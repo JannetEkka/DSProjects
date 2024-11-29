@@ -1,0 +1,8 @@
+binom
+chi2_contingency
+matplotlib
+numpy
+pandas
+poisson
+scipy
+seaborn
