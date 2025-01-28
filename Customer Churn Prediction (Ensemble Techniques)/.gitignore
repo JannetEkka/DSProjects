@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Virtual Environment
+venv/
+env/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Data files (if you want to exclude them)
+# data/*.csv
+
+# Mac OS
+.DS_Store
