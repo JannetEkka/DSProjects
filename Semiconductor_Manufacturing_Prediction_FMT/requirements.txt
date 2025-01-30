@@ -1,13 +1,3 @@
-numpy>=1.21.0
-pandas>=1.3.0
-scikit-learn>=1.0.0
-matplotlib>=3.4.0
-seaborn>=0.11.0
-imbalanced-learn>=0.8.0
-jupyter>=1.0.0
-notebook>=6.4.0
-ipykernel>=6.0.0
-pickleshare>=0.7.5
-python-dateutil>=2.8.2
-scipy>=1.7.0
-statsmodels>=0.13.0
+version https://git-lfs.github.com/spec/v1
+oid sha256:aee48984ea81ea341ee83297539ed8696c49ab1801733420e38a5ea2f86ad03a
+size 240

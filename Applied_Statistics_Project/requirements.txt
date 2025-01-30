@@ -1,8 +1,3 @@
-binom
-chi2_contingency
-matplotlib
-numpy
-pandas
-poisson
-scipy
-seaborn
+version https://git-lfs.github.com/spec/v1
+oid sha256:4706ce9174fb10d14f03f93c3f663b3326f44eb2c7e12311627d2f2340730e82
+size 68
