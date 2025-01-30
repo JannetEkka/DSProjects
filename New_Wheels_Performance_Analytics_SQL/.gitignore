@@ -1,0 +1,96 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.env
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+.idea_modules/
+
+# Database
+*.sql
+*.sqlite
+*.db
+
+# Logs
+*.log
+logs/
+log/
+
+# Local configuration
+config.ini
+.env.local
+.env.*.local
+
+# Data files
+*.csv
+*.xlsx
+*.xls
+*.pkl
+*.h5
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Output files
+output/
+results/
+figures/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+!reports/*.pdf  # Keep PDFs in reports directory
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# Credentials
+credentials.json
+secret.key
+*.pem
