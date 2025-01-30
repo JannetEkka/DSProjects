@@ -62,15 +62,11 @@ share/python-wheels/
 *.egg
 
 # Data files
-*.csv
 *.json
 *.pkl
 *.h5
 *.model
 models/
-datasets/
-raw_data/
-processed_data/
 
 # Logs and databases
 *.log
