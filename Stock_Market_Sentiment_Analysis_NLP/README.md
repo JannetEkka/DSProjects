@@ -6,6 +6,61 @@ This project implements an AI-driven sentiment analysis system that processes fi
 ## Business Context
 Stock prices of companies listed on global exchanges are influenced by various factors, including financial performance, innovations, collaborations, and market sentiment. With the vast volume of news and opinions from diverse sources, investors and financial analysts often struggle to stay updated and accurately interpret market impacts. This project addresses this challenge by leveraging artificial intelligence to analyze and summarize stock-related news.
 
+## Required Files
+
+### Source Files
+The following files are required to run the project:
+1. `data/stock_news.csv` - Main dataset with stock prices and news
+2. `embeddings/glove.6B.100d.txt` - GloVe embeddings file
+   - Download from: https://drive.google.com/file/d/1O7USNidW4RNfk8DirwNgESo6rqLAVJ6H/view?usp=sharing 
+
+The Mistral LLM model will be automatically downloaded during notebook execution.
+
+### Generated Files
+The following files will be generated during notebook execution:
+1. Processed Data:
+   - `stock_news_processed.csv`
+   - `sample_weekly_summaries.csv`
+   - `weekly_summaries_batch_*.csv`
+   - `weekly_summaries_complete.csv`
+
+2. Model Outputs:
+   - `all_embeddings_results.npz`
+   - `balanced_training_data.npz`
+   - `best_sentiment_model.joblib`
+   - `ensemble_sentiment_model.joblib`
+
+3. Converted Embeddings:
+   - `glove.6B.200d.word2vec.txt`
+
+## Project Structure
+```
+stock_market_sentiment/
+├── data/
+│   └── stock_news.csv
+├── embeddings/
+│   └── glove.6B.100d.txt
+├── notebooks/
+│   └── NLPProject5.ipynb
+├── .gitignore
+├── LICENSE.md
+└── README.md
+```
+
+## Installation
+
+### Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Getting Started
+1. Clone the repository
+2. Download required files:
+   - Place `stock_news.csv` in the `data` directory
+   - Download GloVe embeddings and place `glove.6B.100d.txt` in the `embeddings` directory
+3. Run the notebook `NLPProject5.ipynb`
+
 ## Features
 - Sentiment Analysis of financial news articles using advanced NLP techniques
 - Automated weekly news summarization using Large Language Models
@@ -56,21 +111,6 @@ Stock prices of companies listed on global exchanges are influenced by various f
 - Semiconductor industry trends
 - Global economic influences
 
-## Installation and Dependencies
-```python
-# Required Libraries
-pandas
-numpy
-matplotlib
-seaborn
-nltk
-scikit-learn
-xgboost
-llama-cpp-python
-huggingface-hub
-sentence-transformers
-```
-
 ## Dataset Structure
 - Date: Trading date
 - News: News article content
@@ -98,56 +138,6 @@ sentence-transformers
 - Watch for oversold conditions in quality tech stocks
 - Consider entry points during high-volume negative sentiment days
 
-## Project Structure
-```
-stock_market_sentiment/
-├── data/
-│   ├── raw/
-│   │   └── stock_news.csv
-│   └── processed/
-│       ├── stock_news_processed.csv
-│       ├── weekly_summaries_complete.csv
-│       └── embeddings/
-│           ├── all_embeddings_results.npz
-│           └── glove.6B.200d.word2vec.txt
-│
-├── models/
-│   └── sentiment_models/
-│       ├── best_sentiment_model.joblib
-│       └── ensemble_sentiment_model.joblib
-│
-├── notebooks/
-│   └── NLPProject5.ipynb
-```
-
-### Getting Started with the Project Structure
-
-1. **Initial Setup**
-   - Clone the repository
-   - Create a virtual environment
-   - Install dependencies: `pip install -r requirements.txt`
-   - Copy `.env.example` to `.env` and configure
-
-2. **Data Processing**
-   - Raw data is stored in `data/raw/`
-   - Processing scripts are in `src/data/`
-   - Processed data goes to `data/processed/`
-
-3. **Model Development**
-   - Model implementation in `src/models/`
-   - Training scripts in `scripts/`
-   - Trained models saved in `models/`
-
-4. **Analysis and Visualization**
-   - Follow notebooks in order (01 to 05)
-   - Visualization code in `src/visualization/`
-   - Output figures in `outputs/figures/`
-
-5. **Testing and Documentation**
-   - Unit tests in `tests/`
-   - Documentation in `docs/`
-   - Configuration in `configs/`
-
 ## Future Improvements
 1. Incorporate real-time news feeds
 2. Enhance sentiment analysis with aspect-based approaches
@@ -155,19 +145,8 @@ stock_market_sentiment/
 4. Implement cross-asset correlation analysis
 5. Add market microstructure features
 
-## Download Required Files
-Due to size limitations, some large files are not included in this repository. Please download them from the following sources:
-
-1. GloVe Embeddings:
-   - Download from: https://nlp.stanford.edu/data/glove.6B.zip
-   - Extract and place `glove.6B.200d.txt` in `data/processed/embeddings/`
-
-2. Trained Models:
-   - Download from [your preferred file hosting service]
-   - Place in `models/` directory
-   
 ## License
-MIT License
+[MIT License](LICENSE.md)
 
 ## Contributors
 Jannet Akanksha Ekka - Great Learning

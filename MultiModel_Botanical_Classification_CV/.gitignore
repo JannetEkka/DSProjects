@@ -1,0 +1,79 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints
+
+# Data and Models - Generated Files
+/data/processed/*
+!/data/processed/.gitkeep
+!/data/processed/flowers_Y.npy
+
+/data/raw/*
+!/data/raw/.gitkeep
+!/data/raw/Prediction.jpg
+
+# Generated model files
+*.h5
+*.keras
+*.joblib
+*.pkl
+
+# Generated numpy files
+*.npy
+!flowers_Y.npy
+
+# Generated batch files
+batch_*_images.npy
+batch_*_labels.npy
+class_counts.npy
+
+# Generated directories
+model_checkpoints/
+rf_models/
+svm_models/
+nn_models/
+cnn_models/
+flower_models/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Large files that should be downloaded from Drive
+plant-seedlings-classification.zip
+flowers_X.npy
+X_normalized.npy
+X_train.npy
+X_test.npy
+plant_seedlings_df.pkl
