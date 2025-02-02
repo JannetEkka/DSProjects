@@ -4,23 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jannet Akanksha Ekka - Portfolio</title>
-    <!-- Include React and ReactDOM from CDN -->
-    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    <!-- Include Babel for JSX -->
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Include React and ReactDOM -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Include Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <!-- Include Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="root"></div>
+    
     <!-- Load your React component -->
-    <script type="text/babel" src="./PortfolioApp.jsx"></script>
+    <script type="text/babel" src="PortfolioApp.jsx"></script>
     <script type="text/babel">
-        ReactDOM.render(
-            <PortfolioApp />,
-            document.getElementById('root')
-        );
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<PortfolioApp />);
     </script>
 </body>
 </html>
