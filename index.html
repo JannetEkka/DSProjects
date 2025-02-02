@@ -3,23 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jannet Akanksha Ekka - Portfolio</title>
-    <!-- Include React and ReactDOM -->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- Include Babel -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <!-- Include Tailwind CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Jannet Akanksha Ekka - Data Science Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#220738',
+                        secondary: '#3c2c3e',
+                        accent: '#e1d3de',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <div id="root"></div>
-    
-    <!-- Load your React component -->
-    <script type="text/babel" src="PortfolioApp.jsx"></script>
-    <script type="text/babel">
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<PortfolioApp />);
+<body class="bg-white">
+    <div class="min-h-screen">
+        <!-- Header Section -->
+        <header class="bg-primary text-white py-16">
+            <div class="container mx-auto px-4 text-center">
+                <div class="mb-8">
+                    <img 
+                        src="profile pic.png" 
+                        alt="Jannet Akanksha Ekka" 
+                        class="w-40 h-40 rounded-full mx-auto border-4 border-accent object-cover shadow-lg"
+                    />
+                </div>
+                <h1 class="text-4xl font-bold mb-4">Jannet Akanksha Ekka</h1>
+                <p class="text-xl">Data Scientist | Machine Learning Engineer</p>
+                <p class="mt-2">PGP in AIML from University of Texas, Great Learning</p>
+            </div>
+        </header>
+
+        <!-- About Section -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-8 text-center text-primary">About Me</h2>
+                <p class="text-secondary max-w-3xl mx-auto text-center">
+                    A passionate data scientist with expertise in machine learning, deep learning, and statistical analysis. 
+                    Experienced in developing end-to-end solutions across computer vision, natural language processing, 
+                    and predictive analytics. Graduate from Texas McCombs School of Business with a proven track record 
+                    of delivering impactful data-driven solutions.
+                </p>
+            </div>
+        </section>
+
+        <!-- Projects Grid -->
+        <section class="py-16 bg-accent bg-opacity-30">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl font-bold mb-12 text-center text-primary">Projects</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- YouTube AdView Analytics -->
+                    <a href="./YouTube_AdView_Analytics_ML" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">YouTube AdView Analytics</h3>
+                            <div class="mb-2 text-secondary">Jul 2024 - Aug 2024 • Internship Studio</div>
+                            <p class="text-secondary mb-4">Developed ML solution achieving R² of 0.252 with Random Forest Regression. Processed 15,000 YouTube videos and created visualization dashboard using Seaborn and Matplotlib.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Data Analysis</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Stock Market Analysis -->
+                    <a href="./Stock_Market_Sentiment_Analysis_NLP" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Stock Market Sentiment Analysis</h3>
+                            <div class="mb-2 text-secondary">Aug 2024 - Sep 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Built AI-driven financial market intelligence system with 52% F1-score using ensemble models. Implemented Mistral-7B LLM for news summarization and advanced NLP features.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">NLP</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">LLM</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- MultiModel Botanical Classification -->
+                    <a href="./MultiModel_Botanical_Classification_CV" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">MultiModel Botanical Classification</h3>
+                            <div class="mb-2 text-secondary">Oct 2024 - Nov 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Developed plant species classification system processing 4,750+ botanical images. Achieved 83.79% accuracy using CNN architecture and transfer learning with EfficientNetB0.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Computer Vision</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Deep Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">TensorFlow</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Signal Quality Classification -->
+                    <a href="./Signal_Classification_Digit_Recognition_NNDL" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Deep Learning for Signal & SVHN Classification</h3>
+                            <div class="mb-2 text-secondary">Aug 2024 - Sep 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Developed neural networks achieving 90% accuracy in signal quality prediction and 85% accuracy in SVHN digit recognition. Implemented regularization techniques and visualization suite.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Deep Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">TensorFlow</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Computer Vision</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- New-Wheels Analytics -->
+                    <a href="./New_Wheels_Performance_Analytics_SQL" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">New-Wheels Performance Analytics</h3>
+                            <div class="mb-2 text-secondary">Jul 2024 - Aug 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Analyzed customer behavior and sales patterns across 994 customers and $1.25B revenue. Created KPI tracking system and delivered actionable insights for business transformation.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">SQL</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Business Intelligence</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Data Analysis</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Business Analytics -->
+                    <a href="./Business_Analytics_Portfolio_SL" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Predictive Analytics: Automotive & Healthcare</h3>
+                            <div class="mb-2 text-secondary">Jun 2024 - Jul 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Developed ML solutions achieving 86% accuracy in car price prediction and 84% accuracy in employee attrition prediction. Analyzed 7,250+ car listings and implemented retention strategies.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Predictive Analytics</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Business Analytics</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Automobile Analysis -->
+                    <a href="./Automobile_Analysis_Classification_USL" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Automobile Analysis & Classification</h3>
+                            <div class="mb-2 text-secondary">Jun 2024 - Jul 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Implemented K-means clustering for vehicle segmentation and PCA-enhanced SVM for classification. Created comprehensive data preprocessing pipeline and interactive visualizations.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Clustering</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">PCA</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Semiconductor Manufacturing -->
+                    <a href="./Semiconductor_Manufacturing_Prediction_FMT" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Semiconductor Manufacturing Yield Prediction</h3>
+                            <div class="mb-2 text-secondary">Jul 2024 - Aug 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Developed ML solution achieving 99.20% accuracy using SVC. Processed 591 sensor signals and implemented SMOTE for class imbalance correction.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Feature Engineering</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Python</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Customer Churn Prediction -->
+                    <a href="./Customer_Churn_Prediction_ET" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Customer Churn Prediction</h3>
+                            <div class="mb-2 text-secondary">May 2024 - Jun 2024 • Texas McCombs School of Business</div>
+                            <p class="text-secondary mb-4">Led end-to-end ML project achieving 81.48% prediction accuracy with optimized Random Forest model. Implemented comprehensive data preprocessing and hyperparameter tuning.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Ensemble Methods</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Python</span>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Applied Statistics Project -->
+                    <a href="./Applied_Statistics_Project" class="block">
+                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
+                            <h3 class="text-xl font-bold mb-4 text-primary">Applied Statistics Project</h3>
+                            <div class="mb-2 text-secondary">Feb 2024 - Mar 2024</div>
+                            <p class="text-secondary mb-4">Statistical analysis and visualization project covering data manipulation, probability distributions, and hypothesis testing using Python.</p>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Statistics</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Python</span>
+                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Data Visualization</span>
+                            </div>
+                        </div>
+                    </a>
+ 
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <footer class="bg-primary text-white py-8">
+            <div class="container mx-auto px-4 text-center">
+                <div class="flex justify-center space-x-8">
+                    <a href="https://github.com/JannetEkka" 
+                       class="hover:text-accent transition-colors duration-300"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        GitHub
+                    </a>
+                    <a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/" 
+                       class="hover:text-accent transition-colors duration-300"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        LinkedIn
+                    </a>
+                    <a href="mailto:jannetekka96@gmail.com" 
+                       class="hover:text-accent transition-colors duration-300">
+                        Email
+                    </a>
+                </div>
+                <div class="mt-4 text-sm text-accent">
+                    © 2024 Jannet Akanksha Ekka. All rights reserved.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Add smooth hover effect to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
     </script>
 </body>
 </html>
