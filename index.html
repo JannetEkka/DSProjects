@@ -4,19 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jannet Akanksha Ekka - Portfolio</title>
+    <!-- Include React and ReactDOM from CDN -->
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <!-- Include Babel for JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Include Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
     <div id="root"></div>
-    <script type="module">
-        import React from 'https://esm.sh/react'
-        import ReactDOM from 'https://esm.sh/react-dom'
-        import App from './PortfolioApp.jsx'
-        
+    <!-- Load your React component -->
+    <script type="text/babel" src="./PortfolioApp.jsx"></script>
+    <script type="text/babel">
         ReactDOM.render(
-            React.createElement(App),
+            <PortfolioApp />,
             document.getElementById('root')
-        )
+        );
     </script>
 </body>
 </html>

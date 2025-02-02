@@ -69,7 +69,7 @@ const PortfolioApp = () => {
       <header className="bg-purple-900 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <img 
-            src="./profile pic.png"
+            src="profile pic.png"
             alt="Jannet Akanksha Ekka" 
             className="w-48 h-48 rounded-full mx-auto mb-8 object-cover border-4 border-white"
           />
