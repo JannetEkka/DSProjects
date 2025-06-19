@@ -1,124 +1,53 @@
-# Data Science Portfolio
-A collection of data science projects showcasing expertise in machine learning, computer vision, statistical analysis, and business analytics. Currently transitioning from 4 years of Automation Test engineer experience into Data Scientist roles.
+# Certifications & Credentials
 
-🔍 **Open to Data Science Opportunities** - Both Internships and Full-time Roles
+This folder contains **6 official certificates** and credentials that demonstrate my continuous learning journey and expertise in AI, Machine Learning, and Data Science.
 
-## Background
-- 4 years of experience in Quality Assurance at Deloitte USI Consulting
-- Post Graduate Program in AIML from Texas McCombs School of Business
-- Proven ability to deliver end-to-end data science solutions
-- Strong foundation in Python, SQL, machine learning, and statistical analysis
+## 🎓 Academic Credentials
 
-## Project Structure
-```
-DSProjects/
-├── Automotive_Surveillance_System_Capstone/  # Car detection and classification using Fast R-CNN
-├── YouTube_AdView_Analytics_ML/             # YouTube ad view prediction using ML
-├── MultiModel_Botanical_Classification_CV/   # Plant species classification using computer vision
-├── Signal_Classification_Digit_Recognition_NNDL/# Signal quality & SVHN classification with neural networks
-├── New_Wheels_Performance_Analytics_SQL/     # Vehicle resale business analytics using SQL
-├── Business_Analytics_Portfolio_SL/          # Cars4U price prediction & Healthcare HR analytics
-├── Customer_Churn_Prediction_ET/            # Telecom customer churn prediction using ensemble techniques
-├── Stock_Market_Sentiment_Analysis_NLP/      # Financial market sentiment analysis using NLP
-├── Semiconductor_Manufacturing_Prediction_FMT/# Manufacturing yield prediction with feature selection
-├── Applied_Statistics_Project/              # Statistical analysis and visualization using Python
-└── Automobile_Analysis_Classification_USL/   # Vehicle segmentation using K-means & PCA-enhanced SVM
-```
+### Post Graduate Program in Artificial Intelligence and Machine Learning
+- **Institution**: UT Austin McCombs School of Business & Great Lakes Executive Learning  
+- **Date**: March 2025
+- **Verification**: 
+  - UT Austin: [Digital Verification](https://la.utexas.edu/texasexeced/digitalVerification.html?key=jwgyhwmp)
+  - Great Lakes: [Certificate PDF](./JANNET%20AKANKSHA%20EKKA%20-%20certificate.pdf)
 
-## Projects by Domain
+## 🤖 Generative AI Specialization
 
-### Computer Vision & Deep Learning
-1. **Automotive Surveillance System (Capstone)**
-   - Achieved 69.20% accuracy in car classification using fine-tuned ResNet50
-   - Implemented Fast R-CNN with multiple backbones (ResNet50, MobileNetV2)
-   - Processed 16,185 car images across 196 classes
-   - Technologies: TensorFlow, OpenCV, Keras Tuner
+### Google Gen AI Academy Completion Certificate
+- **Institution**: Google Cloud & H2S
+- **Date**: May 2025  
+- **Certificate ID**: 2025H2S04GENAI-A01917
+- **Skills Covered**: Vertex AI, Gemini APIs, Imagen, Streamlit, Multimodal RAG
+- **Certificate**: [Hack2skill-Certificate.png](./Hack2skill-Certificate.png)
 
-2. **MultiModel Botanical Classification**
-   - Achieved 83.79% accuracy with CNN architecture
-   - Implemented transfer learning with EfficientNetB0
-   - Created custom data augmentation pipeline
-   - Processed 4,750+ botanical images
+### AI-Preneur Workshop
+- **Institution**: AI-Preneur  
+- **Date**: March 2025
+- **Focus**: Freelancing with AI - Business Applications
+- **Certificate**: [Jannet Ekka.pdf](./Jannet%20Ekka.pdf)
 
-3. **Signal Classification & SVHN Digit Recognition**
-   - 90% accuracy in signal quality prediction
-   - 85% accuracy in SVHN digit recognition
-   - Implemented neural networks with TensorFlow
-   - Created comprehensive visualization suite
+## 💼 Professional Experience
 
-### Machine Learning & Analytics
-4. **YouTube AdView Analytics**
-   - Developed ML solution for predicting advertisement views
-   - Achieved R² of 0.252 with Random Forest Regression
-   - Created comprehensive visualization dashboards
-   - Technologies: scikit-learn, TensorFlow, Seaborn
+### Machine Learning Internship
+- **Institution**: Internship Studio
+- **Duration**: July 8, 2024 - August 12, 2024
+- **Certificate Number**: ISMAIL600552
+- **Project**: YouTube AdView Analytics (achieved R² of 0.252)
+- **Certificates**: 
+  - [Internship Certificate](./Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Internship.pdf)
+  - [Training Certificate](./Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Training.pdf)
 
-5. **Customer Churn Prediction**
-   - Achieved 81.48% prediction accuracy with Random Forest
-   - Implemented multiple ensemble techniques
-   - Created data-driven retention strategies
-   - Technologies: scikit-learn, GridSearchCV
+## 📜 Certificate Authentication
 
-6. **Semiconductor Manufacturing Prediction**
-   - Achieved 99.20% accuracy in yield prediction
-   - Processed 591 sensor signals
-   - Implemented feature selection and SMOTE
-   - Technologies: scikit-learn, imbalanced-learn
+All certificates in this folder are:
+- ✅ **Original documents** issued by respective institutions
+- ✅ **Verifiable** through official channels where applicable  
+- ✅ **Current and valid** credentials
+- ✅ **Relevant to AI/ML/Data Science** roles
 
-7. **Automobile Analysis & Classification**
-   - Implemented K-means clustering for vehicle segmentation
-   - Developed PCA-enhanced SVM classification
-   - Features: MPG, displacement, horsepower analysis
-   - Technologies: scikit-learn, pandas, NumPy
+## 🔗 Quick Links
 
-### Business Intelligence & Analytics
-8. **New-Wheels Performance Analytics**
-   - Analyzed customer behavior and sales patterns
-   - Processed data for 994 customers and $1.25B revenue
-   - Created interactive visualizations and KPI dashboards
-   - Technologies: SQL, Python, Data Visualization
-
-9. **Business Analytics Portfolio**
-   - Used car price prediction (86% accuracy)
-   - Employee attrition prediction (84% accuracy)
-   - Developed data-driven pricing strategies
-   - Technologies: KNN, Logistic Regression, pandas
-
-### Natural Language Processing & Statistics
-10. **Stock Market Sentiment Analysis**
-    - Built ensemble model for sentiment classification
-    - Implemented automated news summarization using Mistral-7B
-    - Used Word2Vec, GloVe, and SBERT embeddings
-    - Technologies: NLTK, transformers, huggingface
-
-11. **Applied Statistics Project**
-    - Implemented statistical analysis using Python
-    - Covered probability distributions and hypothesis testing
-    - Developed manufacturing quality control metrics
-    - Technologies: scipy, statsmodels, pandas
-
-## Technical Skills
-- **Languages**: Python, SQL, R
-- **Machine Learning**: scikit-learn, TensorFlow, Keras
-- **Data Analysis**: pandas, NumPy, Matplotlib, Seaborn
-- **Big Data**: PySpark, Hadoop
-- **Deep Learning**: CNN, RNN, LSTM
-- **Version Control**: Git, GitHub
-- **Tools**: Jupyter, VS Code, Docker
-
-## Education
-- Post Graduate Program in AIML - Texas McCombs School of Business
-- Bachelor's of Technology in Information Technology
-
-## Looking For
-- Data Science Developer roles
-- Machine Learning Engineer positions
-- Data Analytics opportunities
-- Business Analytics roles
-- Open to both internships and full-time positions
-
-## Contact
-Jannet Akanksha Ekka
-- 📧 Email: jannetekka96@gmail.com
-- 💼 LinkedIn: [Jannet Akanksha Ekka](https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/)
-- 🌐 GitHub: [@JannetEkka](https://github.com/JannetEkka)
+- **Portfolio**: [Main Portfolio](../README.md)
+- **GenAI Resume**: [Jannet_GenAI.pdf](../Jannet_GenAI.pdf)
+- **Data Science Resume**: [JannetEkka_resume.pdf](../JannetEkka_resume.pdf)
+- **Projects**: [DSProjects Repository](../)
