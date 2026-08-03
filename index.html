@@ -1,712 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jannet Akanksha Ekka - AI & Data Science Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#220738',
-                        secondary: '#3c2c3e',
-                        accent: '#e1d3de',
-                        genai: '#4f46e5',
-                    }
-                }
-            }
-        }
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jannet Akanksha Ekka — AI/ML Engineer</title>
+<meta name="description" content="AI/ML engineer building production agentic systems. Patent-pending multi-agent trading AI, Google Cloud GenAI, and 20+ shipped projects.">
+<meta property="og:title" content="Jannet Akanksha Ekka — AI/ML Engineer">
+<meta property="og:description" content="Building production agentic AI systems. Patent-pending multi-agent trading AI on Google Cloud.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>document.documentElement.className+=' js';</script>
+<style>
+:root{
+  --bg:#08080c; --bg2:#0d0d14; --surf:rgba(255,255,255,.028); --surf2:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --tx:#ecedf3; --mut:#9b9cae; --dim:#6f7084;
+  --a1:#7c5cff; --a2:#22d3ee; --a3:#fbbf24;
+  --max:1180px; --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg); color:var(--tx);
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  font-size:16px; line-height:1.65; -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--a1);color:#fff}
+
+/* ---------- ambient background ---------- */
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.30}
+.orb1{width:44vw;height:44vw;background:#5b3df5;top:-14vw;left:-10vw}
+.orb2{width:38vw;height:38vw;background:#0e7490;top:34vh;right:-12vw;opacity:.24}
+.orb3{width:32vw;height:32vw;background:#7c2d9e;bottom:-12vw;left:22vw;opacity:.20}
+.js .orb1{animation:drift1 26s ease-in-out infinite}
+.js .orb2{animation:drift2 32s ease-in-out infinite}
+.js .orb3{animation:drift3 38s ease-in-out infinite}
+@keyframes drift1{50%{transform:translate(9vw,7vh) scale(1.12)}}
+@keyframes drift2{50%{transform:translate(-8vw,-6vh) scale(1.08)}}
+@keyframes drift3{50%{transform:translate(6vw,-8vh) scale(1.14)}}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.16;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E")}
+.wrap{position:relative;z-index:2}
+.shell{max-width:var(--max);margin:0 auto;padding:0 28px}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:all .4s var(--ease)}
+nav .shell{display:flex;align-items:center;justify-content:space-between;height:70px}
+nav.stuck{background:rgba(8,8,12,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.brand{font-weight:700;letter-spacing:-.02em;font-size:15px;display:flex;align-items:center;gap:9px}
+.brand i{width:8px;height:8px;border-radius:50%;background:var(--a2);box-shadow:0 0 12px var(--a2)}
+.js .brand i{animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35;transform:scale(.8)}}
+.navlinks{display:flex;gap:30px;align-items:center}
+.navlinks a{font-size:13.5px;color:var(--mut);font-weight:500;position:relative;transition:color .25s}
+.navlinks a::after{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--a2);transition:width .3s var(--ease)}
+.navlinks a:hover{color:var(--tx)} .navlinks a:hover::after{width:100%}
+.navcta{border:1px solid var(--line2);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;transition:all .28s var(--ease)}
+.navcta:hover{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+@media(max-width:760px){.navlinks a:not(.navcta){display:none}}
+
+/* ---------- hero ---------- */
+header.hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 70px}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.10em;
+  text-transform:uppercase;color:var(--a2);border:1px solid rgba(34,211,238,.28);
+  background:rgba(34,211,238,.06);padding:7px 15px;border-radius:999px;margin-bottom:26px}
+.eyebrow b{width:6px;height:6px;border-radius:50%;background:var(--a2)}
+h1.big{
+  font-size:clamp(2.9rem,8.2vw,6.4rem); line-height:.96; font-weight:800;
+  letter-spacing:-.045em; margin-bottom:22px;
+}
+h1.big .serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-.02em;
+  background:linear-gradient(100deg,var(--a2),var(--a1) 65%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.rotor{display:inline-block;position:relative;height:1.05em;overflow:hidden;vertical-align:bottom}
+.rotor span{display:block;color:var(--a2)}
+.js .rotor{--n:4}
+.js .rotor .rotor-in{animation:roll 9s steps(1) infinite}
+@keyframes roll{0%,22%{transform:translateY(0)}25%,47%{transform:translateY(-25%)}50%,72%{transform:translateY(-50%)}75%,97%{transform:translateY(-75%)}100%{transform:translateY(0)}}
+.lede{font-size:clamp(1.02rem,1.55vw,1.2rem);color:var(--mut);max-width:660px;margin-bottom:34px}
+.lede strong{color:var(--tx);font-weight:600}
+.cta{display:flex;gap:13px;flex-wrap:wrap;margin-bottom:52px}
+.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:999px;
+  font-size:14.5px;font-weight:600;transition:all .3s var(--ease);border:1px solid transparent}
+.btn-p{background:var(--tx);color:#0a0a0f}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,255,255,.18)}
+.btn-g{border-color:var(--line2);color:var(--tx)}
+.btn-g:hover{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}
+.btn svg{width:16px;height:16px}
+.chips{display:flex;gap:9px;flex-wrap:wrap}
+.chip{font-size:12.5px;color:var(--mut);border:1px solid var(--line);background:var(--surf);
+  padding:7px 14px;border-radius:999px;transition:all .3s var(--ease)}
+.chip:hover{border-color:var(--line2);color:var(--tx);transform:translateY(-2px)}
+
+/* ---------- stats ---------- */
+.statbar{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0;background:rgba(255,255,255,.012)}
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+@media(max-width:720px){.statgrid{grid-template-columns:repeat(2,1fr);gap:30px}}
+.stat .n{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:800;letter-spacing:-.035em;line-height:1;
+  background:linear-gradient(150deg,#fff,#9ea0b8);-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat .l{font-size:12.5px;color:var(--dim);margin-top:9px;letter-spacing:.02em}
+
+/* ---------- sections ---------- */
+section{padding:104px 0}
+.shead{margin-bottom:52px;max-width:640px}
+.skicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--a1);margin-bottom:14px}
+.stitle{font-size:clamp(1.85rem,4.1vw,2.85rem);font-weight:700;letter-spacing:-.035em;line-height:1.08;margin-bottom:15px}
+.ssub{color:var(--mut);font-size:15.5px}
+
+/* ---------- flagship ---------- */
+.feature{position:relative;border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  background:linear-gradient(165deg,rgba(124,92,255,.10),rgba(34,211,238,.045) 55%,transparent);margin-bottom:34px}
+.feature-glow{position:absolute;top:-55%;left:15%;width:70%;height:150%;
+  background:radial-gradient(ellipse at center,rgba(124,92,255,.20),transparent 68%);pointer-events:none}
+.feature-inner{position:relative;padding:44px}
+@media(max-width:640px){.feature-inner{padding:28px 22px}}
+.feature-head{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.pill{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 13px;border-radius:999px}
+.pill-flag{background:var(--a1);color:#fff}
+.pill-patent{background:rgba(251,191,36,.13);color:var(--a3);border:1px solid rgba(251,191,36,.3);text-transform:none;letter-spacing:.01em}
+.pill-award{background:rgba(251,191,36,.13);color:var(--a3);border:1px solid rgba(251,191,36,.3);text-transform:none;letter-spacing:.01em;font-size:11px;white-space:nowrap}
+.feature-title{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.1}
+.feature-sub{font-size:clamp(1rem,1.9vw,1.22rem);color:var(--a2);font-weight:500;margin-top:7px}
+.feature-meta{font-size:13px;color:var(--dim);margin-top:11px}
+.feature-desc{color:var(--mut);margin-top:20px;max-width:790px;font-size:15.5px}
+.feature-desc em{color:var(--tx);font-style:normal;font-weight:600}
+.fstats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:30px 0;padding:24px 0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(max-width:620px){.fstats{grid-template-columns:repeat(2,1fr);gap:22px}}
+.fnum{display:block;font-size:1.65rem;font-weight:800;letter-spacing:-.03em;color:var(--tx)}
+.flab{display:block;font-size:11.5px;color:var(--dim);margin-top:4px}
+.feature-note{font-size:12.5px;color:var(--dim);margin-top:18px;font-style:italic}
+
+/* ---------- filters ---------- */
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:34px}
+.filter{font-family:inherit;font-size:13.5px;font-weight:500;color:var(--mut);cursor:pointer;
+  background:var(--surf);border:1px solid var(--line);padding:9px 18px;border-radius:999px;transition:all .28s var(--ease)}
+.filter:hover{color:var(--tx);border-color:var(--line2)}
+.filter.is-on{background:var(--tx);color:var(--bg);border-color:var(--tx);font-weight:600}
+
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}}
+.card{position:relative;border:1px solid var(--line);border-radius:17px;background:var(--surf);
+  overflow:hidden;transition:transform .42s var(--ease),border-color .3s,background .3s}
+.card:hover{transform:translateY(-5px);border-color:var(--line2);background:var(--surf2)}
+.card-spot{position:absolute;inset:0;opacity:0;transition:opacity .35s;pointer-events:none;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(124,92,255,.16),transparent 42%)}
+.card:hover .card-spot{opacity:1}
+.card-body{position:relative;padding:26px}
+.card-top{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+.card-title{font-size:1.14rem;font-weight:700;letter-spacing:-.022em;line-height:1.25}
+.card-sub{font-size:13.5px;color:var(--a2);font-weight:500;margin-top:5px}
+.card-meta{font-size:12px;color:var(--dim);margin-top:8px}
+.card-desc{font-size:14px;color:var(--mut);margin-top:14px}
+.card.hide{display:none}
+
+/* ---------- tags + links ---------- */
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
+.tag{font-size:11.5px;color:var(--mut);background:rgba(255,255,255,.045);
+  border:1px solid var(--line);padding:4px 11px;border-radius:6px}
+.lnks{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.lnk{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;
+  padding:9px 16px;border-radius:9px;border:1px solid var(--line2);transition:all .28s var(--ease)}
+.lnk.sm{font-size:12.5px;padding:7px 13px}
+.lnk .ico{display:inline-flex;width:14px;height:14px}
+.lnk .ico svg{width:100%;height:100%}
+.lnk.live{background:var(--a1);border-color:var(--a1);color:#fff}
+.lnk.live:hover{background:#6b4ae8;transform:translateY(-2px);box-shadow:0 8px 22px rgba(124,92,255,.34)}
+.lnk.code:hover,.lnk.doc:hover{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}
+
+/* ---------- marquee ---------- */
+.marq{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+.marq-in{display:flex;gap:46px;width:max-content}
+.js .marq-in{animation:slide 42s linear infinite}
+.marq:hover .marq-in{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.marq span{font-size:14.5px;font-weight:600;color:var(--dim);white-space:nowrap;letter-spacing:.01em}
+
+/* ---------- timeline ---------- */
+.tl{position:relative;padding-left:30px}
+.tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(180deg,var(--a1),var(--a2),transparent)}
+.tlrow{position:relative;padding-bottom:38px}
+.tlrow:last-child{padding-bottom:0}
+.tlrow::before{content:'';position:absolute;left:-29px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--bg);border:2px solid var(--a1)}
+.tlrow h4{font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
+.tlrow .org{color:var(--a2);font-size:14px;font-weight:500;margin-top:3px}
+.tlrow .when{font-size:12.5px;color:var(--dim);margin-top:5px}
+.tlrow p{color:var(--mut);font-size:14.5px;margin-top:11px}
+
+/* ---------- about ---------- */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+@media(max-width:880px){.two{grid-template-columns:1fr;gap:44px}}
+.abtxt p{color:var(--mut);margin-bottom:17px;font-size:15.5px}
+.abtxt strong{color:var(--tx);font-weight:600}
+.awards{display:flex;flex-direction:column;gap:11px}
+.award{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);background:var(--surf);
+  border-radius:13px;padding:17px 19px;transition:all .3s var(--ease)}
+.award:hover{border-color:var(--line2);background:var(--surf2);transform:translateX(4px)}
+.award .em{font-size:20px;line-height:1.2}
+.award h5{font-size:14.5px;font-weight:700;letter-spacing:-.015em}
+.award p{font-size:13px;color:var(--mut);margin-top:3px}
+.award a{color:var(--a2);border-bottom:1px solid rgba(34,211,238,.35)}
+
+/* ---------- contact ---------- */
+.contact{text-align:center;padding:110px 0}
+.contact h2{font-size:clamp(2.1rem,5.6vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:20px}
+.contact h2 .serif{font-family:'Instrument Serif',Georgia,serif;font-style:italic;font-weight:400;
+  background:linear-gradient(100deg,var(--a2),var(--a1));-webkit-background-clip:text;background-clip:text;color:transparent}
+.contact p{color:var(--mut);max-width:520px;margin:0 auto 34px;font-size:16px}
+footer{border-top:1px solid var(--line);padding:30px 0;font-size:13px;color:var(--dim)}
+footer .shell{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a:hover{color:var(--tx)}
+
+/* ---------- reveal (JS-gated: no JS = fully visible) ---------- */
+.js .reveal{opacity:0;transform:translateY(26px);
+  transition:opacity .78s var(--ease),transform .78s var(--ease)}
+.js .reveal.in{opacity:1;transform:none}
+.js .grid .reveal{transition-delay:calc(var(--i,0) * 42ms)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1!important;transform:none!important}
+}
+</style>
 </head>
-<body class="bg-white">
-    <div class="min-h-screen">
-        <!-- Header Section -->
-        <header class="bg-primary text-white py-16">
-            <div class="container mx-auto px-4 text-center">
-                <div class="mb-8">
-                    <img 
-                        src="profile pic.png" 
-                        alt="Jannet Akanksha Ekka" 
-                        class="w-40 h-40 rounded-full mx-auto border-4 border-accent object-cover shadow-lg"
-                    />
-                </div>
-                <h1 class="text-4xl font-bold mb-4">Jannet Akanksha Ekka</h1>
-                <p class="text-xl">AI/ML Engineer | Agentic Systems, Generative AI &amp; Google Cloud</p>
-                <p class="mt-3 text-sm"><span class="bg-white bg-opacity-20 px-3 py-1 rounded-full">⚙️ Patent pending</span> <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full ml-2">🏆 OpenServ Best DeFi — Winner</span> <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full ml-2">🥇 Rank 1 — PGP AI/ML</span></p>
-                <p class="mt-2">Post Graduate Program in AIML from McCombs School of Business | Bachelor's of Technology in Information Technology</p>
-            </div>
-        </header>
+<body>
 
-        <!-- About Section -->
-        <section class="py-16 bg-white">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-8 text-center text-primary">About Me</h2>
-                <p class="text-secondary max-w-3xl mx-auto text-center mb-6">
-                    I build <strong>production agentic AI systems</strong> end to end — architecture, learning loop, cloud deployment and live operations. My flagship project, <strong>Smart Money Trading (SMT)</strong>, is a patent-pending multi-agent trading AI running continuously on Google Cloud.
-                    I came to AI from <strong>4+ years of enterprise automation engineering at Deloitte</strong>, then completed my <strong>Post Graduate Program in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, followed by <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, Imagen, ADK, MCP and AlloyDB.
-                </p>
-                <p class="text-secondary max-w-3xl mx-auto text-center mb-6">
-                    I've shipped <strong>20+ projects</strong> spanning multi-agent systems, generative AI, computer vision, machine learning and business analytics. My background combines <strong>the engineering discipline of large-scale QA automation</strong> with <strong>hands-on GenAI architecture</strong> — which is why my systems ship with tests, monitoring, and honest failure handling rather than just notebooks.
-                </p>
-                <p class="text-secondary max-w-3xl mx-auto text-center mb-6">
-                    I'm actively seeking roles in <strong>AI/ML engineering, agentic systems, GenAI application development and data science</strong> — open to full-time positions.
-                </p>
-                <div class="text-center">
-                    <div class="flex justify-center gap-4 flex-wrap">
-                        <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" 
-                            class="inline-block bg-genai text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300 font-medium" 
-                            target="_blank" 
-                            rel="noopener noreferrer">
-                            📄 GenAI Resume
-                        </a>
-                        <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" 
-                            class="inline-block border-2 border-primary text-primary px-6 py-3 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 font-medium" 
-                            target="_blank" 
-                            rel="noopener noreferrer">
-                            📊 Data Science Resume
-                        </a>
-                    </div>
-                    <p class="text-sm text-secondary mt-3 max-w-md mx-auto">
-                        Choose the resume that best matches the role you're hiring for
-                    </p>
-                </div>
-            </div>
-        </section>
+<div class="bgfx" aria-hidden="true">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
 
-        <!-- Certifications Section -->
-        <section class="py-16 bg-gradient-to-r from-primary to-secondary">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-12 text-center text-white">Certifications & Credentials</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Google Gen AI Academy -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-2xl">🤖</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-primary">Google Gen AI Academy</h3>
-                                <p class="text-sm text-secondary">May 2025</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary text-sm mb-3">Vertex AI, Gemini APIs, Imagen, Streamlit & Multimodal RAG</p>
-                        <div class="flex gap-2">
-                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">Verified</span>
-                            <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates/Hack2skill-Certificate.png" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="text-blue-600 hover:text-blue-800 text-xs underline">
-                                View Certificate
-                            </a>
-                        </div>
-                    </div>
+<div class="wrap">
 
-                    <!-- UT Austin & Great Lakes -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-2xl">🎓</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-primary">PGP in AIML</h3>
-                                <p class="text-sm text-secondary">March 2025</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary text-sm mb-3">UT Austin McCombs & Great Lakes Executive Learning</p>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">Dual Certification</span>
-                            <a href="https://la.utexas.edu/texasexeced/digitalVerification.html?key=jwgyhwmp" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="text-blue-600 hover:text-blue-800 text-xs underline">
-                                Verify UT
-                            </a>
-                            <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates/JANNET%20AKANKSHA%20EKKA%20-%20certificate.pdf" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="text-blue-600 hover:text-blue-800 text-xs underline">
-                                View Great Lakes
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- AI-Preneur -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-2xl">💼</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-primary">AI-Preneur Workshop</h3>
-                                <p class="text-sm text-secondary">March 2025</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary text-sm mb-3">Freelancing with AI - Business Applications</p>
-                        <div class="flex gap-2">
-                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-medium">Entrepreneurship</span>
-                            <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates/Jannet%20Ekka.pdf" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="text-blue-600 hover:text-blue-800 text-xs underline">
-                                View Certificate
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Internship Studio - ML -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-2xl">⚡</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-primary">ML Internship</h3>
-                                <p class="text-sm text-secondary">July - August 2024</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary text-sm mb-3">Internship Studio - YouTube Analytics Project</p>
-                        <div class="flex gap-2 flex-wrap">
-                            <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full text-xs font-medium">Practical Experience</span>
-                            <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates/Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Internship.pdf" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="text-blue-600 hover:text-blue-800 text-xs underline">
-                                View Internship
-                            </a>
-                            <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates/Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Training.pdf" 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                class="text-blue-600 hover:text-blue-800 text-xs underline">
-                                View Training
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Professional Journey -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-2xl">🔍</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-primary">QA Engineering</h3>
-                                <p class="text-sm text-secondary">4 Years Experience</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary text-sm mb-3">Deloitte USI Consulting - Quality Assurance</p>
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">Professional</span>
-                    </div>
-
-                    <!-- Technical Foundation -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-2xl">💻</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-primary">B.Tech in IT</h3>
-                                <p class="text-sm text-secondary">Academic Foundation</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary text-sm mb-3">Information Technology - Technical Bachelor's</p>
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">Foundation</span>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Grid -->
-        <section class="py-16 bg-accent bg-opacity-30">
-            <div class="container mx-auto px-4">
-                <h2 class="text-3xl font-bold mb-12 text-center text-primary">Projects</h2>
-
-                <!-- NEW: Generative AI & Intelligent Agents -->
-                <div class="bg-gradient-to-r from-genai to-purple-600 rounded-lg p-1 mb-8">
-                    <div class="bg-white rounded-lg p-6">
-                        <h3 class="text-2xl font-semibold mb-4 text-genai flex items-center">
-                            <span class="mr-2">🤖</span>
-                            Generative AI & Intelligent Agents 
-                            <span class="ml-2 text-sm bg-genai text-white px-2 py-1 rounded-full">NEW</span>
-                        </h3>
-<div class="grid grid-cols-1 gap-8 mb-8">
-                            <!-- SMT flagship -->
-                            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border-2 border-genai project-card">
-                                <div class="flex items-start justify-between flex-wrap gap-2 mb-2">
-                                    <h4 class="text-xl font-bold text-genai">🌊 Smart Money Trading (SMT) — Explainable Multi-Agent Trading AI</h4>
-                                    <span class="bg-genai text-white px-3 py-1 rounded-full text-xs font-bold">FLAGSHIP</span>
-                                </div>
-                                <div class="mb-3 text-secondary">2026 – Present • Sole architect &amp; engineer • <strong>Patent pending (IN 202631090789)</strong></div>
-                                <p class="text-secondary mb-4">A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs: a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English "why" with every decision. Six specialist personas (order-flow, technical, whale/on-chain, sentiment, regime) vote into a learned <strong>Judge</strong>; an Optuna optimiser and regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a <strong>CPCV + Deflated-Sharpe + PBO + FDR overfitting gate</strong>. 33,000 LOC across 153 Python modules with a 166-test suite, running continuously on Google Cloud.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://smt-world-2gbcoyhuea-uc.a.run.app/" target="_blank" rel="noopener noreferrer"
-                                        class="bg-genai text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 text-sm font-medium">🚀 Try SMT World (Live)</a>
-                                    <a href="https://github.com/JannetEkka/smt-apac" target="_blank" rel="noopener noreferrer"
-                                        class="border border-genai text-genai px-4 py-2 rounded-lg hover:bg-genai hover:text-white transition-colors duration-300 text-sm font-medium">💻 Explanatory Layer (Code)</a>
-                                    <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer"
-                                        class="border border-genai text-genai px-4 py-2 rounded-lg hover:bg-genai hover:text-white transition-colors duration-300 text-sm font-medium">📰 Press</a>
-                                    <div class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm">🔒 Core repo private</div>
-                                </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Multi-Agent Systems</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Explainable AI</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">BigQuery + Vector Search</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Vertex AI &amp; Gemini</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Cloud Run</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Optuna</span>
-                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">🟢 LIVE</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <!-- VerseCanvas -->
-                            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-genai project-card">
-                                <h4 class="text-xl font-bold mb-4 text-genai">🎨 VerseCanvas - AI Poetry-to-Art Generator</h4>
-                                <div class="mb-2 text-secondary">2025 • Personal Project</div>
-                                <p class="text-secondary mb-4">Transform poetry into stunning visual art using Google Gemini 2.0 for deep semantic analysis and Imagen 3.0 for high-quality image generation. Features multi-language support (6 languages), real-time editing, automatic text overlay, and multiple art styles including photorealistic, watercolor, and abstract.</p>
-                                
-                                <!-- Demo Buttons -->
-                                <div class="flex gap-3 mb-4">
-                                    <a href="https://github.com/JannetEkka/versecanvas#quick-start" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        class="bg-genai text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors duration-300 text-sm font-medium flex items-center">
-                                        ▶️ Run It Locally
-                                    </a>
-                                    <a href="https://github.com/JannetEkka/VerseCanvas" 
-                                        target="_blank" 
-                                        rel="noopener noreferrer"
-                                        class="border border-genai text-genai px-4 py-2 rounded-lg hover:bg-genai hover:text-white transition-colors duration-300 text-sm font-medium">
-                                        💻 View Code
-                                    </a>
-                                </div>
-                                
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Google Gemini 2.0</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Google Imagen 3.0</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Vertex AI</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Streamlit</span>
-                                    <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">📦 OPEN SOURCE</span>
-                                </div>
-                            </div>
-
-                            <!-- Smart Money Tracker -->
-                            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-genai project-card">
-                                <h4 class="text-xl font-bold mb-4 text-genai">📈 Smart Money Tracker - Intelligent Blockchain Agent</h4>
-                                <div class="mb-2 text-secondary">2024 • <strong>Winner — Best DeFi Application</strong>, OpenServ × Hack2skill</div>
-                                <p class="text-secondary mb-4">AI-powered intelligent agent system that tracks "smart money" whale movements across Ethereum, BNB Smart Chain, and Polygon. Features pattern detection with 0-100% confidence scoring, real-time alerts via Telegram, and market impact predictions using advanced AI reasoning.</p>
-                                
-                                <!-- Coming Soon Buttons -->
-<div class="flex gap-3 mb-4 flex-wrap">
-                                    <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-lg text-sm font-medium flex items-center">
-                                        🏆 Hackathon Winner — Best DeFi App
-                                    </div>
-                                    <div class="bg-gray-100 text-gray-600 px-4 py-2 rounded-lg text-sm flex items-center">
-                                        🔒 Private repo
-                                    </div>
-                                </div>
-                                
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">OpenServ SDK</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Google Cloud Run</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">AI Agents</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Blockchain APIs</span>
-                                    <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">🏆 AWARD WINNER</span>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-genai project-card">
-                                <h4 class="text-xl font-bold mb-3 text-genai">🗂️ SmartDesk — Multi-Agent Productivity Assistant</h4>
-                                <div class="mb-2 text-secondary">2026 • Google Cloud Gen AI Academy capstone</div>
-                                <p class="text-secondary mb-4">A root <strong>ADK orchestrator</strong> that routes requests to specialised sub-agents: InboxAgent (Gmail over MCP), PlannerAgent (Google Calendar over MCP), DataAgent (AlloyDB vector search acting as a personal CRM), and a SequentialAgent that synthesises the final reply. Deployed as a container on Cloud Run with Gemini 2.5 Flash.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/smartdesk" target="_blank" rel="noopener noreferrer"
-                                        class="border border-genai text-genai px-4 py-2 rounded-lg hover:bg-genai hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Google ADK</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">MCP</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">AlloyDB + pgvector</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Gemini 2.5 Flash</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Cloud Run</span>
-                                    </div>
-                            </div>
-
-                            <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-genai project-card">
-                                <h4 class="text-xl font-bold mb-3 text-genai">🗺️ Location Intelligence Agent</h4>
-                                <div class="mb-2 text-secondary">2026 • Google Cloud Gen AI Academy — Track 2</div>
-                                <p class="text-secondary mb-4">An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, and Google Maps for location analysis — that scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue, and measures competitor density in candidate delivery zones.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/bakery-growth-agent" target="_blank" rel="noopener noreferrer"
-                                        class="border border-genai text-genai px-4 py-2 rounded-lg hover:bg-genai hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">MCP Servers</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">BigQuery</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Google Maps API</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">ADK</span>
-                                    <span class="bg-genai bg-opacity-10 text-genai px-3 py-1 rounded-full text-sm">Gemini</span>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Applied AI Applications -->
-                <h3 class="text-2xl font-semibold mt-12 mb-4 text-primary">Applied AI Applications</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-accent project-card">
-                                <h4 class="text-xl font-bold mb-3 text-primary">💬 Asha Chatbot — JobsForHer Foundation</h4>
-                                <div class="mb-2 text-secondary">2025 • Hackathon project</div>
-                                <p class="text-secondary mb-4">A context-aware chatbot for the JobsForHer Foundation that surfaces job listings, community events and mentorship programmes, and handles FAQs — built to support women returning to and advancing in the workforce.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/asha-chatbot" target="_blank" rel="noopener noreferrer"
-                                        class="border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Conversational AI</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">NLP</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Python</span>
-                                    </div>
-                            </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-accent project-card">
-                                <h4 class="text-xl font-bold mb-3 text-primary">🏥 MedTestAI — HIPAA-Compliant Healthcare AI</h4>
-                                <div class="mb-2 text-secondary">2025 – 2026 • Personal project</div>
-                                <p class="text-secondary mb-4">A healthcare AI project built around HIPAA compliance constraints — handling protected health information under the access, auditing and data-handling rules that regulated medical software requires.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/MedTestAI" target="_blank" rel="noopener noreferrer"
-                                        class="border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Healthcare AI</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">HIPAA Compliance</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">JavaScript</span>
-                                    </div>
-                            </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-accent project-card">
-                                <h4 class="text-xl font-bold mb-3 text-primary">🔎 WebContentQnA — Ask Questions About Any Page</h4>
-                                <div class="mb-2 text-secondary">2025 • Personal project</div>
-                                <p class="text-secondary mb-4">Paste a set of website URLs and ask questions about their contents; the app retrieves and answers from the page text using a DistilBERT question-answering model.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/WebContentQnA" target="_blank" rel="noopener noreferrer"
-                                        class="border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">DistilBERT</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Question Answering</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Transformers</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Streamlit</span>
-                                    </div>
-                            </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-accent project-card">
-                                <h4 class="text-xl font-bold mb-3 text-primary">💳 NBFC Loan Default Prediction</h4>
-                                <div class="mb-2 text-secondary">Feb 2025 • Great Learning Hackathon</div>
-                                <p class="text-secondary mb-4">A classification model predicting whether a client will default on loan repayment, built for a non-banking financial company dataset as part of a competitive hackathon.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/NBFC-Loan-Default" target="_blank" rel="noopener noreferrer"
-                                        class="border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Classification</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Risk Modelling</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Hackathon</span>
-                                    </div>
-                            </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 border border-accent project-card">
-                                <h4 class="text-xl font-bold mb-3 text-primary">🛒 E-commerce Behaviour &amp; Sales Dashboard</h4>
-                                <div class="mb-2 text-secondary">2024 – 2025 • Personal project</div>
-                                <p class="text-secondary mb-4">A dashboard surfacing user-behaviour and sales-trend insights for an e-commerce website, turning raw event and transaction data into decisions a merchandising team can act on.</p>
-                                <div class="flex gap-3 mb-4 flex-wrap">
-                                    <a href="https://github.com/JannetEkka/ecommerce-analysis" target="_blank" rel="noopener noreferrer"
-                                        class="border border-primary text-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition-colors duration-300 text-sm font-medium">💻 View Code</a>
-                                    </div>
-                                <div class="flex flex-wrap gap-2">
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Dashboards</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Analytics</span>
-                                    <span class="bg-primary bg-opacity-10 text-primary px-3 py-1 rounded-full text-sm">Python</span>
-                                    </div>
-                            </div>
-                </div>
-
-                <!-- Computer Vision & Deep Learning -->
-                <h3 class="text-2xl font-semibold mt-12 mb-4 text-primary">Computer Vision & Deep Learning</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Automotive Surveillance System Capstone -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Automotive_Surveillance_System_Capstone" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Automotive Surveillance System Capstone</h3>
-                            <div class="mb-2 text-secondary">Dec 2024 - Jan 2025 • Great Learning</div>
-                            <p class="text-secondary mb-4">Developed an AI-powered automotive surveillance system that enhances dealership operations through automated vehicle detection and classification. Achieved 69.20% accuracy in car classification using ResNet50 architecture, processing and analyzing over 16,000 vehicle images.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Computer Vision</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Deep Learning</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">ResNet50</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- MultiModel Botanical Classification -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/MultiModel_Botanical_Classification_CV" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">MultiModel Botanical Classification</h3>
-                            <div class="mb-2 text-secondary">Jun 2024 - Jul 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Achieved 83.79% accuracy with CNN architecture for automated plant species classification in research settings. Processed 4,750+ plant seedling images and compared multiple approaches (CNN, Random Forest, SVM), improving research efficiency by automating the time-intensive manual identification process.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">CNN</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Research Automation</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Transfer Learning</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Computer Vision</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Signal Quality Classification -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Signal_Classification_Digit_Recognition_NNDL"
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Deep Learning for Signal & SVHN Classification</h3>
-                            <div class="mb-2 text-secondary">Aug 2024 - Sep 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Developed neural networks achieving 90% accuracy in signal quality prediction and 85% accuracy in SVHN digit recognition. Implemented regularization techniques and visualization suite to handle complex real-world conditions, enabling automated quality control for telecommunications equipment.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Deep Learning</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Neural Networks</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Signal Classification</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Machine Learning & Analytics -->
-                <h3 class="text-2xl font-semibold mt-12 mb-4 text-primary">Machine Learning & Analytics</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- YouTube AdView Analytics -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/YouTube_AdView_Analytics_ML" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">YouTube AdView Analytics</h3>
-                            <div class="mb-2 text-secondary">Jul 2024 - Aug 2024 • Internship Studio</div>
-                            <p class="text-secondary mb-4">Developed a machine learning solution achieving R² of 0.252 with Random Forest Regression to predict advertisement views based on metrics like views, likes and comments. Processed and analyzed 15,000+ YouTube videos to provide data-driven insights for content creators and advertisers to optimize ad revenue.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Machine Learning</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Predictive Analytics</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Random Forest</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Customer Churn Prediction -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Customer_Churn_Prediction_ET" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Customer Churn Prediction</h3>
-                            <div class="mb-2 text-secondary">Oct 2024 - Nov 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Achieved 81.48% prediction accuracy with Random Forest to identify customers likely to cancel telecom services. Implemented multiple ensemble techniques including Bagging, AdaBoost, and Gradient Boosting, creating data-driven retention strategies that prioritize high-risk customer segments for targeted interventions.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Ensemble Methods</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Customer Analytics</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Business Strategy</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Semiconductor Manufacturing -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Semiconductor_Manufacturing_Prediction_FMT" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Semiconductor Manufacturing Prediction</h3>
-                            <div class="mb-2 text-secondary">Sep 2024 - Oct 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Achieved 99.20% accuracy in semiconductor yield prediction by processing 591 sensor signals from manufacturing equipment. Implemented feature selection and SMOTE techniques to handle imbalanced datasets, enabling proactive quality control and reducing manufacturing defects in high-precision semiconductor production.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Manufacturing Analytics</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Feature Engineering</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Quality Control</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Automobile Analysis -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Automobile_Analysis_Classification_USL" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Automobile Analysis & Classification</h3>
-                            <div class="mb-2 text-secondary">Apr 2024 - May 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Implemented K-means clustering for vehicle segmentation and developed PCA-enhanced SVM classification for automotive market analysis. Analyzed vehicle attributes including MPG, displacement, horsepower, and weight to identify optimal groupings across 102 dataset features.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">K-means Clustering</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">PCA</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">SVM Classification</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Business Intelligence & Analytics -->
-                <h3 class="text-2xl font-semibold mt-12 mb-4 text-primary">Business Intelligence & Analytics</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- New-Wheels Analytics -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/New_Wheels_Performance_Analytics_SQL" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">New-Wheels Performance Analytics</h3>
-                            <div class="mb-2 text-secondary">Jul 2024 - Aug 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Analyzed customer behavior and sales patterns to drive strategic decisions for a vehicle resale business, processing data for 994 customers and $1.25B revenue. Created KPI tracking system identifying key markets in California, Texas, and Florida, and delivered actionable insights that shaped targeted marketing approaches and customer engagement strategies.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">SQL Analytics</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Business Intelligence</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">KPI Development</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Business Analytics Portfolio -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Business_Analytics_Portfolio_SL" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Business Analytics Portfolio</h3>
-                            <div class="mb-2 text-secondary">May 2024 - Jun 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Delivered comprehensive analytics solutions achieving 86% accuracy in used car price prediction and 84% accuracy in employee attrition prediction. Developed data-driven pricing strategies for Cars4U and created predictive models for healthcare HR analytics, demonstrating versatility across automotive and healthcare industries.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Price Prediction</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">HR Analytics</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Business Strategy</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <!-- Natural Language Processing & Statistics -->
-                <h3 class="text-2xl font-semibold mt-12 mb-4 text-primary">Natural Language Processing & Statistics</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Stock Market Sentiment Analysis -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Stock_Market_Sentiment_Analysis_NLP" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Stock Market Sentiment Analysis</h3>
-                            <div class="mb-2 text-secondary">Nov 2024 - Dec 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Built ensemble model for sentiment classification of financial news and social media content using Word2Vec, GloVe, and SBERT embeddings. Implemented automated market intelligence through weekly summaries using Mistral-7B LLM, analyzing positive and negative market events to enhance news processing efficiency.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Natural Language Processing</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Sentiment Analysis</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Large Language Models</span>
-                            </div>
-                        </div>
-                    </a>
-
-                    <!-- Applied Statistics Project -->
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Applied_Statistics_Project" 
-                        class="block" 
-                        target="_blank" 
-                        rel="noopener noreferrer">
-                        <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow duration-300 project-card">
-                            <h3 class="text-xl font-bold mb-4 text-primary">Applied Statistics & Hypothesis Testing</h3>
-                            <div class="mb-2 text-secondary">May 2024 - Jun 2024 • Texas McCombs School of Business</div>
-                            <p class="text-secondary mb-4">Executed comprehensive statistical analysis and hypothesis testing to validate business theories on car purchase behavior. Analyzed quality control metrics in manufacturing identifying a 5% defect rate, and developed probability models for sales forecasting showing 82.67% success rate in weekly sales predictions.</p>
-                            <div class="flex flex-wrap gap-2">
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Statistics</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Hypothesis Testing</span>
-                                <span class="bg-accent bg-opacity-50 text-primary px-3 py-1 rounded-full text-sm">Data Analysis</span>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <footer class="bg-primary text-white py-8">
-            <div class="container mx-auto px-4 text-center">
-                <h2 class="text-3xl font-bold mb-8">Let's Connect</h2>
-                <p class="text-xl mb-8">Interested in <strong>GenAI, Data Science, or Machine Learning opportunities?</strong></p>
-                
-                <!-- Resume Downloads -->
-                <div class="flex justify-center gap-4 mb-6 flex-wrap">
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class="bg-genai text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300 font-medium">
-                        📄 Download GenAI Resume
-                    </a>
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class="border-2 border-accent text-accent px-6 py-3 rounded-lg hover:bg-accent hover:text-primary transition-colors duration-300 font-medium">
-                        📊 Download Data Science Resume
-                    </a>
-                </div>
-                
-                <!-- Certificate Access -->
-                <div class="text-center mb-8">
-                    <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class="text-accent hover:text-white transition-colors duration-300 text-sm underline">
-                        📜 View All Certificates & Credentials
-                    </a>
-                </div>
-                
-                <div class="flex justify-center space-x-8">
-                    <a href="https://github.com/JannetEkka" 
-                       class="hover:text-accent transition-colors duration-300"
-                       target="_blank"
-                       rel="noopener noreferrer">
-                        GitHub
-                    </a>
-                    <a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/" 
-                       class="hover:text-accent transition-colors duration-300"
-                       target="_blank"
-                       rel="noopener noreferrer">
-                        LinkedIn
-                    </a>
-                    <a href="mailto:jannetekka96@gmail.com" 
-                       class="hover:text-accent transition-colors duration-300">
-                        Email
-                    </a>
-                </div>
-                <div class="mt-4 text-sm text-accent">
-                    © 2026 Jannet Akanksha Ekka. All rights reserved.
-                </div>
-            </div>
-        </footer>
+<nav id="nav">
+  <div class="shell">
+    <a href="#top" class="brand"><i></i> Jannet Akanksha Ekka</a>
+    <div class="navlinks">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
+  </div>
+</nav>
 
-    <script>
-        // Add smooth hover effect to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                card.style.transform = 'translateY(-2px)';
-            });
-            card.addEventListener('mouseleave', () => {
-                card.style.transform = 'translateY(0)';
-            });
-        });
-    </script>
+<header class="hero" id="top">
+  <div class="shell">
+    <div class="eyebrow reveal"><b></b> Open to AI/ML engineering roles</div>
+    <h1 class="big reveal">
+      I build <span class="serif">agentic AI</span><br>
+      that runs in
+      <span class="rotor"><span class="rotor-in">
+        <span>production.</span><span>the open.</span><span>real markets.</span><span>production.</span>
+      </span></span>
+    </h1>
+    <p class="lede reveal">
+      AI/ML engineer shipping multi-agent systems end to end — architecture, learning loop, cloud deployment and live operations.
+      Author of a <strong>patent-pending multi-agent trading AI</strong> running continuously on Google Cloud, backed by
+      <strong>4+ years of enterprise engineering at Deloitte</strong> and a <strong>Rank&nbsp;1</strong> PGP in AI/ML.
+    </p>
+    <div class="cta reveal">
+      <a class="btn btn-p" href="#work">See the work
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-g" href="mailto:jannetekka96@gmail.com">Get in touch</a>
+    </div>
+    <div class="chips reveal">
+      <span class="chip">⚙️ Patent pending</span>
+      <span class="chip">🏆 OpenServ Best DeFi — Winner</span>
+      <span class="chip">🥇 Rank 1 — PGP AI/ML</span>
+      <span class="chip">☁️ Google Cloud Gen AI Academy</span>
+    </div>
+  </div>
+</header>
+
+<div class="statbar">
+  <div class="shell">
+    <div class="statgrid">
+      <div class="stat reveal"><div class="n" data-count="24">24</div><div class="l">Projects shipped</div></div>
+      <div class="stat reveal"><div class="n" data-count="33">33</div><div class="l">K lines in flagship</div></div>
+      <div class="stat reveal"><div class="n" data-count="4">4</div><div class="l">Years enterprise eng.</div></div>
+      <div class="stat reveal"><div class="n" data-count="1">1</div><div class="l">Patent filed</div></div>
+    </div>
+  </div>
+</div>
+
+<section id="work">
+  <div class="shell">
+    <div class="shead reveal">
+      <div class="skicker">Selected work</div>
+      <h2 class="stitle">Systems, not notebooks.</h2>
+      <p class="ssub">Everything below either runs somewhere or ships with the tests that prove it works. Filter by discipline.</p>
+    </div>
+    
+    <article class="feature reveal" data-cat="agents">
+      <div class="feature-glow" aria-hidden="true"></div>
+      <div class="feature-inner">
+        <div class="feature-head">
+          <span class="pill pill-flag">Flagship</span>
+          <span class="pill pill-patent">Patent pending · IN 202631090789</span>
+        </div>
+        <h3 class="feature-title">Smart Money Trading (SMT)</h3>
+        <p class="feature-sub">Explainable Multi-Agent Trading AI</p>
+        <p class="feature-meta">2026 – Present · Sole architect & engineer</p>
+        <p class="feature-desc">A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate.</p>
+        <div class="fstats"><div class="fstat"><span class="fnum" data-count="33K">33K</span><span class="flab">lines of Python</span></div><div class="fstat"><span class="fnum" data-count="153">153</span><span class="flab">modules</span></div><div class="fstat"><span class="fnum" data-count="166">166</span><span class="flab">tests green</span></div><div class="fstat"><span class="fnum" data-count="8">8</span><span class="flab">pairs live</span></div></div>
+        <div class="tags"><span class="tag">Multi-Agent Systems</span><span class="tag">Explainable AI</span><span class="tag">Optuna</span><span class="tag">BigQuery + Vector Search</span><span class="tag">Vertex AI</span><span class="tag">Cloud Run</span><span class="tag">Cloudflare Workers</span></div>
+        <div class="lnks"><a class="lnk live" href="https://smt-weex-trading-bot.jannet-ekka.workers.dev/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live site</a><a class="lnk live" href="https://smt-world-2gbcoyhuea-uc.a.run.app/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>SMT World</a><a class="lnk code" href="https://github.com/JannetEkka/smt-apac" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a><a class="lnk doc" href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Press</a></div>
+        <p class="feature-note">Core repo private — the linked repo is the public explanatory layer.</p>
+      </div>
+    </article>
+    <div class="filters reveal"><button class="filter is-on" data-filter="all">All work</button><button class="filter" data-filter="agents">AI Agents</button><button class="filter" data-filter="genai">Generative AI</button><button class="filter" data-filter="cv">Computer Vision</button><button class="filter" data-filter="ml">Machine Learning</button><button class="filter" data-filter="analytics">Analytics</button><button class="filter" data-filter="automation">Automation</button></div>
+    <div class="grid" id="grid">
+      <article class="card reveal" data-cat="genai" style="--i:0">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">VerseCanvas</h3>
+            
+          </div>
+          <p class="card-sub">AI Poetry-to-Art Generator</p>
+          <p class="card-meta">2025 · Personal project</p>
+          <p class="card-desc">Turns a poem into original artwork through a multi-stage pipeline: semantic analysis with Gemini 2.0 &rarr; automated prompt engineering &rarr; image synthesis with Imagen 3.0 on Vertex AI &rarr; hybrid editing and text overlay. Six languages, six art styles, tunable mood intensity.</p>
+          <div class="tags"><span class="tag">Gemini 2.0</span><span class="tag">Imagen 3.0</span><span class="tag">Vertex AI</span><span class="tag">Streamlit</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://versecanvas.streamlit.app/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live demo</a><a class="lnk sm code" href="https://github.com/JannetEkka/versecanvas" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:1">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">SmartDesk</h3>
+            
+          </div>
+          <p class="card-sub">Multi-Agent Productivity Assistant</p>
+          <p class="card-meta">2026 · Gen AI Academy capstone</p>
+          <p class="card-desc">A root ADK orchestrator routing to specialised sub-agents — InboxAgent (Gmail over MCP), PlannerAgent (Calendar over MCP), DataAgent (AlloyDB vector search as a personal CRM) — with a SequentialAgent synthesising the reply. Containerised on Cloud Run.</p>
+          <div class="tags"><span class="tag">Google ADK</span><span class="tag">MCP</span><span class="tag">AlloyDB + pgvector</span><span class="tag">Gemini 2.5 Flash</span><span class="tag">Cloud Run</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/smartdesk" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:2">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Location Intelligence Agent</h3>
+            
+          </div>
+          <p class="card-sub">MCP over BigQuery + Google Maps</p>
+          <p class="card-meta">2026 · Gen AI Academy Track 2</p>
+          <p class="card-desc">An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.</p>
+          <div class="tags"><span class="tag">MCP Servers</span><span class="tag">BigQuery</span><span class="tag">Google Maps API</span><span class="tag">ADK</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/bakery-growth-agent" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:3">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Smart Money Tracker</h3>
+            <span class="pill pill-award">🏆 OpenServ × Hack2skill</span>
+          </div>
+          <p class="card-sub">Multi-Agent Blockchain Analytics</p>
+          <p class="card-meta">2024 · Winner — Best DeFi Application</p>
+          <p class="card-desc">Multi-agent whale tracking across Ethereum, BNB Smart Chain and Polygon using the OpenServ SDK, with Alchemy webhooks driving sub-second transaction monitoring. Confidence-scored detection of accumulation, distribution and coordinated movements, with automated exchange-wallet exclusion.</p>
+          <div class="tags"><span class="tag">OpenServ SDK</span><span class="tag">Alchemy</span><span class="tag">Moralis</span><span class="tag">Cloud Run</span><span class="tag">pgvector</span></div>
+          
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:4">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">SMT Chain Adapters</h3>
+            
+          </div>
+          <p class="card-sub">Mantle &amp; BNB hackathon builds</p>
+          <p class="card-meta">2026 · Hackathon adapters</p>
+          <p class="card-desc">Thin per-chain adapters that import the SMT brain and expose it to a specific ecosystem — keeping one shared decision engine behind platform-specific front ends rather than forking the strategy code.</p>
+          <div class="tags"><span class="tag">Mantle</span><span class="tag">BNB Chain</span><span class="tag">Python</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://jannetekka.github.io/smt-mantle/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live</a><a class="lnk sm code" href="https://github.com/JannetEkka/smt-mantle" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Mantle</a><a class="lnk sm code" href="https://github.com/JannetEkka/smt-bnb" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>BNB</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="genai" style="--i:5">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Asha Chatbot</h3>
+            
+          </div>
+          <p class="card-sub">JobsForHer Foundation</p>
+          <p class="card-meta">2025 · Hackathon project</p>
+          <p class="card-desc">A context-aware chatbot surfacing job listings, community events and mentorship programmes, and handling FAQs — built to support women returning to and advancing in the workforce.</p>
+          <div class="tags"><span class="tag">Conversational AI</span><span class="tag">NLP</span><span class="tag">Python</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/asha-chatbot" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="genai" style="--i:6">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">MedTestAI</h3>
+            
+          </div>
+          <p class="card-sub">HIPAA-Compliant Healthcare AI</p>
+          <p class="card-meta">2025 – 2026 · Personal project</p>
+          <p class="card-desc">A healthcare AI project built around HIPAA compliance constraints — handling protected health information under the access, auditing and data-handling rules regulated medical software requires.</p>
+          <div class="tags"><span class="tag">Healthcare AI</span><span class="tag">HIPAA</span><span class="tag">JavaScript</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/MedTestAI" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="genai" style="--i:7">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">WebContentQnA</h3>
+            
+          </div>
+          <p class="card-sub">Ask questions about any page</p>
+          <p class="card-meta">2025 · Personal project</p>
+          <p class="card-desc">Paste a set of URLs and ask questions about their contents; the app retrieves and answers from page text using a DistilBERT question-answering model.</p>
+          <div class="tags"><span class="tag">DistilBERT</span><span class="tag">Question Answering</span><span class="tag">Transformers</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/WebContentQnA" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="cv" style="--i:8">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Automotive Surveillance System</h3>
+            
+          </div>
+          <p class="card-sub">Capstone — Computer Vision</p>
+          <p class="card-meta">Dec 2024 – Jan 2025 · Great Learning</p>
+          <p class="card-desc">Vehicle make/model/year classification reaching 69.2% accuracy with ResNet50, plus Fast R-CNN object detection across 16,185 images spanning 196 classes.</p>
+          <div class="tags"><span class="tag">ResNet50</span><span class="tag">Fast R-CNN</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Automotive_Surveillance_System_Capstone" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="cv" style="--i:9">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">MultiModel Botanical Classification</h3>
+            
+          </div>
+          <p class="card-sub">Plant species recognition</p>
+          <p class="card-meta">Jun – Jul 2024 · UT Austin McCombs</p>
+          <p class="card-desc">83.79% accuracy with a CNN for automated plant-species classification across 4,750+ seedling images, benchmarked against Random Forest and SVM baselines.</p>
+          <div class="tags"><span class="tag">CNN</span><span class="tag">Transfer Learning</span><span class="tag">Computer Vision</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/MultiModel_Botanical_Classification_CV" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="cv" style="--i:10">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Signal &amp; SVHN Classification</h3>
+            
+          </div>
+          <p class="card-sub">Neural networks, two domains</p>
+          <p class="card-meta">Aug – Sep 2024 · UT Austin McCombs</p>
+          <p class="card-desc">Neural networks reaching 90% accuracy on signal-quality prediction and 85% on SVHN street-number digit recognition, with regularisation and a visualisation suite for real-world noise.</p>
+          <div class="tags"><span class="tag">Deep Learning</span><span class="tag">Keras</span><span class="tag">Regularisation</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Signal_Classification_Digit_Recognition_NNDL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="ml" style="--i:11">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Customer Churn Prediction</h3>
+            
+          </div>
+          <p class="card-sub">Telecom retention</p>
+          <p class="card-meta">Oct – Nov 2024 · UT Austin McCombs</p>
+          <p class="card-desc">81.48% accuracy identifying customers likely to cancel, comparing Bagging, AdaBoost and Gradient Boosting, and converting the model into a prioritised retention strategy.</p>
+          <div class="tags"><span class="tag">Ensemble Methods</span><span class="tag">scikit-learn</span><span class="tag">Business Strategy</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Customer_Churn_Prediction_ET" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="ml" style="--i:12">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Semiconductor Yield Prediction</h3>
+            
+          </div>
+          <p class="card-sub">591 sensor signals</p>
+          <p class="card-meta">Sep – Oct 2024 · UT Austin McCombs</p>
+          <p class="card-desc">Pass/fail yield prediction from manufacturing sensor data, using feature selection and SMOTE to cut 591 signals down to the ones that actually carry information about defects.</p>
+          <div class="tags"><span class="tag">Feature Selection</span><span class="tag">SMOTE</span><span class="tag">Quality Control</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Semiconductor_Manufacturing_Prediction_FMT" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="ml" style="--i:13">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">YouTube AdView Analytics</h3>
+            
+          </div>
+          <p class="card-sub">Ad-revenue prediction</p>
+          <p class="card-meta">Jul – Aug 2024 · Internship Studio</p>
+          <p class="card-desc">Random Forest regression predicting advertisement views from engagement metrics across 15,000+ videos, packaged for integration with business dashboards.</p>
+          <div class="tags"><span class="tag">Random Forest</span><span class="tag">pandas</span><span class="tag">Predictive Analytics</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/YouTube_AdView_Analytics_ML" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="ml" style="--i:14">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">NBFC Loan Default Prediction</h3>
+            
+          </div>
+          <p class="card-sub">Credit risk</p>
+          <p class="card-meta">Feb 2025 · Great Learning Hackathon</p>
+          <p class="card-desc">A classification model predicting whether a client will default on loan repayment, built against a non-banking financial company dataset under hackathon time constraints.</p>
+          <div class="tags"><span class="tag">Classification</span><span class="tag">Risk Modelling</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/NBFC-Loan-Default" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="ml" style="--i:15">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Automobile Analysis &amp; Classification</h3>
+            
+          </div>
+          <p class="card-sub">K-Means + PCA-enhanced SVM</p>
+          <p class="card-meta">Apr – May 2024 · UT Austin McCombs</p>
+          <p class="card-desc">Vehicle segmentation with K-Means clustering and classification with a PCA-enhanced SVM, analysing MPG, displacement, horsepower and weight across 102 features.</p>
+          <div class="tags"><span class="tag">K-Means</span><span class="tag">PCA</span><span class="tag">SVM</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Automobile_Analysis_Classification_USL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="ml" style="--i:16">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Stock Market Sentiment Analysis</h3>
+            
+          </div>
+          <p class="card-sub">Financial news NLP</p>
+          <p class="card-meta">Nov – Dec 2024 · UT Austin McCombs</p>
+          <p class="card-desc">An ensemble sentiment classifier over financial news using Word2Vec, GloVe and SBERT embeddings, with weekly market summaries generated by a Mistral-7B LLM.</p>
+          <div class="tags"><span class="tag">NLP</span><span class="tag">SBERT</span><span class="tag">Mistral-7B</span><span class="tag">Transformers</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Stock_Market_Sentiment_Analysis_NLP" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="analytics" style="--i:17">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">New-Wheels Performance Analytics</h3>
+            
+          </div>
+          <p class="card-sub">SQL business intelligence</p>
+          <p class="card-meta">Jul – Aug 2024 · UT Austin McCombs</p>
+          <p class="card-desc">Customer behaviour and sales analysis for a vehicle-resale business covering 994 customers and $1.25B revenue, with a KPI tracking system identifying key markets.</p>
+          <div class="tags"><span class="tag">SQL</span><span class="tag">Business Intelligence</span><span class="tag">KPI Design</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/New_Wheels_Performance_Analytics_SQL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="analytics" style="--i:18">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Business Analytics Portfolio</h3>
+            
+          </div>
+          <p class="card-sub">Pricing + HR attrition</p>
+          <p class="card-meta">May – Jun 2024 · UT Austin McCombs</p>
+          <p class="card-desc">Two supervised-learning studies: 86% accuracy on used-car price prediction for Cars4U, and 84% on employee attrition for a healthcare HR dataset.</p>
+          <div class="tags"><span class="tag">Regression</span><span class="tag">HR Analytics</span><span class="tag">scikit-learn</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Business_Analytics_Portfolio_SL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="analytics" style="--i:19">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">E-commerce Behaviour Dashboard</h3>
+            
+          </div>
+          <p class="card-sub">User &amp; sales insight</p>
+          <p class="card-meta">2024 – 2025 · Personal project</p>
+          <p class="card-desc">A dashboard surfacing user-behaviour and sales-trend insights for an e-commerce site, turning raw event and transaction data into merchandising decisions.</p>
+          <div class="tags"><span class="tag">Dashboards</span><span class="tag">Analytics</span><span class="tag">Python</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/ecommerce-analysis" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="analytics" style="--i:20">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Applied Statistics &amp; Hypothesis Testing</h3>
+            
+          </div>
+          <p class="card-sub">Statistical foundations</p>
+          <p class="card-meta">May – Jun 2024 · UT Austin McCombs</p>
+          <p class="card-desc">Hypothesis testing on car-purchase behaviour, manufacturing quality control identifying a 5% defect rate, and probability models for weekly sales forecasting.</p>
+          <div class="tags"><span class="tag">Hypothesis Testing</span><span class="tag">SciPy</span><span class="tag">Probability</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Applied_Statistics_Project" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="automation" style="--i:21">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Yatra Test Automation Framework</h3>
+            
+          </div>
+          <p class="card-sub">Hybrid Selenium framework</p>
+          <p class="card-meta">2024 · Personal project</p>
+          <p class="card-desc">A hybrid data-driven Selenium framework with Page Object Model structure, external test data, cross-browser runs on Edge/Chrome/Firefox, HTML reporting and failure screenshots — wired into Jenkins.</p>
+          <div class="tags"><span class="tag">Selenium</span><span class="tag">PyTest</span><span class="tag">POM</span><span class="tag">Jenkins</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/python-automation" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article>
+      <article class="card reveal" data-cat="automation" style="--i:22">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">50 Days of Python</h3>
+            
+          </div>
+          <p class="card-sub">A challenge a day</p>
+          <p class="card-meta">2025 · Completed challenge</p>
+          <p class="card-desc">All fifty exercises from Benjamin Bennett Alexander&rsquo;s challenge — data structures, file I/O, CSV and JSON handling, SQLite, and a Flask web app as the day-50 capstone.</p>
+          <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLite</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/50-days-of-python" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+        </div>
+      </article></div>
+  </div>
+</section>
+
+<div class="marq" aria-label="Technology stack">
+  <div class="marq-in">
+    <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
+    <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
+    <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
+    <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
+    <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
+    <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="shell">
+    <div class="two">
+      <div>
+        <div class="shead reveal" style="margin-bottom:30px">
+          <div class="skicker">About</div>
+          <h2 class="stitle">From breaking systems<br>to building them.</h2>
+        </div>
+        <div class="abtxt reveal">
+          <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
+          <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks designed to catch overfitting rather than flatter it.</p>
+          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
+        </div>
+      </div>
+      <div class="awards reveal">
+        <div class="award"><span class="em">⚙️</span><div><h5>Provisional patent filed</h5><p>India, App. No. 202631090789 — the SMT multi-agent decision architecture.</p></div></div>
+        <div class="award"><span class="em">📈</span><div><h5>WEEX AI Wars I — #1 preliminary leaderboard</h5><p>Top of 230+ teams, then one of 37 finalists in the $880K live AI trading competition. <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer">Coverage</a></p></div></div>
+        <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
+        <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
+        <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
+        <div class="award"><span class="em">📜</span><div><h5>Certifications</h5><p>Google Cloud Gen AI Academy (2025) · CPSAT Selenium Automation (2022). <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">View all</a></p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="shell">
+    <div class="shead reveal">
+      <div class="skicker">Experience</div>
+      <h2 class="stitle">Where I've worked.</h2>
+    </div>
+    <div class="tl">
+      <div class="tlrow reveal">
+        <h4>Independent AI Research &amp; Development</h4>
+        <div class="org">Self-directed</div><div class="when">Feb 2024 – Present</div>
+        <p>Built and operate the patent-pending SMT platform plus the projects above. Completed the PGP in AI/ML at Rank 1 and Google Cloud's Gen AI Academy while caring for family.</p>
+      </div>
+      <div class="tlrow reveal">
+        <h4>Lead Frontend Developer</h4>
+        <div class="org">AutoKorrekt — EdTech startup MVP</div><div class="when">May 2024 – Jan 2025</div>
+        <p>Interactive PDF processing with coordinate-based text extraction, integrating AWS Textract OCR and Mistral models into an AI answer-evaluation workflow. Bilingual EN/DE interface scaling to 1,000+ concurrent submissions.</p>
+      </div>
+      <div class="tlrow reveal">
+        <h4>Machine Learning Intern</h4>
+        <div class="org">Internship Studio</div><div class="when">Jul 2024 – Aug 2024</div>
+        <p>Random Forest model predicting YouTube ad views across a 15,000+ video dataset, packaged for integration with business dashboards.</p>
+      </div>
+      <div class="tlrow reveal">
+        <h4>Test Automation Engineer (Analyst)</h4>
+        <div class="org">Deloitte Consulting LLP — Bangalore</div><div class="when">Aug 2019 – Jan 2023</div>
+        <p>Led a 6-member QA team for Fortune 500 clients including AT&amp;T and Hewlett Packard Enterprise. Improved test execution efficiency 83%, tracked quality across 343 components, and analysed 50,000+ SAP Hybris transactions in Python.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="shell">
+    <div class="reveal">
+      <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
+      <p>Open to AI/ML engineering, agentic systems and GenAI application roles. The inbox is always open.</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn btn-p" href="mailto:jannetekka96@gmail.com">jannetekka96@gmail.com</a>
+        <a class="btn btn-g" href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn btn-g" href="https://github.com/JannetEkka" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="shell">
+    <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
+    <span>
+      <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
+      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a>
+    </span>
+  </div>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var R = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky nav */
+  var nav = document.getElementById('nav');
+  addEventListener('scroll', function(){
+    nav.classList.toggle('stuck', scrollY > 40);
+  }, {passive:true});
+
+  /* hero enters immediately on load — never waits on a scroll observer */
+  var hero = [].slice.call(document.querySelectorAll('.hero .reveal'));
+  hero.forEach(function(el,i){ el.style.transitionDelay = (i*90) + 'ms'; });
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    hero.forEach(function(el){ el.classList.add('in'); });
+  }); });
+
+  /* scroll reveal — with a hard failsafe so text can never stay hidden */
+  var rev = [].slice.call(document.querySelectorAll('.reveal')).filter(function(el){
+    return !el.closest('.hero');
+  });
+  function showAll(){ rev.concat(hero).forEach(function(el){ el.classList.add('in'); }); }
+  if (R || !('IntersectionObserver' in window)) {
+    showAll();
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    rev.forEach(function(el){ io.observe(el); });
+    setTimeout(showAll, 3500);           /* failsafe #1: never leave content invisible */
+    addEventListener('load', function(){ setTimeout(showAll, 1200); });
+  }
+
+  /* count-up */
+  function countUp(el){
+    var target = parseFloat(el.dataset.count), t0 = null, dur = 1300;
+    if (isNaN(target) || R) return;
+    function step(ts){
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0)/dur, 1), e = 1 - Math.pow(1-p, 3);
+      el.textContent = Math.round(target*e);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+    requestAnimationFrame(step);
+  }
+  var nums = [].slice.call(document.querySelectorAll('[data-count]'));
+  if ('IntersectionObserver' in window && !R) {
+    var nio = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { countUp(e.target); nio.unobserve(e.target); } });
+    }, {threshold:0.5});
+    nums.forEach(function(n){ nio.observe(n); });
+  }
+
+  /* cursor spotlight on cards */
+  if (!R && matchMedia('(hover:hover)').matches) {
+    document.querySelectorAll('.card').forEach(function(c){
+      c.addEventListener('pointermove', function(ev){
+        var r = c.getBoundingClientRect();
+        c.style.setProperty('--mx', (ev.clientX - r.left) + 'px');
+        c.style.setProperty('--my', (ev.clientY - r.top) + 'px');
+      });
+    });
+  }
+
+  /* filters */
+  var cards = [].slice.call(document.querySelectorAll('#grid .card'));
+  document.querySelectorAll('.filter').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter').forEach(function(b){ b.classList.remove('is-on'); });
+      btn.classList.add('is-on');
+      var f = btn.dataset.filter;
+      cards.forEach(function(c){
+        var show = (f === 'all' || c.dataset.cat === f);
+        c.classList.toggle('hide', !show);
+        if (show) c.classList.add('in');
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
