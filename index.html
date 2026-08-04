@@ -246,6 +246,45 @@ section{padding:104px 0}
 .award p{font-size:13px;color:var(--mut);margin-top:3px}
 .award a{color:var(--a2);border-bottom:1px solid rgba(34,211,238,.35)}
 
+/* ---------- grants chip ---------- */
+.grant-chip{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+  color:var(--a3);border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.08);
+  padding:6px 13px;border-radius:999px;margin-top:14px;transition:all .28s var(--ease)}
+.grant-chip:hover{background:rgba(251,191,36,.16);border-color:var(--a3);transform:translateY(-2px)}
+.feature-head .grant-chip{margin-top:0}
+.gdot{width:6px;height:6px;border-radius:50%;background:var(--a3);flex-shrink:0}
+.js .gdot{animation:pulse 2.4s ease-in-out infinite}
+
+/* ---------- backing / form ---------- */
+.backing{border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;
+  background:linear-gradient(160deg,rgba(251,191,36,.07),rgba(124,92,255,.06) 55%,transparent)}
+.backing-in{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:46px}
+@media(max-width:900px){.backing-in{grid-template-columns:1fr;gap:34px;padding:30px 24px}}
+.backing h3{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;letter-spacing:-.032em;line-height:1.14}
+.backing .bsub{color:var(--mut);margin-top:15px;font-size:15px}
+.backing .bsub strong{color:var(--tx);font-weight:600}
+
+.field{margin-bottom:14px}
+.field label{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin-bottom:6px}
+.field label .req{color:var(--a3)}
+.field input,.field textarea{width:100%;font-family:inherit;font-size:14.5px;color:var(--tx);
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:10px;
+  padding:11px 14px;transition:all .25s var(--ease)}
+.field textarea{resize:vertical;min-height:78px}
+.field input::placeholder,.field textarea::placeholder{color:var(--dim)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--a1);
+  background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(124,92,255,.16)}
+.hp{position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important}
+.fbtn{width:100%;justify-content:center;margin-top:4px;cursor:pointer;font-family:inherit;border:none}
+.fmsg{font-size:13.5px;margin-top:12px;min-height:20px}
+.fmsg.ok{color:#4ade80} .fmsg.bad{color:#f87171}
+
+.connect{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.cbtn{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
+  padding:10px 17px;border-radius:10px;border:1px solid var(--line2);transition:all .28s var(--ease)}
+.cbtn:hover{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}
+.cbtn svg{width:15px;height:15px;flex-shrink:0}
+
 /* ---------- contact ---------- */
 .contact{text-align:center;padding:110px 0}
 .contact h2{font-size:clamp(2.1rem,5.6vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:20px}
@@ -285,6 +324,7 @@ footer a:hover{color:var(--tx)}
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
+      <a href="#backing">Backing</a>
       <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
   </div>
@@ -347,6 +387,7 @@ footer a:hover{color:var(--tx)}
         <div class="feature-head">
           <span class="pill pill-flag">Flagship</span>
           <span class="pill pill-patent">Patent pending · IN 202631090789</span>
+          <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
         <h3 class="feature-title">Smart Money Trading (SMT)</h3>
         <p class="feature-sub">Explainable Multi-Agent Trading AI</p>
@@ -373,6 +414,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Gemini 2.0</span><span class="tag">Imagen 3.0</span><span class="tag">Vertex AI</span><span class="tag">Streamlit</span></div>
           <div class="lnks"><a class="lnk sm live" href="https://versecanvas.streamlit.app/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live demo</a><a class="lnk sm code" href="https://github.com/JannetEkka/versecanvas" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
       <article class="card reveal" data-cat="agents" style="--i:1">
@@ -383,11 +425,12 @@ footer a:hover{color:var(--tx)}
             
           </div>
           <p class="card-sub">Multi-Agent Productivity Assistant</p>
-          <p class="card-meta">2026 · Gen AI Academy capstone</p>
+          <p class="card-meta">2026 · Gen AI Academy APAC — Cohort 1 Hackathon</p>
           <p class="card-desc">A root ADK orchestrator routing to specialised sub-agents — InboxAgent (Gmail over MCP), PlannerAgent (Calendar over MCP), DataAgent (AlloyDB vector search as a personal CRM) — with a SequentialAgent synthesising the reply. Containerised on Cloud Run.</p>
           
           <div class="tags"><span class="tag">Google ADK</span><span class="tag">MCP</span><span class="tag">AlloyDB + pgvector</span><span class="tag">Gemini 2.5 Flash</span><span class="tag">Cloud Run</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/smartdesk" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="agents" style="--i:2">
@@ -398,11 +441,12 @@ footer a:hover{color:var(--tx)}
             
           </div>
           <p class="card-sub">MCP over BigQuery + Google Maps</p>
-          <p class="card-meta">2026 · Gen AI Academy Track 2</p>
+          <p class="card-meta">2026 · Google Cloud Gen AI Academy APAC</p>
           <p class="card-desc">An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.</p>
           
           <div class="tags"><span class="tag">MCP Servers</span><span class="tag">BigQuery</span><span class="tag">Google Maps API</span><span class="tag">ADK</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/bakery-growth-agent" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="agents" style="--i:3">
@@ -417,6 +461,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-desc">Multi-agent whale tracking across Ethereum, BNB Smart Chain and Polygon using the OpenServ SDK, with Alchemy webhooks driving sub-second transaction monitoring. Confidence-scored detection of accumulation, distribution and coordinated movements, with automated exchange-wallet exclusion.</p>
           
           <div class="tags"><span class="tag">OpenServ SDK</span><span class="tag">Alchemy</span><span class="tag">Moralis</span><span class="tag">Cloud Run</span><span class="tag">pgvector</span></div>
+          
           
         </div>
       </article>
@@ -433,6 +478,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Mantle</span><span class="tag">BNB Chain</span><span class="tag">Python</span></div>
           <div class="lnks"><a class="lnk sm live" href="https://jannetekka.github.io/smt-mantle/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live</a><a class="lnk sm code" href="https://github.com/JannetEkka/smt-mantle" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Mantle</a><a class="lnk sm code" href="https://github.com/JannetEkka/smt-bnb" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>BNB</a></div>
+          <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
       <article class="card reveal wide" data-cat="genai" style="--i:5">
@@ -447,6 +493,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-desc">An evaluation platform that takes a teacher from sign-up to graded scripts: create a class, upload a student roster and question paper, bulk-upload scanned answer sheets, then track each student through OCR, AI evaluation and validation. I led the frontend and designed the ML data flow across S3, RDS and SageMaker &mdash; interactive PDF processing with coordinate-based text extraction over AWS Textract, a bilingual EN/DE feedback interface on Amazon Comprehend, and a per-student status pipeline that scaled to 1,000+ concurrent submissions.</p>
           <div class="shots"><a class="shot" href="assets/autokorrekt/signup.png" data-cap="Teacher sign-up" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/signup.png" alt="Teacher sign-up" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Teacher sign-up</span></a><a class="shot" href="assets/autokorrekt/signin.png" data-cap="Sign in" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/signin.png" alt="Sign in" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Sign in</span></a><a class="shot" href="assets/autokorrekt/add-class.png" data-cap="Create a class — roster + question paper upload" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/add-class.png" alt="Create a class — roster + question paper upload" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Create a class — roster + question paper upload</span></a><a class="shot" href="assets/autokorrekt/students.png" data-cap="Per-student evaluation pipeline &amp; bulk answer-sheet upload" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/students.png" alt="Per-student evaluation pipeline &amp; bulk answer-sheet upload" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Per-student evaluation pipeline &amp; bulk answer-sheet upload</span></a></div>
           <div class="tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">AWS Textract</span><span class="tag">Amazon Comprehend</span><span class="tag">SageMaker</span><span class="tag">Django</span></div>
+          
           
         </div>
       </article>
@@ -463,6 +510,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Conversational AI</span><span class="tag">NLP</span><span class="tag">Python</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/asha-chatbot" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="genai" style="--i:7">
@@ -478,6 +526,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Healthcare AI</span><span class="tag">HIPAA</span><span class="tag">JavaScript</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/MedTestAI" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="genai" style="--i:8">
@@ -493,6 +542,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">DistilBERT</span><span class="tag">Question Answering</span><span class="tag">Transformers</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/WebContentQnA" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="cv" style="--i:9">
@@ -508,6 +558,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">ResNet50</span><span class="tag">Fast R-CNN</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Automotive_Surveillance_System_Capstone" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="cv" style="--i:10">
@@ -523,6 +574,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">CNN</span><span class="tag">Transfer Learning</span><span class="tag">Computer Vision</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/MultiModel_Botanical_Classification_CV" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="cv" style="--i:11">
@@ -538,6 +590,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Deep Learning</span><span class="tag">Keras</span><span class="tag">Regularisation</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Signal_Classification_Digit_Recognition_NNDL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="ml" style="--i:12">
@@ -553,6 +606,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Ensemble Methods</span><span class="tag">scikit-learn</span><span class="tag">Business Strategy</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Customer_Churn_Prediction_ET" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="ml" style="--i:13">
@@ -568,6 +622,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Feature Selection</span><span class="tag">SMOTE</span><span class="tag">Quality Control</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Semiconductor_Manufacturing_Prediction_FMT" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="ml" style="--i:14">
@@ -583,6 +638,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Random Forest</span><span class="tag">pandas</span><span class="tag">Predictive Analytics</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/YouTube_AdView_Analytics_ML" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="ml" style="--i:15">
@@ -598,6 +654,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Classification</span><span class="tag">Risk Modelling</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/NBFC-Loan-Default" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="ml" style="--i:16">
@@ -613,6 +670,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">K-Means</span><span class="tag">PCA</span><span class="tag">SVM</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Automobile_Analysis_Classification_USL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="ml" style="--i:17">
@@ -628,6 +686,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">NLP</span><span class="tag">SBERT</span><span class="tag">Mistral-7B</span><span class="tag">Transformers</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Stock_Market_Sentiment_Analysis_NLP" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="analytics" style="--i:18">
@@ -643,6 +702,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">SQL</span><span class="tag">Business Intelligence</span><span class="tag">KPI Design</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/New_Wheels_Performance_Analytics_SQL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="analytics" style="--i:19">
@@ -658,6 +718,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Regression</span><span class="tag">HR Analytics</span><span class="tag">scikit-learn</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Business_Analytics_Portfolio_SL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="analytics" style="--i:20">
@@ -673,6 +734,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Dashboards</span><span class="tag">Analytics</span><span class="tag">Python</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/ecommerce-analysis" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="analytics" style="--i:21">
@@ -688,6 +750,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Hypothesis Testing</span><span class="tag">SciPy</span><span class="tag">Probability</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Applied_Statistics_Project" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="automation" style="--i:22">
@@ -703,6 +766,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Selenium</span><span class="tag">PyTest</span><span class="tag">POM</span><span class="tag">Jenkins</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/python-automation" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article>
       <article class="card reveal" data-cat="automation" style="--i:23">
@@ -718,6 +782,7 @@ footer a:hover{color:var(--tx)}
           
           <div class="tags"><span class="tag">Python</span><span class="tag">Flask</span><span class="tag">SQLite</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/50-days-of-python" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
         </div>
       </article></div>
   </div>
@@ -756,7 +821,10 @@ footer a:hover{color:var(--tx)}
         <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
         <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
         <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
-        <div class="award"><span class="em">📜</span><div><h5>Certifications</h5><p>Google Cloud Gen AI Academy (2025) · CPSAT Selenium Automation (2022). <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">View all</a></p></div></div>
+        <div class="award"><span class="em">📜</span><div><h5>Certifications &amp; verified badges</h5><p>Google Cloud Gen AI Academy (2025) · Gen AI Academy APAC — Cohort 1 Hackathon (2026) · CPSAT Selenium Automation (2022).<br>
+          <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly badges</a> ·
+          <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills profile</a> ·
+          <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">Certificate files</a></p></div></div>
       </div>
     </div>
   </div>
@@ -793,6 +861,52 @@ footer a:hover{color:var(--tx)}
   </div>
 </section>
 
+<section id="backing">
+  <div class="shell">
+    <div class="shead reveal">
+      <div class="skicker">Backing &amp; collaboration</div>
+      <h2 class="stitle">Actively seeking grants and partners.</h2>
+      <p class="ssub">SMT is patent-pending, running live on Google Cloud, and looking for its next backer. If you fund early-stage AI, run a grant programme, or want to build on it &mdash; leave your details and I'll come back to you.</p>
+    </div>
+    <div class="backing reveal">
+      <div class="backing-in">
+        <div>
+          <h3>Fund, partner, or just say hello.</h3>
+          <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
+          <p class="bsub">Prefer to talk first? Reach me on any of these.</p>
+          <div class="connect"><a class="cbtn" href="mailto:jannetekka96@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>Email</a><a class="cbtn" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.1a4.2 4.2 0 0 1 3.8-2c4 0 4.8 2.6 4.8 6.1V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21h-4V9Z"/></svg>LinkedIn</a><a class="cbtn" target="_blank" rel="noopener noreferrer" href="https://wa.me/919078802572"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a13.6 13.6 0 0 1-6.2-5.4c-.5-.7-.8-1.6-.8-2.4 0-.9.5-1.4.7-1.6.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.3.4-.3.3c-.1.1-.2.3 0 .5a9.6 9.6 0 0 0 4.2 3.6c.3.1.4.1.6-.1l.9-1c.1-.2.3-.2.5-.1l2 .9c.2.1.4.2.4.3v.7Z"/></svg>WhatsApp</a></div>
+        </div>
+        <div>
+          <form id="gform" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="">
+            <input type="hidden" name="subject" value="Grant / collaboration enquiry from your portfolio">
+            <input type="hidden" name="from_name" value="Portfolio — jannetekka.github.io">
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="field">
+              <label for="f-name">Name <span class="req">*</span></label>
+              <input id="f-name" type="text" name="name" required placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="req">*</span></label>
+              <input id="f-email" type="email" name="email" required placeholder="you@organisation.com">
+            </div>
+            <div class="field">
+              <label for="f-site">Website</label>
+              <input id="f-site" type="url" name="website" placeholder="https://">
+            </div>
+            <div class="field">
+              <label for="f-msg">Anything else? <span style="color:var(--dim);font-weight:400">(optional)</span></label>
+              <textarea id="f-msg" name="message" placeholder="Grant programme, fund, or what you'd like to build"></textarea>
+            </div>
+            <button type="submit" class="btn btn-p fbtn" id="fsubmit">Send</button>
+            <div class="fmsg" id="fmsg" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact">
   <div class="shell">
     <div class="reveal">
@@ -812,7 +926,9 @@ footer a:hover{color:var(--tx)}
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
       <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a>
+      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a> ·
+      <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
+      <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>
   </div>
 </footer>
@@ -906,6 +1022,54 @@ footer a:hover{color:var(--tx)}
   document.getElementById('lbx').addEventListener('click', closeLb);
   lb.addEventListener('click', function(e){ if (e.target === lb) closeLb(); });
   addEventListener('keydown', function(e){ if (e.key === 'Escape') closeLb(); });
+
+  /* grant form */
+  var gform=document.getElementById('gform');
+  if (gform) {
+    var fmsg=document.getElementById('fmsg'), fbtn=document.getElementById('fsubmit');
+    var keyEl=gform.querySelector('[name=access_key]');
+    var MAIL='jannetekka96@gmail.com';
+    gform.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      if (!gform.checkValidity()) { gform.reportValidity(); return; }
+      var fd=new FormData(gform);
+      var key=(keyEl.value||'').trim();
+
+      /* No access key configured yet — fall back to opening an email so an
+         enquiry can never be silently lost. */
+      if (!key) {
+        var body='Name: '+(fd.get('name')||'')+'%0D%0AEmail: '+(fd.get('email')||'')
+                +'%0D%0AWebsite: '+(fd.get('website')||'')+'%0D%0A%0D%0A'+(fd.get('message')||'');
+        fmsg.className='fmsg ok';
+        fmsg.textContent='Opening your email app…';
+        location.href='mailto:'+MAIL+'?subject=Grant%20/%20collaboration%20enquiry&body='+body;
+        return;
+      }
+
+      fbtn.disabled=true; fbtn.textContent='Sending…';
+      fmsg.className='fmsg'; fmsg.textContent='';
+      fetch('https://api.web3forms.com/submit', {
+        method:'POST',
+        headers:{'Content-Type':'application/json', Accept:'application/json'},
+        body: JSON.stringify(Object.fromEntries(fd))
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        if (d.success) {
+          gform.reset();
+          fmsg.className='fmsg ok';
+          fmsg.textContent="Thank you — I'll get back to you shortly.";
+        } else {
+          throw new Error(d.message||'failed');
+        }
+      })
+      .catch(function(){
+        fmsg.className='fmsg bad';
+        fmsg.innerHTML='Could not send. Please email <a href="mailto:'+MAIL+'" style="color:var(--a2)">'+MAIL+'</a> directly.';
+      })
+      .finally(function(){ fbtn.disabled=false; fbtn.textContent='Send'; });
+    });
+  }
 
   /* filters */
   var cards = [].slice.call(document.querySelectorAll('#grid .card'));
