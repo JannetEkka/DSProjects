@@ -93,6 +93,15 @@ CONTACT = dict(
 
 # Remote-work / hiring profiles. Add a (label, url) pair as each one goes live
 # and rebuild — nothing else needs changing.
+# Visitor counter (Abacus — free, no signup, no key; abacus.jasoncameron.dev).
+# Counts once per browser session, not per refresh, so a reload does not inflate it.
+# Set enabled=False to remove it entirely.
+COUNTER = dict(
+    enabled=True,
+    namespace="jannetekka-github-io",
+    key="portfolio",
+)
+
 HIRE = [
     ("Himalayas", "https://himalayas.app/@jannetaekkauser"),
     ("LinkedIn", "https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/"),

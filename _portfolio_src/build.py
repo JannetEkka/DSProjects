@@ -2,7 +2,7 @@
 """Builds the animated portfolio index.html from data.py."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from data import FLAGSHIP, PROJECTS, CATS, CONTACT, CREDENTIALS, PROFILES, HIRE
+from data import FLAGSHIP, PROJECTS, CATS, CONTACT, CREDENTIALS, PROFILES, HIRE, COUNTER
 
 ICON = {
     "live": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
@@ -258,6 +258,14 @@ nav.stuck{{background:rgba(8,8,12,.72);backdrop-filter:blur(16px);border-bottom:
 .navlinks a{{font-size:13.5px;color:var(--mut);font-weight:500;position:relative;transition:color .25s}}
 .navlinks a::after{{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--a2);transition:width .3s var(--ease)}}
 .navlinks a:hover{{color:var(--tx)}} .navlinks a:hover::after{{width:100%}}
+.views{{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+  color:var(--mut);border:1px solid var(--line);background:var(--surf);
+  padding:6px 13px;border-radius:999px;white-space:nowrap}}
+.views b{{color:var(--tx);font-variant-numeric:tabular-nums}}
+.views .vlab{{color:var(--dim);font-weight:500}}
+.veye{{color:var(--a2);font-size:8px;line-height:1}}
+.js .veye{{animation:pulse 2.6s ease-in-out infinite}}
+@media(max-width:860px){{.views{{display:none}}}}
 .navcta{{border:1px solid var(--line2);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;transition:all .28s var(--ease)}}
 .navcta:hover{{background:var(--tx);color:var(--bg);border-color:var(--tx)}}
 @media(max-width:760px){{.navlinks a:not(.navcta){{display:none}}}}
@@ -553,7 +561,8 @@ footer a:hover{{color:var(--tx)}}
       <a href="#credentials">Credentials</a>
       <a href="#backing">Backing</a>
       <a href="#contact">Contact</a>
-      <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
+<span class="views" id="views" hidden><span class="veye" aria-hidden="true">&#9673;</span><b id="viewsn">—</b><span class="vlab">views</span></span>
+            <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
   </div>
 </nav>
@@ -912,6 +921,28 @@ footer a:hover{{color:var(--tx)}}
       .finally(function(){{ fbtn.disabled=false; fbtn.textContent='Send'; }});
     }});
   }}
+
+  /* visitor counter — increments once per session, reads on later views.
+     Stays hidden unless a real number comes back, so a dead API shows nothing
+     rather than a broken chip or a misleading zero. */
+  (function(){{
+    var on={'true' if COUNTER.get('enabled') else 'false'}, ns='{COUNTER["namespace"]}', key='{COUNTER["key"]}';
+    if (!on) return;
+    var box=document.getElementById('views'), num=document.getElementById('viewsn');
+    if (!box) return;
+    var seen=false;
+    try {{ seen = sessionStorage.getItem('smt_counted') === '1'; }} catch(e) {{}}
+    var verb = seen ? 'get' : 'hit';
+    fetch('https://abacus.jasoncameron.dev/' + verb + '/' + ns + '/' + key)
+      .then(function(r){{ return r.ok ? r.json() : Promise.reject(); }})
+      .then(function(d){{
+        if (typeof d.value !== 'number') return;
+        num.textContent = d.value.toLocaleString();
+        box.hidden = false;
+        try {{ sessionStorage.setItem('smt_counted','1'); }} catch(e) {{}}
+      }})
+      .catch(function(){{ /* leave it hidden */ }});
+  }})();
 
   /* click-to-copy (Discord username — not a linkable URL) */
   document.querySelectorAll('.copyable').forEach(function(b){{
