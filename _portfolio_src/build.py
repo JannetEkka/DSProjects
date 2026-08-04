@@ -2,7 +2,7 @@
 """Builds the animated portfolio index.html from data.py."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from data import FLAGSHIP, PROJECTS, CATS
+from data import FLAGSHIP, PROJECTS, CATS, CONTACT
 
 ICON = {
     "live": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
@@ -21,6 +21,10 @@ def links_html(links, small=False):
             f'<span class="ico">{ICON[kind]}</span>{label}</a>'
         )
     return f'<div class="lnks">{"".join(out)}</div>'
+
+
+GRANT_CHIP = ('<a class="grant-chip" href="#backing">'
+              '<span class="gdot"></span>Seeking grants &amp; partners</a>')
 
 
 def shots_html(shots):
@@ -49,6 +53,7 @@ def flagship_html(f):
         <div class="feature-head">
           <span class="pill pill-flag">Flagship</span>
           <span class="pill pill-patent">{f['badge']}</span>
+          {GRANT_CHIP if f.get('grants') else ''}
         </div>
         <h3 class="feature-title">{f['title']}</h3>
         <p class="feature-sub">{f['sub']}</p>
@@ -78,8 +83,30 @@ def card_html(p, i):
           {shots_html(p.get('shots'))}
           {tags_html(p['tags'])}
           {links_html(p['links'], small=True)}
+          {GRANT_CHIP if p.get('grants') else ''}
         </div>
       </article>'''
+
+
+SOCIAL_ICON = {
+ "discord": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a12.6 12.6 0 0 1 3.7 1.9 15.7 15.7 0 0 0-13.3 0A12.7 12.7 0 0 1 9 4.4L8.8 4a16.9 16.9 0 0 0-4.2 1.3C2 9.3 1.3 13.2 1.6 17a17 17 0 0 0 5.2 2.6l1-1.7c-.6-.2-1.2-.5-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.9 0l.4.3c-.5.3-1.1.6-1.7.8l1 1.7a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-2.9-11.7ZM8.5 14.7c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7 0c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>',
+ "linkedin": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.1a4.2 4.2 0 0 1 3.8-2c4 0 4.8 2.6 4.8 6.1V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21h-4V9Z"/></svg>',
+ "whatsapp": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a13.6 13.6 0 0 1-6.2-5.4c-.5-.7-.8-1.6-.8-2.4 0-.9.5-1.4.7-1.6.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.3.4-.3.3c-.1.1-.2.3 0 .5a9.6 9.6 0 0 0 4.2 3.6c.3.1.4.1.6-.1l.9-1c.1-.2.3-.2.5-.1l2 .9c.2.1.4.2.4.3v.7Z"/></svg>',
+ "email": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
+}
+
+def connect_html():
+    rows = [("email", "Email", "mailto:" + CONTACT["email"]),
+            ("linkedin", "LinkedIn", CONTACT.get("linkedin", "")),
+            ("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
+            ("discord", "Discord", CONTACT.get("discord", ""))]
+    out = []
+    for key, label, url in rows:
+        if not url:
+            continue          # unset channel renders nothing rather than a dead link
+        ext = '' if url.startswith("mailto:") else ' target="_blank" rel="noopener noreferrer"'
+        out.append(f'<a class="cbtn"{ext} href="{url}">{SOCIAL_ICON[key]}{label}</a>')
+    return '<div class="connect">' + "".join(out) + "</div>"
 
 
 filters = "".join(
@@ -336,6 +363,45 @@ section{{padding:104px 0}}
 .award p{{font-size:13px;color:var(--mut);margin-top:3px}}
 .award a{{color:var(--a2);border-bottom:1px solid rgba(34,211,238,.35)}}
 
+/* ---------- grants chip ---------- */
+.grant-chip{{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
+  color:var(--a3);border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.08);
+  padding:6px 13px;border-radius:999px;margin-top:14px;transition:all .28s var(--ease)}}
+.grant-chip:hover{{background:rgba(251,191,36,.16);border-color:var(--a3);transform:translateY(-2px)}}
+.feature-head .grant-chip{{margin-top:0}}
+.gdot{{width:6px;height:6px;border-radius:50%;background:var(--a3);flex-shrink:0}}
+.js .gdot{{animation:pulse 2.4s ease-in-out infinite}}
+
+/* ---------- backing / form ---------- */
+.backing{{border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;
+  background:linear-gradient(160deg,rgba(251,191,36,.07),rgba(124,92,255,.06) 55%,transparent)}}
+.backing-in{{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:46px}}
+@media(max-width:900px){{.backing-in{{grid-template-columns:1fr;gap:34px;padding:30px 24px}}}}
+.backing h3{{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;letter-spacing:-.032em;line-height:1.14}}
+.backing .bsub{{color:var(--mut);margin-top:15px;font-size:15px}}
+.backing .bsub strong{{color:var(--tx);font-weight:600}}
+
+.field{{margin-bottom:14px}}
+.field label{{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin-bottom:6px}}
+.field label .req{{color:var(--a3)}}
+.field input,.field textarea{{width:100%;font-family:inherit;font-size:14.5px;color:var(--tx);
+  background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:10px;
+  padding:11px 14px;transition:all .25s var(--ease)}}
+.field textarea{{resize:vertical;min-height:78px}}
+.field input::placeholder,.field textarea::placeholder{{color:var(--dim)}}
+.field input:focus,.field textarea:focus{{outline:none;border-color:var(--a1);
+  background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(124,92,255,.16)}}
+.hp{{position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important}}
+.fbtn{{width:100%;justify-content:center;margin-top:4px;cursor:pointer;font-family:inherit;border:none}}
+.fmsg{{font-size:13.5px;margin-top:12px;min-height:20px}}
+.fmsg.ok{{color:#4ade80}} .fmsg.bad{{color:#f87171}}
+
+.connect{{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}}
+.cbtn{{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;font-weight:600;
+  padding:10px 17px;border-radius:10px;border:1px solid var(--line2);transition:all .28s var(--ease)}}
+.cbtn:hover{{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}}
+.cbtn svg{{width:15px;height:15px;flex-shrink:0}}
+
 /* ---------- contact ---------- */
 .contact{{text-align:center;padding:110px 0}}
 .contact h2{{font-size:clamp(2.1rem,5.6vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:20px}}
@@ -375,6 +441,7 @@ footer a:hover{{color:var(--tx)}}
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
+      <a href="#backing">Backing</a>
       <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
   </div>
@@ -509,6 +576,52 @@ footer a:hover{{color:var(--tx)}}
   </div>
 </section>
 
+<section id="backing">
+  <div class="shell">
+    <div class="shead reveal">
+      <div class="skicker">Backing &amp; collaboration</div>
+      <h2 class="stitle">Actively seeking grants and partners.</h2>
+      <p class="ssub">SMT is patent-pending, running live on Google Cloud, and looking for its next backer. If you fund early-stage AI, run a grant programme, or want to build on it &mdash; leave your details and I'll come back to you.</p>
+    </div>
+    <div class="backing reveal">
+      <div class="backing-in">
+        <div>
+          <h3>Fund, partner, or just say hello.</h3>
+          <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
+          <p class="bsub">Prefer to talk first? Reach me on any of these.</p>
+          {connect_html()}
+        </div>
+        <div>
+          <form id="gform" action="https://api.web3forms.com/submit" method="POST" novalidate>
+            <input type="hidden" name="access_key" value="{CONTACT.get('web3forms_key','')}">
+            <input type="hidden" name="subject" value="Grant / collaboration enquiry from your portfolio">
+            <input type="hidden" name="from_name" value="Portfolio — jannetekka.github.io">
+            <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <div class="field">
+              <label for="f-name">Name <span class="req">*</span></label>
+              <input id="f-name" type="text" name="name" required placeholder="Your name">
+            </div>
+            <div class="field">
+              <label for="f-email">Email <span class="req">*</span></label>
+              <input id="f-email" type="email" name="email" required placeholder="you@organisation.com">
+            </div>
+            <div class="field">
+              <label for="f-site">Website</label>
+              <input id="f-site" type="url" name="website" placeholder="https://">
+            </div>
+            <div class="field">
+              <label for="f-msg">Anything else? <span style="color:var(--dim);font-weight:400">(optional)</span></label>
+              <textarea id="f-msg" name="message" placeholder="Grant programme, fund, or what you'd like to build"></textarea>
+            </div>
+            <button type="submit" class="btn btn-p fbtn" id="fsubmit">Send</button>
+            <div class="fmsg" id="fmsg" role="status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="contact">
   <div class="shell">
     <div class="reveal">
@@ -624,6 +737,54 @@ footer a:hover{{color:var(--tx)}}
   document.getElementById('lbx').addEventListener('click', closeLb);
   lb.addEventListener('click', function(e){{ if (e.target === lb) closeLb(); }});
   addEventListener('keydown', function(e){{ if (e.key === 'Escape') closeLb(); }});
+
+  /* grant form */
+  var gform=document.getElementById('gform');
+  if (gform) {{
+    var fmsg=document.getElementById('fmsg'), fbtn=document.getElementById('fsubmit');
+    var keyEl=gform.querySelector('[name=access_key]');
+    var MAIL='{CONTACT["email"]}';
+    gform.addEventListener('submit', function(ev){{
+      ev.preventDefault();
+      if (!gform.checkValidity()) {{ gform.reportValidity(); return; }}
+      var fd=new FormData(gform);
+      var key=(keyEl.value||'').trim();
+
+      /* No access key configured yet — fall back to opening an email so an
+         enquiry can never be silently lost. */
+      if (!key) {{
+        var body='Name: '+(fd.get('name')||'')+'%0D%0AEmail: '+(fd.get('email')||'')
+                +'%0D%0AWebsite: '+(fd.get('website')||'')+'%0D%0A%0D%0A'+(fd.get('message')||'');
+        fmsg.className='fmsg ok';
+        fmsg.textContent='Opening your email app…';
+        location.href='mailto:'+MAIL+'?subject=Grant%20/%20collaboration%20enquiry&body='+body;
+        return;
+      }}
+
+      fbtn.disabled=true; fbtn.textContent='Sending…';
+      fmsg.className='fmsg'; fmsg.textContent='';
+      fetch('https://api.web3forms.com/submit', {{
+        method:'POST',
+        headers:{{'Content-Type':'application/json', Accept:'application/json'}},
+        body: JSON.stringify(Object.fromEntries(fd))
+      }})
+      .then(function(r){{ return r.json(); }})
+      .then(function(d){{
+        if (d.success) {{
+          gform.reset();
+          fmsg.className='fmsg ok';
+          fmsg.textContent="Thank you — I'll get back to you shortly.";
+        }} else {{
+          throw new Error(d.message||'failed');
+        }}
+      }})
+      .catch(function(){{
+        fmsg.className='fmsg bad';
+        fmsg.innerHTML='Could not send. Please email <a href="mailto:'+MAIL+'" style="color:var(--a2)">'+MAIL+'</a> directly.';
+      }})
+      .finally(function(){{ fbtn.disabled=false; fbtn.textContent='Send'; }});
+    }});
+  }}
 
   /* filters */
   var cards = [].slice.call(document.querySelectorAll('#grid .card'));

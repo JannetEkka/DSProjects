@@ -1,3 +1,23 @@
+# ---------------------------------------------------------------------------
+# CONTACT + FORM CONFIG  — the only things you need to edit to switch the form on
+# ---------------------------------------------------------------------------
+# WEB3FORMS_KEY: get a free key at https://web3forms.com — enter your email,
+#   they send the access key to that inbox. Every submission then arrives there.
+#   Free tier: 250 submissions/month. The key is PUBLIC by design (it is tied to
+#   your email, it is not a password), so it is safe to commit.
+#   While this is blank the form still renders but falls back to opening an
+#   email instead of posting, so it can never silently swallow an enquiry.
+#
+# DISCORD: paste your invite or profile URL. Left blank = the button is not
+#   rendered at all (no dead link).
+CONTACT = dict(
+    email="jannetekka96@gmail.com",
+    linkedin="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/",
+    whatsapp="https://wa.me/919078802572",
+    discord="",
+    web3forms_key="",
+)
+
 # ---- verified link status ----
 # 200 OK : workers.dev SMT, run.app SMT World, smt-mantle pages, all github repos (public via API)
 # user-confirmed live: versecanvas.streamlit.app
@@ -6,7 +26,7 @@
 GH = "https://github.com/JannetEkka/"
 
 FLAGSHIP = dict(
-    slug="smt", cat="agents", title="Smart Money Trading (SMT)",
+    slug="smt", grants=True, cat="agents", title="Smart Money Trading (SMT)",
     sub="Explainable Multi-Agent Trading AI",
     meta="2026 – Present · Sole architect & engineer",
     badge="Patent pending · IN 202631090789",
@@ -21,7 +41,7 @@ FLAGSHIP = dict(
 )
 
 PROJECTS = [
- dict(slug="versecanvas", cat="genai", title="VerseCanvas", sub="AI Poetry-to-Art Generator", meta="2025 · Personal project",
+ dict(slug="versecanvas", grants=True, cat="genai", title="VerseCanvas", sub="AI Poetry-to-Art Generator", meta="2025 · Personal project",
    desc="Turns a poem into original artwork through a multi-stage pipeline: semantic analysis with Gemini 2.0 &rarr; automated prompt engineering &rarr; image synthesis with Imagen 3.0 on Vertex AI &rarr; hybrid editing and text overlay. Six languages, six art styles, tunable mood intensity.",
    tags=["Gemini 2.0","Imagen 3.0","Vertex AI","Streamlit"],
    links=[("Live demo","https://versecanvas.streamlit.app/","live"),("Code",GH+"versecanvas","code")]),
@@ -42,7 +62,7 @@ PROJECTS = [
    tags=["OpenServ SDK","Alchemy","Moralis","Cloud Run","pgvector"],
    links=[]),
 
- dict(slug="smtchains", cat="agents", title="SMT Chain Adapters", sub="Mantle &amp; BNB hackathon builds", meta="2026 · Hackathon adapters",
+ dict(slug="smtchains", grants=True, cat="agents", title="SMT Chain Adapters", sub="Mantle &amp; BNB hackathon builds", meta="2026 · Hackathon adapters",
    desc="Thin per-chain adapters that import the SMT brain and expose it to a specific ecosystem — keeping one shared decision engine behind platform-specific front ends rather than forking the strategy code.",
    tags=["Mantle","BNB Chain","Python"],
    links=[("Live","https://jannetekka.github.io/smt-mantle/","live"),("Mantle",GH+"smt-mantle","code"),("BNB",GH+"smt-bnb","code")]),
