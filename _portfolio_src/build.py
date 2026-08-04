@@ -469,7 +469,10 @@ footer a:hover{{color:var(--tx)}}
         <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
         <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
         <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
-        <div class="award"><span class="em">📜</span><div><h5>Certifications</h5><p>Google Cloud Gen AI Academy (2025) · CPSAT Selenium Automation (2022). <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">View all</a></p></div></div>
+        <div class="award"><span class="em">📜</span><div><h5>Certifications &amp; verified badges</h5><p>Google Cloud Gen AI Academy (2025) · Gen AI Academy APAC — Cohort 1 Hackathon (2026) · CPSAT Selenium Automation (2022).<br>
+          <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly badges</a> ·
+          <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills profile</a> ·
+          <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">Certificate files</a></p></div></div>
       </div>
     </div>
   </div>
@@ -525,7 +528,9 @@ footer a:hover{{color:var(--tx)}}
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
       <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a>
+      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a> ·
+      <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
+      <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>
   </div>
 </footer>

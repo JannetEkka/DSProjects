@@ -26,12 +26,12 @@ PROJECTS = [
    tags=["Gemini 2.0","Imagen 3.0","Vertex AI","Streamlit"],
    links=[("Live demo","https://versecanvas.streamlit.app/","live"),("Code",GH+"versecanvas","code")]),
 
- dict(slug="smartdesk", cat="agents", title="SmartDesk", sub="Multi-Agent Productivity Assistant", meta="2026 · Gen AI Academy capstone",
+ dict(slug="smartdesk", cat="agents", title="SmartDesk", sub="Multi-Agent Productivity Assistant", meta="2026 · Gen AI Academy APAC — Cohort 1 Hackathon",
    desc="A root ADK orchestrator routing to specialised sub-agents — InboxAgent (Gmail over MCP), PlannerAgent (Calendar over MCP), DataAgent (AlloyDB vector search as a personal CRM) — with a SequentialAgent synthesising the reply. Containerised on Cloud Run.",
    tags=["Google ADK","MCP","AlloyDB + pgvector","Gemini 2.5 Flash","Cloud Run"],
    links=[("Code",GH+"smartdesk","code")]),
 
- dict(slug="locintel", cat="agents", title="Location Intelligence Agent", sub="MCP over BigQuery + Google Maps", meta="2026 · Gen AI Academy Track 2",
+ dict(slug="locintel", cat="agents", title="Location Intelligence Agent", sub="MCP over BigQuery + Google Maps", meta="2026 · Google Cloud Gen AI Academy APAC",
    desc="An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.",
    tags=["MCP Servers","BigQuery","Google Maps API","ADK"],
    links=[("Code",GH+"bakery-growth-agent","code")]),
