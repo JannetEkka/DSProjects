@@ -1,4 +1,71 @@
 # ---------------------------------------------------------------------------
+# CREDENTIALS — every field below was read off the certificate itself.
+# `files` entries are (label, path-relative-to-index.html). Spaces are
+# %20-encoded because these are URLs, not filesystem paths.
+# ---------------------------------------------------------------------------
+C = "certificates/"
+CREDENTIALS = [
+ dict(title="Post Graduate Program in AI &amp; Machine Learning", issuer="Texas McCombs School of Business &amp; Great Lakes",
+      date="Mar 2025", note="GPA 4.09/5 · Rank 1 in batch", kind="degree",
+      files=[("Certificate", C+"pgp%20great%20lakes%20cert.pdf"),
+             ("Grade book", C+"UTA%20transcript.pdf"),
+             ("Verify", "https://www.mygreatlearning.com/certificate/SPXKJOPH")]),
+
+ dict(title="Gen AI Academy — Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="28 May 2025", note="Vertex AI · Gemini APIs · Imagen · Streamlit · Multimodal RAG",
+      cid="2025H2S04GENAI-A01917", kind="google",
+      files=[("Certificate", C+"genai%20academy%20COC.pdf")]),
+
+ dict(title="Gen AI Academy APAC 2026 — Cohort 2, Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="31 Jul 2026", note="Data, analytics and intelligent systems on Google Cloud",
+      cid="2026H2S07GCGENAIAPACC2-P02585", kind="google",
+      files=[("Certificate", C+"cohort%202%20cert%20comp.pdf")]),
+
+ dict(title="Gen AI Academy APAC 2026 — Cohort 1, Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="28 Apr 2026", note="Building, connecting and migrating AI-powered applications",
+      cid="2026H2S04GCGENAIAPACC1-P01679", kind="google",
+      files=[("Certificate", C+"cohort%201%20cert%20comp.pdf")]),
+
+ dict(title="Gen AI Academy APAC 2026 — Cohort 1 Hackathon", issuer="Google Cloud &amp; Hack2skill",
+      date="19 May 2026", note="Shortlisted top 101 of 1,500+ teams",
+      cid="2026H2S05GCGENAIAPACC1-P00373", kind="google",
+      files=[("Certificate", C+"cohort%201%20cert%20part.pdf")]),
+
+ dict(title="Gen AI Exchange Hackathon 2025", issuer="Google Cloud &amp; Hack2skill",
+      date="14 Jan 2026", note="Problem statement — &ldquo;Automating Test Case Generation with AI&rdquo;",
+      cid="2025H2S08GH-P100275", kind="google",
+      files=[("Certificate", C+"GenAI%20Exc%20Hack%20COP.pdf")]),
+
+ dict(title="Agentic AI Day", issuer="Google Cloud &amp; Hack2skill",
+      date="2025", note="Build the next generation of intelligent agents",
+      cid="2025H2S06AID-I01369", kind="google",
+      files=[("Certificate", C+"Agentic%20AI%20DAy%20COP.pdf")]),
+
+ dict(title="Asha AI Hackathon 2025", issuer="JobsForHer Foundation &amp; Hack2skill",
+      date="2025", note="The hackathon behind the Asha Chatbot project",
+      cid="2025H2S03AAIH-P00105", kind="hack",
+      files=[("Certificate", C+"Asha%20AI%20Hack%20COP.pdf")]),
+
+ dict(title="Machine Learning Internship", issuer="Internship Studio",
+      date="Jul – Aug 2024", note="YouTube ad-view analytics", cid="ISMAIL600552", kind="work",
+      files=[("Internship", C+"Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Internship.pdf"),
+             ("Training", C+"Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Training.pdf")]),
+
+ dict(title="AI-Preneur Workshop", issuer="AI-Preneur", date="Mar 2025",
+      note="Freelancing with AI — business applications", kind="work",
+      files=[("Certificate", C+"Jannet%20Ekka.pdf")]),
+
+ dict(title="CPSAT — Certified Professional Selenium Automation Testing", issuer="CPSAT",
+      date="2022", note="", kind="work", files=[]),
+]
+
+PROFILES = [
+ ("Credly badges", "https://www.credly.com/users/jannet-akanksha-ekka/badges"),
+ ("Google Skills profile", "https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e"),
+ ("All certificate files", "https://github.com/JannetEkka/DSProjects/tree/main/certificates"),
+]
+
+# ---------------------------------------------------------------------------
 # CONTACT + FORM CONFIG  — the only things you need to edit to switch the form on
 # ---------------------------------------------------------------------------
 # WEB3FORMS_KEY: get a free key at https://web3forms.com — enter your email,

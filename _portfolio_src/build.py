@@ -2,7 +2,7 @@
 """Builds the animated portfolio index.html from data.py."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from data import FLAGSHIP, PROJECTS, CATS, CONTACT
+from data import FLAGSHIP, PROJECTS, CATS, CONTACT, CREDENTIALS, PROFILES
 
 ICON = {
     "live": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
@@ -107,6 +107,36 @@ def connect_html():
         ext = '' if url.startswith("mailto:") else ' target="_blank" rel="noopener noreferrer"'
         out.append(f'<a class="cbtn"{ext} href="{url}">{SOCIAL_ICON[key]}{label}</a>')
     return '<div class="connect">' + "".join(out) + "</div>"
+
+
+KIND_EM = {"degree":"🎓", "google":"☁️", "hack":"🏆", "work":"📜"}
+
+def creds_html():
+    rows = []
+    for c in CREDENTIALS:
+        links = "".join(
+            f'<a class="cred-link" href="{u}"'
+            + (' target="_blank" rel="noopener noreferrer"' if u.startswith("http") else ' target="_blank" rel="noopener noreferrer"')
+            + f'>{lbl}</a>' for lbl, u in c["files"])
+        cid = f'<span class="cred-id">ID {c["cid"]}</span>' if c.get("cid") else ""
+        note = f'<p class="cred-note">{c["note"]}</p>' if c.get("note") else ""
+        rows.append(f'''
+        <div class="cred">
+          <span class="cred-em">{KIND_EM.get(c["kind"], "📜")}</span>
+          <div class="cred-body">
+            <h4>{c["title"]}</h4>
+            <p class="cred-meta">{c["issuer"]} · {c["date"]}</p>
+            {note}
+            <div class="cred-links">{links}{cid}</div>
+          </div>
+        </div>''')
+    return "".join(rows)
+
+
+def profiles_html():
+    return "".join(
+        f'<a class="cbtn" href="{u}" target="_blank" rel="noopener noreferrer">{lbl}</a>'
+        for lbl, u in PROFILES)
 
 
 filters = "".join(
@@ -363,6 +393,23 @@ section{{padding:104px 0}}
 .award p{{font-size:13px;color:var(--mut);margin-top:3px}}
 .award a{{color:var(--a2);border-bottom:1px solid rgba(34,211,238,.35)}}
 
+/* ---------- credentials ---------- */
+.creds{{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:12px}}
+@media(max-width:560px){{.creds{{grid-template-columns:1fr}}}}
+.cred{{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);
+  background:var(--surf);border-radius:13px;padding:17px 19px;transition:all .3s var(--ease)}}
+.cred:hover{{border-color:var(--line2);background:var(--surf2);transform:translateY(-2px)}}
+.cred-em{{font-size:19px;line-height:1.3;flex-shrink:0}}
+.cred-body{{min-width:0}}
+.cred h4{{font-size:14.5px;font-weight:700;letter-spacing:-.015em;line-height:1.35}}
+.cred-meta{{font-size:12.5px;color:var(--a2);margin-top:3px}}
+.cred-note{{font-size:12.5px;color:var(--mut);margin-top:5px}}
+.cred-links{{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:9px}}
+.cred-link{{font-size:12px;font-weight:600;color:var(--tx);border:1px solid var(--line2);
+  padding:4px 11px;border-radius:7px;transition:all .25s var(--ease)}}
+.cred-link:hover{{background:var(--tx);color:var(--bg);border-color:var(--tx)}}
+.cred-id{{font-size:11px;color:var(--dim);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}}
+
 /* ---------- grants chip ---------- */
 .grant-chip{{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
   color:var(--a3);border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.08);
@@ -441,8 +488,9 @@ footer a:hover{{color:var(--tx)}}
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
       <a href="#backing">Backing</a>
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
+      <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
   </div>
 </nav>
@@ -536,10 +584,7 @@ footer a:hover{{color:var(--tx)}}
         <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
         <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
         <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
-        <div class="award"><span class="em">📜</span><div><h5>Certifications &amp; verified badges</h5><p>Google Cloud Gen AI Academy (2025) · Gen AI Academy APAC — Cohort 1 Hackathon (2026) · CPSAT Selenium Automation (2022).<br>
-          <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly badges</a> ·
-          <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills profile</a> ·
-          <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">Certificate files</a></p></div></div>
+        <div class="award"><span class="em">📜</span><div><h5>11 credentials, all verifiable</h5><p>Google Cloud Gen AI Academy (2025 &amp; APAC 2026 Cohorts 1–2) · Gen AI Exchange · Agentic AI Day · Asha AI Hackathon · CPSAT. <a href="#credentials">See them all</a></p></div></div>
       </div>
     </div>
   </div>
@@ -553,9 +598,14 @@ footer a:hover{{color:var(--tx)}}
     </div>
     <div class="tl">
       <div class="tlrow reveal">
-        <h4>Independent AI Research &amp; Development</h4>
-        <div class="org">Self-directed</div><div class="when">Feb 2024 – Present</div>
-        <p>Built and operate the patent-pending SMT platform plus the projects above. Completed the PGP in AI/ML at Rank 1 and Google Cloud's Gen AI Academy while caring for family.</p>
+        <h4>Founder &amp; Sole Engineer — Smart Money Trading (SMT)</h4>
+        <div class="org">Independent · patent pending</div><div class="when">2026 – Present</div>
+        <p>Designed, built and operate a patent-pending multi-agent trading AI running continuously on Google Cloud — 33,000 lines across 153 modules, a six-persona committee under a learned Judge, a self-retuning learning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Shortlisted top 101 of 1,500+ teams at the Google Cloud Gen AI Academy APAC hackathon.</p>
+      </div>
+      <div class="tlrow reveal">
+        <h4>Independent AI Engineer</h4>
+        <div class="org">Freelance &amp; competitive builds</div><div class="when">2024 – 2025</div>
+        <p>Started at the OpenServ × Hack2skill hackathon, where Smart Money Tracker <strong>won Best DeFi Application</strong> and placed runner-up for Best Website Application. Went on to ship VerseCanvas on Vertex AI, multi-agent assistants on Google ADK, MCP and AlloyDB, and the applied AI projects above.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
@@ -573,6 +623,18 @@ footer a:hover{{color:var(--tx)}}
         <p>Led a 6-member QA team for Fortune 500 clients including AT&amp;T and Hewlett Packard Enterprise. Improved test execution efficiency 83%, tracked quality across 343 components, and analysed 50,000+ SAP Hybris transactions in Python.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<section id="credentials">
+  <div class="shell">
+    <div class="shead reveal">
+      <div class="skicker">Credentials</div>
+      <h2 class="stitle">Every certificate, verifiable.</h2>
+      <p class="ssub">Badge profiles first — they are confirmable by a third party and stay current. The certificate files are linked underneath for anything the profiles don't cover.</p>
+    </div>
+    <div class="connect reveal" style="margin:0 0 26px">{profiles_html()}</div>
+    <div class="creds">{creds_html()}</div>
   </div>
 </section>
 
@@ -640,8 +702,8 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a> ·
+      <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
+      <a href="JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a> ·
       <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
       <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>
