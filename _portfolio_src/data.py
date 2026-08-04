@@ -78,12 +78,25 @@ PROFILES = [
 # DISCORD: paste your invite or profile URL. Left blank = the button is not
 #   rendered at all (no dead link).
 CONTACT = dict(
-    email="jannetekka96@gmail.com",
-    linkedin="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/",
+    email="jannetekka96@gmail.com",          # general / hiring
+    grants_email="jtech26smt@gmail.com",     # SMT grants & funding only
+    phone="+919078802572",
     whatsapp="https://wa.me/919078802572",
-    discord="",
+    telegram="https://t.me/Jannetekka",
+    discord="jannetekka_03690",      # a username, not a URL — rendered as click-to-copy
+    linkedin="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/",
+    github="https://github.com/JannetEkka",
+    twitter="https://x.com/EkkaJanny96",
+    smt_twitter="https://x.com/JTechSMT",
     web3forms_key="",
 )
+
+# Remote-work / hiring profiles. Add a (label, url) pair as each one goes live
+# and rebuild — nothing else needs changing.
+HIRE = [
+    ("Himalayas", "https://himalayas.app/@jannetaekkauser"),
+    ("LinkedIn", "https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/"),
+]
 
 # ---- verified link status ----
 # 200 OK : workers.dev SMT, run.app SMT World, smt-mantle pages, all github repos (public via API)

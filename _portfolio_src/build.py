@@ -2,7 +2,7 @@
 """Builds the animated portfolio index.html from data.py."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from data import FLAGSHIP, PROJECTS, CATS, CONTACT, CREDENTIALS, PROFILES
+from data import FLAGSHIP, PROJECTS, CATS, CONTACT, CREDENTIALS, PROFILES, HIRE
 
 ICON = {
     "live": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
@@ -92,21 +92,71 @@ SOCIAL_ICON = {
  "discord": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a12.6 12.6 0 0 1 3.7 1.9 15.7 15.7 0 0 0-13.3 0A12.7 12.7 0 0 1 9 4.4L8.8 4a16.9 16.9 0 0 0-4.2 1.3C2 9.3 1.3 13.2 1.6 17a17 17 0 0 0 5.2 2.6l1-1.7c-.6-.2-1.2-.5-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.9 0l.4.3c-.5.3-1.1.6-1.7.8l1 1.7a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-2.9-11.7ZM8.5 14.7c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7 0c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>',
  "linkedin": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.1a4.2 4.2 0 0 1 3.8-2c4 0 4.8 2.6 4.8 6.1V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21h-4V9Z"/></svg>',
  "whatsapp": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a13.6 13.6 0 0 1-6.2-5.4c-.5-.7-.8-1.6-.8-2.4 0-.9.5-1.4.7-1.6.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.3.4-.3.3c-.1.1-.2.3 0 .5a9.6 9.6 0 0 0 4.2 3.6c.3.1.4.1.6-.1l.9-1c.1-.2.3-.2.5-.1l2 .9c.2.1.4.2.4.3v.7Z"/></svg>',
+ "telegram": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1L18.9 6c.4-.400-.1-.6-.6-.3L6.8 12.9l-5-1.6c-1.1-.3-1.1-1 .2-1.5l19.5-7.5c.9-.3 1.7.2 1.4 2Z"/></svg>',
+ "discord": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a12.6 12.6 0 0 1 3.7 1.9 15.7 15.7 0 0 0-13.3 0A12.7 12.7 0 0 1 9 4.4L8.8 4a16.9 16.9 0 0 0-4.2 1.3C2 9.3 1.3 13.2 1.6 17a17 17 0 0 0 5.2 2.6l1-1.7c-.6-.2-1.2-.5-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.9 0l.4.3c-.5.3-1.1.6-1.7.8l1 1.7a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-2.9-11.7ZM8.5 14.7c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7 0c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>',
+ "x": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-6l-4.7-6.2L5.6 21h-3l7-8L2.6 3h6.2l4.3 5.7L17.5 3Zm-1.1 16.2h1.7L7.7 4.7H5.9l10.5 14.5Z"/></svg>',
+ "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>',
+ "code": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8 0-.7.3-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7 0-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>',
+ "globe": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg>',
  "email": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
 }
 
+def btn(key, label, url):
+    """One channel button. An empty url renders nothing rather than a dead link."""
+    if not url:
+        return ""
+    ext = "" if url.startswith(("mailto:", "tel:")) else ' target="_blank" rel="noopener noreferrer"'
+    return f'<a class="cbtn"{ext} href="{url}">{SOCIAL_ICON[key]}{label}</a>'
+
+
+def copy_btn(key, label, value):
+    """Discord usernames are not linkable, so offer click-to-copy instead."""
+    if not value:
+        return ""
+    return (f'<button type="button" class="cbtn copyable" data-copy="{value}">'
+            f'{SOCIAL_ICON[key]}{label}<span class="copy-hint">copy</span></button>')
+
+
 def connect_html():
-    rows = [("email", "Email", "mailto:" + CONTACT["email"]),
-            ("linkedin", "LinkedIn", CONTACT.get("linkedin", "")),
-            ("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
-            ("discord", "Discord", CONTACT.get("discord", ""))]
-    out = []
-    for key, label, url in rows:
-        if not url:
-            continue          # unset channel renders nothing rather than a dead link
-        ext = '' if url.startswith("mailto:") else ' target="_blank" rel="noopener noreferrer"'
-        out.append(f'<a class="cbtn"{ext} href="{url}">{SOCIAL_ICON[key]}{label}</a>')
-    return '<div class="connect">' + "".join(out) + "</div>"
+    """Compact row used inside the backing section."""
+    g = CONTACT.get("grants_email", CONTACT["email"])
+    return '<div class="connect">' + "".join([
+        btn("email", g, "mailto:" + g),
+        btn("telegram", "Telegram", CONTACT.get("telegram", "")),
+        copy_btn("discord", "Discord: " + CONTACT.get("discord", ""), CONTACT.get("discord", "")),
+        btn("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
+    ]) + "</div>"
+
+
+def contact_groups_html():
+    """Full contact footer — every channel, grouped."""
+    direct = "".join([
+        btn("email", CONTACT["email"], "mailto:" + CONTACT["email"]),
+        btn("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
+        btn("phone", CONTACT.get("phone", ""), "tel:" + CONTACT.get("phone", "")),
+        btn("telegram", "Telegram", CONTACT.get("telegram", "")),
+        copy_btn("discord", CONTACT.get("discord", ""), CONTACT.get("discord", "")),
+    ])
+    social = "".join([
+        btn("linkedin", "LinkedIn", CONTACT.get("linkedin", "")),
+        btn("code", "GitHub", CONTACT.get("github", "")),
+        btn("x", "@EkkaJanny96", CONTACT.get("twitter", "")),
+        btn("x", "@JTechSMT (SMT)", CONTACT.get("smt_twitter", "")),
+    ])
+    hire = "".join(btn("globe", lbl, url) for lbl, url in HIRE)
+    return f'''
+      <div class="cgroup reveal">
+        <h4>Talk to me</h4>
+        <div class="connect">{direct}</div>
+      </div>
+      <div class="cgroup reveal">
+        <h4>Find me</h4>
+        <div class="connect">{social}</div>
+      </div>
+      <div class="cgroup reveal">
+        <h4>Hire me</h4>
+        <div class="connect">{hire}</div>
+      </div>'''
 
 
 KIND_EM = {"degree":"🎓", "google":"☁️", "hack":"🏆", "work":"📜"}
@@ -449,6 +499,18 @@ section{{padding:104px 0}}
 .cbtn:hover{{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}}
 .cbtn svg{{width:15px;height:15px;flex-shrink:0}}
 
+/* ---------- contact footer ---------- */
+.cgroups{{display:grid;grid-template-columns:repeat(3,1fr);gap:38px;text-align:left;
+  margin-top:46px;padding-top:38px;border-top:1px solid var(--line)}}
+@media(max-width:900px){{.cgroups{{grid-template-columns:1fr;gap:30px}}}}
+.cgroup h4{{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--a1);margin-bottom:14px}}
+.cgroup .connect{{margin-top:0;flex-direction:column;align-items:flex-start;gap:8px}}
+.cgroup .cbtn{{width:100%;justify-content:flex-start}}
+.copyable{{font-family:inherit;cursor:pointer;background:none;color:var(--tx);position:relative}}
+.copy-hint{{margin-left:auto;font-size:11px;color:var(--dim);font-weight:500}}
+.copyable.done .copy-hint{{color:#4ade80}}
+
 /* ---------- contact ---------- */
 .contact{{text-align:center;padding:110px 0}}
 .contact h2{{font-size:clamp(2.1rem,5.6vw,3.8rem);font-weight:800;letter-spacing:-.04em;line-height:1.05;margin-bottom:20px}}
@@ -490,6 +552,7 @@ footer a:hover{{color:var(--tx)}}
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
       <a href="#backing">Backing</a>
+      <a href="#contact">Contact</a>
       <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
   </div>
@@ -516,7 +579,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="cta reveal">
       <a class="btn btn-p" href="#work">See the work
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-g" href="mailto:jannetekka96@gmail.com">Get in touch</a>
+      <a class="btn btn-g" href="#contact">Get in touch</a>
     </div>
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
@@ -650,13 +713,14 @@ footer a:hover{{color:var(--tx)}}
         <div>
           <h3>Fund, partner, or just say hello.</h3>
           <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
-          <p class="bsub">Prefer to talk first? Reach me on any of these.</p>
+          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest.</p>
           {connect_html()}
         </div>
         <div>
           <form id="gform" action="https://api.web3forms.com/submit" method="POST" novalidate>
             <input type="hidden" name="access_key" value="{CONTACT.get('web3forms_key','')}">
             <input type="hidden" name="subject" value="Grant / collaboration enquiry from your portfolio">
+            <input type="hidden" name="to" value="{CONTACT.get('grants_email', CONTACT['email'])}">
             <input type="hidden" name="from_name" value="Portfolio — jannetekka.github.io">
             <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="field">
@@ -684,7 +748,7 @@ footer a:hover{{color:var(--tx)}}
   </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="contact">
   <div class="shell">
     <div class="reveal">
       <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
@@ -692,9 +756,10 @@ footer a:hover{{color:var(--tx)}}
       <div class="cta" style="justify-content:center">
         <a class="btn btn-p" href="mailto:jannetekka96@gmail.com">jannetekka96@gmail.com</a>
         <a class="btn btn-g" href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn btn-g" href="https://github.com/JannetEkka" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn btn-g" href="{CONTACT['linkedin']}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </div>
+    <div class="cgroups">{contact_groups_html()}</div>
   </div>
 </section>
 
@@ -805,7 +870,7 @@ footer a:hover{{color:var(--tx)}}
   if (gform) {{
     var fmsg=document.getElementById('fmsg'), fbtn=document.getElementById('fsubmit');
     var keyEl=gform.querySelector('[name=access_key]');
-    var MAIL='{CONTACT["email"]}';
+    var MAIL='{CONTACT.get("grants_email", CONTACT["email"])}';
     gform.addEventListener('submit', function(ev){{
       ev.preventDefault();
       if (!gform.checkValidity()) {{ gform.reportValidity(); return; }}
@@ -847,6 +912,25 @@ footer a:hover{{color:var(--tx)}}
       .finally(function(){{ fbtn.disabled=false; fbtn.textContent='Send'; }});
     }});
   }}
+
+  /* click-to-copy (Discord username — not a linkable URL) */
+  document.querySelectorAll('.copyable').forEach(function(b){{
+    b.addEventListener('click', function(){{
+      var v=b.dataset.copy, hint=b.querySelector('.copy-hint');
+      function done(){{ b.classList.add('done'); hint.textContent='copied'; 
+        setTimeout(function(){{ b.classList.remove('done'); hint.textContent='copy'; }},1800); }}
+      if (navigator.clipboard && navigator.clipboard.writeText) {{
+        navigator.clipboard.writeText(v).then(done).catch(fallback);
+      }} else {{ fallback(); }}
+      function fallback(){{
+        var t=document.createElement('textarea'); t.value=v; t.style.position='fixed';
+        t.style.opacity='0'; document.body.appendChild(t); t.select();
+        try {{ document.execCommand('copy'); done(); }}
+        catch(e) {{ hint.textContent=v; }}      /* worst case: show it to copy by hand */
+        document.body.removeChild(t);
+      }}
+    }});
+  }});
 
   /* filters */
   var cards = [].slice.call(document.querySelectorAll('#grid .card'));
