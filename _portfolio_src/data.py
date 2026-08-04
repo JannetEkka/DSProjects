@@ -47,6 +47,15 @@ PROJECTS = [
    tags=["Mantle","BNB Chain","Python"],
    links=[("Live","https://jannetekka.github.io/smt-mantle/","live"),("Mantle",GH+"smt-mantle","code"),("BNB",GH+"smt-bnb","code")]),
 
+ dict(slug="autokorrekt", cat="genai", wide=True, title="AutoKorrekt", sub="AI Answer-Evaluation Platform for Teachers", meta="May 2024 – Jan 2025 · Lead Frontend Developer · EdTech startup MVP",
+   desc="An evaluation platform that takes a teacher from sign-up to graded scripts: create a class, upload a student roster and question paper, bulk-upload scanned answer sheets, then track each student through OCR, AI evaluation and validation. I led the frontend and designed the ML data flow across S3, RDS and SageMaker &mdash; interactive PDF processing with coordinate-based text extraction over AWS Textract, a bilingual EN/DE feedback interface on Amazon Comprehend, and a per-student status pipeline that scaled to 1,000+ concurrent submissions.",
+   tags=["React","Next.js","TypeScript","AWS Textract","Amazon Comprehend","SageMaker","Django"],
+   shots=[("assets/autokorrekt/signup.png","Teacher sign-up"),
+          ("assets/autokorrekt/signin.png","Sign in"),
+          ("assets/autokorrekt/add-class.png","Create a class — roster + question paper upload"),
+          ("assets/autokorrekt/students.png","Per-student evaluation pipeline &amp; bulk answer-sheet upload")],
+   links=[]),
+
  dict(slug="asha", cat="genai", title="Asha Chatbot", sub="JobsForHer Foundation", meta="2025 · Hackathon project",
    desc="A context-aware chatbot surfacing job listings, community events and mentorship programmes, and handling FAQs — built to support women returning to and advancing in the workforce.",
    tags=["Conversational AI","NLP","Python"], links=[("Code",GH+"asha-chatbot","code")]),

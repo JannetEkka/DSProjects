@@ -23,6 +23,17 @@ def links_html(links, small=False):
     return f'<div class="lnks">{"".join(out)}</div>'
 
 
+def shots_html(shots):
+    if not shots:
+        return ""
+    items = "".join(
+        f'<a class="shot" href="{src}" data-cap="{cap}" target="_blank" rel="noopener noreferrer">'
+        f'<img src="{src}" alt="{cap}" loading="lazy" onerror="this.closest(\'.shot\').remove()">'
+        f'<span class="shot-cap">{cap}</span></a>'
+        for src, cap in shots)
+    return f'<div class="shots">{items}</div>'
+
+
 def tags_html(tags):
     return '<div class="tags">' + "".join(f'<span class="tag">{t}</span>' for t in tags) + "</div>"
 
@@ -54,7 +65,7 @@ def flagship_html(f):
 def card_html(p, i):
     award = f'<span class="pill pill-award">🏆 {p["award"]}</span>' if p.get("award") else ""
     return f'''
-      <article class="card reveal" data-cat="{p['cat']}" style="--i:{i}">
+      <article class="card reveal{' wide' if p.get('wide') else ''}" data-cat="{p['cat']}" style="--i:{i}">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -64,6 +75,7 @@ def card_html(p, i):
           <p class="card-sub">{p['sub']}</p>
           <p class="card-meta">{p['meta']}</p>
           <p class="card-desc">{p['desc']}</p>
+          {shots_html(p.get('shots'))}
           {tags_html(p['tags'])}
           {links_html(p['links'], small=True)}
         </div>
@@ -175,6 +187,39 @@ h1.big .serif{{font-family:'Instrument Serif',Georgia,serif;font-style:italic;fo
   padding:7px 14px;border-radius:999px;transition:all .3s var(--ease)}}
 .chip:hover{{border-color:var(--line2);color:var(--tx);transform:translateY(-2px)}}
 
+/* ---------- avatar ---------- */
+.idrow{{display:flex;align-items:center;gap:16px;margin-bottom:26px;flex-wrap:wrap}}
+.avatar{{position:relative;width:96px;height:96px;border-radius:50%;flex-shrink:0;padding:2.5px;
+  background:linear-gradient(140deg,var(--a2),var(--a1) 60%,transparent)}}
+.avatar img{{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 22%;
+  border:2.5px solid var(--bg);background:var(--bg2)}}
+.js .avatar::after{{content:'';position:absolute;inset:-5px;border-radius:50%;
+  background:radial-gradient(circle,rgba(124,92,255,.30),transparent 68%);z-index:-1;animation:halo 4.5s ease-in-out infinite}}
+@keyframes halo{{50%{{transform:scale(1.14);opacity:.6}}}}
+.idrow .eyebrow{{margin-bottom:0}}
+
+/* ---------- screenshot gallery ---------- */
+.shots:empty{{display:none}}
+.shots{{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin-top:17px}}
+.shot{{display:block;border:1px solid var(--line);border-radius:11px;overflow:hidden;
+  background:#000;transition:all .3s var(--ease)}}
+.shot:hover{{border-color:var(--a1);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.45)}}
+.shot img{{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top center;display:block}}
+.shot-cap{{display:block;font-size:11.5px;color:var(--mut);padding:8px 11px;border-top:1px solid var(--line)}}
+
+/* ---------- lightbox ---------- */
+.lb{{position:fixed;inset:0;z-index:200;background:rgba(4,4,8,.93);backdrop-filter:blur(9px);
+  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:15px;padding:36px;
+  opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}}
+.lb.on{{opacity:1;pointer-events:auto}}
+.lb img{{max-width:min(1180px,94vw);max-height:80vh;object-fit:contain;
+  border:1px solid var(--line2);border-radius:12px;box-shadow:0 26px 80px rgba(0,0,0,.7)}}
+.lb-cap{{font-size:14px;color:var(--mut);text-align:center}}
+.lb-x{{position:absolute;top:22px;right:26px;width:40px;height:40px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line2);background:var(--surf2);color:var(--tx);font-size:20px;line-height:1;
+  font-family:inherit;transition:all .25s}}
+.lb-x:hover{{background:var(--tx);color:var(--bg)}}
+
 /* ---------- stats ---------- */
 .statbar{{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0;background:rgba(255,255,255,.012)}}
 .statgrid{{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}}
@@ -237,6 +282,8 @@ section{{padding:104px 0}}
 .card-meta{{font-size:12px;color:var(--dim);margin-top:8px}}
 .card-desc{{font-size:14px;color:var(--mut);margin-top:14px}}
 .card.hide{{display:none}}
+.card.wide{{grid-column:span 2}}
+@media(max-width:1100px){{.card.wide{{grid-column:span 1}}}}
 
 /* ---------- tags + links ---------- */
 .tags{{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}}
@@ -335,7 +382,10 @@ footer a:hover{{color:var(--tx)}}
 
 <header class="hero" id="top">
   <div class="shell">
-    <div class="eyebrow reveal"><b></b> Open to AI/ML engineering roles</div>
+    <div class="idrow reveal">
+      <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
+      <div class="eyebrow"><b></b> Open to AI/ML engineering roles</div>
+    </div>
     <h1 class="big reveal">
       I build <span class="serif">agentic AI</span><br>
       that runs in
@@ -482,6 +532,12 @@ footer a:hover{{color:var(--tx)}}
 
 </div>
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Screenshot viewer">
+  <button class="lb-x" id="lbx" aria-label="Close">&times;</button>
+  <img id="lbimg" src="" alt="">
+  <div class="lb-cap" id="lbcap"></div>
+</div>
+
 <script>
 (function(){{
   var R = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -548,6 +604,21 @@ footer a:hover{{color:var(--tx)}}
       }});
     }});
   }}
+
+  /* screenshot lightbox — anchors point at the image, so it still works without JS */
+  var lb=document.getElementById('lb'), lbimg=document.getElementById('lbimg'), lbcap=document.getElementById('lbcap');
+  function closeLb(){{ lb.classList.remove('on'); lbimg.src=''; }}
+  document.querySelectorAll('.shot').forEach(function(a){{
+    a.addEventListener('click', function(ev){{
+      ev.preventDefault();
+      lbimg.src = a.getAttribute('href');
+      lbcap.textContent = a.dataset.cap || '';
+      lb.classList.add('on');
+    }});
+  }});
+  document.getElementById('lbx').addEventListener('click', closeLb);
+  lb.addEventListener('click', function(e){{ if (e.target === lb) closeLb(); }});
+  addEventListener('keydown', function(e){{ if (e.key === 'Escape') closeLb(); }});
 
   /* filters */
   var cards = [].slice.call(document.querySelectorAll('#grid .card'));
