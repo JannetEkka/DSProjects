@@ -2,7 +2,7 @@
 """Builds the animated portfolio index.html from data.py."""
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path(__file__).parent))
-from data import FLAGSHIP, PROJECTS, CATS, CONTACT
+from data import FLAGSHIP, PROJECTS, CATS, CONTACT, CREDENTIALS, PROFILES, HIRE, COUNTER
 
 ICON = {
     "live": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>',
@@ -92,21 +92,101 @@ SOCIAL_ICON = {
  "discord": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a12.6 12.6 0 0 1 3.7 1.9 15.7 15.7 0 0 0-13.3 0A12.7 12.7 0 0 1 9 4.4L8.8 4a16.9 16.9 0 0 0-4.2 1.3C2 9.3 1.3 13.2 1.6 17a17 17 0 0 0 5.2 2.6l1-1.7c-.6-.2-1.2-.5-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.9 0l.4.3c-.5.3-1.1.6-1.7.8l1 1.7a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-2.9-11.7ZM8.5 14.7c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7 0c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>',
  "linkedin": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9h4v12H3V9Zm7 0h3.8v1.7h.1a4.2 4.2 0 0 1 3.8-2c4 0 4.8 2.6 4.8 6.1V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21h-4V9Z"/></svg>',
  "whatsapp": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a13.6 13.6 0 0 1-6.2-5.4c-.5-.7-.8-1.6-.8-2.4 0-.9.5-1.4.7-1.6.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.1.1.3 0 .5l-.3.4-.3.3c-.1.1-.2.3 0 .5a9.6 9.6 0 0 0 4.2 3.6c.3.1.4.1.6-.1l.9-1c.1-.2.3-.2.5-.1l2 .9c.2.1.4.2.4.3v.7Z"/></svg>',
+ "telegram": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3 18.6 20c-.2 1.1-.9 1.4-1.8.9l-5-3.7-2.4 2.3c-.3.3-.5.5-1 .5l.4-5.1L18.9 6c.4-.400-.1-.6-.6-.3L6.8 12.9l-5-1.6c-1.1-.3-1.1-1 .2-1.5l19.5-7.5c.9-.3 1.7.2 1.4 2Z"/></svg>',
+ "discord": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.3 5.3A16.9 16.9 0 0 0 15.1 4l-.2.4a12.6 12.6 0 0 1 3.7 1.9 15.7 15.7 0 0 0-13.3 0A12.7 12.7 0 0 1 9 4.4L8.8 4a16.9 16.9 0 0 0-4.2 1.3C2 9.3 1.3 13.2 1.6 17a17 17 0 0 0 5.2 2.6l1-1.7c-.6-.2-1.2-.5-1.7-.8l.4-.3a12.1 12.1 0 0 0 10.9 0l.4.3c-.5.3-1.1.6-1.7.8l1 1.7a17 17 0 0 0 5.2-2.6c.4-4.4-.7-8.3-2.9-11.7ZM8.5 14.7c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Zm7 0c-1 0-1.9-.9-1.9-2.1s.8-2.1 1.9-2.1 1.9 1 1.9 2.1-.8 2.1-1.9 2.1Z"/></svg>',
+ "x": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3l-6.6 7.5L21.8 21h-6l-4.7-6.2L5.6 21h-3l7-8L2.6 3h6.2l4.3 5.7L17.5 3Zm-1.1 16.2h1.7L7.7 4.7H5.9l10.5 14.5Z"/></svg>',
+ "phone": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>',
+ "code": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.8 21.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.4-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8 0-.7.3-1.1.6-1.4-2.2-.2-4.6-1.1-4.6-5 0-1.1.4-2 1-2.7 0-.3-.4-1.3.1-2.6 0 0 .8-.3 2.7 1a9.4 9.4 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.3.2 2.3.1 2.6a3.9 3.9 0 0 1 1 2.7c0 3.9-2.3 4.7-4.6 5 .4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>',
+ "globe": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></svg>',
  "email": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>',
 }
 
+def btn(key, label, url):
+    """One channel button. An empty url renders nothing rather than a dead link."""
+    if not url:
+        return ""
+    ext = "" if url.startswith(("mailto:", "tel:")) else ' target="_blank" rel="noopener noreferrer"'
+    return f'<a class="cbtn"{ext} href="{url}">{SOCIAL_ICON[key]}{label}</a>'
+
+
+def copy_btn(key, label, value):
+    """Discord usernames are not linkable, so offer click-to-copy instead."""
+    if not value:
+        return ""
+    return (f'<button type="button" class="cbtn copyable" data-copy="{value}">'
+            f'{SOCIAL_ICON[key]}{label}<span class="copy-hint">copy</span></button>')
+
+
 def connect_html():
-    rows = [("email", "Email", "mailto:" + CONTACT["email"]),
-            ("linkedin", "LinkedIn", CONTACT.get("linkedin", "")),
-            ("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
-            ("discord", "Discord", CONTACT.get("discord", ""))]
-    out = []
-    for key, label, url in rows:
-        if not url:
-            continue          # unset channel renders nothing rather than a dead link
-        ext = '' if url.startswith("mailto:") else ' target="_blank" rel="noopener noreferrer"'
-        out.append(f'<a class="cbtn"{ext} href="{url}">{SOCIAL_ICON[key]}{label}</a>')
-    return '<div class="connect">' + "".join(out) + "</div>"
+    """Compact row used inside the backing section."""
+    g = CONTACT.get("grants_email", CONTACT["email"])
+    return '<div class="connect">' + "".join([
+        btn("email", g, "mailto:" + g),
+        btn("telegram", "Telegram", CONTACT.get("telegram", "")),
+        copy_btn("discord", "Discord: " + CONTACT.get("discord", ""), CONTACT.get("discord", "")),
+        btn("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
+    ]) + "</div>"
+
+
+def contact_groups_html():
+    """Full contact footer — every channel, grouped."""
+    direct = "".join([
+        btn("email", CONTACT["email"], "mailto:" + CONTACT["email"]),
+        btn("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
+        btn("phone", CONTACT.get("phone", ""), "tel:" + CONTACT.get("phone", "")),
+        btn("telegram", "Telegram", CONTACT.get("telegram", "")),
+        copy_btn("discord", CONTACT.get("discord", ""), CONTACT.get("discord", "")),
+    ])
+    social = "".join([
+        btn("linkedin", "LinkedIn", CONTACT.get("linkedin", "")),
+        btn("code", "GitHub", CONTACT.get("github", "")),
+        btn("x", "@EkkaJanny96", CONTACT.get("twitter", "")),
+        btn("x", "@JTechSMT (SMT)", CONTACT.get("smt_twitter", "")),
+    ])
+    hire = "".join(btn("globe", lbl, url) for lbl, url in HIRE)
+    return f'''
+      <div class="cgroup reveal">
+        <h4>Talk to me</h4>
+        <div class="connect">{direct}</div>
+      </div>
+      <div class="cgroup reveal">
+        <h4>Find me</h4>
+        <div class="connect">{social}</div>
+      </div>
+      <div class="cgroup reveal">
+        <h4>Hire me</h4>
+        <div class="connect">{hire}</div>
+      </div>'''
+
+
+KIND_EM = {"degree":"🎓", "google":"☁️", "hack":"🏆", "work":"📜"}
+
+def creds_html():
+    rows = []
+    for c in CREDENTIALS:
+        links = "".join(
+            f'<a class="cred-link" href="{u}"'
+            + (' target="_blank" rel="noopener noreferrer"' if u.startswith("http") else ' target="_blank" rel="noopener noreferrer"')
+            + f'>{lbl}</a>' for lbl, u in c["files"])
+        cid = f'<span class="cred-id">ID {c["cid"]}</span>' if c.get("cid") else ""
+        note = f'<p class="cred-note">{c["note"]}</p>' if c.get("note") else ""
+        rows.append(f'''
+        <div class="cred">
+          <span class="cred-em">{KIND_EM.get(c["kind"], "📜")}</span>
+          <div class="cred-body">
+            <h4>{c["title"]}</h4>
+            <p class="cred-meta">{c["issuer"]} · {c["date"]}</p>
+            {note}
+            <div class="cred-links">{links}{cid}</div>
+          </div>
+        </div>''')
+    return "".join(rows)
+
+
+def profiles_html():
+    return "".join(
+        f'<a class="cbtn" href="{u}" target="_blank" rel="noopener noreferrer">{lbl}</a>'
+        for lbl, u in PROFILES)
 
 
 filters = "".join(
@@ -120,9 +200,9 @@ HTML = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jannet Akanksha Ekka — AI/ML Engineer</title>
+<title>Jannet Akanksha Ekka — GenAI Applications Engineer</title>
 <meta name="description" content="AI/ML engineer building production agentic systems. Patent-pending multi-agent trading AI, Google Cloud GenAI, and 20+ shipped projects.">
-<meta property="og:title" content="Jannet Akanksha Ekka — AI/ML Engineer">
+<meta property="og:title" content="Jannet Akanksha Ekka — GenAI Applications Engineer">
 <meta property="og:description" content="Building production agentic AI systems. Patent-pending multi-agent trading AI on Google Cloud.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -178,6 +258,14 @@ nav.stuck{{background:rgba(8,8,12,.72);backdrop-filter:blur(16px);border-bottom:
 .navlinks a{{font-size:13.5px;color:var(--mut);font-weight:500;position:relative;transition:color .25s}}
 .navlinks a::after{{content:'';position:absolute;left:0;bottom:-5px;width:0;height:1.5px;background:var(--a2);transition:width .3s var(--ease)}}
 .navlinks a:hover{{color:var(--tx)}} .navlinks a:hover::after{{width:100%}}
+.views{{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;
+  color:var(--mut);border:1px solid var(--line);background:var(--surf);
+  padding:6px 13px;border-radius:999px;white-space:nowrap}}
+.views b{{color:var(--tx);font-variant-numeric:tabular-nums}}
+.views .vlab{{color:var(--dim);font-weight:500}}
+.veye{{color:var(--a2);font-size:8px;line-height:1}}
+.js .veye{{animation:pulse 2.6s ease-in-out infinite}}
+@media(max-width:860px){{.views{{display:none}}}}
 .navcta{{border:1px solid var(--line2);padding:8px 16px;border-radius:999px;font-size:13px;font-weight:600;transition:all .28s var(--ease)}}
 .navcta:hover{{background:var(--tx);color:var(--bg);border-color:var(--tx)}}
 @media(max-width:760px){{.navlinks a:not(.navcta){{display:none}}}}
@@ -363,6 +451,23 @@ section{{padding:104px 0}}
 .award p{{font-size:13px;color:var(--mut);margin-top:3px}}
 .award a{{color:var(--a2);border-bottom:1px solid rgba(34,211,238,.35)}}
 
+/* ---------- credentials ---------- */
+.creds{{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:12px}}
+@media(max-width:560px){{.creds{{grid-template-columns:1fr}}}}
+.cred{{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);
+  background:var(--surf);border-radius:13px;padding:17px 19px;transition:all .3s var(--ease)}}
+.cred:hover{{border-color:var(--line2);background:var(--surf2);transform:translateY(-2px)}}
+.cred-em{{font-size:19px;line-height:1.3;flex-shrink:0}}
+.cred-body{{min-width:0}}
+.cred h4{{font-size:14.5px;font-weight:700;letter-spacing:-.015em;line-height:1.35}}
+.cred-meta{{font-size:12.5px;color:var(--a2);margin-top:3px}}
+.cred-note{{font-size:12.5px;color:var(--mut);margin-top:5px}}
+.cred-links{{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:9px}}
+.cred-link{{font-size:12px;font-weight:600;color:var(--tx);border:1px solid var(--line2);
+  padding:4px 11px;border-radius:7px;transition:all .25s var(--ease)}}
+.cred-link:hover{{background:var(--tx);color:var(--bg);border-color:var(--tx)}}
+.cred-id{{font-size:11px;color:var(--dim);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}}
+
 /* ---------- grants chip ---------- */
 .grant-chip{{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
   color:var(--a3);border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.08);
@@ -401,6 +506,18 @@ section{{padding:104px 0}}
   padding:10px 17px;border-radius:10px;border:1px solid var(--line2);transition:all .28s var(--ease)}}
 .cbtn:hover{{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}}
 .cbtn svg{{width:15px;height:15px;flex-shrink:0}}
+
+/* ---------- contact footer ---------- */
+.cgroups{{display:grid;grid-template-columns:repeat(3,1fr);gap:38px;text-align:left;
+  margin-top:46px;padding-top:38px;border-top:1px solid var(--line)}}
+@media(max-width:900px){{.cgroups{{grid-template-columns:1fr;gap:30px}}}}
+.cgroup h4{{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--a1);margin-bottom:14px}}
+.cgroup .connect{{margin-top:0;flex-direction:column;align-items:flex-start;gap:8px}}
+.cgroup .cbtn{{width:100%;justify-content:flex-start}}
+.copyable{{font-family:inherit;cursor:pointer;background:none;color:var(--tx);position:relative}}
+.copy-hint{{margin-left:auto;font-size:11px;color:var(--dim);font-weight:500}}
+.copyable.done .copy-hint{{color:#4ade80}}
 
 /* ---------- contact ---------- */
 .contact{{text-align:center;padding:110px 0}}
@@ -441,8 +558,11 @@ footer a:hover{{color:var(--tx)}}
       <a href="#work">Work</a>
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
+      <a href="#credentials">Credentials</a>
       <a href="#backing">Backing</a>
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
+      <a href="#contact">Contact</a>
+<span class="views" id="views" hidden><span class="veye" aria-hidden="true">&#9673;</span><b id="viewsn">—</b><span class="vlab">views</span></span>
+            <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer" class="navcta">Résumé</a>
     </div>
   </div>
 </nav>
@@ -468,7 +588,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="cta reveal">
       <a class="btn btn-p" href="#work">See the work
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-      <a class="btn btn-g" href="mailto:jannetekka96@gmail.com">Get in touch</a>
+      <a class="btn btn-g" href="#contact">Get in touch</a>
     </div>
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
@@ -507,10 +627,12 @@ footer a:hover{{color:var(--tx)}}
   <div class="marq-in">
     <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
     <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
     <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
     <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
     <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
     <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
   </div>
@@ -527,7 +649,8 @@ footer a:hover{{color:var(--tx)}}
         <div class="abtxt reveal">
           <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
           <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks designed to catch overfitting rather than flatter it.</p>
-          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
+          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB.</p>
+          <p>I work <strong>AI-native and deliberately lean</strong>. All of this was designed, built and is operated from a single 16&nbsp;GB laptop — and when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4 rather than throwing hardware at it. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
       </div>
       <div class="awards reveal">
@@ -536,10 +659,7 @@ footer a:hover{{color:var(--tx)}}
         <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
         <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
         <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
-        <div class="award"><span class="em">📜</span><div><h5>Certifications &amp; verified badges</h5><p>Google Cloud Gen AI Academy (2025) · Gen AI Academy APAC — Cohort 1 Hackathon (2026) · CPSAT Selenium Automation (2022).<br>
-          <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly badges</a> ·
-          <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills profile</a> ·
-          <a href="https://github.com/JannetEkka/DSProjects/tree/main/certificates" target="_blank" rel="noopener noreferrer">Certificate files</a></p></div></div>
+        <div class="award"><span class="em">📜</span><div><h5>11 credentials, all verifiable</h5><p>Google Cloud Gen AI Academy (2025 &amp; APAC 2026 Cohorts 1–2) · Gen AI Exchange · Agentic AI Day · Asha AI Hackathon · CPSAT. <a href="#credentials">See them all</a></p></div></div>
       </div>
     </div>
   </div>
@@ -553,9 +673,14 @@ footer a:hover{{color:var(--tx)}}
     </div>
     <div class="tl">
       <div class="tlrow reveal">
-        <h4>Independent AI Research &amp; Development</h4>
-        <div class="org">Self-directed</div><div class="when">Feb 2024 – Present</div>
-        <p>Built and operate the patent-pending SMT platform plus the projects above. Completed the PGP in AI/ML at Rank 1 and Google Cloud's Gen AI Academy while caring for family.</p>
+        <h4>Founder &amp; Sole Engineer — Smart Money Trading (SMT)</h4>
+        <div class="org">Independent · patent pending</div><div class="when">2026 – Present</div>
+        <p>Designed, built and operate a patent-pending multi-agent trading AI running continuously on Google Cloud — 33,000 lines across 153 modules, a six-persona committee under a learned Judge, a self-retuning learning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Shortlisted top 101 of 1,500+ teams at the Google Cloud Gen AI Academy APAC hackathon.</p>
+      </div>
+      <div class="tlrow reveal">
+        <h4>Independent AI Engineer</h4>
+        <div class="org">Freelance &amp; competitive builds</div><div class="when">2024 – 2025</div>
+        <p>Started at the OpenServ × Hack2skill hackathon, where Smart Money Tracker <strong>won Best DeFi Application</strong> and placed runner-up for Best Website Application. Went on to ship VerseCanvas on Vertex AI, multi-agent assistants on Google ADK, MCP and AlloyDB, and the applied AI projects above — all delivered <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
@@ -576,6 +701,18 @@ footer a:hover{{color:var(--tx)}}
   </div>
 </section>
 
+<section id="credentials">
+  <div class="shell">
+    <div class="shead reveal">
+      <div class="skicker">Credentials</div>
+      <h2 class="stitle">Every certificate, verifiable.</h2>
+      <p class="ssub">Badge profiles first — they are confirmable by a third party and stay current. The certificate files are linked underneath for anything the profiles don't cover.</p>
+    </div>
+    <div class="connect reveal" style="margin:0 0 26px">{profiles_html()}</div>
+    <div class="creds">{creds_html()}</div>
+  </div>
+</section>
+
 <section id="backing">
   <div class="shell">
     <div class="shead reveal">
@@ -588,13 +725,14 @@ footer a:hover{{color:var(--tx)}}
         <div>
           <h3>Fund, partner, or just say hello.</h3>
           <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
-          <p class="bsub">Prefer to talk first? Reach me on any of these.</p>
+          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest.</p>
           {connect_html()}
         </div>
         <div>
           <form id="gform" action="https://api.web3forms.com/submit" method="POST" novalidate>
             <input type="hidden" name="access_key" value="{CONTACT.get('web3forms_key','')}">
             <input type="hidden" name="subject" value="Grant / collaboration enquiry from your portfolio">
+            <input type="hidden" name="to" value="{CONTACT.get('grants_email', CONTACT['email'])}">
             <input type="hidden" name="from_name" value="Portfolio — jannetekka.github.io">
             <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="field">
@@ -622,7 +760,7 @@ footer a:hover{{color:var(--tx)}}
   </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="contact">
   <div class="shell">
     <div class="reveal">
       <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
@@ -630,9 +768,10 @@ footer a:hover{{color:var(--tx)}}
       <div class="cta" style="justify-content:center">
         <a class="btn btn-p" href="mailto:jannetekka96@gmail.com">jannetekka96@gmail.com</a>
         <a class="btn btn-g" href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn btn-g" href="https://github.com/JannetEkka" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a class="btn btn-g" href="{CONTACT['linkedin']}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       </div>
     </div>
+    <div class="cgroups">{contact_groups_html()}</div>
   </div>
 </section>
 
@@ -640,8 +779,8 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
-      <a href="https://github.com/JannetEkka/DSProjects/tree/main/JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a> ·
+      <a href="Jannet_GenAI.pdf" target="_blank" rel="noopener noreferrer">GenAI résumé</a> ·
+      <a href="JannetEkka_Resume.pdf" target="_blank" rel="noopener noreferrer">Data science résumé</a> ·
       <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
       <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>
@@ -743,7 +882,7 @@ footer a:hover{{color:var(--tx)}}
   if (gform) {{
     var fmsg=document.getElementById('fmsg'), fbtn=document.getElementById('fsubmit');
     var keyEl=gform.querySelector('[name=access_key]');
-    var MAIL='{CONTACT["email"]}';
+    var MAIL='{CONTACT.get("grants_email", CONTACT["email"])}';
     gform.addEventListener('submit', function(ev){{
       ev.preventDefault();
       if (!gform.checkValidity()) {{ gform.reportValidity(); return; }}
@@ -785,6 +924,47 @@ footer a:hover{{color:var(--tx)}}
       .finally(function(){{ fbtn.disabled=false; fbtn.textContent='Send'; }});
     }});
   }}
+
+  /* visitor counter — increments once per session, reads on later views.
+     Stays hidden unless a real number comes back, so a dead API shows nothing
+     rather than a broken chip or a misleading zero. */
+  (function(){{
+    var on={'true' if COUNTER.get('enabled') else 'false'}, ns='{COUNTER["namespace"]}', key='{COUNTER["key"]}';
+    if (!on) return;
+    var box=document.getElementById('views'), num=document.getElementById('viewsn');
+    if (!box) return;
+    var seen=false;
+    try {{ seen = sessionStorage.getItem('smt_counted') === '1'; }} catch(e) {{}}
+    var verb = seen ? 'get' : 'hit';
+    fetch('https://abacus.jasoncameron.dev/' + verb + '/' + ns + '/' + key)
+      .then(function(r){{ return r.ok ? r.json() : Promise.reject(); }})
+      .then(function(d){{
+        if (typeof d.value !== 'number') return;
+        num.textContent = d.value.toLocaleString();
+        box.hidden = false;
+        try {{ sessionStorage.setItem('smt_counted','1'); }} catch(e) {{}}
+      }})
+      .catch(function(){{ /* leave it hidden */ }});
+  }})();
+
+  /* click-to-copy (Discord username — not a linkable URL) */
+  document.querySelectorAll('.copyable').forEach(function(b){{
+    b.addEventListener('click', function(){{
+      var v=b.dataset.copy, hint=b.querySelector('.copy-hint');
+      function done(){{ b.classList.add('done'); hint.textContent='copied'; 
+        setTimeout(function(){{ b.classList.remove('done'); hint.textContent='copy'; }},1800); }}
+      if (navigator.clipboard && navigator.clipboard.writeText) {{
+        navigator.clipboard.writeText(v).then(done).catch(fallback);
+      }} else {{ fallback(); }}
+      function fallback(){{
+        var t=document.createElement('textarea'); t.value=v; t.style.position='fixed';
+        t.style.opacity='0'; document.body.appendChild(t); t.select();
+        try {{ document.execCommand('copy'); done(); }}
+        catch(e) {{ hint.textContent=v; }}      /* worst case: show it to copy by hand */
+        document.body.removeChild(t);
+      }}
+    }});
+  }});
 
   /* filters */
   var cards = [].slice.call(document.querySelectorAll('#grid .card'));

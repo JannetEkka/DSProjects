@@ -1,4 +1,71 @@
 # ---------------------------------------------------------------------------
+# CREDENTIALS — every field below was read off the certificate itself.
+# `files` entries are (label, path-relative-to-index.html). Spaces are
+# %20-encoded because these are URLs, not filesystem paths.
+# ---------------------------------------------------------------------------
+C = "certificates/"
+CREDENTIALS = [
+ dict(title="Post Graduate Program in AI &amp; Machine Learning", issuer="Texas McCombs School of Business &amp; Great Lakes",
+      date="Mar 2025", note="GPA 4.09/5 · Rank 1 in batch", kind="degree",
+      files=[("Certificate", C+"pgp%20great%20lakes%20cert.pdf"),
+             ("Grade book", C+"UTA%20transcript.pdf"),
+             ("Verify", "https://www.mygreatlearning.com/certificate/SPXKJOPH")]),
+
+ dict(title="Gen AI Academy — Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="28 May 2025", note="Vertex AI · Gemini APIs · Imagen · Streamlit · Multimodal RAG",
+      cid="2025H2S04GENAI-A01917", kind="google",
+      files=[("Certificate", C+"genai%20academy%20COC.pdf")]),
+
+ dict(title="Gen AI Academy APAC 2026 — Cohort 2, Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="31 Jul 2026", note="Data, analytics and intelligent systems on Google Cloud",
+      cid="2026H2S07GCGENAIAPACC2-P02585", kind="google",
+      files=[("Certificate", C+"cohort%202%20cert%20comp.pdf")]),
+
+ dict(title="Gen AI Academy APAC 2026 — Cohort 1, Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="28 Apr 2026", note="Building, connecting and migrating AI-powered applications",
+      cid="2026H2S04GCGENAIAPACC1-P01679", kind="google",
+      files=[("Certificate", C+"cohort%201%20cert%20comp.pdf")]),
+
+ dict(title="Gen AI Academy APAC 2026 — Cohort 1 Hackathon", issuer="Google Cloud &amp; Hack2skill",
+      date="19 May 2026", note="Shortlisted top 101 of 1,500+ teams",
+      cid="2026H2S05GCGENAIAPACC1-P00373", kind="google",
+      files=[("Certificate", C+"cohort%201%20cert%20part.pdf")]),
+
+ dict(title="Gen AI Exchange Hackathon 2025", issuer="Google Cloud &amp; Hack2skill",
+      date="14 Jan 2026", note="Problem statement — &ldquo;Automating Test Case Generation with AI&rdquo;",
+      cid="2025H2S08GH-P100275", kind="google",
+      files=[("Certificate", C+"GenAI%20Exc%20Hack%20COP.pdf")]),
+
+ dict(title="Agentic AI Day", issuer="Google Cloud &amp; Hack2skill",
+      date="2025", note="Build the next generation of intelligent agents",
+      cid="2025H2S06AID-I01369", kind="google",
+      files=[("Certificate", C+"Agentic%20AI%20DAy%20COP.pdf")]),
+
+ dict(title="Asha AI Hackathon 2025", issuer="JobsForHer Foundation &amp; Hack2skill",
+      date="2025", note="The hackathon behind the Asha Chatbot project",
+      cid="2025H2S03AAIH-P00105", kind="hack",
+      files=[("Certificate", C+"Asha%20AI%20Hack%20COP.pdf")]),
+
+ dict(title="Machine Learning Internship", issuer="Internship Studio",
+      date="Jul – Aug 2024", note="YouTube ad-view analytics", cid="ISMAIL600552", kind="work",
+      files=[("Internship", C+"Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Internship.pdf"),
+             ("Training", C+"Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Training.pdf")]),
+
+ dict(title="AI-Preneur Workshop", issuer="AI-Preneur", date="Mar 2025",
+      note="Freelancing with AI — business applications", kind="work",
+      files=[("Certificate", C+"Jannet%20Ekka.pdf")]),
+
+ dict(title="CPSAT — Certified Professional Selenium Automation Testing", issuer="CPSAT",
+      date="2022", note="", kind="work", files=[]),
+]
+
+PROFILES = [
+ ("Credly badges", "https://www.credly.com/users/jannet-akanksha-ekka/badges"),
+ ("Google Skills profile", "https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e"),
+ ("All certificate files", "https://github.com/JannetEkka/DSProjects/tree/main/certificates"),
+]
+
+# ---------------------------------------------------------------------------
 # CONTACT + FORM CONFIG  — the only things you need to edit to switch the form on
 # ---------------------------------------------------------------------------
 # WEB3FORMS_KEY: get a free key at https://web3forms.com — enter your email,
@@ -11,12 +78,34 @@
 # DISCORD: paste your invite or profile URL. Left blank = the button is not
 #   rendered at all (no dead link).
 CONTACT = dict(
-    email="jannetekka96@gmail.com",
-    linkedin="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/",
+    email="jannetekka96@gmail.com",          # general / hiring
+    grants_email="jtech26smt@gmail.com",     # SMT grants & funding only
+    phone="+919078802572",
     whatsapp="https://wa.me/919078802572",
-    discord="",
+    telegram="https://t.me/Jannetekka",
+    discord="jannetekka_03690",      # a username, not a URL — rendered as click-to-copy
+    linkedin="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/",
+    github="https://github.com/JannetEkka",
+    twitter="https://x.com/EkkaJanny96",
+    smt_twitter="https://x.com/JTechSMT",
     web3forms_key="",
 )
+
+# Remote-work / hiring profiles. Add a (label, url) pair as each one goes live
+# and rebuild — nothing else needs changing.
+# Visitor counter (Abacus — free, no signup, no key; abacus.jasoncameron.dev).
+# Counts once per browser session, not per refresh, so a reload does not inflate it.
+# Set enabled=False to remove it entirely.
+COUNTER = dict(
+    enabled=True,
+    namespace="jannetekka-github-io",
+    key="portfolio",
+)
+
+HIRE = [
+    ("Himalayas", "https://himalayas.app/@jannetaekka"),
+    ("LinkedIn", "https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/"),
+]
 
 # ---- verified link status ----
 # 200 OK : workers.dev SMT, run.app SMT World, smt-mantle pages, all github repos (public via API)
@@ -30,11 +119,11 @@ FLAGSHIP = dict(
     sub="Explainable Multi-Agent Trading AI",
     meta="2026 – Present · Sole architect & engineer",
     badge="Patent pending · IN 202631090789",
-    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate.",
-    stats=[("33K","lines of Python"),("153","modules"),("166","tests green"),("8","pairs live")],
-    tags=["Multi-Agent Systems","Explainable AI","Optuna","BigQuery + Vector Search","Vertex AI","Cloud Run","Cloudflare Workers"],
+    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. Strategy validation is <em>GPU-accelerated with NVIDIA cuDF</em> — <code>cudf.pandas</code>, zero code change — taking a 2.5M-row CPCV pipeline from ~24s to 3.9s (~6×) on a T4 Vertex AI notebook. The front end is a Three.js/WebGL ocean world served from Cloudflare Workers.",
+    stats=[("33K","lines of Python"),("166","tests green"),("6","× faster on GPU"),("8","pairs live")],
+    tags=["Multi-Agent Systems","Explainable AI","NVIDIA cuDF / RAPIDS","Optuna","BigQuery + Conversational Analytics","Vertex AI","Three.js / WebGL","Cloudflare Workers"],
     links=[("Live site","https://smt-weex-trading-bot.jannet-ekka.workers.dev/","live"),
-           ("SMT World","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
+           ("Hackathon build (Cloud Run)","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
            ("Code","https://github.com/JannetEkka/smt-apac","code"),
            ("Press","https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641","doc")],
     note="Core repo private — the linked repo is the public explanatory layer.",
@@ -70,9 +159,9 @@ PROJECTS = [
  dict(slug="autokorrekt", cat="genai", wide=True, title="AutoKorrekt", sub="AI Answer-Evaluation Platform for Teachers", meta="May 2024 – Jan 2025 · Lead Frontend Developer · EdTech startup MVP",
    desc="An evaluation platform that takes a teacher from sign-up to graded scripts: create a class, upload a student roster and question paper, bulk-upload scanned answer sheets, then track each student through OCR, AI evaluation and validation. I led the frontend and designed the ML data flow across S3, RDS and SageMaker &mdash; interactive PDF processing with coordinate-based text extraction over AWS Textract, a bilingual EN/DE feedback interface on Amazon Comprehend, and a per-student status pipeline that scaled to 1,000+ concurrent submissions.",
    tags=["React","Next.js","TypeScript","AWS Textract","Amazon Comprehend","SageMaker","Django"],
-   shots=[("assets/autokorrekt/signup.png","Teacher sign-up"),
-          ("assets/autokorrekt/signin.png","Sign in"),
-          ("assets/autokorrekt/add-class.png","Create a class — roster + question paper upload"),
+   shots=[("assets/autokorrekt/Index_page_signup.png","Teacher sign-up"),
+          ("assets/autokorrekt/Index_pg_signin.png","Sign in"),
+          ("assets/autokorrekt/add_Test.png","Create a class — student roster (CSV) + question-paper upload"),
           ("assets/autokorrekt/students.png","Per-student evaluation pipeline &amp; bulk answer-sheet upload")],
    links=[]),
 
