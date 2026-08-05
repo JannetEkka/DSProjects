@@ -603,7 +603,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="statgrid">
       <div class="stat reveal"><div class="n" data-count="24">24</div><div class="l">Projects shipped</div></div>
-      <div class="stat reveal"><div class="n" data-count="33">33</div><div class="l">K lines in flagship</div></div>
+      <div class="stat reveal"><div class="n" data-count="33K">33K</div><div class="l">Lines in flagship</div></div>
       <div class="stat reveal"><div class="n" data-count="4">4</div><div class="l">Years enterprise eng.</div></div>
       <div class="stat reveal"><div class="n" data-count="1">1</div><div class="l">Patent filed</div></div>
     </div>
@@ -826,14 +826,19 @@ footer a:hover{{color:var(--tx)}}
 
   /* count-up */
   function countUp(el){{
-    var target = parseFloat(el.dataset.count), t0 = null, dur = 1300;
-    if (isNaN(target) || R) return;
+    /* data-count may carry a unit, e.g. "33K" or "6x". Animate the number and
+       keep the suffix on every frame, otherwise "33K" counts up to a bare 33. */
+    var raw = String(el.dataset.count || '').trim();
+    var m = raw.match(/^(-?[\d.]+)(.*)$/);
+    if (!m || R) return;
+    var target = parseFloat(m[1]), suffix = m[2] || '', t0 = null, dur = 1300;
+    if (isNaN(target)) return;
     function step(ts){{
       if (!t0) t0 = ts;
       var p = Math.min((ts - t0)/dur, 1), e = 1 - Math.pow(1-p, 3);
-      el.textContent = Math.round(target*e);
+      el.textContent = Math.round(target*e) + suffix;
       if (p < 1) requestAnimationFrame(step);
-      else el.textContent = target;
+      else el.textContent = m[1] + suffix;   /* restore the exact authored value */
     }}
     requestAnimationFrame(step);
   }}
