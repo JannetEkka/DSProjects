@@ -19,3 +19,17 @@
    ```
 
 No dependencies — plain Python 3, standard library only.
+
+## The résumé
+
+`../Jannet_Ekka_Resume.pdf` is generated from `resume.html` in this folder —
+the same build-and-verify approach as the site. To regenerate after editing:
+
+```bash
+chromium --headless --no-pdf-header-footer \
+  --print-to-pdf=../Jannet_Ekka_Resume.pdf _portfolio_src/resume.html
+```
+
+It is tuned to land on **exactly two pages**. Adding content can push it to
+three; the fix is to step the body `font-size` and the matching spacing values
+down together until it fits again, rather than cutting content blindly.
