@@ -200,9 +200,9 @@ HTML = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jannet Akanksha Ekka — AI/ML Engineer</title>
+<title>Jannet Akanksha Ekka — GenAI Applications Engineer</title>
 <meta name="description" content="AI/ML engineer building production agentic systems. Patent-pending multi-agent trading AI, Google Cloud GenAI, and 20+ shipped projects.">
-<meta property="og:title" content="Jannet Akanksha Ekka — AI/ML Engineer">
+<meta property="og:title" content="Jannet Akanksha Ekka — GenAI Applications Engineer">
 <meta property="og:description" content="Building production agentic AI systems. Patent-pending multi-agent trading AI on Google Cloud.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -627,10 +627,12 @@ footer a:hover{{color:var(--tx)}}
   <div class="marq-in">
     <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
     <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
     <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
     <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
     <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
     <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
   </div>
@@ -647,7 +649,8 @@ footer a:hover{{color:var(--tx)}}
         <div class="abtxt reveal">
           <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
           <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks designed to catch overfitting rather than flatter it.</p>
-          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
+          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB.</p>
+          <p>I work <strong>AI-native and deliberately lean</strong>. All of this was designed, built and is operated from a single 16&nbsp;GB laptop — and when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4 rather than throwing hardware at it. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
       </div>
       <div class="awards reveal">
@@ -677,7 +680,7 @@ footer a:hover{{color:var(--tx)}}
       <div class="tlrow reveal">
         <h4>Independent AI Engineer</h4>
         <div class="org">Freelance &amp; competitive builds</div><div class="when">2024 – 2025</div>
-        <p>Started at the OpenServ × Hack2skill hackathon, where Smart Money Tracker <strong>won Best DeFi Application</strong> and placed runner-up for Best Website Application. Went on to ship VerseCanvas on Vertex AI, multi-agent assistants on Google ADK, MCP and AlloyDB, and the applied AI projects above.</p>
+        <p>Started at the OpenServ × Hack2skill hackathon, where Smart Money Tracker <strong>won Best DeFi Application</strong> and placed runner-up for Best Website Application. Went on to ship VerseCanvas on Vertex AI, multi-agent assistants on Google ADK, MCP and AlloyDB, and the applied AI projects above — all delivered <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>

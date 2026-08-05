@@ -103,7 +103,7 @@ COUNTER = dict(
 )
 
 HIRE = [
-    ("Himalayas", "https://himalayas.app/@jannetaekkauser"),
+    ("Himalayas", "https://himalayas.app/@jannetaekka"),
     ("LinkedIn", "https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/"),
 ]
 
@@ -119,11 +119,11 @@ FLAGSHIP = dict(
     sub="Explainable Multi-Agent Trading AI",
     meta="2026 – Present · Sole architect & engineer",
     badge="Patent pending · IN 202631090789",
-    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate.",
-    stats=[("33K","lines of Python"),("153","modules"),("166","tests green"),("8","pairs live")],
-    tags=["Multi-Agent Systems","Explainable AI","Optuna","BigQuery + Vector Search","Vertex AI","Cloud Run","Cloudflare Workers"],
+    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. Strategy validation is <em>GPU-accelerated with NVIDIA cuDF</em> — <code>cudf.pandas</code>, zero code change — taking a 2.5M-row CPCV pipeline from ~24s to 3.9s (~6×) on a T4 Vertex AI notebook. The front end is a Three.js/WebGL ocean world served from Cloudflare Workers.",
+    stats=[("33K","lines of Python"),("166","tests green"),("6","× faster on GPU"),("8","pairs live")],
+    tags=["Multi-Agent Systems","Explainable AI","NVIDIA cuDF / RAPIDS","Optuna","BigQuery + Conversational Analytics","Vertex AI","Three.js / WebGL","Cloudflare Workers"],
     links=[("Live site","https://smt-weex-trading-bot.jannet-ekka.workers.dev/","live"),
-           ("SMT World","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
+           ("Hackathon build (Cloud Run)","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
            ("Code","https://github.com/JannetEkka/smt-apac","code"),
            ("Press","https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641","doc")],
     note="Core repo private — the linked repo is the public explanatory layer.",
