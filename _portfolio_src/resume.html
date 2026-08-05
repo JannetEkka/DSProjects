@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jannet Akanksha Ekka — Resume</title>
+<style>
+  @page { size: A4; margin: 10mm 11mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Calibri", "Carlito", "Helvetica Neue", Arial, sans-serif;
+    font-size: 9.8pt;
+    line-height: 1.33;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: #1c3f6e; text-decoration: none; }
+
+  header { border-bottom: 2.2pt solid #1c3f6e; padding-bottom: 4pt; margin-bottom: 5pt; }
+  h1 { font-size: 19pt; font-weight: 700; letter-spacing: 0.7pt; color: #12294a; line-height: 1.02; }
+  .tagline { font-size: 9.4pt; font-weight: 600; color: #1c3f6e; margin-top: 1pt; }
+  .contact { font-size: 8.5pt; color: #333; margin-top: 3pt; }
+  .contact span { white-space: nowrap; }
+  .sep { color: #9aa8bb; padding: 0 3.5pt; }
+
+  h2 {
+    font-size: 9.2pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.05pt;
+    color: #12294a; border-bottom: 0.8pt solid #c3cede;
+    padding-bottom: 1.5pt; margin: 7.6pt 0 4.3pt;
+  }
+  section:first-of-type h2 { margin-top: 1.5pt; }
+  .summary { text-align: justify; }
+
+  table.skills { width: 100%; border-collapse: collapse; }
+  table.skills td { vertical-align: top; padding: 1.4pt 0; }
+  table.skills td.k { width: 90pt; font-weight: 700; color: #1c3f6e; padding-right: 6pt; }
+
+  .entry { margin-bottom: 5.7pt; break-inside: avoid; }
+  .entry:last-child { margin-bottom: 0; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
+  .role { font-weight: 700; color: #12294a; font-size: 9.8pt; }
+  .role .org { font-weight: 600; color: #333; }
+  .meta { font-size: 8.3pt; color: #555; font-style: italic; white-space: nowrap; flex-shrink: 0; }
+  .sub { font-size: 8.6pt; color: #444; font-style: italic; margin-top: 0.4pt; }
+
+  ul { list-style: none; margin-top: 1.8pt; }
+  li { position: relative; padding-left: 9.5pt; margin-bottom: 1.9pt; }
+  li::before { content: "▪"; position: absolute; left: 0; top: -0.4pt; color: #1c3f6e; font-size: 7.6pt; }
+  .links { font-size: 8.2pt; margin-top: 1.2pt; padding-left: 0; color: #1c3f6e; }
+  .links a { color: #1c3f6e; }
+  .links .lbl { color: #666; font-style: italic; }
+  .links .dot { color: #9aa8bb; padding: 0 3pt; }
+  .tech { font-size: 8.4pt; color: #444; padding-left: 9pt; margin-top: 1.2pt; }
+  .tech b { color: #1c3f6e; font-weight: 700; }
+
+  b, strong { font-weight: 700; color: #0d1f38; }
+
+  .flagship { border-left: 2.4pt solid #1c3f6e; padding: 0.5pt 0 0.5pt 7pt; background: #f6f8fb; }
+  .flagship .row { padding-right: 4pt; }
+
+  .twocol { column-count: 2; column-gap: 15pt; }
+  .twocol li { break-inside: avoid; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>JANNET AKANKSHA EKKA</h1>
+  <div class="tagline">GenAI Applications Engineer &nbsp;·&nbsp; Agentic Systems · Google Cloud &amp; NVIDIA-Accelerated ML</div>
+  <div class="contact">
+    <span>jannetekka96@gmail.com</span><span class="sep">|</span><span>+91 90788 02572</span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/">linkedin.com/in/jannet-akanksha-ekka</a></span><span class="sep">|</span><span><a href="https://github.com/JannetEkka">github.com/JannetEkka</a></span><span class="sep">|</span><span><a href="https://jannetekka.github.io/DSProjects/">jannetekka.github.io/DSProjects</a></span><span class="sep">|</span><span>Kolkata, India</span>
+  </div>
+</header>
+
+<section>
+  <h2>Professional Summary</h2>
+  <p class="summary">
+    AI/ML engineer who ships production agentic systems end to end — architecture, learning loop, cloud deployment and live operations.
+    Author of a <b>patent-pending multi-agent trading AI</b> (33K LOC, 166-test suite, running continuously on Google Cloud) and of
+    multi-agent assistants built on Google ADK, MCP and AlloyDB. Brings <b>4+ years leading enterprise QA automation at Deloitte</b> to the
+    problem most AI teams now face — <b>evaluating and monitoring agents</b>, not just building them: systems here refuse to act on data they
+    cannot verify, and no substituted default passes without a warning. <b>Rank&nbsp;1</b> PGP in AI/ML (UT Austin McCombs &amp; Great Lakes).
+    Works AI-native and deliberately lean — that platform was designed, built and is operated from a single 16&nbsp;GB laptop, and a
+    <b>cuDF/RAPIDS rewrite</b> cut its validation pipeline <b>~6× on an NVIDIA T4</b>. Built while a full-time family carer.
+  </p>
+</section>
+
+<section>
+  <h2>Technical Skills</h2>
+  <table class="skills">
+    <tr>
+      <td class="k">GenAI &amp; Agents</td>
+      <td>Google ADK, Model Context Protocol (MCP), Agent2Agent (A2A) SDK, Vertex AI, Gemini, Imagen, OpenServ SDK, multi-agent orchestration, prompt engineering, RAG &amp; vector search, LangChain, Hugging Face</td>
+    </tr>
+    <tr>
+      <td class="k">ML &amp; Quant</td>
+      <td>scikit-learn, TensorFlow, Keras, PyTorch, CatBoost, Optuna (TPE), contextual bandits, CPCV / Deflated Sharpe / PBO / FDR overfitting gates, conformal prediction, time-series forecasting, NLP &amp; sentiment analysis, computer vision (ResNet, Fast R-CNN)</td>
+    </tr>
+    <tr>
+      <td class="k">Cloud &amp; Data</td>
+      <td>GCP — Cloud Run, Cloud Functions, Compute Engine, BigQuery (+ vector search &amp; Conversational Analytics), AlloyDB &amp; pgvector, Cloud SQL, Firestore, Pub/Sub, Cloud Scheduler, Cloud Build, Artifact Registry, Secret Manager, Vertex AI MLOps; AWS — S3, EC2, RDS, SageMaker, Textract, Comprehend; Cloudflare Workers</td>
+    </tr>
+    <tr>
+      <td class="k">Engineering</td>
+      <td>Python, SQL, TypeScript, JavaScript; FastAPI, Flask, Streamlit, Django, React, Next.js; Docker, Kubernetes, Git, Jenkins, GitHub Actions, systemd, pytest, Selenium; REST &amp; WebSocket API integration</td>
+    </tr>
+    <tr>
+      <td class="k">GPU &amp; Acceleration</td>
+      <td>NVIDIA cuDF / RAPIDS (cudf.pandas), CUDA, Vertex AI GPU notebooks, T4 CPU-vs-GPU benchmarking, GPU-native pipeline rewrites</td>
+    </tr>
+    <tr>
+      <td class="k">Analytics</td>
+      <td>pandas, NumPy, SciPy, Matplotlib, Seaborn, Tableau, Power BI, hypothesis testing, A/B testing, experiment design</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Flagship Project</h2>
+  <div class="entry flagship">
+    <div class="row">
+      <div class="role">Smart Money Trading (SMT) — Explainable Multi-Agent Trading AI <span class="org">· Sole architect &amp; engineer</span></div>
+      <div class="meta">2026 – Present</div>
+    </div>
+    <div class="sub">Patent pending — Indian provisional application No. 202631090789 (filed Jul 2026)</div>
+    <div class="links"><span class="lbl">Live:</span> <a href="https://smt-weex-trading-bot.jannet-ekka.workers.dev/">smt-weex-trading-bot.jannet-ekka.workers.dev</a><span class="dot">·</span><span class="lbl">Hackathon build on Cloud Run:</span> <a href="https://smt-world-2gbcoyhuea-uc.a.run.app/">smt-world</a><span class="dot">·</span><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/smt-apac">github.com/JannetEkka/smt-apac</a></div>
+    <ul>
+      <li>Designed and built a <b>three-layer autonomous trading agent</b> — quant base, learning loop and explanation layer — trading 8 crypto perpetual-futures pairs across 4 strategy horizons; <b>33,000 LOC over 153 Python modules with a 166-test suite</b>.</li>
+      <li>Architected a <b>6-persona committee</b> (order-flow, technical, whale/on-chain, sentiment, regime) aggregated by a learned <b>Judge</b> with quorum-renormalised conviction, so a dead data feed can never silently strand a decision threshold.</li>
+      <li>Built the learning loop end to end — Optuna/TPE optimiser, regime-aware <b>contextual bandit</b> for sizing, replay and reward shaping, and a weekly refit that ships only through a <b>CPCV + Deflated-Sharpe + PBO + FDR overfitting gate</b>; a per-pair P(up-in-4h) forecaster validated on non-overlapping windows reached <b>AUC 0.723</b> on BTC, with gate-failing pairs auto-held in shadow.</li>
+      <li>Accelerated strategy validation with <b>NVIDIA cuDF (cudf.pandas, zero code change)</b> on a Vertex AI GPU notebook — a 2.5M-row CPCV pipeline dropped from ~24s to <b>3.9s (~6×)</b> on a T4; the front end is a Three.js/WebGL world served from Cloudflare Workers.</li>
+      <li>Engineered a <b>BigQuery data lake of 173K decisions and 447K klines</b> with embeddings and vector search for pattern mining, plus a conversational analytics agent over a sanitised public view.</li>
+      <li>Operate it live on GCP — Compute Engine under systemd with watchdog and auto-restart, Cloud Run and Cloud Functions services, Secret Manager, a Streamlit dashboard and a Cloudflare-hosted user-facing UI; every trade ships a faithful ≤500-character "why" verified by a counterfactual faithfulness check, and a <b>no-silent-fallback rule</b> (any substituted default raises a warning and a liveness flag) that surfaced four multi-week data-integrity bugs.</li>
+    </ul>
+    <div class="tech"><b>Stack:</b> Python, Optuna, scikit-learn, CatBoost, BigQuery, Vertex AI &amp; Gemini, Cloud Run, Cloud Functions, Secret Manager, Streamlit, Cloudflare Workers, Docker, pytest, GitHub Actions</div>
+  </div>
+</section>
+
+<section>
+  <h2>Selected AI / ML Projects</h2>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">SmartDesk — Multi-Agent Productivity Assistant <span class="org">· Google Cloud Gen AI Academy capstone</span></div>
+      <div class="meta">2026</div>
+    </div>
+    <div class="links"><a href="https://github.com/JannetEkka/smartdesk">github.com/JannetEkka/smartdesk</a></div>
+    <ul>
+      <li>Built a root <b>ADK orchestrator</b> routing to specialised sub-agents — InboxAgent (Gmail via MCP), PlannerAgent (Calendar via MCP), DataAgent (AlloyDB vector search as a personal CRM) and a SequentialAgent response formatter.</li>
+      <li>Deployed as a containerised service on <b>Cloud Run</b> with Gemini 2.5 Flash; extended the lab work with a <code>Graceful429Plugin</code> giving ADK tools a clean fallback under rate limiting.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">VerseCanvas — AI Poetry-to-Art Generation Platform</div>
+      <div class="meta">2025</div>
+    </div>
+    <div class="links"><a href="https://github.com/JannetEkka/versecanvas">github.com/JannetEkka/versecanvas</a></div>
+    <ul>
+      <li>Engineered a <b>multi-stage generative pipeline</b> — semantic poem analysis with Gemini 2.0 → automated prompt engineering → image synthesis with <b>Imagen 3.0 on Vertex AI</b> → hybrid editing and text overlay (2,600 LOC across 6 modules).</li>
+      <li>Extracts themes, mood, visual elements and narrative arc beyond literal text; 6 languages, 6 art styles, tunable mood intensity and multiple interpretations per poem, shipped as a Streamlit app.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Smart Money Tracker — Multi-Agent Blockchain Analytics <span class="org">· Hackathon winner</span></div>
+      <div class="meta">2024</div>
+    </div>
+    <ul>
+      <li>Orchestrated multi-agent whale tracking across <b>Ethereum, Polygon and BNB Chain</b> with the OpenServ SDK, using Alchemy webhooks for sub-second transaction monitoring on Cloud Run.</li>
+      <li>Built a confidence-scored detector for accumulation, distribution and coordinated movements with automated exchange-wallet exclusion via Moralis labelling; backed by Cloud SQL + pgvector, Firestore and Gemini analysis.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Applied ML Portfolio <span class="org">· 13 end-to-end projects (UT Austin McCombs PGP)</span></div>
+      <div class="meta">2024 – 2025</div>
+    </div>
+    <div class="links"><a href="https://jannetekka.github.io/DSProjects/">jannetekka.github.io/DSProjects</a><span class="dot">·</span><a href="https://github.com/JannetEkka/DSProjects">github.com/JannetEkka/DSProjects</a></div>
+    <ul>
+      <li><b>Automotive surveillance (capstone):</b> ResNet50 make/model/year classification at 69.2% accuracy with Fast R-CNN detection over 16,185 images across 196 classes. <b>Customer churn:</b> 81.5% accuracy (Random Forest / Gradient Boosting). Also semiconductor yield prediction (591 sensor signals), SVHN digit and signal classification, financial-news sentiment with Mistral-7B embeddings, SQL business analytics, and K-Means + PCA-SVM vehicle segmentation.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Professional Experience</h2>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Smart Money Trading (SMT) <span class="org">— Founder &amp; Sole Engineer</span></div>
+      <div class="meta">2026 – Present</div>
+    </div>
+    <ul>
+      <li>Design, build and operate the patent-pending multi-agent trading platform detailed above — running continuously on Google Cloud under systemd with watchdog, auto-restart and per-decision audit logging.</li>
+      <li>Own the full lifecycle solo: architecture, learning loop, evaluation gates, cloud deployment, incident response and cost control.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Independent AI Engineer <span class="org">— freelance &amp; competitive builds</span></div>
+      <div class="meta">2024 – 2025</div>
+    </div>
+    <ul>
+      <li><b>Won Best DeFi Application</b> at the OpenServ × Hack2skill hackathon (runner-up, Best Website Application) with a multi-agent blockchain analytics platform tracking whale movements across three chains.</li>
+      <li>Shipped VerseCanvas on Vertex AI, multi-agent assistants on Google <b>ADK / MCP / AlloyDB</b> deployed to Cloud Run, and the applied AI projects above.</li>
+      <li>Delivered all of the above <b>while a full-time family carer</b>, alongside completing the PGP in AI/ML at Rank 1 and the Google Cloud Gen AI Academy.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Deloitte Consulting LLP <span class="org">— Test Automation Engineer (Analyst)</span></div>
+      <div class="meta">Aug 2019 – Jan 2023 · Bangalore</div>
+    </div>
+    <ul>
+      <li><b>Led a 6-member QA engineering team</b> delivering automated testing frameworks and enterprise data-processing solutions for Fortune 500 clients including AT&amp;T Consumer Connect, Hewlett Packard Enterprise and The Dental Supply Company.</li>
+      <li>Built Selenium and Katalon Studio automation components that <b>improved test execution efficiency by 83%</b>; Jenkins-based automated reporting cut manual analysis time by <b>75%</b>.</li>
+      <li>Wrote Python analysis scripts and Tableau dashboards tracking quality metrics across <b>343 business components</b>, reducing test failures by 25%.</li>
+      <li>Developed Python pipelines analysing <b>50,000+ SAP Hybris transactions</b> to isolate performance bottlenecks, and automated data validation for 10,000+ product configurations.</li>
+    </ul>
+    <div class="tech"><b>Tech:</b> Selenium, Katalon Studio, Python, JavaScript, Jenkins, Salesforce, SAP Hybris, Tableau, JIRA, Git</div>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">AutoKorrekt <span class="org">— Lead Frontend Developer (EdTech startup MVP)</span></div>
+      <div class="meta">May 2024 – Jan 2025</div>
+    </div>
+    <ul>
+      <li>Engineered an interactive PDF processing system with coordinate-based text extraction, integrating <b>AWS Textract OCR</b> and Mistral models into an AI answer-evaluation workflow, and designed the ML data flow across S3, RDS and SageMaker.</li>
+      <li>Built a bilingual (English/German) evaluation interface with real-time NLP feedback via Amazon Comprehend plus an analytics dashboard; scaled to <b>1,000+ concurrent submissions</b> and 100+ teacher sessions, cutting grading time 70% and lifting grading consistency 85%.</li>
+    </ul>
+    <div class="tech"><b>Tech:</b> React, Next.js, TypeScript, Python, Django, AWS (EC2, S3, RDS, SageMaker, Textract, Comprehend)</div>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Internship Studio <span class="org">— Machine Learning Intern</span></div>
+      <div class="meta">Jul 2024 – Aug 2024 · Remote</div>
+    </div>
+    <ul>
+      <li>Built a Random Forest model (R² = 0.252) predicting YouTube ad views from engagement metrics across a <b>15,000+ video dataset</b>, packaged for integration with business dashboards to inform ad-revenue optimisation.</li>
+    </ul>
+  </div>
+
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="row">
+      <div class="role">Post Graduate Program in Artificial Intelligence &amp; Machine Learning</div>
+      <div class="meta">Feb 2024 – Feb 2025</div>
+    </div>
+    <div class="sub">Texas McCombs School of Business &amp; Great Lakes Institute of Management — <b>GPA 4.09/5 · Rank 1 in batch</b></div>
+  </div>
+  <div class="entry">
+    <div class="row">
+      <div class="role">Bachelor of Technology, Information Technology</div>
+      <div class="meta">2015 – 2019</div>
+    </div>
+    <div class="sub">Kalinga Institute of Industrial Technology (KIIT) University, Bhubaneswar — CGPA 7.17/10</div>
+  </div>
+</section>
+
+<section>
+  <h2>Achievements, Recognition &amp; Certifications</h2>
+  <ul class="twocol">
+    <li><b>Provisional patent filed</b> — India, App. No. 202631090789 (Jul 2026), covering the SMT multi-agent decision architecture.</li>
+    <li><b>WEEX AI Wars I — #1 on the overall preliminary leaderboard</b> of 230+ teams and one of 37 finalists in the $880K live AI trading competition; featured in <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641">WEEX's official coverage</a> and two live AMAs.</li>
+    <li><b>Winner, Best DeFi Application</b> — OpenServ × Hack2skill hackathon; runner-up, Best Website Application.</li>
+    <li><b>Top 101 of 1,500+ teams</b> — Google Cloud Gen AI Academy APAC hackathon (Cohort 2), advanced to prototype refinement.</li>
+    <li><b>2 Spot Awards</b> and an <b>Applause Award</b> at Deloitte for project excellence (HPE Configure-Price-Quote).</li>
+    <li><b>Google Cloud Gen AI Academy</b> — Completion, May 2025 (ID 2025H2S04GENAI-A01917); <b>Gen AI Academy APAC 2026</b> — Cohort 1 and Cohort 2 completions plus the Cohort 1 Hackathon.</li>
+    <li><b>Gen AI Exchange Hackathon 2025</b> (Google Cloud &amp; Hack2skill) — problem statement &ldquo;Automating Test Case Generation with AI&rdquo; · <b>Agentic AI Day</b> · <b>Asha AI Hackathon 2025</b> (JobsForHer Foundation).</li>
+    <li><b>CPSAT</b> — Certified Professional Selenium Automation Testing, 2022. All credentials verifiable on
+      <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges">Credly</a> and
+      <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e">Google Skills</a>.</li>
+  </ul>
+</section>
+
+</body>
+</html>
