@@ -244,9 +244,6 @@ PROJECTS = [
    desc="A hybrid data-driven Selenium framework with Page Object Model structure, external test data, cross-browser runs on Edge/Chrome/Firefox, HTML reporting and failure screenshots — wired into Jenkins.",
    tags=["Selenium","PyTest","POM","Jenkins"], links=[("Code",GH+"python-automation","code")]),
 
- dict(slug="50days", cat="automation", title="50 Days of Python", sub="A challenge a day", meta="2025 · Completed challenge",
-   desc="All fifty exercises from Benjamin Bennett Alexander&rsquo;s challenge — data structures, file I/O, CSV and JSON handling, SQLite, and a Flask web app as the day-50 capstone.",
-   tags=["Python","Flask","SQLite"], links=[("Code",GH+"50-days-of-python","code")]),
 ]
 
 CATS = [("all","All work"),("agents","AI Agents"),("genai","Generative AI"),
