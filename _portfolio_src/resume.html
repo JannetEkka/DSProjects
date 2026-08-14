@@ -8,8 +8,8 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: "Calibri", "Carlito", "Helvetica Neue", Arial, sans-serif;
-    font-size: 9.8pt;
-    line-height: 1.33;
+    font-size: 9.2pt;
+    line-height: 1.3;
     color: #1a1a1a;
     -webkit-font-smoothing: antialiased;
   }
@@ -25,7 +25,7 @@
   h2 {
     font-size: 9.2pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.05pt;
     color: #12294a; border-bottom: 0.8pt solid #c3cede;
-    padding-bottom: 1.5pt; margin: 7.6pt 0 4.3pt;
+    padding-bottom: 1.5pt; margin: 6.8pt 0 3.8pt;
   }
   section:first-of-type h2 { margin-top: 1.5pt; }
   .summary { text-align: justify; }
@@ -34,7 +34,7 @@
   table.skills td { vertical-align: top; padding: 1.4pt 0; }
   table.skills td.k { width: 90pt; font-weight: 700; color: #1c3f6e; padding-right: 6pt; }
 
-  .entry { margin-bottom: 5.7pt; break-inside: avoid; }
+  .entry { margin-bottom: 5.0pt; break-inside: avoid; }
   .entry:last-child { margin-bottom: 0; }
   .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10pt; }
   .role { font-weight: 700; color: #12294a; font-size: 9.8pt; }
@@ -43,7 +43,7 @@
   .sub { font-size: 8.6pt; color: #444; font-style: italic; margin-top: 0.4pt; }
 
   ul { list-style: none; margin-top: 1.8pt; }
-  li { position: relative; padding-left: 9.5pt; margin-bottom: 1.9pt; }
+  li { position: relative; padding-left: 9.5pt; margin-bottom: 1.6pt; }
   li::before { content: "▪"; position: absolute; left: 0; top: -0.4pt; color: #1c3f6e; font-size: 7.6pt; }
   .links { font-size: 8.2pt; margin-top: 1.2pt; padding-left: 0; color: #1c3f6e; }
   .links a { color: #1c3f6e; }
@@ -89,7 +89,7 @@
   <table class="skills">
     <tr>
       <td class="k">GenAI &amp; Agents</td>
-      <td>Google ADK, Model Context Protocol (MCP), Agent2Agent (A2A) SDK, Vertex AI, Gemini, Imagen, OpenServ SDK, multi-agent orchestration, prompt engineering, RAG &amp; vector search, LangChain, Hugging Face</td>
+      <td>Google ADK, Model Context Protocol (MCP), Agent2Agent (A2A) SDK, Vertex AI, Gemini, Imagen, OpenServ SDK, multi-agent orchestration, prompt engineering, RAG &amp; retrieval evaluation (recall@k, MRR, paired bootstrap), chunking, BM25, reciprocal-rank fusion, cross-encoder reranking, Hugging Face</td>
     </tr>
     <tr>
       <td class="k">ML &amp; Quant</td>
@@ -101,7 +101,7 @@
     </tr>
     <tr>
       <td class="k">Engineering</td>
-      <td>Python, SQL, TypeScript, JavaScript; FastAPI, Flask, Streamlit, Django, React, Next.js; Docker, Kubernetes, Git, Jenkins, GitHub Actions, systemd, pytest, Selenium; REST &amp; WebSocket API integration</td>
+      <td>Python, SQL, TypeScript, JavaScript; FastAPI, Flask, Streamlit, Django, React, Next.js; Docker, Postgres + pgvector, Git, Jenkins, GitHub Actions, systemd, pytest, Selenium; REST &amp; WebSocket API integration</td>
     </tr>
     <tr>
       <td class="k">GPU &amp; Acceleration</td>
@@ -140,13 +140,14 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">SmartDesk — Multi-Agent Productivity Assistant <span class="org">· Google Cloud Gen AI Academy capstone</span></div>
+      <div class="role">SmartDesk — Multi-Agent Assistant with Evaluated RAG <span class="org">· Google Cloud Gen AI Academy capstone</span></div>
       <div class="meta">2026</div>
     </div>
-    <div class="links"><a href="https://github.com/JannetEkka/smartdesk">github.com/JannetEkka/smartdesk</a></div>
+    <div class="links"><a href="https://github.com/JannetEkka/smartdesk">github.com/JannetEkka/smartdesk</a><span class="dot">·</span><span class="lbl">Eval write-up:</span> <a href="https://github.com/JannetEkka/smartdesk/blob/main/evals/RESULTS.md">evals/RESULTS.md</a></div>
     <ul>
-      <li>Built a root <b>ADK orchestrator</b> routing to specialised sub-agents — InboxAgent (Gmail via MCP), PlannerAgent (Calendar via MCP), DataAgent (AlloyDB vector search as a personal CRM) and a SequentialAgent response formatter.</li>
-      <li>Deployed as a containerised service on <b>Cloud Run</b> with Gemini 2.5 Flash; extended the lab work with a <code>Graceful429Plugin</code> giving ADK tools a clean fallback under rate limiting.</li>
+      <li>Built a root <b>ADK orchestrator</b> routing to specialised sub-agents (inbox, calendar, knowledge base) with a SequentialAgent composing the reply, on Gemini 2.5 Flash and Cloud Run. Gmail and Calendar are reached through <b>MCP servers written from scratch</b> against the protocol SDK over stdio, not off-the-shelf toolsets.</li>
+      <li>Built a <b>RAG evaluation harness before touching retrieval</b> — 40 labelled questions over 120 notes, recall@k and MRR@k, significance by <b>paired bootstrap at 10,000 resamples</b>; production baseline recall@5 <b>0.963</b>, MRR@10 0.886. 54 tests across chunking, metrics, rerankers and integration.</li>
+      <li>Compared six retrieval strategies — whole-note and chunked embedding, BM25, reciprocal-rank fusion, a local cross-encoder and a Gemini reranker. <b>The harness killed the change it was built to justify:</b> the cross-encoder won clearly on the development embedder (MRR@10 +0.094, p=0.04) then collapsed on the production embedder to +0.028 with a CI spanning zero. Shipping it would have added <b>190&nbsp;MB of PyTorch and taken search from 29&nbsp;ms to 2,382&nbsp;ms</b> in an image deliberately cut from 1.8&nbsp;GB to 340&nbsp;MB, for a gain indistinguishable from noise.</li>
     </ul>
   </div>
 

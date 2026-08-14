@@ -27,6 +27,16 @@ GRANT_CHIP = ('<a class="grant-chip" href="#backing">'
               '<span class="gdot"></span>Seeking grants &amp; partners</a>')
 
 
+def card_stats_html(stats):
+    """Compact stat strip for a project card. Same shape as the flagship's."""
+    if not stats:
+        return ""
+    cells = "".join(
+        f'<div class="cstat"><span class="cnum">{n}</span><span class="clab">{l}</span></div>'
+        for n, l in stats)
+    return f'<div class="cstats">{cells}</div>'
+
+
 def shots_html(shots):
     if not shots:
         return ""
@@ -80,6 +90,7 @@ def card_html(p, i):
           <p class="card-sub">{p['sub']}</p>
           <p class="card-meta">{p['meta']}</p>
           <p class="card-desc">{p['desc']}</p>
+          {card_stats_html(p.get('stats'))}
           {shots_html(p.get('shots'))}
           {tags_html(p['tags'])}
           {links_html(p['links'], small=True)}
@@ -399,6 +410,13 @@ section{{padding:104px 0}}
 .card.hide{{display:none}}
 .card.wide{{grid-column:span 2}}
 @media(max-width:1100px){{.card.wide{{grid-column:span 1}}}}
+
+/* ---------- card stat strip ---------- */
+.cstats{{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:17px 0 4px;
+  padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}}
+@media(max-width:620px){{.cstats{{grid-template-columns:repeat(2,1fr);gap:16px}}}}
+.cnum{{display:block;font-size:1.22rem;font-weight:800;letter-spacing:-.025em;color:var(--tx)}}
+.clab{{display:block;font-size:11pt;font-size:11px;color:var(--dim);margin-top:3px}}
 
 /* ---------- tags + links ---------- */
 .tags{{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}}
