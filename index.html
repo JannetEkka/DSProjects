@@ -203,6 +203,13 @@ section{padding:104px 0}
 .card.wide{grid-column:span 2}
 @media(max-width:1100px){.card.wide{grid-column:span 1}}
 
+/* ---------- card stat strip ---------- */
+.cstats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:17px 0 4px;
+  padding:15px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+@media(max-width:620px){.cstats{grid-template-columns:repeat(2,1fr);gap:16px}}
+.cnum{display:block;font-size:1.22rem;font-weight:800;letter-spacing:-.025em;color:var(--tx)}
+.clab{display:block;font-size:11pt;font-size:11px;color:var(--dim);margin-top:3px}
+
 /* ---------- tags + links ---------- */
 .tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}
 .tag{font-size:11.5px;color:var(--mut);background:rgba(255,255,255,.045);
@@ -452,24 +459,26 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">2025 · Personal project</p>
           <p class="card-desc">Turns a poem into original artwork through a multi-stage pipeline: semantic analysis with Gemini 2.0 &rarr; automated prompt engineering &rarr; image synthesis with Imagen 3.0 on Vertex AI &rarr; hybrid editing and text overlay. Six languages, six art styles, tunable mood intensity.</p>
           
+          
           <div class="tags"><span class="tag">Gemini 2.0</span><span class="tag">Imagen 3.0</span><span class="tag">Vertex AI</span><span class="tag">Streamlit</span></div>
           <div class="lnks"><a class="lnk sm live" href="https://versecanvas.streamlit.app/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live demo</a><a class="lnk sm code" href="https://github.com/JannetEkka/versecanvas" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:1">
+      <article class="card reveal wide" data-cat="agents" style="--i:1">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
             <h3 class="card-title">SmartDesk</h3>
             
           </div>
-          <p class="card-sub">Multi-Agent Productivity Assistant</p>
+          <p class="card-sub">Multi-Agent Assistant with Measured RAG</p>
           <p class="card-meta">2026 · Gen AI Academy APAC — Cohort 1 Hackathon</p>
-          <p class="card-desc">A root ADK orchestrator routing to specialised sub-agents — InboxAgent (Gmail over MCP), PlannerAgent (Calendar over MCP), DataAgent (AlloyDB vector search as a personal CRM) — with a SequentialAgent synthesising the reply. Containerised on Cloud Run.</p>
+          <p class="card-desc">A root ADK orchestrator routing to specialised sub-agents — InboxAgent, PlannerAgent and a DataAgent doing retrieval over a pgvector knowledge base — with a SequentialAgent synthesising the reply. Gmail and Calendar are reached through <em>MCP servers I wrote myself</em> against the protocol SDK over stdio, not off-the-shelf toolsets. Containerised on Cloud Run.<br><br>The retrieval is <em>evaluated, not assumed</em>: 40 labelled questions over 120 notes, recall@k and MRR@k, significance by paired bootstrap at 10,000 resamples. That harness is what stopped a bad decision — a cross-encoder reranker looked like a clear win on the development embedder (MRR@10 +0.094, p=0.04), then collapsed on the production embedder to +0.028 with a CI spanning zero. Shipping it would have added <em>190&nbsp;MB of PyTorch and taken search from 29&nbsp;ms to 2,382&nbsp;ms</em>, in an image deliberately cut from 1.8&nbsp;GB to 340&nbsp;MB, for a gain indistinguishable from noise. The baseline ships instead, now on evidence rather than caution.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">0.963</span><span class="clab">recall@5</span></div><div class="cstat"><span class="cnum">40</span><span class="clab">labelled questions</span></div><div class="cstat"><span class="cnum">82×</span><span class="clab">latency the reranker cost</span></div><div class="cstat"><span class="cnum">54</span><span class="clab">tests</span></div></div>
           
-          <div class="tags"><span class="tag">Google ADK</span><span class="tag">MCP</span><span class="tag">AlloyDB + pgvector</span><span class="tag">Gemini 2.5 Flash</span><span class="tag">Cloud Run</span></div>
-          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/smartdesk" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          <div class="tags"><span class="tag">Google ADK</span><span class="tag">MCP (servers written from scratch)</span><span class="tag">pgvector</span><span class="tag">RAG evaluation</span><span class="tag">Paired bootstrap</span><span class="tag">Cross-encoder / RRF / BM25</span><span class="tag">Gemini 2.5 Flash</span><span class="tag">Cloud Run</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/smartdesk" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a><a class="lnk sm doc" href="https://github.com/JannetEkka/smartdesk/blob/main/evals/RESULTS.md" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Eval results</a></div>
           
         </div>
       </article>
@@ -483,6 +492,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">MCP over BigQuery + Google Maps</p>
           <p class="card-meta">2026 · Google Cloud Gen AI Academy APAC</p>
           <p class="card-desc">An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.</p>
+          
           
           <div class="tags"><span class="tag">MCP Servers</span><span class="tag">BigQuery</span><span class="tag">Google Maps API</span><span class="tag">ADK</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/bakery-growth-agent" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -500,6 +510,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">2024 · Winner — Best DeFi Application</p>
           <p class="card-desc">Multi-agent whale tracking across Ethereum, BNB Smart Chain and Polygon using the OpenServ SDK, with Alchemy webhooks driving sub-second transaction monitoring. Confidence-scored detection of accumulation, distribution and coordinated movements, with automated exchange-wallet exclusion.</p>
           
+          
           <div class="tags"><span class="tag">OpenServ SDK</span><span class="tag">Alchemy</span><span class="tag">Moralis</span><span class="tag">Cloud Run</span><span class="tag">pgvector</span></div>
           
           
@@ -516,6 +527,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">2026 · Hackathon adapters</p>
           <p class="card-desc">Thin per-chain adapters that import the SMT brain and expose it to a specific ecosystem — keeping one shared decision engine behind platform-specific front ends rather than forking the strategy code.</p>
           
+          
           <div class="tags"><span class="tag">Mantle</span><span class="tag">BNB Chain</span><span class="tag">Python</span></div>
           <div class="lnks"><a class="lnk sm live" href="https://jannetekka.github.io/smt-mantle/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live</a><a class="lnk sm code" href="https://github.com/JannetEkka/smt-mantle" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Mantle</a><a class="lnk sm code" href="https://github.com/JannetEkka/smt-bnb" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>BNB</a></div>
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
@@ -531,6 +543,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">AI Answer-Evaluation Platform for Teachers</p>
           <p class="card-meta">May 2024 – Jan 2025 · Lead Frontend Developer · EdTech startup MVP</p>
           <p class="card-desc">An evaluation platform that takes a teacher from sign-up to graded scripts: create a class, upload a student roster and question paper, bulk-upload scanned answer sheets, then track each student through OCR, AI evaluation and validation. I led the frontend and designed the ML data flow across S3, RDS and SageMaker &mdash; interactive PDF processing with coordinate-based text extraction over AWS Textract, a bilingual EN/DE feedback interface on Amazon Comprehend, and a per-student status pipeline that scaled to 1,000+ concurrent submissions.</p>
+          
           <div class="shots"><a class="shot" href="assets/autokorrekt/Index_page_signup.png" data-cap="Teacher sign-up" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/Index_page_signup.png" alt="Teacher sign-up" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Teacher sign-up</span></a><a class="shot" href="assets/autokorrekt/Index_pg_signin.png" data-cap="Sign in" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/Index_pg_signin.png" alt="Sign in" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Sign in</span></a><a class="shot" href="assets/autokorrekt/add_Test.png" data-cap="Create a class — student roster (CSV) + question-paper upload" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/add_Test.png" alt="Create a class — student roster (CSV) + question-paper upload" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Create a class — student roster (CSV) + question-paper upload</span></a><a class="shot" href="assets/autokorrekt/students.png" data-cap="Per-student evaluation pipeline &amp; bulk answer-sheet upload" target="_blank" rel="noopener noreferrer"><img src="assets/autokorrekt/students.png" alt="Per-student evaluation pipeline &amp; bulk answer-sheet upload" loading="lazy" onerror="this.closest('.shot').remove()"><span class="shot-cap">Per-student evaluation pipeline &amp; bulk answer-sheet upload</span></a></div>
           <div class="tags"><span class="tag">React</span><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag">AWS Textract</span><span class="tag">Amazon Comprehend</span><span class="tag">SageMaker</span><span class="tag">Django</span></div>
           
@@ -548,6 +561,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">2025 · Hackathon project</p>
           <p class="card-desc">A context-aware chatbot surfacing job listings, community events and mentorship programmes, and handling FAQs — built to support women returning to and advancing in the workforce.</p>
           
+          
           <div class="tags"><span class="tag">Conversational AI</span><span class="tag">NLP</span><span class="tag">Python</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/asha-chatbot" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -563,6 +577,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">HIPAA-Compliant Healthcare AI</p>
           <p class="card-meta">2025 – 2026 · Personal project</p>
           <p class="card-desc">A healthcare AI project built around HIPAA compliance constraints — handling protected health information under the access, auditing and data-handling rules regulated medical software requires.</p>
+          
           
           <div class="tags"><span class="tag">Healthcare AI</span><span class="tag">HIPAA</span><span class="tag">JavaScript</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/MedTestAI" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -580,6 +595,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">2025 · Personal project</p>
           <p class="card-desc">Paste a set of URLs and ask questions about their contents; the app retrieves and answers from page text using a DistilBERT question-answering model.</p>
           
+          
           <div class="tags"><span class="tag">DistilBERT</span><span class="tag">Question Answering</span><span class="tag">Transformers</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/WebContentQnA" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -595,6 +611,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">Capstone — Computer Vision</p>
           <p class="card-meta">Dec 2024 – Jan 2025 · Great Learning</p>
           <p class="card-desc">Vehicle make/model/year classification reaching 69.2% accuracy with ResNet50, plus Fast R-CNN object detection across 16,185 images spanning 196 classes.</p>
+          
           
           <div class="tags"><span class="tag">ResNet50</span><span class="tag">Fast R-CNN</span><span class="tag">TensorFlow</span><span class="tag">OpenCV</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Automotive_Surveillance_System_Capstone" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -612,6 +629,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">Jun – Jul 2024 · UT Austin McCombs</p>
           <p class="card-desc">83.79% accuracy with a CNN for automated plant-species classification across 4,750+ seedling images, benchmarked against Random Forest and SVM baselines.</p>
           
+          
           <div class="tags"><span class="tag">CNN</span><span class="tag">Transfer Learning</span><span class="tag">Computer Vision</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/MultiModel_Botanical_Classification_CV" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -627,6 +645,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">Neural networks, two domains</p>
           <p class="card-meta">Aug – Sep 2024 · UT Austin McCombs</p>
           <p class="card-desc">Neural networks reaching 90% accuracy on signal-quality prediction and 85% on SVHN street-number digit recognition, with regularisation and a visualisation suite for real-world noise.</p>
+          
           
           <div class="tags"><span class="tag">Deep Learning</span><span class="tag">Keras</span><span class="tag">Regularisation</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Signal_Classification_Digit_Recognition_NNDL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -644,6 +663,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">Oct – Nov 2024 · UT Austin McCombs</p>
           <p class="card-desc">81.48% accuracy identifying customers likely to cancel, comparing Bagging, AdaBoost and Gradient Boosting, and converting the model into a prioritised retention strategy.</p>
           
+          
           <div class="tags"><span class="tag">Ensemble Methods</span><span class="tag">scikit-learn</span><span class="tag">Business Strategy</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Customer_Churn_Prediction_ET" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -659,6 +679,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">591 sensor signals</p>
           <p class="card-meta">Sep – Oct 2024 · UT Austin McCombs</p>
           <p class="card-desc">Pass/fail yield prediction from manufacturing sensor data, using feature selection and SMOTE to cut 591 signals down to the ones that actually carry information about defects.</p>
+          
           
           <div class="tags"><span class="tag">Feature Selection</span><span class="tag">SMOTE</span><span class="tag">Quality Control</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Semiconductor_Manufacturing_Prediction_FMT" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -676,6 +697,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">Jul – Aug 2024 · Internship Studio</p>
           <p class="card-desc">Random Forest regression predicting advertisement views from engagement metrics across 15,000+ videos, packaged for integration with business dashboards.</p>
           
+          
           <div class="tags"><span class="tag">Random Forest</span><span class="tag">pandas</span><span class="tag">Predictive Analytics</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/YouTube_AdView_Analytics_ML" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -691,6 +713,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">Credit risk</p>
           <p class="card-meta">Feb 2025 · Great Learning Hackathon</p>
           <p class="card-desc">A classification model predicting whether a client will default on loan repayment, built against a non-banking financial company dataset under hackathon time constraints.</p>
+          
           
           <div class="tags"><span class="tag">Classification</span><span class="tag">Risk Modelling</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/NBFC-Loan-Default" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -708,6 +731,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">Apr – May 2024 · UT Austin McCombs</p>
           <p class="card-desc">Vehicle segmentation with K-Means clustering and classification with a PCA-enhanced SVM, analysing MPG, displacement, horsepower and weight across 102 features.</p>
           
+          
           <div class="tags"><span class="tag">K-Means</span><span class="tag">PCA</span><span class="tag">SVM</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Automobile_Analysis_Classification_USL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -723,6 +747,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">Financial news NLP</p>
           <p class="card-meta">Nov – Dec 2024 · UT Austin McCombs</p>
           <p class="card-desc">An ensemble sentiment classifier over financial news using Word2Vec, GloVe and SBERT embeddings, with weekly market summaries generated by a Mistral-7B LLM.</p>
+          
           
           <div class="tags"><span class="tag">NLP</span><span class="tag">SBERT</span><span class="tag">Mistral-7B</span><span class="tag">Transformers</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Stock_Market_Sentiment_Analysis_NLP" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -740,6 +765,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">Jul – Aug 2024 · UT Austin McCombs</p>
           <p class="card-desc">Customer behaviour and sales analysis for a vehicle-resale business covering 994 customers and $1.25B revenue, with a KPI tracking system identifying key markets.</p>
           
+          
           <div class="tags"><span class="tag">SQL</span><span class="tag">Business Intelligence</span><span class="tag">KPI Design</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/New_Wheels_Performance_Analytics_SQL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -755,6 +781,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">Pricing + HR attrition</p>
           <p class="card-meta">May – Jun 2024 · UT Austin McCombs</p>
           <p class="card-desc">Two supervised-learning studies: 86% accuracy on used-car price prediction for Cars4U, and 84% on employee attrition for a healthcare HR dataset.</p>
+          
           
           <div class="tags"><span class="tag">Regression</span><span class="tag">HR Analytics</span><span class="tag">scikit-learn</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Business_Analytics_Portfolio_SL" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
@@ -772,6 +799,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">2024 – 2025 · Personal project</p>
           <p class="card-desc">A dashboard surfacing user-behaviour and sales-trend insights for an e-commerce site, turning raw event and transaction data into merchandising decisions.</p>
           
+          
           <div class="tags"><span class="tag">Dashboards</span><span class="tag">Analytics</span><span class="tag">Python</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/ecommerce-analysis" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -788,6 +816,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-meta">May – Jun 2024 · UT Austin McCombs</p>
           <p class="card-desc">Hypothesis testing on car-purchase behaviour, manufacturing quality control identifying a 5% defect rate, and probability models for weekly sales forecasting.</p>
           
+          
           <div class="tags"><span class="tag">Hypothesis Testing</span><span class="tag">SciPy</span><span class="tag">Probability</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/Applied_Statistics_Project" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
           
@@ -803,6 +832,7 @@ footer a:hover{color:var(--tx)}
           <p class="card-sub">Hybrid Selenium framework</p>
           <p class="card-meta">2024 · Personal project</p>
           <p class="card-desc">A hybrid data-driven Selenium framework with Page Object Model structure, external test data, cross-browser runs on Edge/Chrome/Firefox, HTML reporting and failure screenshots — wired into Jenkins.</p>
+          
           
           <div class="tags"><span class="tag">Selenium</span><span class="tag">PyTest</span><span class="tag">POM</span><span class="tag">Jenkins</span></div>
           <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/python-automation" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>

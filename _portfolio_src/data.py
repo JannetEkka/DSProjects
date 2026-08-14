@@ -135,10 +135,12 @@ PROJECTS = [
    tags=["Gemini 2.0","Imagen 3.0","Vertex AI","Streamlit"],
    links=[("Live demo","https://versecanvas.streamlit.app/","live"),("Code",GH+"versecanvas","code")]),
 
- dict(slug="smartdesk", cat="agents", title="SmartDesk", sub="Multi-Agent Productivity Assistant", meta="2026 · Gen AI Academy APAC — Cohort 1 Hackathon",
-   desc="A root ADK orchestrator routing to specialised sub-agents — InboxAgent (Gmail over MCP), PlannerAgent (Calendar over MCP), DataAgent (AlloyDB vector search as a personal CRM) — with a SequentialAgent synthesising the reply. Containerised on Cloud Run.",
-   tags=["Google ADK","MCP","AlloyDB + pgvector","Gemini 2.5 Flash","Cloud Run"],
-   links=[("Code",GH+"smartdesk","code")]),
+ dict(slug="smartdesk", grants=False, wide=True, cat="agents", title="SmartDesk", sub="Multi-Agent Assistant with Measured RAG", meta="2026 · Gen AI Academy APAC — Cohort 1 Hackathon",
+   desc="A root ADK orchestrator routing to specialised sub-agents — InboxAgent, PlannerAgent and a DataAgent doing retrieval over a pgvector knowledge base — with a SequentialAgent synthesising the reply. Gmail and Calendar are reached through <em>MCP servers I wrote myself</em> against the protocol SDK over stdio, not off-the-shelf toolsets. Containerised on Cloud Run.<br><br>The retrieval is <em>evaluated, not assumed</em>: 40 labelled questions over 120 notes, recall@k and MRR@k, significance by paired bootstrap at 10,000 resamples. That harness is what stopped a bad decision — a cross-encoder reranker looked like a clear win on the development embedder (MRR@10 +0.094, p=0.04), then collapsed on the production embedder to +0.028 with a CI spanning zero. Shipping it would have added <em>190&nbsp;MB of PyTorch and taken search from 29&nbsp;ms to 2,382&nbsp;ms</em>, in an image deliberately cut from 1.8&nbsp;GB to 340&nbsp;MB, for a gain indistinguishable from noise. The baseline ships instead, now on evidence rather than caution.",
+   stats=[("0.963","recall@5"),("40","labelled questions"),("82×","latency the reranker cost"),("54","tests")],
+   tags=["Google ADK","MCP (servers written from scratch)","pgvector","RAG evaluation","Paired bootstrap","Cross-encoder / RRF / BM25","Gemini 2.5 Flash","Cloud Run"],
+   links=[("Code",GH+"smartdesk","code"),
+          ("Eval results","https://github.com/JannetEkka/smartdesk/blob/main/evals/RESULTS.md","doc")]),
 
  dict(slug="locintel", cat="agents", title="Location Intelligence Agent", sub="MCP over BigQuery + Google Maps", meta="2026 · Google Cloud Gen AI Academy APAC",
    desc="An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.",
