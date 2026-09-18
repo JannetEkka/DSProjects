@@ -211,10 +211,10 @@ HTML = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jannet Akanksha Ekka — GenAI Applications Engineer</title>
-<meta name="description" content="AI/ML engineer building production agentic systems. Patent-pending multi-agent trading AI, Google Cloud GenAI, and 20+ shipped projects.">
-<meta property="og:title" content="Jannet Akanksha Ekka — GenAI Applications Engineer">
-<meta property="og:description" content="Building production agentic AI systems. Patent-pending multi-agent trading AI on Google Cloud.">
+<title>Jannet Akanksha Ekka — AI Systems Architect &amp; Operator</title>
+<meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending multi-agent trading AI running 24/7 on Google Cloud, and 20+ shipped projects.">
+<meta property="og:title" content="Jannet Akanksha Ekka — AI Systems Architect &amp; Operator">
+<meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live on Google Cloud.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -589,19 +589,20 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="idrow reveal">
       <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
-      <div class="eyebrow"><b></b> Open to AI/ML engineering roles</div>
+      <div class="eyebrow"><b></b> Open to AI architect &amp; AI-operations roles</div>
     </div>
     <h1 class="big reveal">
-      I build <span class="serif">agentic AI</span><br>
-      that runs in
+      I architect <span class="serif">agentic AI</span><br>
+      and keep it
       <span class="rotor"><span class="rotor-in">
-        <span>production.</span><span>the open.</span><span>real markets.</span><span>production.</span>
+        <span>running.</span><span>honest.</span><span>live in real markets.</span><span>running.</span>
       </span></span>
     </h1>
     <p class="lede reveal">
-      AI/ML engineer shipping multi-agent systems end to end — architecture, learning loop, cloud deployment and live operations.
-      Author of a <strong>patent-pending multi-agent trading AI</strong> running continuously on Google Cloud, backed by
-      <strong>4+ years of enterprise engineering at Deloitte</strong> and a <strong>Rank&nbsp;1</strong> PGP in AI/ML.
+      AI systems architect and operator. I design the system, direct <strong>AI coding agents</strong> to build it, and act as the
+      <strong>sole human-in-the-loop quality gate</strong> before anything ships. Architect of a <strong>patent-pending multi-agent
+      trading AI</strong> running 24/7 on Google Cloud, backed by <strong>4+ years of QA leadership at Deloitte</strong> and a
+      <strong>Rank&nbsp;1</strong> PGP in AI/ML.
     </p>
     <div class="cta reveal">
       <a class="btn btn-p" href="#work">See the work
@@ -610,6 +611,7 @@ footer a:hover{{color:var(--tx)}}
     </div>
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
+      <span class="chip">🤖 AI-native delivery</span>
       <span class="chip">🏆 OpenServ Best DeFi — Winner</span>
       <span class="chip">🥇 Rank 1 — PGP AI/ML</span>
       <span class="chip">☁️ Google Cloud Gen AI Academy</span>
@@ -621,7 +623,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="statgrid">
       <div class="stat reveal"><div class="n" data-count="24">24</div><div class="l">Projects shipped</div></div>
-      <div class="stat reveal"><div class="n" data-count="33K">33K</div><div class="l">Lines in flagship</div></div>
+      <div class="stat reveal"><div class="n" data-count="33K">33K</div><div class="l">Lines shipped &amp; audited</div></div>
       <div class="stat reveal"><div class="n" data-count="4">4</div><div class="l">Years enterprise eng.</div></div>
       <div class="stat reveal"><div class="n" data-count="1">1</div><div class="l">Patent filed</div></div>
     </div>
@@ -643,16 +645,16 @@ footer a:hover{{color:var(--tx)}}
 
 <div class="marq" aria-label="Technology stack">
   <div class="marq-in">
-    <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
+    <span>Claude Code</span><span>AI-Native CI/CD</span><span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
     <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
     <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
-    <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
-    <span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
+    <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>systemd</span><span>SQL</span>
+    <span>Claude Code</span><span>AI-Native CI/CD</span><span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
     <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
     <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
-    <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>SQL</span>
+    <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>systemd</span><span>SQL</span>
   </div>
 </div>
 
@@ -662,13 +664,14 @@ footer a:hover{{color:var(--tx)}}
       <div>
         <div class="shead reveal" style="margin-bottom:30px">
           <div class="skicker">About</div>
-          <h2 class="stitle">From breaking systems<br>to building them.</h2>
+          <h2 class="stitle">From breaking systems<br>to architecting them.</h2>
         </div>
         <div class="abtxt reveal">
           <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
           <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks designed to catch overfitting rather than flatter it.</p>
-          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB.</p>
-          <p>I work <strong>AI-native and deliberately lean</strong>. All of this was designed, built and is operated from a single 16&nbsp;GB laptop — and when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4 rather than throwing hardware at it. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
+          <p>The way I work has changed too. I don't hand-type a 33,000-line platform — I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The leverage is real, but so is the gate — I am the only one standing between a generated patch and a system trading live.</p>
+          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on <strong>GCP Compute Engine</strong>, and I read its logs the way I used to read defect reports — triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
+          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB. All of it is architected and operated from a single 16&nbsp;GB laptop; when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4 rather than throwing hardware at it. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
       </div>
       <div class="awards reveal">
@@ -691,14 +694,9 @@ footer a:hover{{color:var(--tx)}}
     </div>
     <div class="tl">
       <div class="tlrow reveal">
-        <h4>Founder &amp; Sole Engineer — Smart Money Trading (SMT)</h4>
-        <div class="org">Independent · patent pending</div><div class="when">2026 – Present</div>
-        <p>Designed, built and operate a patent-pending multi-agent trading AI running continuously on Google Cloud — 33,000 lines across 153 modules, a six-persona committee under a learned Judge, a self-retuning learning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Shortlisted top 101 of 1,500+ teams at the Google Cloud Gen AI Academy APAC hackathon.</p>
-      </div>
-      <div class="tlrow reveal">
-        <h4>Independent AI Engineer</h4>
-        <div class="org">Freelance &amp; competitive builds</div><div class="when">2024 – 2025</div>
-        <p>Started at the OpenServ × Hack2skill hackathon, where Smart Money Tracker <strong>won Best DeFi Application</strong> and placed runner-up for Best Website Application. Went on to ship VerseCanvas on Vertex AI, multi-agent assistants on Google ADK, MCP and AlloyDB, and the applied AI projects above — all delivered <strong>while a full-time family carer</strong>.</p>
+        <h4>Independent AI Infrastructure Operator &amp; Developer</h4>
+        <div class="org">Smart Money Trading (SMT) Project · patent pending</div><div class="when">Jan 2024 – Present</div>
+        <p>Architect and operate a patent-pending multi-agent trading AI — 33,000 lines across 153 modules, a six-persona committee under a learned Judge, a self-retuning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Deployed as a <strong>high-availability daemon running 24/7 on GCP Compute Engine</strong>, with end-to-end AI observability: defect triage through terminal log diagnostics to isolate execution errors and systemic drift. Built through an <strong>AI-native CI/CD workflow</strong> — <strong>Claude Code</strong> on the command line generating targeted hotfixes and structuring pull requests, with me as the <strong>sole human-in-the-loop quality gate</strong> performing code audits and manual Git merges. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams and top 101 of 1,500+ at the Google Cloud Gen AI Academy APAC hackathon — all <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
