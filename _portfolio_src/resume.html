@@ -43,8 +43,13 @@
   .sub { font-size: 8.6pt; color: #444; font-style: italic; margin-top: 0.4pt; }
 
   ul { list-style: none; margin-top: 1.8pt; }
-  li { position: relative; padding-left: 9.5pt; margin-bottom: 1.6pt; }
-  li::before { content: "▪"; position: absolute; left: 0; top: -0.4pt; color: #1c3f6e; font-size: 7.6pt; }
+  /* No `position` here: a positioned <li> paints in a later phase than in-flow
+     blocks, so Chromium emits every bullet AFTER every header in the PDF text
+     stream and ATS parsers read the bullets detached from their jobs. A
+     negative-margin inline-block marker gives the same hanging indent while
+     keeping each bullet in document order. */
+  li { padding-left: 9.5pt; margin-bottom: 1.6pt; }
+  li::before { content: "▪"; display: inline-block; width: 9.5pt; margin-left: -9.5pt; color: #1c3f6e; font-size: 7.6pt; }
   .links { font-size: 8.2pt; margin-top: 1.2pt; padding-left: 0; color: #1c3f6e; }
   .links a { color: #1c3f6e; }
   .links .lbl { color: #666; font-style: italic; }
@@ -205,7 +210,8 @@
       <li>Manage end-to-end <b>AI observability</b> — defect triage through terminal log diagnostics to isolate execution errors and systemic drift.</li>
       <li>Engineered an <b>AI-native CI/CD workflow</b> using <b>Claude Code</b> via command-line environments to generate targeted hotfixes and automate Pull Request (PR) structures.</li>
       <li>Act as the <b>sole human-in-the-loop quality gate</b>, performing technical code audits and manual Git merges to protect system state integrity.</li>
-      <li><b>Won Best DeFi Application</b> at the OpenServ × Hack2skill hackathon (runner-up, Best Website Application) with the multi-agent blockchain analytics build that preceded SMT; later <b>#1 on the WEEX AI Wars I preliminary leaderboard</b> of 230+ teams.</li>
+      <li>Evolved the codebase from its initial <b>OpenServ hackathon architecture</b> (whale tracking via Alchemy webhooks) into live trading infrastructure running against exchange transactional APIs.</li>
+      <li><b>Won Best DeFi Application</b> at the OpenServ × Hack2skill hackathon (runner-up, Best Website Application) with that original blockchain analytics build; later <b>#1 on the WEEX AI Wars I preliminary leaderboard</b> of 230+ teams.</li>
       <li>Also shipped VerseCanvas on Vertex AI and multi-agent assistants on Google <b>ADK / MCP / AlloyDB</b> to Cloud Run — all delivered <b>while a full-time family carer</b>, alongside the PGP in AI/ML at Rank 1 and the Google Cloud Gen AI Academy.</li>
     </ul>
   </div>
