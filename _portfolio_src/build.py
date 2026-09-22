@@ -140,7 +140,7 @@ def connect_html():
 
 
 def contact_groups_html():
-    """Full contact footer — every channel, grouped."""
+    """Full contact footer, every channel, grouped."""
     direct = "".join([
         btn("email", CONTACT["email"], "mailto:" + CONTACT["email"]),
         btn("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
@@ -211,9 +211,9 @@ HTML = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jannet Akanksha Ekka — Forward-Deployed AI Engineer</title>
+<title>Jannet Akanksha Ekka. Forward-Deployed AI Engineer</title>
 <meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending multi-agent trading AI running 24/7 on Google Cloud, and 20+ shipped projects.">
-<meta property="og:title" content="Jannet Akanksha Ekka — Forward-Deployed AI Engineer">
+<meta property="og:title" content="Jannet Akanksha Ekka. Forward-Deployed AI Engineer">
 <meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live on Google Cloud.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -222,11 +222,11 @@ HTML = f'''<!DOCTYPE html>
 <script>document.documentElement.className+=' js';</script>
 <style>
 :root{{
-  --bg:#08080c; --bg2:#0d0d14; --surf:rgba(255,255,255,.028); --surf2:rgba(255,255,255,.045);
-  --line:rgba(255,255,255,.09); --line2:rgba(255,255,255,.16);
+  --bg:#08080c; --bg2:#0d0d14; --surf:rgba(255,255,255.028); --surf2:rgba(255,255,255.045);
+  --line:rgba(255,255,255.09); --line2:rgba(255,255,255.16);
   --tx:#ecedf3; --mut:#9b9cae; --dim:#6f7084;
   --a1:#7c5cff; --a2:#22d3ee; --a3:#fbbf24;
-  --max:1180px; --ease:cubic-bezier(.22,1,.36,1);
+  --max:1180px; --ease:cubic-bezier(.22,1.36,1);
 }}
 *{{margin:0;padding:0;box-sizing:border-box}}
 html{{scroll-behavior:smooth;-webkit-text-size-adjust:100%}}
@@ -260,7 +260,7 @@ img{{max-width:100%;display:block}}
 /* ---------- nav ---------- */
 nav{{position:fixed;top:0;left:0;right:0;z-index:60;transition:all .4s var(--ease)}}
 nav .shell{{display:flex;align-items:center;justify-content:space-between;height:70px}}
-nav.stuck{{background:rgba(8,8,12,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}}
+nav.stuck{{background:rgba(8,8,12.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}}
 .brand{{font-weight:700;letter-spacing:-.02em;font-size:15px;display:flex;align-items:center;gap:9px}}
 .brand i{{width:8px;height:8px;border-radius:50%;background:var(--a2);box-shadow:0 0 12px var(--a2)}}
 .js .brand i{{animation:pulse 2.6s ease-in-out infinite}}
@@ -284,8 +284,8 @@ nav.stuck{{background:rgba(8,8,12,.72);backdrop-filter:blur(16px);border-bottom:
 /* ---------- hero ---------- */
 header.hero{{min-height:100svh;display:flex;align-items:center;padding:110px 0 70px}}
 .eyebrow{{display:inline-flex;align-items:center;gap:9px;font-size:12.5px;font-weight:600;letter-spacing:.10em;
-  text-transform:uppercase;color:var(--a2);border:1px solid rgba(34,211,238,.28);
-  background:rgba(34,211,238,.06);padding:7px 15px;border-radius:999px;margin-bottom:26px}}
+  text-transform:uppercase;color:var(--a2);border:1px solid rgba(34,211,238.28);
+  background:rgba(34,211,238.06);padding:7px 15px;border-radius:999px;margin-bottom:26px}}
 .eyebrow b{{width:6px;height:6px;border-radius:50%;background:var(--a2)}}
 h1.big{{
   font-size:clamp(2.9rem,8.2vw,6.4rem); line-height:.96; font-weight:800;
@@ -304,7 +304,7 @@ h1.big .serif{{font-family:'Instrument Serif',Georgia,serif;font-style:italic;fo
 .btn{{display:inline-flex;align-items:center;gap:9px;padding:13px 25px;border-radius:999px;
   font-size:14.5px;font-weight:600;transition:all .3s var(--ease);border:1px solid transparent}}
 .btn-p{{background:var(--tx);color:#0a0a0f}}
-.btn-p:hover{{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,255,255,.18)}}
+.btn-p:hover{{transform:translateY(-2px);box-shadow:0 12px 34px rgba(255,255,255.18)}}
 .btn-g{{border-color:var(--line2);color:var(--tx)}}
 .btn-g:hover{{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}}
 .btn svg{{width:16px;height:16px}}
@@ -320,7 +320,7 @@ h1.big .serif{{font-family:'Instrument Serif',Georgia,serif;font-style:italic;fo
 .avatar img{{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:center 22%;
   border:2.5px solid var(--bg);background:var(--bg2)}}
 .js .avatar::after{{content:'';position:absolute;inset:-5px;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,92,255,.30),transparent 68%);z-index:-1;animation:halo 4.5s ease-in-out infinite}}
+  background:radial-gradient(circle,rgba(124,92,255.30),transparent 68%);z-index:-1;animation:halo 4.5s ease-in-out infinite}}
 @keyframes halo{{50%{{transform:scale(1.14);opacity:.6}}}}
 .idrow .eyebrow{{margin-bottom:0}}
 
@@ -329,17 +329,17 @@ h1.big .serif{{font-family:'Instrument Serif',Georgia,serif;font-style:italic;fo
 .shots{{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:11px;margin-top:17px}}
 .shot{{display:block;border:1px solid var(--line);border-radius:11px;overflow:hidden;
   background:#000;transition:all .3s var(--ease)}}
-.shot:hover{{border-color:var(--a1);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.45)}}
+.shot:hover{{border-color:var(--a1);transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0.45)}}
 .shot img{{width:100%;aspect-ratio:16/9;object-fit:cover;object-position:top center;display:block}}
 .shot-cap{{display:block;font-size:11.5px;color:var(--mut);padding:8px 11px;border-top:1px solid var(--line)}}
 
 /* ---------- lightbox ---------- */
-.lb{{position:fixed;inset:0;z-index:200;background:rgba(4,4,8,.93);backdrop-filter:blur(9px);
+.lb{{position:fixed;inset:0;z-index:200;background:rgba(4,4,8.93);backdrop-filter:blur(9px);
   display:flex;align-items:center;justify-content:center;flex-direction:column;gap:15px;padding:36px;
   opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}}
 .lb.on{{opacity:1;pointer-events:auto}}
 .lb img{{max-width:min(1180px,94vw);max-height:80vh;object-fit:contain;
-  border:1px solid var(--line2);border-radius:12px;box-shadow:0 26px 80px rgba(0,0,0,.7)}}
+  border:1px solid var(--line2);border-radius:12px;box-shadow:0 26px 80px rgba(0,0,0.7)}}
 .lb-cap{{font-size:14px;color:var(--mut);text-align:center}}
 .lb-x{{position:absolute;top:22px;right:26px;width:40px;height:40px;border-radius:50%;cursor:pointer;
   border:1px solid var(--line2);background:var(--surf2);color:var(--tx);font-size:20px;line-height:1;
@@ -347,7 +347,7 @@ h1.big .serif{{font-family:'Instrument Serif',Georgia,serif;font-style:italic;fo
 .lb-x:hover{{background:var(--tx);color:var(--bg)}}
 
 /* ---------- stats ---------- */
-.statbar{{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0;background:rgba(255,255,255,.012)}}
+.statbar{{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:44px 0;background:rgba(255,255,255.012)}}
 .statgrid{{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}}
 @media(max-width:720px){{.statgrid{{grid-template-columns:repeat(2,1fr);gap:30px}}}}
 .stat .n{{font-size:clamp(1.9rem,4.2vw,2.9rem);font-weight:800;letter-spacing:-.035em;line-height:1;
@@ -363,16 +363,16 @@ section{{padding:104px 0}}
 
 /* ---------- flagship ---------- */
 .feature{{position:relative;border:1px solid var(--line);border-radius:22px;overflow:hidden;
-  background:linear-gradient(165deg,rgba(124,92,255,.10),rgba(34,211,238,.045) 55%,transparent);margin-bottom:34px}}
+  background:linear-gradient(165deg,rgba(124,92,255.10),rgba(34,211,238.045) 55%,transparent);margin-bottom:34px}}
 .feature-glow{{position:absolute;top:-55%;left:15%;width:70%;height:150%;
-  background:radial-gradient(ellipse at center,rgba(124,92,255,.20),transparent 68%);pointer-events:none}}
+  background:radial-gradient(ellipse at center,rgba(124,92,255.20),transparent 68%);pointer-events:none}}
 .feature-inner{{position:relative;padding:44px}}
 @media(max-width:640px){{.feature-inner{{padding:28px 22px}}}}
 .feature-head{{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}}
 .pill{{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:6px 13px;border-radius:999px}}
 .pill-flag{{background:var(--a1);color:#fff}}
-.pill-patent{{background:rgba(251,191,36,.13);color:var(--a3);border:1px solid rgba(251,191,36,.3);text-transform:none;letter-spacing:.01em}}
-.pill-award{{background:rgba(251,191,36,.13);color:var(--a3);border:1px solid rgba(251,191,36,.3);text-transform:none;letter-spacing:.01em;font-size:11px;white-space:nowrap}}
+.pill-patent{{background:rgba(251,191,36.13);color:var(--a3);border:1px solid rgba(251,191,36.3);text-transform:none;letter-spacing:.01em}}
+.pill-award{{background:rgba(251,191,36.13);color:var(--a3);border:1px solid rgba(251,191,36.3);text-transform:none;letter-spacing:.01em;font-size:11px;white-space:nowrap}}
 .feature-title{{font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.1}}
 .feature-sub{{font-size:clamp(1rem,1.9vw,1.22rem);color:var(--a2);font-weight:500;margin-top:7px}}
 .feature-meta{{font-size:13px;color:var(--dim);margin-top:11px}}
@@ -399,7 +399,7 @@ section{{padding:104px 0}}
   overflow:hidden;transition:transform .42s var(--ease),border-color .3s,background .3s}}
 .card:hover{{transform:translateY(-5px);border-color:var(--line2);background:var(--surf2)}}
 .card-spot{{position:absolute;inset:0;opacity:0;transition:opacity .35s;pointer-events:none;
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(124,92,255,.16),transparent 42%)}}
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(124,92,255.16),transparent 42%)}}
 .card:hover .card-spot{{opacity:1}}
 .card-body{{position:relative;padding:26px}}
 .card-top{{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}}
@@ -420,7 +420,7 @@ section{{padding:104px 0}}
 
 /* ---------- tags + links ---------- */
 .tags{{display:flex;gap:7px;flex-wrap:wrap;margin-top:16px}}
-.tag{{font-size:11.5px;color:var(--mut);background:rgba(255,255,255,.045);
+.tag{{font-size:11.5px;color:var(--mut);background:rgba(255,255,255.045);
   border:1px solid var(--line);padding:4px 11px;border-radius:6px}}
 .lnks{{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}}
 .lnk{{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;
@@ -429,8 +429,8 @@ section{{padding:104px 0}}
 .lnk .ico{{display:inline-flex;width:14px;height:14px}}
 .lnk .ico svg{{width:100%;height:100%}}
 .lnk.live{{background:var(--a1);border-color:var(--a1);color:#fff}}
-.lnk.live:hover{{background:#6b4ae8;transform:translateY(-2px);box-shadow:0 8px 22px rgba(124,92,255,.34)}}
-.lnk.code:hover,.lnk.doc:hover{{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}}
+.lnk.live:hover{{background:#6b4ae8;transform:translateY(-2px);box-shadow:0 8px 22px rgba(124,92,255.34)}}
+.lnk.code:hover.lnk.doc:hover{{background:var(--surf2);border-color:var(--tx);transform:translateY(-2px)}}
 
 /* ---------- marquee ---------- */
 .marq{{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:26px 0;
@@ -467,7 +467,7 @@ section{{padding:104px 0}}
 .award .em{{font-size:20px;line-height:1.2}}
 .award h5{{font-size:14.5px;font-weight:700;letter-spacing:-.015em}}
 .award p{{font-size:13px;color:var(--mut);margin-top:3px}}
-.award a{{color:var(--a2);border-bottom:1px solid rgba(34,211,238,.35)}}
+.award a{{color:var(--a2);border-bottom:1px solid rgba(34,211,238.35)}}
 
 /* ---------- credentials ---------- */
 .creds{{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:12px}}
@@ -488,16 +488,16 @@ section{{padding:104px 0}}
 
 /* ---------- grants chip ---------- */
 .grant-chip{{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
-  color:var(--a3);border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.08);
+  color:var(--a3);border:1px solid rgba(251,191,36.32);background:rgba(251,191,36.08);
   padding:6px 13px;border-radius:999px;margin-top:14px;transition:all .28s var(--ease)}}
-.grant-chip:hover{{background:rgba(251,191,36,.16);border-color:var(--a3);transform:translateY(-2px)}}
+.grant-chip:hover{{background:rgba(251,191,36.16);border-color:var(--a3);transform:translateY(-2px)}}
 .feature-head .grant-chip{{margin-top:0}}
 .gdot{{width:6px;height:6px;border-radius:50%;background:var(--a3);flex-shrink:0}}
 .js .gdot{{animation:pulse 2.4s ease-in-out infinite}}
 
 /* ---------- backing / form ---------- */
 .backing{{border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;
-  background:linear-gradient(160deg,rgba(251,191,36,.07),rgba(124,92,255,.06) 55%,transparent)}}
+  background:linear-gradient(160deg,rgba(251,191,36.07),rgba(124,92,255.06) 55%,transparent)}}
 .backing-in{{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:48px;padding:46px}}
 @media(max-width:900px){{.backing-in{{grid-template-columns:1fr;gap:34px;padding:30px 24px}}}}
 .backing h3{{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;letter-spacing:-.032em;line-height:1.14}}
@@ -507,13 +507,13 @@ section{{padding:104px 0}}
 .field{{margin-bottom:14px}}
 .field label{{display:block;font-size:12.5px;font-weight:600;color:var(--mut);margin-bottom:6px}}
 .field label .req{{color:var(--a3)}}
-.field input,.field textarea{{width:100%;font-family:inherit;font-size:14.5px;color:var(--tx);
-  background:rgba(255,255,255,.04);border:1px solid var(--line2);border-radius:10px;
+.field input.field textarea{{width:100%;font-family:inherit;font-size:14.5px;color:var(--tx);
+  background:rgba(255,255,255.04);border:1px solid var(--line2);border-radius:10px;
   padding:11px 14px;transition:all .25s var(--ease)}}
 .field textarea{{resize:vertical;min-height:78px}}
-.field input::placeholder,.field textarea::placeholder{{color:var(--dim)}}
-.field input:focus,.field textarea:focus{{outline:none;border-color:var(--a1);
-  background:rgba(255,255,255,.06);box-shadow:0 0 0 3px rgba(124,92,255,.16)}}
+.field input::placeholder.field textarea::placeholder{{color:var(--dim)}}
+.field input:focus.field textarea:focus{{outline:none;border-color:var(--a1);
+  background:rgba(255,255,255.06);box-shadow:0 0 0 3px rgba(124,92,255.16)}}
 .hp{{position:absolute!important;left:-9999px!important;opacity:0!important;height:0!important}}
 .fbtn{{width:100%;justify-content:center;margin-top:4px;cursor:pointer;font-family:inherit;border:none}}
 .fmsg{{font-size:13.5px;margin-top:12px;min-height:20px}}
@@ -599,12 +599,11 @@ footer a:hover{{color:var(--tx)}}
       </span></span>
     </h1>
     <p class="lede reveal">
-      I ship production AI systems by directing <strong>AI coding agents</strong> &mdash; and I am the
-      <strong>sole human-in-the-loop quality gate</strong> that decides what merges. That means reading the diff, refusing the
-      plausible-but-wrong fix, and owning the thing at 3am when it breaks. Architect and operator of a
-      <strong>patent-pending multi-agent trading AI</strong> running 24/7 on Google Cloud &mdash; <strong>67K lines</strong>,
-      <strong>2,815 tests</strong>, <strong>491 recorded findings</strong>, deployed and debugged live. Backed by
-      <strong>4+ years of QA leadership at Deloitte</strong> and a <strong>Rank&nbsp;1</strong> PGP in AI/ML.
+      I ship production AI systems by directing <strong>AI coding agents</strong>, and I am the
+      <strong>only review before anything merges</strong>. Four years leading QA automation at
+      <strong>Deloitte</strong> taught me how to tell when the output is wrong, which is the part most AI teams are still
+      learning. I run a <strong>patent-pending multi-agent trading AI</strong> on Google Cloud, live 24/7.
+      <strong>Rank&nbsp;1</strong> in my AI/ML postgrad at UT Austin McCombs.
     </p>
     <div class="cta reveal">
       <a class="btn btn-p" href="#work">See the work
@@ -614,9 +613,9 @@ footer a:hover{{color:var(--tx)}}
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
       <span class="chip">🤖 AI-native delivery</span>
-      <span class="chip">🛡️ Agent security &mdash; Wiretrap</span>
-      <span class="chip">🏆 OpenServ Best DeFi — Winner</span>
-      <span class="chip">🥇 Rank 1 — PGP AI/ML</span>
+      <span class="chip">🛡️ Agent security · Wiretrap</span>
+      <span class="chip">🏆 OpenServ Best DeFi. Winner</span>
+      <span class="chip">🥇 Rank 1. PGP AI/ML</span>
       <span class="chip">☁️ Google Cloud Gen AI Academy</span>
     </div>
   </div>
@@ -670,20 +669,20 @@ footer a:hover{{color:var(--tx)}}
           <h2 class="stitle">From breaking systems<br>to architecting them.</h2>
         </div>
         <div class="abtxt reveal">
-          <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
-          <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks designed to catch overfitting rather than flatter it.</p>
-          <p>The way I work has changed too. I don't hand-type a 33,000-line platform — I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The leverage is real, but so is the gate — I am the only one standing between a generated patch and a system trading live.</p>
-          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on <strong>GCP Compute Engine</strong>, and I read its logs the way I used to read defect reports — triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
-          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong> — Vertex AI, Gemini, ADK, MCP and AlloyDB. All of it is architected and operated from a single 16&nbsp;GB laptop; when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4 rather than throwing hardware at it. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
+          <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team, finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
+          <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks built to catch overfitting.</p>
+          <p>The way I work has changed too. I don't hand-type a 67,000-line platform. I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The speed-up is real and so is the gate. I am the only one standing between a generated patch and a system trading live.</p>
+          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on <strong>GCP Compute Engine</strong>, and I read its logs the way I used to read defect reports, triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
+          <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong>. Vertex AI, Gemini, ADK, MCP and AlloyDB. All of it is architected and operated from a single 16&nbsp;GB laptop; when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
       </div>
       <div class="awards reveal">
-        <div class="award"><span class="em">⚙️</span><div><h5>Provisional patent filed</h5><p>India, App. No. 202631090789 — the SMT multi-agent decision architecture.</p></div></div>
-        <div class="award"><span class="em">📈</span><div><h5>WEEX AI Wars I — #1 preliminary leaderboard</h5><p>Top of 230+ teams, then one of 37 finalists in the $880K live AI trading competition. <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer">Coverage</a></p></div></div>
-        <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
-        <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
-        <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
-        <div class="award"><span class="em">📜</span><div><h5>11 credentials, all verifiable</h5><p>Google Cloud Gen AI Academy (2025 &amp; APAC 2026 Cohorts 1–2) · Gen AI Exchange · Agentic AI Day · Asha AI Hackathon · CPSAT. <a href="#credentials">See them all</a></p></div></div>
+        <div class="award"><span class="em">⚙️</span><div><h5>Provisional patent filed</h5><p>India, App. No. 202631090789, the SMT multi-agent decision architecture.</p></div></div>
+        <div class="award"><span class="em">📈</span><div><h5>WEEX AI Wars I, #1 preliminary leaderboard</h5><p>Top of 230+ teams, then one of 37 finalists in the $880K live AI trading competition. <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer">Coverage</a></p></div></div>
+        <div class="award"><span class="em">🏆</span><div><h5>Winner. Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
+        <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2, advanced to prototype refinement.</p></div></div>
+        <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes. GPA 4.09/5.</p></div></div>
+        <div class="award"><span class="em">📜</span><div><h5>12 credentials, all verifiable</h5><p>Google Cloud Gen AI Academy (2025 &amp; APAC 2026 Cohorts 1–3) · Gen AI Exchange · Agentic AI Day · Asha AI Hackathon · CPSAT. <a href="#credentials">See them all</a></p></div></div>
       </div>
     </div>
   </div>
@@ -699,11 +698,11 @@ footer a:hover{{color:var(--tx)}}
       <div class="tlrow reveal">
         <h4>Independent AI Infrastructure Operator &amp; Developer</h4>
         <div class="org">Smart Money Trading (SMT) Project · patent pending</div><div class="when">Jan 2024 – Present</div>
-        <p>Architect and operate a patent-pending multi-agent trading AI — 33,000 lines across 153 modules, a six-persona committee under a learned Judge, a self-retuning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Deployed as a <strong>high-availability daemon running 24/7 on GCP Compute Engine</strong>, with end-to-end AI observability: defect triage through terminal log diagnostics to isolate execution errors and systemic drift. Built through an <strong>AI-native CI/CD workflow</strong> — <strong>Claude Code</strong> on the command line generating targeted hotfixes and structuring pull requests, with me as the <strong>sole human-in-the-loop quality gate</strong> performing code audits and manual Git merges. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams and top 101 of 1,500+ at the Google Cloud Gen AI Academy APAC hackathon — all <strong>while a full-time family carer</strong>.</p>
+        <p>Architect and operate a patent-pending multi-agent trading AI. 67,000 lines of Python, 2,815 tests, a six-persona committee under a learned Judge, a self-retuning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Deployed as a <strong>high-availability daemon running 24/7 on GCP Compute Engine</strong>, with end-to-end AI observability: defect triage through terminal log diagnostics to isolate execution errors and systemic drift. Built through an <strong>AI-native CI/CD workflow</strong>, <strong>Claude Code</strong> on the command line generating targeted hotfixes and structuring pull requests, with me as the <strong>sole human-in-the-loop quality gate</strong> performing code audits and manual Git merges. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams and top 101 of 1,500+ at the Google Cloud Gen AI Academy APAC hackathon, all <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
-        <div class="org">AutoKorrekt — EdTech startup MVP</div><div class="when">May 2024 – Jan 2025</div>
+        <div class="org">AutoKorrekt. EdTech startup MVP</div><div class="when">May 2024 – Jan 2025</div>
         <p>Interactive PDF processing with coordinate-based text extraction, integrating AWS Textract OCR and Mistral models into an AI answer-evaluation workflow. Bilingual EN/DE interface scaling to 1,000+ concurrent submissions.</p>
       </div>
       <div class="tlrow reveal">
@@ -713,7 +712,7 @@ footer a:hover{{color:var(--tx)}}
       </div>
       <div class="tlrow reveal">
         <h4>Test Automation Engineer (Analyst)</h4>
-        <div class="org">Deloitte Consulting LLP — Bangalore</div><div class="when">Aug 2019 – Jan 2023</div>
+        <div class="org">Deloitte Consulting LLP. Bangalore</div><div class="when">Aug 2019 – Jan 2023</div>
         <p>Led a 6-member QA team for Fortune 500 clients including AT&amp;T and Hewlett Packard Enterprise. Improved test execution efficiency 83%, tracked quality across 343 components, and analysed 50,000+ SAP Hybris transactions in Python.</p>
       </div>
     </div>
@@ -725,7 +724,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="shead reveal">
       <div class="skicker">Credentials</div>
       <h2 class="stitle">Every certificate, verifiable.</h2>
-      <p class="ssub">Badge profiles first — they are confirmable by a third party and stay current. The certificate files are linked underneath for anything the profiles don't cover.</p>
+      <p class="ssub">Badge profiles first, they are confirmable by a third party and stay current. The certificate files are linked underneath for anything the profiles don't cover.</p>
     </div>
     <div class="connect reveal" style="margin:0 0 26px">{profiles_html()}</div>
     <div class="creds">{creds_html()}</div>
@@ -737,7 +736,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="shead reveal">
       <div class="skicker">Backing &amp; collaboration</div>
       <h2 class="stitle">Actively seeking grants and partners.</h2>
-      <p class="ssub">SMT is patent-pending, running live on Google Cloud, and looking for its next backer. If you fund early-stage AI, run a grant programme, or want to build on it &mdash; leave your details and I'll come back to you.</p>
+      <p class="ssub">SMT is patent-pending, running live on Google Cloud, and looking for its next backer. If you fund early-stage AI, run a grant programme, or want to build on it, leave your details and I'll come back to you.</p>
     </div>
     <div class="backing reveal">
       <div class="backing-in">
@@ -752,7 +751,7 @@ footer a:hover{{color:var(--tx)}}
             <input type="hidden" name="access_key" value="{CONTACT.get('web3forms_key','')}">
             <input type="hidden" name="subject" value="Grant / collaboration enquiry from your portfolio">
             <input type="hidden" name="to" value="{CONTACT.get('grants_email', CONTACT['email'])}">
-            <input type="hidden" name="from_name" value="Portfolio — jannetekka.github.io">
+            <input type="hidden" name="from_name" value="Portfolio, jannetekka.github.io">
             <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="field">
               <label for="f-name">Name <span class="req">*</span></label>
@@ -818,14 +817,14 @@ footer a:hover{{color:var(--tx)}}
     nav.classList.toggle('stuck', scrollY > 40);
   }}, {{passive:true}});
 
-  /* hero enters immediately on load — never waits on a scroll observer */
+  /* hero enters immediately on load, never waits on a scroll observer */
   var hero = [].slice.call(document.querySelectorAll('.hero .reveal'));
   hero.forEach(function(el,i){{ el.style.transitionDelay = (i*90) + 'ms'; }});
   requestAnimationFrame(function(){{ requestAnimationFrame(function(){{
     hero.forEach(function(el){{ el.classList.add('in'); }});
   }}); }});
 
-  /* scroll reveal — with a hard failsafe so text can never stay hidden */
+  /* scroll reveal, with a hard failsafe so text can never stay hidden */
   var rev = [].slice.call(document.querySelectorAll('.reveal')).filter(function(el){{
     return !el.closest('.hero');
   }});
@@ -880,7 +879,7 @@ footer a:hover{{color:var(--tx)}}
     }});
   }}
 
-  /* screenshot lightbox — anchors point at the image, so it still works without JS */
+  /* screenshot lightbox, anchors point at the image, so it still works without JS */
   var lb=document.getElementById('lb'), lbimg=document.getElementById('lbimg'), lbcap=document.getElementById('lbcap');
   function closeLb(){{ lb.classList.remove('on'); lbimg.src=''; }}
   document.querySelectorAll('.shot').forEach(function(a){{
@@ -907,7 +906,7 @@ footer a:hover{{color:var(--tx)}}
       var fd=new FormData(gform);
       var key=(keyEl.value||'').trim();
 
-      /* No access key configured yet — fall back to opening an email so an
+      /* No access key configured yet, fall back to opening an email so an
          enquiry can never be silently lost. */
       if (!key) {{
         var body='Name: '+(fd.get('name')||'')+'%0D%0AEmail: '+(fd.get('email')||'')
@@ -930,7 +929,7 @@ footer a:hover{{color:var(--tx)}}
         if (d.success) {{
           gform.reset();
           fmsg.className='fmsg ok';
-          fmsg.textContent="Thank you — I'll get back to you shortly.";
+          fmsg.textContent="Thank you. I'll get back to you shortly.";
         }} else {{
           throw new Error(d.message||'failed');
         }}
@@ -943,7 +942,7 @@ footer a:hover{{color:var(--tx)}}
     }});
   }}
 
-  /* visitor counter — increments once per session, reads on later views.
+  /* visitor counter, increments once per session, reads on later views.
      Stays hidden unless a real number comes back, so a dead API shows nothing
      rather than a broken chip or a misleading zero. */
   (function(){{
@@ -965,7 +964,7 @@ footer a:hover{{color:var(--tx)}}
       .catch(function(){{ /* leave it hidden */ }});
   }})();
 
-  /* click-to-copy (Discord username — not a linkable URL) */
+  /* click-to-copy (Discord username, not a linkable URL) */
   document.querySelectorAll('.copyable').forEach(function(b){{
     b.addEventListener('click', function(){{
       var v=b.dataset.copy, hint=b.querySelector('.copy-hint');
