@@ -719,7 +719,7 @@ footer a:hover{{color:var(--tx)}}
       <div class="tlrow reveal">
         <h4>QA Automation Intern</h4>
         <div class="org">Deloitte Consulting LLP · Bangalore</div><div class="when">Jan 2019 &ndash; Jul 2019</div>
-        <p>Ran the core regression suites, worked through environment test cycles, and logged defects in Jira. Converted to the analyst role above after six months.</p>
+        <p>Functional testing of the <strong>North Dakota State Government Health and Human Services</strong> website, plus POEDI XML script testing. Ran environment testing loops, tracked the active regression suites, and managed system errors in Jira. Converted to the analyst role above after six months.</p>
       </div>
     </div>
   </div>
