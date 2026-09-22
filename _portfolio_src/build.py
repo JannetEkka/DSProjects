@@ -211,9 +211,9 @@ HTML = f'''<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jannet Akanksha Ekka — AI Systems Architect &amp; Operator</title>
+<title>Jannet Akanksha Ekka — Forward-Deployed AI Engineer</title>
 <meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending multi-agent trading AI running 24/7 on Google Cloud, and 20+ shipped projects.">
-<meta property="og:title" content="Jannet Akanksha Ekka — AI Systems Architect &amp; Operator">
+<meta property="og:title" content="Jannet Akanksha Ekka — Forward-Deployed AI Engineer">
 <meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live on Google Cloud.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -589,7 +589,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="idrow reveal">
       <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
-      <div class="eyebrow"><b></b> Open to AI architect &amp; AI-operations roles</div>
+      <div class="eyebrow"><b></b> Open to Forward-Deployed Engineer &amp; AI-native delivery roles</div>
     </div>
     <h1 class="big reveal">
       I architect <span class="serif">agentic AI</span><br>
@@ -599,10 +599,12 @@ footer a:hover{{color:var(--tx)}}
       </span></span>
     </h1>
     <p class="lede reveal">
-      AI systems architect and operator. I design the system, direct <strong>AI coding agents</strong> to build it, and act as the
-      <strong>sole human-in-the-loop quality gate</strong> before anything ships. Architect of a <strong>patent-pending multi-agent
-      trading AI</strong> running 24/7 on Google Cloud, backed by <strong>4+ years of QA leadership at Deloitte</strong> and a
-      <strong>Rank&nbsp;1</strong> PGP in AI/ML.
+      I ship production AI systems by directing <strong>AI coding agents</strong> &mdash; and I am the
+      <strong>sole human-in-the-loop quality gate</strong> that decides what merges. That means reading the diff, refusing the
+      plausible-but-wrong fix, and owning the thing at 3am when it breaks. Architect and operator of a
+      <strong>patent-pending multi-agent trading AI</strong> running 24/7 on Google Cloud &mdash; <strong>67K lines</strong>,
+      <strong>2,815 tests</strong>, <strong>491 recorded findings</strong>, deployed and debugged live. Backed by
+      <strong>4+ years of QA leadership at Deloitte</strong> and a <strong>Rank&nbsp;1</strong> PGP in AI/ML.
     </p>
     <div class="cta reveal">
       <a class="btn btn-p" href="#work">See the work
@@ -612,6 +614,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
       <span class="chip">🤖 AI-native delivery</span>
+      <span class="chip">🛡️ Agent security &mdash; Wiretrap</span>
       <span class="chip">🏆 OpenServ Best DeFi — Winner</span>
       <span class="chip">🥇 Rank 1 — PGP AI/ML</span>
       <span class="chip">☁️ Google Cloud Gen AI Academy</span>
@@ -622,8 +625,8 @@ footer a:hover{{color:var(--tx)}}
 <div class="statbar">
   <div class="shell">
     <div class="statgrid">
-      <div class="stat reveal"><div class="n" data-count="24">24</div><div class="l">Projects shipped</div></div>
-      <div class="stat reveal"><div class="n" data-count="33K">33K</div><div class="l">Lines shipped &amp; audited</div></div>
+      <div class="stat reveal"><div class="n" data-count="25">25</div><div class="l">Projects shipped</div></div>
+      <div class="stat reveal"><div class="n" data-count="77K">77K</div><div class="l">Lines shipped &amp; audited</div></div>
       <div class="stat reveal"><div class="n" data-count="4">4</div><div class="l">Years enterprise eng.</div></div>
       <div class="stat reveal"><div class="n" data-count="1">1</div><div class="l">Patent filed</div></div>
     </div>

@@ -16,6 +16,11 @@ CREDENTIALS = [
       cid="2025H2S04GENAI-A01917", kind="google",
       files=[("Certificate", C+"genai%20academy%20COC.pdf")]),
 
+ dict(title="Gen AI Academy APAC 2026 — Cohort 3, Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="Sep 2026", note="Agentic AI on Google Cloud — the cohort Wiretrap was built in",
+      kind="google",
+      files=[]),
+
  dict(title="Gen AI Academy APAC 2026 — Cohort 2, Completion", issuer="Google Cloud &amp; Hack2skill",
       date="31 Jul 2026", note="Data, analytics and intelligent systems on Google Cloud",
       cid="2026H2S07GCGENAIAPACC2-P02585", kind="google",
@@ -120,7 +125,7 @@ FLAGSHIP = dict(
     meta="Jan 2024 – Present · Sole architect & operator",
     badge="Patent pending · IN 202631090789",
     desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. Strategy validation is <em>GPU-accelerated with NVIDIA cuDF</em> — <code>cudf.pandas</code>, zero code change — taking a 2.5M-row CPCV pipeline from ~24s to 3.9s (~6×) on a T4 Vertex AI notebook. The front end is a Three.js/WebGL ocean world served from Cloudflare Workers.",
-    stats=[("33K","lines of Python"),("166","tests green"),("6","× faster on GPU"),("8","pairs live")],
+    stats=[("67K","lines of Python"),("2,815","tests green"),("491","findings recorded"),("8","pairs live")],
     tags=["Multi-Agent Systems","Explainable AI","AI-Native Development","GCP Compute Engine + systemd","NVIDIA cuDF / RAPIDS","Optuna","BigQuery + Conversational Analytics","Vertex AI","Three.js / WebGL","Cloudflare Workers"],
     links=[("Live site","https://smt-weex-trading-bot.jannet-ekka.workers.dev/","live"),
            ("Hackathon build (Cloud Run)","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
@@ -130,6 +135,14 @@ FLAGSHIP = dict(
 )
 
 PROJECTS = [
+ dict(slug="wiretrap", wide=True, cat="agents", title="Wiretrap", sub="Adversarial Security Testing for AI Agents",
+   meta="2026 · Google Cloud Gen AI Academy APAC — Cohort 3",
+   desc="<strong>&ldquo;We don&rsquo;t grade what your agent says. We audit what it does.&rdquo;</strong> Most LLM security tooling reads the agent&rsquo;s reply and decides whether the text looks compliant. That misses the failure that matters: an agent can refuse in prose <em>after</em> it has already invoked the tool. Wiretrap clones a target agent against <em>inert decoy tools</em> with identical names and JSON Schemas, attacks it with payloads written to read like ordinary work &mdash; no shouting, no &ldquo;ignore all previous instructions&rdquo; &mdash; and reports which tools actually fired.<br><br>Against a Google codelab business-analyst agent it caught exactly that: a polite, correct-sounding refusal &mdash; <em>&ldquo;I don&rsquo;t have access or authorization to modify configuration files&rdquo;</em> &mdash; issued <em>after</em> the agent had run <code>ls -la</code> through its shell tool. Every text-grading scanner marks that a pass. Wiretrap names it <strong>&ldquo;Said No, Did Yes&rdquo;</strong> and shows the arguments.<br><br>Honest by construction: a run with zero classified results reports <code>INCONCLUSIVE</code>, never <code>HARDENED</code>; attacks aimed at capabilities the agent doesn&rsquo;t have are excluded from the denominator rather than counted as wins; and remediation patches are never auto-applied &mdash; approving one versions the prompt, and &ldquo;Verify Fixes&rdquo; re-runs the exact breached attacks and says plainly when a fix did not hold.",
+   stats=[("8","attack categories"),("9.4K","lines of TypeScript"),("0","static API keys"),("4","model fallback ladder")],
+   tags=["Adversarial Testing","Agent Security","Vertex AI / Gemini","React + TypeScript","Express","Cloud Run","Firestore","Secret Manager","Google AI Studio"],
+   links=[("Live","https://wiretrap.ai.studio","live"),
+          ("Code",GH+"wiretrap","code")]),
+
  dict(slug="versecanvas", grants=True, cat="genai", title="VerseCanvas", sub="AI Poetry-to-Art Generator", meta="2025 · Personal project",
    desc="Turns a poem into original artwork through a multi-stage pipeline: semantic analysis with Gemini 2.0 &rarr; automated prompt engineering &rarr; image synthesis with Imagen 3.0 on Vertex AI &rarr; hybrid editing and text overlay. Six languages, six art styles, tunable mood intensity.",
    tags=["Gemini 2.0","Imagen 3.0","Vertex AI","Streamlit"],
