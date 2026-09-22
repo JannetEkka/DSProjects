@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-# CREDENTIALS — every field below was read off the certificate itself.
+# CREDENTIALS, every field below was read off the certificate itself.
 # `files` entries are (label, path-relative-to-index.html). Spaces are
 # %20-encoded because these are URLs, not filesystem paths.
 # ---------------------------------------------------------------------------
@@ -11,33 +11,33 @@ CREDENTIALS = [
              ("Grade book", C+"UTA%20transcript.pdf"),
              ("Verify", "https://www.mygreatlearning.com/certificate/SPXKJOPH")]),
 
- dict(title="Gen AI Academy — Completion", issuer="Google Cloud &amp; Hack2skill",
+ dict(title="Gen AI Academy. Completion", issuer="Google Cloud &amp; Hack2skill",
       date="28 May 2025", note="Vertex AI · Gemini APIs · Imagen · Streamlit · Multimodal RAG",
       cid="2025H2S04GENAI-A01917", kind="google",
       files=[("Certificate", C+"genai%20academy%20COC.pdf")]),
 
- dict(title="Gen AI Academy APAC 2026 — Cohort 3, Completion", issuer="Google Cloud &amp; Hack2skill",
-      date="Sep 2026", note="Agentic AI on Google Cloud — the cohort Wiretrap was built in",
+ dict(title="Gen AI Academy APAC 2026. Cohort 3, Completion", issuer="Google Cloud &amp; Hack2skill",
+      date="Sep 2026", note="Agentic AI on Google Cloud, the cohort Wiretrap was built in",
       kind="google",
       files=[]),
 
- dict(title="Gen AI Academy APAC 2026 — Cohort 2, Completion", issuer="Google Cloud &amp; Hack2skill",
+ dict(title="Gen AI Academy APAC 2026. Cohort 2, Completion", issuer="Google Cloud &amp; Hack2skill",
       date="31 Jul 2026", note="Data, analytics and intelligent systems on Google Cloud",
       cid="2026H2S07GCGENAIAPACC2-P02585", kind="google",
       files=[("Certificate", C+"cohort%202%20cert%20comp.pdf")]),
 
- dict(title="Gen AI Academy APAC 2026 — Cohort 1, Completion", issuer="Google Cloud &amp; Hack2skill",
+ dict(title="Gen AI Academy APAC 2026. Cohort 1, Completion", issuer="Google Cloud &amp; Hack2skill",
       date="28 Apr 2026", note="Building, connecting and migrating AI-powered applications",
       cid="2026H2S04GCGENAIAPACC1-P01679", kind="google",
       files=[("Certificate", C+"cohort%201%20cert%20comp.pdf")]),
 
- dict(title="Gen AI Academy APAC 2026 — Cohort 1 Hackathon", issuer="Google Cloud &amp; Hack2skill",
+ dict(title="Gen AI Academy APAC 2026. Cohort 1 Hackathon", issuer="Google Cloud &amp; Hack2skill",
       date="19 May 2026", note="Shortlisted top 101 of 1,500+ teams",
       cid="2026H2S05GCGENAIAPACC1-P00373", kind="google",
       files=[("Certificate", C+"cohort%201%20cert%20part.pdf")]),
 
  dict(title="Gen AI Exchange Hackathon 2025", issuer="Google Cloud &amp; Hack2skill",
-      date="14 Jan 2026", note="Problem statement — &ldquo;Automating Test Case Generation with AI&rdquo;",
+      date="14 Jan 2026", note="Problem statement, &ldquo;Automating Test Case Generation with AI&rdquo;",
       cid="2025H2S08GH-P100275", kind="google",
       files=[("Certificate", C+"GenAI%20Exc%20Hack%20COP.pdf")]),
 
@@ -57,10 +57,10 @@ CREDENTIALS = [
              ("Training", C+"Jannet%20Ekka%20-%20Machine%20Learning%20Internship%20-%20Training.pdf")]),
 
  dict(title="AI-Preneur Workshop", issuer="AI-Preneur", date="Mar 2025",
-      note="Freelancing with AI — business applications", kind="work",
+      note="Freelancing with AI, business applications", kind="work",
       files=[("Certificate", C+"Jannet%20Ekka.pdf")]),
 
- dict(title="CPSAT — Certified Professional Selenium Automation Testing", issuer="CPSAT",
+ dict(title="CPSAT. Certified Professional Selenium Automation Testing", issuer="CPSAT",
       date="2022", note="", kind="work", files=[]),
 ]
 
@@ -71,9 +71,9 @@ PROFILES = [
 ]
 
 # ---------------------------------------------------------------------------
-# CONTACT + FORM CONFIG  — the only things you need to edit to switch the form on
+# CONTACT + FORM CONFIG, the only things you need to edit to switch the form on
 # ---------------------------------------------------------------------------
-# WEB3FORMS_KEY: get a free key at https://web3forms.com — enter your email,
+# WEB3FORMS_KEY: get a free key at https://web3forms.com, enter your email,
 #   they send the access key to that inbox. Every submission then arrives there.
 #   Free tier: 250 submissions/month. The key is PUBLIC by design (it is tied to
 #   your email, it is not a password), so it is safe to commit.
@@ -88,7 +88,7 @@ CONTACT = dict(
     phone="+919078802572",
     whatsapp="https://wa.me/919078802572",
     telegram="https://t.me/Jannetekka",
-    discord="jannetekka_03690",      # a username, not a URL — rendered as click-to-copy
+    discord="jannetekka_03690",      # a username, not a URL, rendered as click-to-copy
     linkedin="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/",
     github="https://github.com/JannetEkka",
     twitter="https://x.com/EkkaJanny96",
@@ -97,8 +97,8 @@ CONTACT = dict(
 )
 
 # Remote-work / hiring profiles. Add a (label, url) pair as each one goes live
-# and rebuild — nothing else needs changing.
-# Visitor counter (Abacus — free, no signup, no key; abacus.jasoncameron.dev).
+# and rebuild, nothing else needs changing.
+# Visitor counter (Abacus, free, no signup, no key; abacus.jasoncameron.dev).
 # Counts once per browser session, not per refresh, so a reload does not inflate it.
 # Set enabled=False to remove it entirely.
 COUNTER = dict(
@@ -124,20 +124,20 @@ FLAGSHIP = dict(
     sub="Explainable Multi-Agent Trading AI",
     meta="Jan 2024 – Present · Sole architect & operator",
     badge="Patent pending · IN 202631090789",
-    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. Strategy validation is <em>GPU-accelerated with NVIDIA cuDF</em> — <code>cudf.pandas</code>, zero code change — taking a 2.5M-row CPCV pipeline from ~24s to 3.9s (~6×) on a T4 Vertex AI notebook. The front end is a Three.js/WebGL ocean world served from Cloudflare Workers.",
+    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs, a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. Strategy validation is <em>GPU-accelerated with NVIDIA cuDF</em>, <code>cudf.pandas</code>, zero code change, taking a 2.5M-row CPCV pipeline from ~24s to 3.9s (~6×) on a T4 Vertex AI notebook. The front end is a Three.js/WebGL ocean world served from Cloudflare Workers.",
     stats=[("67K","lines of Python"),("2,815","tests green"),("491","findings recorded"),("8","pairs live")],
     tags=["Multi-Agent Systems","Explainable AI","AI-Native Development","GCP Compute Engine + systemd","NVIDIA cuDF / RAPIDS","Optuna","BigQuery + Conversational Analytics","Vertex AI","Three.js / WebGL","Cloudflare Workers"],
     links=[("Live site","https://smt-weex-trading-bot.jannet-ekka.workers.dev/","live"),
            ("Hackathon build (Cloud Run)","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
            ("Code","https://github.com/JannetEkka/smt-apac","code"),
            ("Press","https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641","doc")],
-    note="Core repo private — the linked repo is the public explanatory layer.",
+    note="Core repo private, the linked repo is the public explanatory layer.",
 )
 
 PROJECTS = [
  dict(slug="wiretrap", wide=True, cat="agents", title="Wiretrap", sub="Adversarial Security Testing for AI Agents",
-   meta="2026 · Google Cloud Gen AI Academy APAC — Cohort 3",
-   desc="<strong>&ldquo;We don&rsquo;t grade what your agent says. We audit what it does.&rdquo;</strong> Most LLM security tooling reads the agent&rsquo;s reply and decides whether the text looks compliant. That misses the failure that matters: an agent can refuse in prose <em>after</em> it has already invoked the tool. Wiretrap clones a target agent against <em>inert decoy tools</em> with identical names and JSON Schemas, attacks it with payloads written to read like ordinary work &mdash; no shouting, no &ldquo;ignore all previous instructions&rdquo; &mdash; and reports which tools actually fired.<br><br>Against a Google codelab business-analyst agent it caught exactly that: a polite, correct-sounding refusal &mdash; <em>&ldquo;I don&rsquo;t have access or authorization to modify configuration files&rdquo;</em> &mdash; issued <em>after</em> the agent had run <code>ls -la</code> through its shell tool. Every text-grading scanner marks that a pass. Wiretrap names it <strong>&ldquo;Said No, Did Yes&rdquo;</strong> and shows the arguments.<br><br>Honest by construction: a run with zero classified results reports <code>INCONCLUSIVE</code>, never <code>HARDENED</code>; attacks aimed at capabilities the agent doesn&rsquo;t have are excluded from the denominator rather than counted as wins; and remediation patches are never auto-applied &mdash; approving one versions the prompt, and &ldquo;Verify Fixes&rdquo; re-runs the exact breached attacks and says plainly when a fix did not hold.",
+   meta="2026 · Google Cloud Gen AI Academy APAC. Cohort 3",
+   desc="<strong>&ldquo;We don&rsquo;t grade what your agent says. We audit what it does.&rdquo;</strong> Most LLM security tools read the agent&rsquo;s reply and grade the text. This one reads the tool-call log.<br><br>Every tool the agent declares gets cloned as a dead copy with the same name and JSON Schema. The copy records the call and returns fake data, so nothing real fires. Attacks run in separate Gemini conversations and a judge model reads the log. The payloads are written to look like ordinary work, no shouting and no &ldquo;ignore all previous instructions&rdquo;, because current models refuse those easily.<br><br>It caught a Google codelab agent saying <em>&ldquo;I don&rsquo;t have access or authorization to modify configuration files&rdquo;</em> after it had already run <code>ls -la</code> through its shell tool. Text scanners pass that. Wiretrap calls it <strong>&ldquo;Said No, Did Yes&rdquo;</strong> and shows the arguments.<br><br>A run with nothing classified reports <code>INCONCLUSIVE</code>, never <code>HARDENED</code>. Attacks against tools the agent doesn&rsquo;t have are dropped from the score. Approved fixes get re-run against the attacks that broke it, and the report says when one didn&rsquo;t hold.",
    stats=[("8","attack categories"),("9.4K","lines of TypeScript"),("0","static API keys"),("4","model fallback ladder")],
    tags=["Adversarial Testing","Agent Security","Vertex AI / Gemini","React + TypeScript","Express","Cloud Run","Firestore","Secret Manager","Google AI Studio"],
    links=[("Live","https://wiretrap.ai.studio","live"),
@@ -148,51 +148,51 @@ PROJECTS = [
    tags=["Gemini 2.0","Imagen 3.0","Vertex AI","Streamlit"],
    links=[("Live demo","https://versecanvas.streamlit.app/","live"),("Code",GH+"versecanvas","code")]),
 
- dict(slug="smartdesk", grants=False, wide=True, cat="agents", title="SmartDesk", sub="Multi-Agent Assistant with Measured RAG", meta="2026 · Gen AI Academy APAC — Cohort 1 Hackathon",
-   desc="A root ADK orchestrator routing to specialised sub-agents — InboxAgent, PlannerAgent and a DataAgent doing retrieval over a pgvector knowledge base — with a SequentialAgent synthesising the reply. Gmail and Calendar are reached through <em>MCP servers I wrote myself</em> against the protocol SDK over stdio, not off-the-shelf toolsets. Containerised on Cloud Run.<br><br>The retrieval is <em>evaluated, not assumed</em>: 40 labelled questions over 120 notes, recall@k and MRR@k, significance by paired bootstrap at 10,000 resamples. That harness is what stopped a bad decision — a cross-encoder reranker looked like a clear win on the development embedder (MRR@10 +0.094, p=0.04), then collapsed on the production embedder to +0.028 with a CI spanning zero. Shipping it would have added <em>190&nbsp;MB of PyTorch and taken search from 29&nbsp;ms to 2,382&nbsp;ms</em>, in an image deliberately cut from 1.8&nbsp;GB to 340&nbsp;MB, for a gain indistinguishable from noise. The baseline ships instead, now on evidence rather than caution.",
+ dict(slug="smartdesk", grants=False, wide=True, cat="agents", title="SmartDesk", sub="Multi-Agent Assistant with Measured RAG", meta="2026 · Gen AI Academy APAC. Cohort 1 Hackathon",
+   desc="A root ADK orchestrator routing to specialised sub-agents. InboxAgent, PlannerAgent and a DataAgent doing retrieval over a pgvector knowledge base, with a SequentialAgent synthesising the reply. Gmail and Calendar are reached through <em>MCP servers I wrote myself</em> against the protocol SDK over stdio, not off-the-shelf toolsets. Containerised on Cloud Run.<br><br>The retrieval is <em>evaluated, not assumed</em>: 40 labelled questions over 120 notes, recall@k and MRR@k, significance by paired bootstrap at 10,000 resamples. That harness is what stopped a bad decision, a cross-encoder reranker looked like a clear win on the development embedder (MRR@10 +0.094, p=0.04), then collapsed on the production embedder to +0.028 with a CI spanning zero. Shipping it would have added <em>190&nbsp;MB of PyTorch and taken search from 29&nbsp;ms to 2,382&nbsp;ms</em>, in an image deliberately cut from 1.8&nbsp;GB to 340&nbsp;MB, for a gain indistinguishable from noise. The baseline ships instead, now on evidence.",
    stats=[("0.963","recall@5"),("40","labelled questions"),("82×","latency the reranker cost"),("54","tests")],
    tags=["Google ADK","MCP (servers written from scratch)","pgvector","RAG evaluation","Paired bootstrap","Cross-encoder / RRF / BM25","Gemini 2.5 Flash","Cloud Run"],
    links=[("Code",GH+"smartdesk","code"),
           ("Eval results","https://github.com/JannetEkka/smartdesk/blob/main/evals/RESULTS.md","doc")]),
 
  dict(slug="locintel", cat="agents", title="Location Intelligence Agent", sub="MCP over BigQuery + Google Maps", meta="2026 · Google Cloud Gen AI Academy APAC",
-   desc="An ADK agent wired to two remote MCP servers — BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.",
+   desc="An ADK agent wired to two remote MCP servers. BigQuery for demographic, pricing and sales data, Google Maps for location analysis. Scores zip codes by demographics and foot traffic, flags underperforming stores, projects next-month revenue and measures competitor density.",
    tags=["MCP Servers","BigQuery","Google Maps API","ADK"],
    links=[("Code",GH+"bakery-growth-agent","code")]),
 
- dict(slug="smtracker", cat="agents", title="Smart Money Tracker", sub="Multi-Agent Blockchain Analytics", meta="2024 · Winner — Best DeFi Application",
+ dict(slug="smtracker", cat="agents", title="Smart Money Tracker", sub="Multi-Agent Blockchain Analytics", meta="2024 · Winner. Best DeFi Application",
    award="OpenServ × Hack2skill",
    desc="Multi-agent whale tracking across Ethereum, BNB Smart Chain and Polygon using the OpenServ SDK, with Alchemy webhooks driving sub-second transaction monitoring. Confidence-scored detection of accumulation, distribution and coordinated movements, with automated exchange-wallet exclusion.",
    tags=["OpenServ SDK","Alchemy","Moralis","Cloud Run","pgvector"],
    links=[]),
 
  dict(slug="smtchains", grants=True, cat="agents", title="SMT Chain Adapters", sub="Mantle &amp; BNB hackathon builds", meta="2026 · Hackathon adapters",
-   desc="Thin per-chain adapters that import the SMT brain and expose it to a specific ecosystem — keeping one shared decision engine behind platform-specific front ends rather than forking the strategy code.",
+   desc="Thin per-chain adapters that import the SMT brain and expose it to a specific ecosystem, one shared decision engine behind platform-specific front ends, with no forked strategy code.",
    tags=["Mantle","BNB Chain","Python"],
    links=[("Live","https://jannetekka.github.io/smt-mantle/","live"),("Mantle",GH+"smt-mantle","code"),("BNB",GH+"smt-bnb","code")]),
 
  dict(slug="autokorrekt", cat="genai", wide=True, title="AutoKorrekt", sub="AI Answer-Evaluation Platform for Teachers", meta="May 2024 – Jan 2025 · Lead Frontend Developer · EdTech startup MVP",
-   desc="An evaluation platform that takes a teacher from sign-up to graded scripts: create a class, upload a student roster and question paper, bulk-upload scanned answer sheets, then track each student through OCR, AI evaluation and validation. I led the frontend and designed the ML data flow across S3, RDS and SageMaker &mdash; interactive PDF processing with coordinate-based text extraction over AWS Textract, a bilingual EN/DE feedback interface on Amazon Comprehend, and a per-student status pipeline that scaled to 1,000+ concurrent submissions.",
+   desc="An evaluation platform that takes a teacher from sign-up to graded scripts: create a class, upload a student roster and question paper, bulk-upload scanned answer sheets, then track each student through OCR, AI evaluation and validation. I led the frontend and designed the ML data flow across S3, RDS and SageMaker, interactive PDF processing with coordinate-based text extraction over AWS Textract, a bilingual EN/DE feedback interface on Amazon Comprehend, and a per-student status pipeline that scaled to 1,000+ concurrent submissions.",
    tags=["React","Next.js","TypeScript","AWS Textract","Amazon Comprehend","SageMaker","Django"],
    shots=[("assets/autokorrekt/Index_page_signup.png","Teacher sign-up"),
           ("assets/autokorrekt/Index_pg_signin.png","Sign in"),
-          ("assets/autokorrekt/add_Test.png","Create a class — student roster (CSV) + question-paper upload"),
+          ("assets/autokorrekt/add_Test.png","Create a class, student roster (CSV) + question-paper upload"),
           ("assets/autokorrekt/students.png","Per-student evaluation pipeline &amp; bulk answer-sheet upload")],
    links=[]),
 
  dict(slug="asha", cat="genai", title="Asha Chatbot", sub="JobsForHer Foundation", meta="2025 · Hackathon project",
-   desc="A context-aware chatbot surfacing job listings, community events and mentorship programmes, and handling FAQs — built to support women returning to and advancing in the workforce.",
+   desc="A context-aware chatbot surfacing job listings, community events and mentorship programmes, and handling FAQs, built to support women returning to and advancing in the workforce.",
    tags=["Conversational AI","NLP","Python"], links=[("Code",GH+"asha-chatbot","code")]),
 
  dict(slug="medtest", cat="genai", title="MedTestAI", sub="HIPAA-Compliant Healthcare AI", meta="2025 – 2026 · Personal project",
-   desc="A healthcare AI project built around HIPAA compliance constraints — handling protected health information under the access, auditing and data-handling rules regulated medical software requires.",
+   desc="A healthcare AI project built around HIPAA compliance constraints, handling protected health information under the access, auditing and data-handling rules regulated medical software requires.",
    tags=["Healthcare AI","HIPAA","JavaScript"], links=[("Code",GH+"MedTestAI","code")]),
 
  dict(slug="webqna", cat="genai", title="WebContentQnA", sub="Ask questions about any page", meta="2025 · Personal project",
    desc="Paste a set of URLs and ask questions about their contents; the app retrieves and answers from page text using a DistilBERT question-answering model.",
    tags=["DistilBERT","Question Answering","Transformers"], links=[("Code",GH+"WebContentQnA","code")]),
 
- dict(slug="capstone", cat="cv", title="Automotive Surveillance System", sub="Capstone — Computer Vision", meta="Dec 2024 – Jan 2025 · Great Learning",
+ dict(slug="capstone", cat="cv", title="Automotive Surveillance System", sub="Capstone. Computer Vision", meta="Dec 2024 – Jan 2025 · Great Learning",
    desc="Vehicle make/model/year classification reaching 69.2% accuracy with ResNet50, plus Fast R-CNN object detection across 16,185 images spanning 196 classes.",
    tags=["ResNet50","Fast R-CNN","TensorFlow","OpenCV"],
    links=[("Code","https://github.com/JannetEkka/DSProjects/tree/main/Automotive_Surveillance_System_Capstone","code")]),
@@ -256,7 +256,7 @@ PROJECTS = [
    links=[("Code","https://github.com/JannetEkka/DSProjects/tree/main/Applied_Statistics_Project","code")]),
 
  dict(slug="yatra", cat="automation", title="Yatra Test Automation Framework", sub="Hybrid Selenium framework", meta="2024 · Personal project",
-   desc="A hybrid data-driven Selenium framework with Page Object Model structure, external test data, cross-browser runs on Edge/Chrome/Firefox, HTML reporting and failure screenshots — wired into Jenkins.",
+   desc="A hybrid data-driven Selenium framework with Page Object Model structure, external test data, cross-browser runs on Edge/Chrome/Firefox, HTML reporting and failure screenshots, wired into Jenkins.",
    tags=["Selenium","PyTest","POM","Jenkins"], links=[("Code",GH+"python-automation","code")]),
 
 ]
