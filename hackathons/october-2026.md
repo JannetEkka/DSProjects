@@ -83,26 +83,26 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | TBA | @commonsmade builder hackathon | — | ⚪ | announcement expected later in October |
 | TBA | [Arca: The Agent Capital Hackathon](https://form.typeform.com/to/tBJ8Q1io) | — | ⚪ | date not announced |
 
-## The entries, by deadline (updated 2026-10-05, night)
+## The entries — progress board
 
-Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. Claude builds in cloud sessions; the operator registers, creates free accounts, checks the video and submits.
+**Progress lives in one GitHub issue per entry** (label [`hackathon`](https://github.com/JannetEkka/DSProjects/issues?q=label%3Ahackathon)), never in this file. Each issue holds the deadline, the session that owns it, a checklist (registered → rules read → repo → build → demo → submission text → submitted → result) and a "Waiting on Jannet" list. **Every session ticks its own issue and comments at each milestone** — no PR or merge needed for a status change. This file holds decisions only.
 
-| When (IST) | Entry | State |
-|---|---|---|
-| night of Oct 7 | **Solana Mobile: Clock In** — APK + video + deck done (closes Oct 8) | ✘ register |
-| Oct 8 | **#HackCanton S3** — done (closes Oct 9) | ✘ register |
-| Oct 10–11 | **neatHack** — 48 h build | ✅ registered |
-| Oct 10 04:30 → Oct 12 04:30 | **IonQ** — 48 h sprint, Quantum Impact | ✅ registered |
-| Oct 13 | **Open Agent** — registration closes (own session: workshop first) | ✘ register |
-| Oct 14, 09:29 | **Monad Metropolis** — Onchain Finance & Trading | ✅ registered |
-| Oct 15 | **RSNA Knee** — entry deadline (joined) | ✅ joined |
-| night of Oct 14 | **Hack Apertus** — ready before the second away window (closes Oct 16, 15:30) | ✅ registered |
-| Oct 15–18 | **Graph Hacks / FalkorDB** — build in window | ✅ registered |
-| Oct 20 | **Open Agent** | — |
-| Oct 22 | **RSNA Knee** — final submission | — |
-| Oct 24, 00:30 (= Oct 23 12:00 PDT) | **Amazon: Build, Ship, Shape** — Fire TV | ✅ registered |
-| Oct 25 | **IEEE ClimateChain** | ✘ register |
-| Oct 26 | **Build With AI: Basics** | ✅ registered |
-| Oct 27 | **GitLab: Life After Code** | ✅ registered |
-| Oct 30 | **Nebius × NVIDIA** — only on free credits | — |
-| Dec 1 | **Lablab × AMD AI Academy** — self-paced; $100 GPU credits for RSNA | ✅ registered |
+Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. Claude builds in cloud sessions; Jannet registers, creates free accounts, checks the video and submits.
+
+| Deadline (IST) | Entry | Session | Progress |
+|---|---|---|---|
+| Oct 8 (done by night of Oct 7) | Solana Mobile: Clock In | S11 | [#30](https://github.com/JannetEkka/DSProjects/issues/30) |
+| Oct 9 (done by night of Oct 8) | #HackCanton S3 | S12 | [#29](https://github.com/JannetEkka/DSProjects/issues/29) |
+| Oct 10–11 | neatHack | S5 | [#28](https://github.com/JannetEkka/DSProjects/issues/28) |
+| Oct 10 04:30 → Oct 12 04:30 | Qollab × IonQ — Quantum Impact | S9 | [#27](https://github.com/JannetEkka/DSProjects/issues/27) |
+| Oct 14, 09:29 | Monad Metropolis — SMT Receipts | S8 | [#26](https://github.com/JannetEkka/DSProjects/issues/26) |
+| Oct 16, 15:30 (ready by night of Oct 14) | Hack Apertus | S7 | [#25](https://github.com/JannetEkka/DSProjects/issues/25) |
+| Oct 15–18 | Graph Hacks / FalkorDB | S5 | [#24](https://github.com/JannetEkka/DSProjects/issues/24) |
+| Oct 20 (register by Oct 13) | Open Agent | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
+| Oct 22 | RSNA Knee (Kaggle) | S6 | [#22](https://github.com/JannetEkka/DSProjects/issues/22) |
+| Oct 24, 00:30 | Amazon: Build, Ship, Shape — Fire TV | S3 | [#21](https://github.com/JannetEkka/DSProjects/issues/21) |
+| Oct 25 | IEEE ClimateChain | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
+| Oct 27, 02:30 | Build With AI: Basics | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
+| Oct 27 | GitLab: Life After Code | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
+| Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
+| Oct 30 | Nebius × NVIDIA — only on free credits | — | not entered |
