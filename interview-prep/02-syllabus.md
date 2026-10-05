@@ -9,7 +9,7 @@ have something most candidates do not, so they are worth as much as 1–4.
 
 | # | Module | Taught from | Why it matters |
 |---|---|---|---|
-| 1 | **Agents and orchestration** | SMT `personas/` + `judge.py`; SmartDesk `agent.py` | The central question in every AI-engineering interview right now |
+| 1 | **Agents and orchestration** | SMT `personas/` + `judge.py` and the Sept 2026 redesign (setups author, advisors graded); SmartDesk `agent.py` | The central question in every AI-engineering interview right now |
 | 2 | **Tools, function calling and MCP** | SmartDesk `mcp_servers/`, `tools.py` | MCP is vendor-neutral and I have written servers, not just used them |
 | 3 | **RAG and retrieval** | SmartDesk `rag/` | Asked in nearly every interview; most candidates cannot go past "I used a vector DB" |
 | 4 | **Evaluation** | `evals/`, SMT `learning/validation/` | The rarest thing I have. Almost nobody interviewing can measure what they built |
@@ -28,11 +28,14 @@ Before any of the detail, these four answers cover most of a first-round
 screen. Everything in Part 3 is elaboration on them.
 
 **"Tell me about yourself."**
-> I build production agentic systems. My flagship is a patent-pending
-> multi-agent trading platform on Google Cloud — six specialist agents voting
-> into a learned judge, retrained weekly behind a statistical overfitting
-> gate. Before AI I led QA automation at Deloitte for four years, which is why
-> I build evaluation in from the start rather than bolting it on.
+> I build LLM agents and the tests that show whether they work. My flagship
+> is a patent-pending AI trading agent I built on my own by directing AI coding
+> agents. It started as six specialist agents voting into a learned judge.
+> When I graded those agents on independent data, all six were at a coin
+> flip, so I rebuilt it: written rules with replayed records open every
+> trade, and the agents became advisors graded on every call. Before AI I led
+> QA automation at Deloitte for four years, which is why I build the
+> measurement first.
 
 **"What is your strongest technical skill?"**
 > Knowing whether the thing I built actually works. I build the measurement
@@ -51,7 +54,10 @@ screen. Everything in Part 3 is elaboration on them.
 > spent four years finding how enterprise systems fail before customers did,
 > and I have carried that into every system I have built since. My trading
 > agent refuses to act on data it cannot verify, and no fallback value passes
-> without a warning.
+> without a warning. When I audited 98 merges my own coding agents wrote, I
+> found an order bug that had rejected 1,137 live orders over three months
+> while every test passed. Since then a fix only counts when the production
+> log shows it.
 
 ---
 

@@ -18,7 +18,7 @@ decides how a question about that skill should be answered.
 
 | Project | What it is | Where |
 |---|---|---|
-| **Smart Money Trading (SMT)** | Patent-pending multi-agent trading system. 6 persona agents → learned Judge → risk gate → execution. 33K lines, 153 modules, 166 tests. Live on GCP. | private core; public layer `smt-apac` |
+| **Smart Money Trading (SMT)** | Patent-pending AI trading agent. **Since the Sept 2026 redesign:** written rules with replayed records open every trade; 6 advisor agents + a Judge are graded on every call and earn a veto only after 30 proven warnings; reasons pass a counterfactual check; shadow copies re-run each live trade with one decision changed. ~91K lines of Python, 3,045 tests, 611 findings, 344 PRs. Live 24/7 on an Oracle Cloud free-tier VM since 10-03 (GCP before), real orders on WEEX's simulated account. *(Original design, still worth knowing:* 6 persona agents → learned Judge → risk gate → execution; 33K lines and 166 tests when this table was first written.)* | private core; public layer `smt-apac` |
 | **SmartDesk** | Multi-agent assistant. ADK orchestrator → inbox / planner / knowledge sub-agents. Own MCP servers. RAG with a measured eval harness. | `github.com/JannetEkka/smartdesk` |
 | **VerseCanvas** | Poem → art. Gemini analysis → prompt engineering → Imagen on Vertex AI → editing. 2,600 lines. | `github.com/JannetEkka/versecanvas` |
 | **Smart Money Tracker** | Multi-agent whale tracking, 3 chains, OpenServ SDK, Alchemy webhooks. **Won Best DeFi Application.** | private |
@@ -94,10 +94,11 @@ decides how a question about that skill should be answered.
 | Cloud Run | **Built** | SmartDesk, SMT World, smt-world-chat |
 | Cloud Functions | **Built** | `cloud_functions/` — budget pause, cost digest |
 | BigQuery | **Built** | 173K decisions + 447K klines, Conversational Analytics agent |
-| Compute Engine + systemd | **Built** | SMT daemon, watchdog, auto-restart |
+| Compute Engine + systemd | **Built** | SMT daemon, watchdog, auto-restart (on GCP until 10-02) |
+| Oracle Cloud (Always Free VM) | **Built** | SMT daemon since 10-03: a bootstrap script turns a fresh Ubuntu VM into the running system; moved off GCP in two days, open positions re-adopted from committed state |
 | Secret Manager | **Built** | `v4/secrets_loader.py` |
 | Pub/Sub, Cloud Scheduler | **Used** | budget pause, cost digest cron |
-| Cloudflare Workers | **Built** | SMT live site |
+| Cloudflare Workers | **Built** | SMT World: static site + a Worker routing `/api/chat` (Gemini on a free AI Studio key, held as a Worker secret) and `/api/trend` |
 | Docker | **Used** | Dockerfiles; image slimmed 1.8 GB → 340 MB |
 | AWS (S3, EC2, RDS, SageMaker, Textract, Comprehend) | **Used** | AutoKorrekt |
 | Kubernetes | **No** | — |
@@ -128,5 +129,5 @@ decides how a question about that skill should be answered.
 | Test automation leadership | **Built** | Deloitte, 6-person team, 4 years |
 | Selenium / Katalon | **Built** | 83% efficiency improvement, Yatra framework |
 | CI/CD (Jenkins) | **Built** | automated reporting, 75% manual time cut |
-| pytest | **Built** | 166 tests SMT, 54 tests SmartDesk |
+| pytest | **Built** | 3,045 tests SMT, 54 tests SmartDesk |
 | Enterprise systems | **Used** | HPE CPQ, AT&T, Salesforce, SAP Hybris, Walmart Sam's Club DR, ND benefits portal |

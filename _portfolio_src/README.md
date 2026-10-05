@@ -20,18 +20,26 @@
 
 No dependencies — plain Python 3, standard library only.
 
-## The résumé
+## The résumés
 
-`../Jannet_Ekka_Resume.pdf` is generated from `resume.html` in this folder —
-the same build-and-verify approach as the site. To regenerate after editing:
+Two résumés, both generated from HTML in this folder — the same build-and-verify
+approach as the site:
+
+| PDF (repo root) | source | for | length |
+|---|---|---|---|
+| `Jannet_Ekka_Resume.pdf` | `resume.html` | applied AI + AI evaluation roles (the site's nav button) | **exactly 2 pages** |
+| `Jannet_Ekka_Founder_Resume.pdf` | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
+
+To regenerate after editing (from this folder):
 
 ```bash
 chromium --headless --no-pdf-header-footer \
-  --print-to-pdf=../Jannet_Ekka_Resume.pdf _portfolio_src/resume.html
+  --print-to-pdf=../Jannet_Ekka_Resume.pdf resume.html
+chromium --headless --no-pdf-header-footer \
+  --print-to-pdf=../Jannet_Ekka_Founder_Resume.pdf resume_founder.html
 ```
 
-It is tuned to land on **exactly two pages**. Adding content can push it to
-three; the fix is to step the body `font-size` and the matching spacing values
+Each is tuned to its page count above. Adding content can push one over; the fix is to step the body `font-size` and the matching spacing values
 down together until it fits again, rather than cutting content blindly.
 
 ⚠️ **Verify the page count after every edit — and verify the FONT first.**
@@ -44,16 +52,18 @@ knew. Two traps found while fixing it:
    pages *regardless of the content*. `fc-list | grep -i carlito` before
    trusting any page count; on Debian/Ubuntu,
    `apt-get install fonts-crosextra-carlito`.
-2. **Measure, do not eyeball.** Render and count:
+2. **Measure, do not eyeball.**
 
    ```bash
    chromium --headless --no-sandbox --no-pdf-header-footer \
      --print-to-pdf=/tmp/r.pdf _portfolio_src/resume.html
-   python3 -c "from pdfminer.high_level import extract_pages; \
-     print(sum(1 for _ in extract_pages('/tmp/r.pdf')))"
+   pdfinfo /tmp/r.pdf | grep Pages
    ```
 
-The current source is at a **0.92 type scale** and holds two pages. If it
-spills again, cut the entry that earns its place least — everything cut so far
-(VerseCanvas, the 13-project ML portfolio, the Internship Studio role) is one
-click away on the site, which the header links.
+2026-10-05: the committed `Jannet_Ekka_Resume.pdf` was itself **three** pages
+(`pdfinfo`, built 09-22 — the font trap above). Both résumés rewritten (applied AI + evaluation, and a separate founder
+page). The body is **10.1pt** (every `pt` value in the `<style>` block scaled
+together); the 2-page résumé has about a third of page 2 free, so there is room
+to add before anything has to go. Everything cut so far (VerseCanvas, the
+Location Intelligence agent, the Internship Studio role) is one click away on
+the site, which the header links.

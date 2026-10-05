@@ -15,9 +15,10 @@ to do next. The loop is: observe → decide → act → observe.
 
 **What makes a system "multi-agent"?**
 More than one agent, each with a narrower job, plus something that routes
-between them and combines their output. My SMT system has six persona agents —
-order-flow, technical, whale, on-chain, sentiment, regime — and a Judge that
-aggregates their votes. SmartDesk has an inbox agent, a planner agent and a
+between them and combines their output. My SMT system has six advisor agents —
+order-flow, flows (whale + on-chain, merged), regime, technical, sentiment,
+catalyst — and a Judge. Since the September 2026 redesign they advise and are
+graded; written rules open the trades. SmartDesk has an inbox agent, a planner agent and a
 knowledge agent under a root orchestrator.
 
 **Why use multiple agents instead of one big prompt?**
@@ -34,20 +35,25 @@ SmartDesk it is the root ADK `Agent`; it routes to sub-agents, then a
 ## Intermediate
 
 **Walk me through your multi-agent architecture.**
-> SMT. Six personas, each a class implementing one contract: given market
-> context, return a `PersonaVote` with direction, confidence and reasoning.
-> They run independently and know nothing about each other.
+> SMT, in two versions, and the reason it changed is the best part.
 >
-> A `JudgePersona` collects those votes and produces a `JudgeDecision`. It
-> weights each persona, and the weights are learned rather than hand-set. One
-> detail I had to add: the conviction is **quorum-renormalised** — divided by
-> the weight mass that actually voted. Without that, one dead data feed drags
-> the total down and the confidence floor becomes unreachable, so the system
-> silently stops trading. That happened, and that is why the renormalisation
-> exists.
+> Version one: six personas, each a class implementing one contract: given
+> market context, return a `PersonaVote` with direction, confidence and
+> reasoning. A `JudgePersona` weighted the votes, with learned weights, into a
+> `JudgeDecision`. One detail I had to add: conviction is **quorum-renormalised**,
+> divided by the weight mass that actually voted. Without it, one dead feed
+> dragged the total down, the confidence floor became unreachable and the
+> system silently stopped trading. That happened.
 >
-> Downstream of the Judge is a risk gate and an execution layer, then a
-> learning loop that retrains on real outcomes.
+> Then I graded every persona on independent market data. All six called
+> direction at a coin flip. So version two flips the roles. A trade opens only
+> when a **written rule** fires, and each rule carries its own record, replayed
+> 2020–2026 through the live code at the venue's fees. The personas became
+> **advisors**: every call is graded against what happened (agree, oppose,
+> silent), and an advisor earns a veto only after 30 proven warnings. Each live
+> trade gets **shadow copies** that redo it with one decision changed, so I can
+> see what each decision was worth. A new rule trades on paper until 30 tracked
+> trades, and promotion is a human call.
 
 **How do agents share state?**
 Two patterns I have used. In SMT it is explicit: a context dict built once per
@@ -85,7 +91,18 @@ The weekly refit only ships if the candidate passes a gate — combinatorial
 purged cross-validation, deflated Sharpe, probability of backtest overfitting,
 and false discovery rate control. Failing candidates are held in shadow rather
 than deployed. The gate has rejected every candidate on some weeks, and I let
-it, because a gate you override is not a gate.
+it, because a gate you override is not a gate. It still holds a per-pair
+forecaster in shadow that scored AUC 0.723 on a BTC forward test: a good
+number on one test is not the same as a result that survives the gate.
+
+**Have you ever found that your agents did not work?**
+Yes, and it changed the design. I graded SMT's six personas on independent
+data, not the bot's own logs, and every one called direction at a coin flip.
+I did not delete them: they became graded advisors whose own record decides
+whether they ever earn a veto, and the trades come from written rules with long
+records. The
+general lesson: grade an agent on data it did not produce before you let it
+act.
 
 **When would you NOT use a multi-agent architecture?**
 When one model with one prompt does the job. Multi-agent costs latency, tokens
@@ -447,14 +464,21 @@ announce itself — no silent fallback.
 ## Basics
 
 **Cloud Run vs Cloud Functions vs Compute Engine?**
-Cloud Run for containers that scale to zero — SmartDesk, SMT World. Cloud
-Functions for small event-driven handlers — my budget pause and cost digest.
-Compute Engine when you need a long-lived process; my trading daemon runs there
-under systemd because it must hold state across cycles and survive reboots.
+Cloud Run for containers that scale to zero — SmartDesk, and SMT World until
+October 2026. Cloud Functions for small event-driven handlers — my budget pause
+and cost digest. Compute Engine when you need a long-lived process; my trading
+daemon ran there under systemd because it must hold state across cycles and
+survive reboots. When the GCP billing account closed I moved it in two days to
+an Oracle Cloud free-tier VM (same systemd units, a bootstrap script) and SMT
+World to Cloudflare Workers; it re-adopted its open positions from committed
+state on first boot.
 
 **How do you handle secrets?**
-Secret Manager, resolved at runtime by the service account. Never in env files,
-never in the image. And a secret that fails to resolve must log loudly — I had a
+On GCP: Secret Manager, resolved at runtime by the service account, never in
+the image. Off GCP (since October 2026, no Secret Manager on a free stack): a
+root-only, mode-600 env file on the VM, read by a loader that refuses a value
+pasted twice and flags one identical to another key, and a Cloudflare Worker secret for
+the chat key; the key never touches the repo or the chat. And a secret that fails to resolve must log loudly — I had a
 module fall back to a stub `get_secret` that returned `None`, which meant no
 Discord alert was sent for months while everything looked healthy.
 
@@ -646,8 +670,9 @@ problem. Say how fast you would pick it up. Never bluff.**
 > days, not weeks. LangGraph is the closest to what I built.
 
 **"Have you used Kubernetes?"**
-> No. My deployments are Cloud Run for containers that scale to zero and
-> Compute Engine under systemd for the long-running daemon. I understand the
+> No. My deployments are Cloud Run or Cloudflare Workers for things that scale
+> to zero, and a VM under systemd for the long-running daemon (Compute Engine,
+> now Oracle Cloud). I understand the
 > problems Kubernetes solves — orchestration, scaling, self-healing — because I
 > solved the small version with systemd, watchdogs and health checks. I have not
 > run a cluster.
