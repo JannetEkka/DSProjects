@@ -10,7 +10,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 
 | Closes | Hackathon | Prize | Decision | Why |
 |---|---|---|---|---|
-| Oct 06 | **[Qollab × IonQ Global Quantum Hackathon](https://qollab.xyz/programs/hackathon)** — register by **Oct 6, 11:00 ET (20:30 IST)**; 48 h sprint Oct 10 04:30 → Oct 12 04:30 IST | $10K + $20K compute | ✅ | ✓ theme **Quantum Impact** (finance: portfolio optimisation over the 8-coin book, benchmarked honestly against a classical optimiser). Solo OK, India eligible, free compute. Top 3 get IonQ mentorship and fast-tracked interviews. Sprint lands on the away days — Claude builds, operator submits |
+| Oct 06 | **[Qollab × IonQ Global Quantum Hackathon](https://qollab.xyz/programs/hackathon)** — register by **Oct 6, 11:00 ET (20:30 IST)**; 48 h sprint Oct 10 04:30 → Oct 12 04:30 IST | $10K + $20K compute | ✅ registered | ✓ theme **Quantum Impact** (finance: portfolio optimisation over the 8-coin book, benchmarked honestly against a classical optimiser). Solo OK, India eligible, free compute. Top 3 get IonQ mentorship and fast-tracked interviews. Sprint lands on the away days — Claude builds, operator submits |
 | Oct 08 | **[Solana Mobile: Clock In](https://solanamobile.com/blog/clock-in-the-solana-mobile-hackathon)** — no time published; finish by the night of Oct 7 | $125K USDC (10 places) + $10K SKR | ✅ | ✓ submit a working Android APK + repo + demo video + pitch deck; no Seeker needed (emulator or any Android phone); judged on stickiness, UX, innovation, demo. Plan: SMT World wrapped as an Android app plus a Solana-native piece (wallet sign-in on devnet). Entering is free; only a WINNER must publish on the Solana dApp Store to claim, which costs ~0.2 SOL plus KYC |
 | Oct 08 | [Bitget AI Hackathon S2](https://x.com/bitget_ai) | $50K USDT | ⛔ | ✓ submissions closed Sep 21; Oct 8 is the results date |
 | Oct 09 | **[#HackCanton Season 3](https://appsfactory.cc/hackathons)** — finish by Oct 8 | up to $50K cash + credits | ✅ | ✓ online, solo OK; DAML smart contracts on Canton. Idea: the bot's decision log as auditable DAML contracts |
@@ -27,19 +27,19 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 14 | [Multimodal AI Hackathon 2026 (IIT Mandi)](https://multimodal-ai-hackathon-2026-7.devpost.com) | — | ❌ | students only |
 | Oct 15 | RESPAWN Game Jam (Oct 12–15) | — | ❌ | game engine jam |
 | Oct 16 | [MLAI Hackathon 2026](https://mlai-hackathon.devpost.com/) — closes Oct 17 00:00 ICT | 10M VND + $500 OpenAI credits | ❌ | ✓ students or alumni of the 23 member universities of the HCMUT AI Network (Vietnam) only |
-| Oct 16 | **[Hack Apertus](https://hackapertus.devpost.com/)** — closes **Oct 16, 12:00 CEST (15:30 IST)** | €10,680+ (2,500 CHF per track) | ⚪ operator deciding | ✓ global, solo OK, no cost. Tracks: Red-Teaming · Swiss Voices · Academia · Own Projects, all on Apertus (Switzerland's open LLM). Red-Teaming = Wiretrap's method on a new target. Grand Finals are in St. Gallen in May 2027 — check whether attending is required for the prize |
+| Oct 16 | **[Hack Apertus](https://hackapertus.devpost.com/)** — closes **Oct 16, 12:00 CEST (15:30 IST)** | €10,680+ (2,500 CHF per track) | ✅ registered | ✓ global, solo OK, no cost. Tracks: Red-Teaming · Swiss Voices · Academia · Own Projects, all on Apertus (Switzerland's open LLM). Red-Teaming = Wiretrap's method on a new target. Grand Finals are in St. Gallen in May 2027 — check whether attending is required for the prize |
 | Oct 18 | **[Graph Hacks: Context for AI Agents (FalkorDB)](https://wemakedevs.org/hackathons/falkordb)** — Oct 15–18 | iPhone 18 Pro / PS5 / Mac Mini per track | ✅ registered | ✓ online, solo allowed; "an agent that can show how it got to each answer" — an explainable decision graph |
 | Oct 18 | [Ayiti AI](https://ayiti.ai) | — | ❓ | not checked |
 | Oct 20 | **[Open Agent Hackathon 2026](https://hackathon.genai.works)** — register by Oct 13, build Oct 15–20 | up to $20K | ⚪ | ✓ register by Oct 13; overlaps Graph Hacks — decide Oct 15 when prizes are posted · has workshop material to go through first — its own session |
 | Oct 20 | TechEx Amsterdam on lablab (online Oct 16–19) | — | ⚪ | overlaps Graph Hacks |
 | Oct 20 | North America HPC Hackathon (Oct 19–20) | — | ❌ | HPC, North America |
-| Oct 22 | **[RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection)** — **join by Oct 15** (entry + team-merger deadline); final Oct 22 | $77K, incl. new awards for the most efficient models | ⚪ operator deciding | ✓ multimodal: knee MRI + the radiology report → 12 abnormality types. Personal (operator 10-05). Honest odds: a 2.5-week start against medical-imaging teams makes the main prizes unlikely; the efficiency award is the realistic lane, and a strong public notebook is a portfolio piece either way. Compute: Kaggle's free GPUs + AMD's $100 credits (lablab) |
-| Oct 23 | **[Amazon: Build, Ship, Shape](https://amazonappdev2026.devpost.com)** — closes 12:00 PDT | $138K ($25K first per track) | ✅ | ✓ **Fire TV track**: a demo-ready app on Fire OS (web tech or Android accepted; simulator OK) — the operator owns a Fire TV Stick for a real-device demo. SMT World on the TV ("AI-enhanced viewing"), reusing the Solana Android wrapper. Existing apps allowed with a note on what was built in the window. Submit: repo, video under 3 min, product feedback |
+| Oct 22 | **[RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection)** — **join by Oct 15** (entry + team-merger deadline); final Oct 22 | $77K, incl. new awards for the most efficient models | ✅ joined | ✓ multimodal: knee MRI + the radiology report → 12 abnormality types. Personal (operator 10-05). Honest odds: a 2.5-week start against medical-imaging teams makes the main prizes unlikely; the efficiency award is the realistic lane, and a strong public notebook is a portfolio piece either way. Compute: Kaggle's free GPUs + AMD's $100 credits (lablab) |
+| Oct 23 | **[Amazon: Build, Ship, Shape](https://amazonappdev2026.devpost.com)** — closes 12:00 PDT | $138K ($25K first per track) | ✅ registered | ✓ **Fire TV track**: a demo-ready app on Fire OS (web tech or Android accepted; simulator OK) — the operator owns a Fire TV Stick for a real-device demo. SMT World on the TV ("AI-enhanced viewing"), reusing the Solana Android wrapper. Existing apps allowed with a note on what was built in the window. Submit: repo, video under 3 min, product feedback |
 | Oct 23 | [AiTHON 2.0](https://aithon2-0.xyz/) | — | ❌ | skipped (operator, 10-05) |
 | Oct 24 | [Web3 for Social Good](https://dorahacks.io/hackathon/web3-social-good-2026) | — | ❓ | rules page did not load (10-05). DAO / impact contracts — would need a testnet faucet that asks for no money |
 | Oct 25 | **[IEEE ClimateChain](https://ieee-climatechain-hack.devpost.com)** — online Oct 5–25 | $3K | ✅ | ✓ open worldwide. Climate + blockchain; a new project |
 | Oct 26 | [OpenCV AI Competition 2026](https://opencv26.devpost.com) | $20,250 | ❌ | ✓ needs a component running on AWS (an account with a card on file) |
-| Oct 26 | **[Build With AI: Basics](https://learn-ai-basics.devpost.com/)** — closes Oct 26, 17:00 EDT | $2,500 ($1,250 first) | ⚪ operator deciding | ✓ 18+, all countries; a new project started from an empty folder; 1–3 min video + public repo. Beginner-friendly, so a polished small build stands out |
+| Oct 26 | **[Build With AI: Basics](https://learn-ai-basics.devpost.com/)** — closes Oct 26, 17:00 EDT | $2,500 ($1,250 first) | ✅ registered | ✓ 18+, all countries; a new project started from an empty folder; 1–3 min video + public repo. Beginner-friendly, so a polished small build stands out |
 | Oct 27 | **[GitLab: Life After Code](https://gitlab-transcend.devpost.com)** | $45K total | ✅ registered | ✓ India eligible, solo allowed. "Proof of Fix": an agent that checks production after a merge and reopens the issue if the promised log line never appears |
 | Oct 28 | [AWS CDS Agentic AI Partner Hackathon](https://aws-cds-partner.devpost.com) | $40K | ❌ | ✓ AWS Partner organisations only |
 | Oct 30 | **[Nebius × NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com)** | $50K+ ($20K first) | ⚪ | ✓ must run on Nebius + an NVIDIA open model; free trial is ~$1 — only on free Builder Program credits, never a paid top-up |
@@ -70,7 +70,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Nov 15 | [Mezo Buildathon Wave 1](https://app.akindo.io/wave-hacks) (Oct 16–Nov 15) | $7K in MEZO | ❌ | Bitcoin DeFi |
 | Nov 18 | [Meta VR Start Developer Competition](https://start-developer-competition-26.devpost.com) | $1M | ❌ | needs a Quest 3 and the VR Start programme |
 | Nov 30 | [QIE 3.0 Blockchain Hackathon](https://hackathon.qie.digital) | $17K | ❓ | not checked |
-| Dec 01 | **[Lablab × AMD AI Academy Challenge](https://lablab.ai/ai-hackathons/amd-lablab-ai-academy-challenge)** — self-paced Sep 1–Dec 1 | $5K (3 prizes) | ⚪ operator deciding | ✓ solo, free, no card. XP from courses + bi-weekly mini-challenges. New AMD AI Developer Program members get $100 of AMD GPU credits — compute for the RSNA entry |
+| Dec 01 | **[Lablab × AMD AI Academy Challenge](https://lablab.ai/ai-hackathons/amd-lablab-ai-academy-challenge)** — self-paced Sep 1–Dec 1 | $5K (3 prizes) | ✅ registered | ✓ solo, free, no card. XP from courses + bi-weekly mini-challenges. New AMD AI Developer Program members get $100 of AMD GPU credits — compute for the RSNA entry |
 | Dec 14 | [Enveda CASMI 2026](https://www.kaggle.com/competitions/enveda-casmi26-molecule-id-mass-spectra) — entry Dec 7 | $50K | ❌ | mass-spectrometry chemistry |
 | rolling | [Circle Grants](https://circle.questbook.app) | grants | ❌ | USDC builders |
 | — | [HackMeridian (Stellar)](https://hackmeridian.com) | — | ❌ | in person, Lisbon |
@@ -83,23 +83,26 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | TBA | @commonsmade builder hackathon | — | ⚪ | announcement expected later in October |
 | TBA | [Arca: The Agent Capital Hackathon](https://form.typeform.com/to/tBJ8Q1io) | — | ⚪ | date not announced |
 
-## The entries, by deadline (updated 2026-10-05, evening)
+## The entries, by deadline (updated 2026-10-05, night)
 
 Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. Claude builds in cloud sessions; the operator registers, creates free accounts, checks the video and submits.
 
 | When (IST) | Entry | State |
 |---|---|---|
-| Oct 6, 20:30 | **IonQ** — register (theme: Quantum Impact) | ✘ register |
 | night of Oct 7 | **Solana Mobile: Clock In** — APK + video + deck done (closes Oct 8) | ✘ register |
 | Oct 8 | **#HackCanton S3** — done (closes Oct 9) | ✘ register |
 | Oct 10–11 | **neatHack** — 48 h build | ✅ registered |
-| Oct 10 04:30 → Oct 12 04:30 | **IonQ** — 48 h sprint | build in window |
+| Oct 10 04:30 → Oct 12 04:30 | **IonQ** — 48 h sprint, Quantum Impact | ✅ registered |
 | Oct 13 | **Open Agent** — registration closes (own session: workshop first) | ✘ register |
 | Oct 14, 09:29 | **Monad Metropolis** — Onchain Finance & Trading | ✅ registered |
+| Oct 15 | **RSNA Knee** — entry deadline (joined) | ✅ joined |
+| night of Oct 14 | **Hack Apertus** — ready before the second away window (closes Oct 16, 15:30) | ✅ registered |
 | Oct 15–18 | **Graph Hacks / FalkorDB** — build in window | ✅ registered |
 | Oct 20 | **Open Agent** | — |
-| Oct 24, 00:30 (= Oct 23 12:00 PDT) | **Amazon: Build, Ship, Shape** — Fire TV | ✘ register |
+| Oct 22 | **RSNA Knee** — final submission | — |
+| Oct 24, 00:30 (= Oct 23 12:00 PDT) | **Amazon: Build, Ship, Shape** — Fire TV | ✅ registered |
 | Oct 25 | **IEEE ClimateChain** | ✘ register |
+| Oct 26 | **Build With AI: Basics** | ✅ registered |
 | Oct 27 | **GitLab: Life After Code** | ✅ registered |
 | Oct 30 | **Nebius × NVIDIA** — only on free credits | — |
-| — | RSNA Knee (join by Oct 15) · Hack Apertus (Oct 16) · Build With AI (Oct 26) · Lablab × AMD (Dec 1) | ⚪ operator deciding |
+| Dec 1 | **Lablab × AMD AI Academy** — self-paced; $100 GPU credits for RSNA | ✅ registered |
