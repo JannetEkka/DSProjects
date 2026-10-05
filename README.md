@@ -12,7 +12,7 @@ Applied AI engineer: LLM agents, AI evaluation and agent security. Founder of JT
 
 **Smart Money Trading (SMT)** is an AI trading agent for crypto futures that has to prove why it traded. Written rules with replayed records open every trade; six AI advisors explain each decision and are graded on whether they were right; a reason is only shown if flipping that advisor's input changes the decision. I built it alone, directing AI coding agents and reviewing every merge: 91,000 lines of Python, 3,000+ tests and 611 measured findings. Patent pending in India (App. No. 202631090789).
 
-**Wiretrap** tests AI agents for security by reading the tool-call log instead of the reply. **SmartDesk** is a multi-agent assistant whose RAG evaluation harness stopped a reranker that only looked like a win.
+**Wiretrap** ([live](https://wiretrap.onrender.com/)) tests AI agents for security by reading the tool-call log instead of the reply. **SmartDesk** is a multi-agent assistant whose RAG evaluation harness stopped a reranker that only looked like a win.
 
 ## This repository
 

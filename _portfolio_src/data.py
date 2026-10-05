@@ -115,6 +115,7 @@ HIRE = [
 # ---- verified link status ----
 # 200 OK : workers.dev SMT, smt-mantle pages, all github repos (public via API)
 # DEAD 2026-10-05: run.app SMT World (503) and wiretrap.ai.studio — both on GCP projects whose billing closed 10-02
+# LIVE again 2026-10-05: Wiretrap at wiretrap.onrender.com (Render free tier + Firebase Spark + a free AI Studio key)
 # user-confirmed live: versecanvas.streamlit.app
 # no repo exists: Smart Money Tracker -> left blank per instruction
 
@@ -137,12 +138,10 @@ FLAGSHIP = dict(
 PROJECTS = [
  dict(slug="wiretrap", wide=True, cat="agents", title="Wiretrap", sub="Adversarial Security Testing for AI Agents",
    meta="2026 · Google Cloud Gen AI Academy APAC — Cohort 3",
-   desc="<strong>&ldquo;We don&rsquo;t grade what your agent says. We audit what it does.&rdquo;</strong> Most LLM security tools read the agent&rsquo;s reply and grade the text. This one reads the tool-call log.<br><br>Every tool the agent declares gets cloned as a dead copy with the same name and JSON Schema. The copy records the call and returns fake data, so nothing real fires. Attacks run in separate Gemini conversations and a judge model reads the log. The payloads are written to look like ordinary work, no shouting and no &ldquo;ignore all previous instructions&rdquo;, because current models refuse those easily.<br><br>It caught a Google codelab agent saying <em>&ldquo;I don&rsquo;t have access or authorization to modify configuration files&rdquo;</em> after it had already run <code>ls -la</code> through its shell tool. Text scanners pass that. Wiretrap calls it <strong>&ldquo;Said No, Did Yes&rdquo;</strong> and shows the arguments.<br><br>A run with nothing classified reports <code>INCONCLUSIVE</code>, never <code>HARDENED</code>. Attacks against tools the agent doesn&rsquo;t have are dropped from the score. Approved fixes get re-run against the attacks that broke it, and the report says when one didn&rsquo;t hold.",
-   stats=[("8","attack categories"),("9.4K","lines of TypeScript"),("0","static API keys"),("4","model fallback ladder")],
-   tags=["Adversarial Testing","Agent Security","Vertex AI / Gemini","React + TypeScript","Express","Cloud Run","Firestore","Secret Manager","Google AI Studio"],
-   # Live link (wiretrap.ai.studio) removed 2026-10-05: its backend ran on a GCP project whose
-   # billing closed 10-02. Re-add it when the port to the free AI Studio key ships.
-   links=[("Code",GH+"wiretrap","code")]),
+   desc="<strong>&ldquo;We don&rsquo;t grade what your agent says. We audit what it does.&rdquo;</strong> Most LLM security tools read the agent&rsquo;s reply and grade the text. This one reads the tool-call log.<br><br>Every tool the agent declares gets cloned as a dead copy with the same name and JSON Schema. The copy records the call and returns fake data, so nothing real fires. Attacks run in separate Gemini conversations and a judge model reads the log. The payloads are written to look like ordinary work, no shouting and no &ldquo;ignore all previous instructions&rdquo;, because current models refuse those easily.<br><br>It caught a Google codelab agent saying <em>&ldquo;I don&rsquo;t have access or authorization to modify configuration files&rdquo;</em> after it had already run <code>ls -la</code> through its shell tool. Text scanners pass that. Wiretrap calls it <strong>&ldquo;Said No, Did Yes&rdquo;</strong> and shows the arguments.<br><br>A run with nothing classified reports <code>INCONCLUSIVE</code>, never <code>HARDENED</code>. Attacks against tools the agent doesn&rsquo;t have are dropped from the score. Approved fixes get re-run against the attacks that broke it, and the report says when one didn&rsquo;t hold.<br><br><em>The live demo runs on free tiers, so the first load can take up to a minute while it wakes up.</em>",
+   stats=[("8","attack categories"),("9.4K","lines of TypeScript"),("₹0","to host, all free tiers"),("4","model fallback ladder")],
+   tags=["Adversarial Testing","Agent Security","Gemini API","React + TypeScript","Express","Firestore","Firebase Auth","Docker on Render","Google AI Studio"],
+   links=[("Live demo","https://wiretrap.onrender.com/","live"),("Code",GH+"wiretrap","code")]),
 
  dict(slug="versecanvas", grants=True, cat="genai", title="VerseCanvas", sub="AI Poetry-to-Art Generator", meta="2025 · Personal project",
    desc="Turns a poem into original artwork through a multi-stage pipeline: semantic analysis with Gemini 2.0 &rarr; automated prompt engineering &rarr; image synthesis with Imagen 3.0 on Vertex AI &rarr; hybrid editing and text overlay. Six languages, six art styles, tunable mood intensity.",
