@@ -589,20 +589,20 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="idrow reveal">
       <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
-      <div class="eyebrow"><b></b> Open to Forward-Deployed Engineer &amp; AI-native delivery roles</div>
+      <div class="eyebrow"><b></b> Open to applied AI &amp; AI evaluation roles · remote</div>
     </div>
     <h1 class="big reveal">
       I architect <span class="serif">agentic AI</span><br>
       and keep it
       <span class="rotor"><span class="rotor-in">
-        <span>running.</span><span>honest.</span><span>live in real markets.</span><span>running.</span>
+        <span>running.</span><span>honest.</span><span>measured.</span><span>running.</span>
       </span></span>
     </h1>
     <p class="lede reveal">
       I ship production AI systems by directing <strong>AI coding agents</strong>, and I am the
       <strong>only review before anything merges</strong>. Four years leading QA automation at
       <strong>Deloitte</strong> taught me how to tell when the output is wrong, which is the part most AI teams are still
-      learning. I run a <strong>patent-pending multi-agent trading AI</strong> on Google Cloud, live 24/7.
+      learning. I run a <strong>patent-pending AI trading agent</strong>, live 24/7 on a free-tier cloud stack.
       <strong>Rank&nbsp;1</strong> in my AI/ML postgrad at UT Austin McCombs.
     </p>
     <div class="cta reveal">
@@ -625,7 +625,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="statgrid">
       <div class="stat reveal"><div class="n" data-count="25">25</div><div class="l">Projects shipped</div></div>
-      <div class="stat reveal"><div class="n" data-count="77K">77K</div><div class="l">Lines shipped &amp; audited</div></div>
+      <div class="stat reveal"><div class="n" data-count="91K">91K</div><div class="l">Lines shipped &amp; audited</div></div>
       <div class="stat reveal"><div class="n" data-count="4">4</div><div class="l">Years enterprise eng.</div></div>
       <div class="stat reveal"><div class="n" data-count="1">1</div><div class="l">Patent filed</div></div>
     </div>
@@ -648,12 +648,12 @@ footer a:hover{{color:var(--tx)}}
 <div class="marq" aria-label="Technology stack">
   <div class="marq-in">
     <span>Claude Code</span><span>AI-Native CI/CD</span><span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
-    <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span><span>Oracle Cloud</span><span>Google AI Studio</span>
     <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
     <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>systemd</span><span>SQL</span>
     <span>Claude Code</span><span>AI-Native CI/CD</span><span>Python</span><span>Google ADK</span><span>MCP</span><span>Vertex AI</span><span>Gemini</span><span>Imagen</span>
-    <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span>
+    <span>BigQuery</span><span>AlloyDB</span><span>pgvector</span><span>Cloud Run</span><span>Cloudflare Workers</span><span>Oracle Cloud</span><span>Google AI Studio</span>
     <span>NVIDIA cuDF</span><span>RAPIDS</span><span>CUDA</span><span>Three.js</span><span>Pub/Sub</span>
     <span>TensorFlow</span><span>PyTorch</span><span>scikit-learn</span><span>Optuna</span><span>CatBoost</span>
     <span>FastAPI</span><span>Streamlit</span><span>React</span><span>TypeScript</span><span>Docker</span><span>systemd</span><span>SQL</span>
@@ -670,9 +670,9 @@ footer a:hover{{color:var(--tx)}}
         </div>
         <div class="abtxt reveal">
           <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
-          <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks built to catch overfitting.</p>
-          <p>The way I work has changed too. I don't hand-type a 67,000-line platform. I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The speed-up is real and so is the gate. I am the only one standing between a generated patch and a system trading live.</p>
-          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on <strong>GCP Compute Engine</strong>, and I read its logs the way I used to read defect reports, triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
+          <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks built to catch overfitting. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it: written rules with replayed records open trades, and the agents became advisors graded on every call.</p>
+          <p>The way I work has changed too. I don't hand-type a 91,000-line platform. I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The speed-up is real and so is the gate. I am the only one standing between a generated patch and a system trading live.</p>
+          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on an <strong>Oracle Cloud</strong> free-tier VM (I moved it off GCP in two days when the billing account closed), and I read its logs the way I used to read defect reports, triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
           <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong>, covering Vertex AI, Gemini, ADK, MCP and AlloyDB. All of it is architected and operated from a single 16&nbsp;GB laptop; when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
       </div>
@@ -680,7 +680,7 @@ footer a:hover{{color:var(--tx)}}
         <div class="award"><span class="em">⚙️</span><div><h5>Provisional patent filed</h5><p>India, App. No. 202631090789 — the SMT multi-agent decision architecture.</p></div></div>
         <div class="award"><span class="em">📈</span><div><h5>WEEX AI Wars I — #1 preliminary leaderboard</h5><p>Top of 230+ teams, then one of 37 finalists in the $880K live AI trading competition. <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer">Coverage</a></p></div></div>
         <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
-        <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC hackathon, Cohort 2 — advanced to prototype refinement.</p></div></div>
+        <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC 2026, Cohort 1 hackathon, with SmartDesk — advanced to prototype refinement.</p></div></div>
         <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
         <div class="award"><span class="em">📜</span><div><h5>12 credentials, all verifiable</h5><p>Google Cloud Gen AI Academy (2025 &amp; APAC 2026 Cohorts 1–3) · Gen AI Exchange · Agentic AI Day · Asha AI Hackathon · CPSAT. <a href="#credentials">See them all</a></p></div></div>
       </div>
@@ -696,9 +696,9 @@ footer a:hover{{color:var(--tx)}}
     </div>
     <div class="tl">
       <div class="tlrow reveal">
-        <h4>Independent AI Infrastructure Operator &amp; Developer</h4>
-        <div class="org">Smart Money Trading (SMT) Project · patent pending</div><div class="when">Jan 2024 – Present</div>
-        <p>Architect and operate a patent-pending multi-agent trading AI. 67,000 lines of Python, 2,815 tests, a six-persona committee under a learned Judge, a self-retuning loop behind a statistical overfitting gate, and an explanation layer that justifies every decision. Deployed as a <strong>high-availability daemon running 24/7 on GCP Compute Engine</strong>, with end-to-end AI observability: defect triage through terminal log diagnostics to isolate execution errors and systemic drift. Built through an <strong>AI-native CI/CD workflow</strong>. <strong>Claude Code</strong> on the command line generating targeted hotfixes and structuring pull requests, with me as the <strong>sole human-in-the-loop quality gate</strong> performing code audits and manual Git merges. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams and top 101 of 1,500+ at the Google Cloud Gen AI Academy APAC hackathon — all <strong>while a full-time family carer</strong>.</p>
+        <h4>Founder &amp; sole engineer</h4>
+        <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">Jan 2024 – Present</div>
+        <p>Building SMT, an AI trading agent that has to prove why it traded, and <strong>SMT World</strong>, the product exchanges give their users on top of it. 91,000 lines of Python, 3,045 tests, 344 merged pull requests and 611 measured findings, written by AI coding agents I direct, with me as the <strong>only review before anything merges</strong>. Graded my own six AI agents on independent data, found all six at a coin flip, and rebuilt the system so written rules open trades and the agents are graded advisors. Tested 1,800 strategy variants (36 million simulated trades) at six exchanges&rsquo; fees. Audited 98 AI-written merges and found an order bug that had rejected 1,137 live orders over three months while every test passed. It places real orders 24/7 on WEEX&rsquo;s simulated account from an <strong>Oracle Cloud</strong> free-tier VM, moved off GCP in two days. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams. All <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
@@ -742,14 +742,14 @@ footer a:hover{{color:var(--tx)}}
     <div class="shead reveal">
       <div class="skicker">Backing &amp; collaboration</div>
       <h2 class="stitle">Actively seeking grants and partners.</h2>
-      <p class="ssub">SMT is patent-pending, running live on Google Cloud, and looking for its next backer. If you fund early-stage AI, run a grant programme, or want to build on it &mdash; leave your details and I'll come back to you.</p>
+      <p class="ssub">SMT is patent-pending, running live 24/7, and looking for its first backer. If you fund early-stage AI, run a grant programme, or want to build on it &mdash; leave your details and I'll come back to you.</p>
     </div>
     <div class="backing reveal">
       <div class="backing-in">
         <div>
           <h3>Fund, partner, or just say hello.</h3>
           <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
-          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest.</p>
+          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest. The company on one page: <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">founder résumé (PDF)</a>.</p>
           {connect_html()}
         </div>
         <div>
@@ -788,7 +788,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="reveal">
       <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
-      <p>Open to AI/ML engineering, agentic systems and GenAI application roles. The inbox is always open.</p>
+      <p>Open to applied AI engineering, agent evaluation and agent security roles, remote. The inbox is always open.</p>
     </div>
     <div class="cgroups">{contact_groups_html()}</div>
   </div>
@@ -799,6 +799,7 @@ footer a:hover{{color:var(--tx)}}
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
       <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF)</a> ·
+      <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">Founder résumé (PDF)</a> ·
       <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
       <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>

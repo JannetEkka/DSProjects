@@ -113,7 +113,8 @@ HIRE = [
 ]
 
 # ---- verified link status ----
-# 200 OK : workers.dev SMT, run.app SMT World, smt-mantle pages, all github repos (public via API)
+# 200 OK : workers.dev SMT, smt-mantle pages, all github repos (public via API)
+# DEAD 2026-10-05: run.app SMT World (503) and wiretrap.ai.studio — both on GCP projects whose billing closed 10-02
 # user-confirmed live: versecanvas.streamlit.app
 # no repo exists: Smart Money Tracker -> left blank per instruction
 
@@ -121,14 +122,13 @@ GH = "https://github.com/JannetEkka/"
 
 FLAGSHIP = dict(
     slug="smt", grants=True, cat="agents", title="Smart Money Trading (SMT)",
-    sub="Explainable Multi-Agent Trading AI",
-    meta="Jan 2024 – Present · Sole architect & operator",
+    sub="Explainable AI Trading Agent",
+    meta="Jan 2024 – Present · Founder &amp; sole engineer · JTech Solutions (pre-incorporation)",
     badge="Patent pending · IN 202631090789",
-    desc="A three-layer autonomous trading agent for 8 crypto perpetual-futures pairs — a quant base, a self-retuning learning loop, and an explanation layer that ships a plain-English &ldquo;why&rdquo; with every decision. Six specialist personas vote into a learned <em>Judge</em>; an Optuna optimiser and a regime-aware contextual bandit retune it on real outcomes, and a weekly refit only ships through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. Strategy validation is <em>GPU-accelerated with NVIDIA cuDF</em> — <code>cudf.pandas</code>, zero code change — taking a 2.5M-row CPCV pipeline from ~24s to 3.9s (~6×) on a T4 Vertex AI notebook. The front end is a Three.js/WebGL ocean world served from Cloudflare Workers.",
-    stats=[("67K","lines of Python"),("2,815","tests green"),("491","findings recorded"),("8","pairs live")],
-    tags=["Multi-Agent Systems","Explainable AI","AI-Native Development","GCP Compute Engine + systemd","NVIDIA cuDF / RAPIDS","Optuna","BigQuery + Conversational Analytics","Vertex AI","Three.js / WebGL","Cloudflare Workers"],
+    desc="An AI trading agent for 8 crypto perpetual-futures pairs that has to prove why it traded. Written rules with replayed records open every trade. Six AI advisors explain each decision and are graded on whether they were right; one earns a veto only after 30 proven warnings. Before a reason reaches a user, the system flips that advisor&rsquo;s input and re-runs the decision, and drops the reason if nothing changes. The learning loop retunes only through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. It places real orders 24/7 on WEEX&rsquo;s exchange-granted simulated account from a free-tier Oracle Cloud VM, and <em>SMT World</em>, a Three.js/WebGL ocean on Cloudflare Workers, lets anyone watch it trade and ask it why.",
+    stats=[("91K","lines of Python"),("3,045","tests green"),("611","findings recorded"),("344","PRs merged")],
+    tags=["Multi-Agent Systems","Explainable AI","AI Evaluation","AI-Native Development","Oracle Cloud + systemd","Cloudflare Workers","Gemini (AI Studio)","Optuna","NVIDIA cuDF / RAPIDS","BigQuery","Three.js / WebGL"],
     links=[("Live site","https://smt-weex-trading-bot.jannet-ekka.workers.dev/","live"),
-           ("Hackathon build (Cloud Run)","https://smt-world-2gbcoyhuea-uc.a.run.app/","live"),
            ("Code","https://github.com/JannetEkka/smt-apac","code"),
            ("Press","https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641","doc")],
     note="Core repo private — the linked repo is the public explanatory layer.",
@@ -140,15 +140,16 @@ PROJECTS = [
    desc="<strong>&ldquo;We don&rsquo;t grade what your agent says. We audit what it does.&rdquo;</strong> Most LLM security tools read the agent&rsquo;s reply and grade the text. This one reads the tool-call log.<br><br>Every tool the agent declares gets cloned as a dead copy with the same name and JSON Schema. The copy records the call and returns fake data, so nothing real fires. Attacks run in separate Gemini conversations and a judge model reads the log. The payloads are written to look like ordinary work, no shouting and no &ldquo;ignore all previous instructions&rdquo;, because current models refuse those easily.<br><br>It caught a Google codelab agent saying <em>&ldquo;I don&rsquo;t have access or authorization to modify configuration files&rdquo;</em> after it had already run <code>ls -la</code> through its shell tool. Text scanners pass that. Wiretrap calls it <strong>&ldquo;Said No, Did Yes&rdquo;</strong> and shows the arguments.<br><br>A run with nothing classified reports <code>INCONCLUSIVE</code>, never <code>HARDENED</code>. Attacks against tools the agent doesn&rsquo;t have are dropped from the score. Approved fixes get re-run against the attacks that broke it, and the report says when one didn&rsquo;t hold.",
    stats=[("8","attack categories"),("9.4K","lines of TypeScript"),("0","static API keys"),("4","model fallback ladder")],
    tags=["Adversarial Testing","Agent Security","Vertex AI / Gemini","React + TypeScript","Express","Cloud Run","Firestore","Secret Manager","Google AI Studio"],
-   links=[("Live","https://wiretrap.ai.studio","live"),
-          ("Code",GH+"wiretrap","code")]),
+   # Live link (wiretrap.ai.studio) removed 2026-10-05: its backend ran on a GCP project whose
+   # billing closed 10-02. Re-add it when the port to the free AI Studio key ships.
+   links=[("Code",GH+"wiretrap","code")]),
 
  dict(slug="versecanvas", grants=True, cat="genai", title="VerseCanvas", sub="AI Poetry-to-Art Generator", meta="2025 · Personal project",
    desc="Turns a poem into original artwork through a multi-stage pipeline: semantic analysis with Gemini 2.0 &rarr; automated prompt engineering &rarr; image synthesis with Imagen 3.0 on Vertex AI &rarr; hybrid editing and text overlay. Six languages, six art styles, tunable mood intensity.",
    tags=["Gemini 2.0","Imagen 3.0","Vertex AI","Streamlit"],
    links=[("Live demo","https://versecanvas.streamlit.app/","live"),("Code",GH+"versecanvas","code")]),
 
- dict(slug="smartdesk", grants=False, wide=True, cat="agents", title="SmartDesk", sub="Multi-Agent Assistant with Measured RAG", meta="2026 · Gen AI Academy APAC — Cohort 1 Hackathon",
+ dict(slug="smartdesk", grants=False, wide=True, cat="agents", title="SmartDesk", sub="Multi-Agent Assistant with Measured RAG", meta="2026 · Gen AI Academy APAC — Cohort 1 Hackathon · top 101 of 1,500+",
    desc="A root ADK orchestrator routing to specialised sub-agents — InboxAgent, PlannerAgent and a DataAgent doing retrieval over a pgvector knowledge base — with a SequentialAgent synthesising the reply. Gmail and Calendar are reached through <em>MCP servers I wrote myself</em> against the protocol SDK over stdio, not off-the-shelf toolsets. Containerised on Cloud Run.<br><br>The retrieval is <em>evaluated, not assumed</em>: 40 labelled questions over 120 notes, recall@k and MRR@k, significance by paired bootstrap at 10,000 resamples. That harness is what stopped a bad decision — a cross-encoder reranker looked like a clear win on the development embedder (MRR@10 +0.094, p=0.04), then collapsed on the production embedder to +0.028 with a CI spanning zero. Shipping it would have added <em>190&nbsp;MB of PyTorch and taken search from 29&nbsp;ms to 2,382&nbsp;ms</em>, in an image deliberately cut from 1.8&nbsp;GB to 340&nbsp;MB, for a gain indistinguishable from noise. The baseline ships instead, now on evidence rather than caution.",
    stats=[("0.963","recall@5"),("40","labelled questions"),("82×","latency the reranker cost"),("54","tests")],
    tags=["Google ADK","MCP (servers written from scratch)","pgvector","RAG evaluation","Paired bootstrap","Cross-encoder / RRF / BM25","Gemini 2.5 Flash","Cloud Run"],
