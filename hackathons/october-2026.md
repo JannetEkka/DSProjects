@@ -1,23 +1,23 @@
 # Hackathons, October–November 2026
 
-Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, sorted by the date it **closes** (submission deadline, or the last day of the event). Checked against the official pages on 2026-10-05 where marked ✓. Dates are as listed; confirm on the page before relying on one.
+Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, sorted by the date it **closes** (submission deadline, or the last day of the event). Checked against the official pages on 2026-10-05 where marked ✓; Solana Mobile, neatHack, Graph Hacks and HackWithUs re-checked 2026-10-06. Dates are as listed; confirm on the page before relying on one.
 
 **New projects are fine** (operator, 2026-10-05) — "fits our existing work" is no longer a reason to skip. The filters left: our own money, students-only / in-person / region, and whether it can be built and submitted around the away days (Oct 8–10, 15–18).
 
-**Rule:** no hackathon that needs our own money — no funded trading account, wallet, gas or paid credits. Free tiers and organiser-provided credits only.
+**Rule:** no hackathon that needs our own money — no funded trading account, gas we pay for, or paid credits. Free tiers and organiser-provided credits only. **Testnet and devnet wallets with free faucet tokens are fine** (operator, 10-06), and so is linking a wallet address to receive a prize; never a wallet that holds real funds.
 
 **Decision key:** ✅ entering · ⚪ maybe (decide by the date shown) · ❓ not checked yet · ❌ skipping (reason given) · ⛔ already closed
 
 | Closes | Hackathon | Prize | Decision | Why |
 |---|---|---|---|---|
 | Oct 06 | **[Qollab × IonQ Global Quantum Hackathon](https://qollab.xyz/programs/hackathon)** — register by **Oct 6, 11:00 ET (20:30 IST)**; 48 h sprint Oct 10 04:30 → Oct 12 04:30 IST | $10K + $20K compute | ✅ registered | ✓ theme **Quantum Impact** (finance: portfolio optimisation over the 8-coin book, benchmarked honestly against a classical optimiser). Solo OK, India eligible, free compute. Top 3 get IonQ mentorship and fast-tracked interviews. Sprint lands on the away days — Claude builds, operator submits |
-| Oct 08 | **[Solana Mobile: Clock In](https://solanamobile.com/blog/clock-in-the-solana-mobile-hackathon)** — no time published; finish by the night of Oct 7 | $125K USDC (10 places) + $10K SKR | ✅ | ✓ submit a working Android APK + repo + demo video + pitch deck; no Seeker needed (emulator or any Android phone); judged on stickiness, UX, innovation, demo. Plan: SMT World wrapped as an Android app plus a Solana-native piece (wallet sign-in on devnet). Entering is free; only a WINNER must publish on the Solana dApp Store to claim, which costs ~0.2 SOL plus KYC |
+| Oct 08 | **[Solana Mobile: Clock In](https://solanamobile.com/blog/clock-in-the-solana-mobile-hackathon)** — no time published; finish by the night of Oct 7 | $125K USDC (10 places) + $10K SKR | ✅ registered 10-06 | ✓ submit an Android APK + repo + 3-min demo video + pitch deck. Must use the Solana Mobile Stack and Mobile Wallet Adapter and "interact meaningfully with the Solana network" — no rule asks for mainnet, so **a devnet wallet with free faucet SOL is allowed**. Must run on a real Android phone, not only an emulator; no Seeker needed. **"Direct ports or PWA wrappers will score poorly"**, and the project must be started within 3 months of Sep 8 or show significant new mobile work — so wrapping SMT World needs real mobile-first features. Results Nov 10. Entering is free; only a WINNER must publish on the Solana dApp Store within 30 days to claim (~0.2 SOL plus KYC) |
 | Oct 08 | [Bitget AI Hackathon S2](https://x.com/bitget_ai) | $50K USDT | ⛔ | ✓ submissions closed Sep 21; Oct 8 is the results date |
 | Oct 09 | **[#HackCanton Season 3](https://appsfactory.cc/hackathons)** — finish by Oct 8 | up to $50K cash + credits | ✅ | ✓ online, solo OK; DAML smart contracts on Canton. Idea: the bot's decision log as auditable DAML contracts |
 | Oct 09 | [Hackyard #4: Gamification](https://hackyard.tech/yards/yard-4) — kickoff Oct 5 18:00 UTC; late joins close **Oct 7 18:00 UTC**; submit **Oct 9 18:00 UTC (23:30 IST)**; voting to Oct 11 | $180 pool ($100 first) + hoodie | ⚪ | ✓ solo only, 50 spots (39 taken on 10-05); all code written in build week; open repo + demo video. Idea: a game for a daily knee-physio routine. Tiny prize — operator's call |
 | Oct 10 | [ForgeHacks Online 2026](https://forgehacks.dev) | — | ❌ | students only |
 | Oct 10 | ETH Lagos 2026 (Oct 8–10, Lagos) | — | ❌ | in person, Lagos |
-| Oct 11 | **[neatHack](https://luma.com/s5blr882)** — Oct 10–11, 48 h | $10K + engineering roles & internships | ✅ registered | ✓ online, solo allowed, AI-agent theme (tracks announced Oct 8); spots limited — register early |
+| Oct 11 | **[neatHack](https://luma.com/s5blr882)** — **Oct 10 00:00 → Oct 11 23:59 IST**, 48 h | $10K + engineering roles & internships | ✅ registered | ✓ online, solo allowed, AI-agent theme; tracks out Oct 8. Run by neatlogs (agent tracing, failure detection, evals; free plan 100k spans/month). No rules yet on pre-work, so nothing is built before the window. Prep: [neathack-prep.md](prep/neathack-prep.md) |
 | Oct 11 | [BNB Hack: Tokenized Stocks Edition](https://www.bnbchain.org/en/hackathons/tokenized-stocks) | $20K track | ❌ | tokenized-RWA trading tooling; on-chain trading needs funded wallets |
 | Oct 12 | [WEEX AI Wars II](https://dorahacks.io/hackathon/weex-ai-wars2) | $200K | ❌ | needs the entrant's own USDT trading balance |
 | Oct 12 | [Colosseum: Crypto World's Fair](https://arena.colosseum.org) | $465K+ | ❌ | very crowded; needs a Solana product in a week |
@@ -28,7 +28,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 15 | RESPAWN Game Jam (Oct 12–15) | — | ❌ | game engine jam |
 | Oct 16 | [MLAI Hackathon 2026](https://mlai-hackathon.devpost.com/) — closes Oct 17 00:00 ICT | 10M VND + $500 OpenAI credits | ❌ | ✓ students or alumni of the 23 member universities of the HCMUT AI Network (Vietnam) only |
 | Oct 16 | **[Hack Apertus](https://hackapertus.devpost.com/)** — closes **Oct 16, 12:00 CEST (15:30 IST)** | €10,680+ (2,500 CHF per track) | ✅ registered | ✓ global, solo OK, no cost. Tracks: Red-Teaming · Swiss Voices · Academia · Own Projects, all on Apertus (Switzerland's open LLM). Red-Teaming = Wiretrap's method on a new target. Grand Finals are in St. Gallen in May 2027 — check whether attending is required for the prize |
-| Oct 18 | **[Graph Hacks: Context for AI Agents (FalkorDB)](https://wemakedevs.org/hackathons/falkordb)** — Oct 15–18 | iPhone 18 Pro / PS5 / Mac Mini per track | ✅ registered | ✓ online, solo allowed; "an agent that can show how it got to each answer" — an explainable decision graph |
+| Oct 18 | **[Graph Hacks: Context for AI Agents (FalkorDB)](https://wemakedevs.org/hackathons/falkordb)** — **Oct 15 00:01 → Oct 18 23:59 IST** | iPhone 18 Pro / PS5 / M6 Mac Mini per track ($20K pool) + AirPods for the best blog post | ✅ registered | ✓ online, solo allowed. FalkorDB must do real work (the product has to fail without it). Before the window: ideas, notes, graph-model sketch and diagrams only — no code. Submit a public repo, README with the data model, the Cypher it relies on, demo video, live deploy or local setup, tracks named, AI use disclosed. Entry: **Custody**, a chain of custody for every agent tool call (Tracks 01 + 02), on synthetic data — [graph-hacks-prep.md](prep/graph-hacks-prep.md) |
 | Oct 18 | [Ayiti AI](https://ayiti.ai) | — | ❓ | not checked |
 | Oct 20 | **[Open Agent Hackathon 2026](https://hackathon.genai.works)** — register by Oct 13, build Oct 15–20 | up to $20K | ⚪ | ✓ register by Oct 13; overlaps Graph Hacks — decide Oct 15 when prizes are posted · has workshop material to go through first — its own session |
 | Oct 20 | TechEx Amsterdam on lablab (online Oct 16–19) | — | ⚪ | overlaps Graph Hacks |
@@ -71,6 +71,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Nov 18 | [Meta VR Start Developer Competition](https://start-developer-competition-26.devpost.com) | $1M | ❌ | needs a Quest 3 and the VR Start programme |
 | Nov 30 | [QIE 3.0 Blockchain Hackathon](https://hackathon.qie.digital) | $17K | ❓ | not checked |
 | Dec 01 | **[Lablab × AMD AI Academy Challenge](https://lablab.ai/ai-hackathons/amd-lablab-ai-academy-challenge)** — self-paced Sep 1–Dec 1 | $5K (3 prizes) | ✅ registered | ✓ solo, free, no card. XP from courses + bi-weekly mini-challenges. New AMD AI Developer Program members get $100 of AMD GPU credits — compute for the RSNA entry |
+| Dec 05 | [HackWithUs Accelerate: race to $10K revenue](https://hackwithus.dev/event/accelerate-10k) — Oct 5 → Dec 5, 8 weeks | $10K pool, $1K minimum per finalist | ⚪ | ✓ the cohort the HackWithUs founder invited us to (chat, Aug 23–25). Free, zero equity, open to anyone. Payments must go through tiun (merchant of record; 0% tiun fees for the cohort). Scored on weekly goals that end in real paying customers: 70% votes + weekly goals, 30% jury. Needs a product people pay for, not a demo, and SMT can't be it (no PnL in public). Operator's call; check tiun pays out to India first |
 | Dec 14 | [Enveda CASMI 2026](https://www.kaggle.com/competitions/enveda-casmi26-molecule-id-mass-spectra) — entry Dec 7 | $50K | ❌ | mass-spectrometry chemistry |
 | rolling | [Circle Grants](https://circle.questbook.app) | grants | ❌ | USDC builders |
 | — | [HackMeridian (Stellar)](https://hackmeridian.com) | — | ❌ | in person, Lisbon |
@@ -87,22 +88,23 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 
 **Progress lives in one GitHub issue per entry** (label [`hackathon`](https://github.com/JannetEkka/DSProjects/issues?q=label%3Ahackathon)), never in this file. Each issue holds the deadline, the session that owns it, a checklist (registered → rules read → repo → build → demo → submission text → submitted → result) and a "Waiting on Jannet" list. **Every session ticks its own issue and comments at each milestone** — no PR or merge needed for a status change. This file holds decisions only.
 
-Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. Claude builds in cloud sessions; Jannet registers, creates free accounts, checks the video and submits.
+Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. Claude builds in cloud sessions; Jannet registers, creates free accounts, checks the video and submits. Prep for the fixed-window entries is in [prep/](prep/). Every session records its own demo video with [tools/demo-video](tools/demo-video/).
 
-| Deadline (IST) | Entry | Session | Progress |
-|---|---|---|---|
-| Oct 8 (done by night of Oct 7) | Solana Mobile: Clock In | S11 | [#30](https://github.com/JannetEkka/DSProjects/issues/30) |
-| Oct 9 (done by night of Oct 8) | #HackCanton S3 | S12 | [#29](https://github.com/JannetEkka/DSProjects/issues/29) |
-| Oct 10–11 | neatHack | S5 | [#28](https://github.com/JannetEkka/DSProjects/issues/28) |
-| Oct 10 04:30 → Oct 12 04:30 | Qollab × IonQ — Quantum Impact | S9 | [#27](https://github.com/JannetEkka/DSProjects/issues/27) |
-| Oct 14, 09:29 | Monad Metropolis — SMT Receipts | S8 | [#26](https://github.com/JannetEkka/DSProjects/issues/26) |
-| Oct 16, 15:30 (ready by night of Oct 14) | Hack Apertus | S7 | [#25](https://github.com/JannetEkka/DSProjects/issues/25) |
-| Oct 15–18 | Graph Hacks / FalkorDB | S5 | [#24](https://github.com/JannetEkka/DSProjects/issues/24) |
-| Oct 20 (register by Oct 13) | Open Agent | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
-| Oct 22 | RSNA Knee (Kaggle) | S6 | [#22](https://github.com/JannetEkka/DSProjects/issues/22) |
-| Oct 24, 00:30 | Amazon: Build, Ship, Shape — Fire TV | S3 | [#21](https://github.com/JannetEkka/DSProjects/issues/21) |
-| Oct 25 | IEEE ClimateChain | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
-| Oct 27, 02:30 | Build With AI: Basics | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
-| Oct 27 | GitLab: Life After Code | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
-| Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
-| Oct 30 | Nebius × NVIDIA — only on free credits | — | not entered |
+| Deadline (IST) | Entry | Registered | Session | Progress |
+|---|---|---|---|---|
+| Oct 8 (done by night of Oct 7) | Solana Mobile: Clock In | ✓ 10-06 (profile needs name + country) | S11 | [#30](https://github.com/JannetEkka/DSProjects/issues/30) |
+| Oct 9 (done by night of Oct 8) | #HackCanton S3 | **not yet** | S12 | [#29](https://github.com/JannetEkka/DSProjects/issues/29) |
+| Oct 11, 23:59 (window opens Oct 10 00:00) | neatHack | ✓ | S5 | [#28](https://github.com/JannetEkka/DSProjects/issues/28) |
+| Oct 12, 04:30 (sprint from Oct 10 04:30) | Qollab × IonQ — Quantum Impact | ✓ | S9 | [#27](https://github.com/JannetEkka/DSProjects/issues/27) |
+| Oct 14, 09:29 | Monad Metropolis — SMT Receipts | ✓ | S8 | [#26](https://github.com/JannetEkka/DSProjects/issues/26) |
+| Oct 16, 15:30 (ready by night of Oct 14) | Hack Apertus | ✓ | S7 | [#25](https://github.com/JannetEkka/DSProjects/issues/25) |
+| Oct 18, 23:59 (window opens Oct 15 00:01) | Graph Hacks / FalkorDB — Custody | ✓ | S5 | [#24](https://github.com/JannetEkka/DSProjects/issues/24) |
+| Oct 20 (register by Oct 13) | Open Agent | **not yet** | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
+| Oct 23, 05:29 | RSNA Knee (Kaggle) | ✓ joined | S6 | [#22](https://github.com/JannetEkka/DSProjects/issues/22) |
+| Oct 24, 00:30 | Amazon: Build, Ship, Shape — Fire TV | ✓ | S3 | [#21](https://github.com/JannetEkka/DSProjects/issues/21) |
+| Oct 25 | IEEE ClimateChain | **not yet** | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
+| Oct 27, 02:30 | Build With AI: Basics | ✓ | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
+| Oct 27 | GitLab: Life After Code | ✓ | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
+| Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | ✓ | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
+| Oct 30 | Nebius × NVIDIA — only on free credits | — | — | not entered |
+| Dec 5 | HackWithUs Accelerate | — | — | not entered — operator's call |
