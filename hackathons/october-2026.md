@@ -13,7 +13,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 06 | **[Qollab × IonQ Global Quantum Hackathon](https://qollab.xyz/programs/hackathon)** — register by **Oct 6, 11:00 ET (20:30 IST)**; 48 h sprint Oct 10 04:30 → Oct 12 04:30 IST | $10K + $20K compute | ✅ registered | ✓ theme **Quantum Impact** (finance: portfolio optimisation over the 8-coin book, benchmarked honestly against a classical optimiser). Solo OK, India eligible, free compute. Top 3 get IonQ mentorship and fast-tracked interviews. Sprint lands on the away days — Claude builds, operator submits |
 | Oct 08 | **[Solana Mobile: Clock In](https://solanamobile.com/blog/clock-in-the-solana-mobile-hackathon)** — no time published; finish by the night of Oct 7 | $125K USDC (10 places) + $10K SKR | ✅ registered 10-06 | ✓ submit an Android APK + repo + 3-min demo video + pitch deck. Must use the Solana Mobile Stack and Mobile Wallet Adapter and "interact meaningfully with the Solana network" — no rule asks for mainnet, so **a devnet wallet with free faucet SOL is allowed**. Must run on a real Android phone, not only an emulator; no Seeker needed. **"Direct ports or PWA wrappers will score poorly"**, and the project must be started within 3 months of Sep 8 or show significant new mobile work — so wrapping SMT World needs real mobile-first features. Results Nov 10. Entering is free; only a WINNER must publish on the Solana dApp Store within 30 days to claim (~0.2 SOL plus KYC) |
 | Oct 08 | [Bitget AI Hackathon S2](https://x.com/bitget_ai) | $50K USDT | ⛔ | ✓ submissions closed Sep 21; Oct 8 is the results date |
-| Oct 09 | **[#HackCanton Season 3](https://appsfactory.cc/hackathons)** — finish by Oct 8 | up to $50K cash + credits | ✅ | ✓ online, solo OK; DAML smart contracts on Canton. Idea: the bot's decision log as auditable DAML contracts |
+| Oct 09 | [#HackCanton Season 3](https://appsfactory.cc/hackathons) | up to $50K cash + credits | ⛔ | registration had closed by 10-06; registered for **Season 4** instead (see TBA rows) |
 | Oct 09 | [Hackyard #4: Gamification](https://hackyard.tech/yards/yard-4) — kickoff Oct 5 18:00 UTC; late joins close **Oct 7 18:00 UTC**; submit **Oct 9 18:00 UTC (23:30 IST)**; voting to Oct 11 | $180 pool ($100 first) + hoodie | ⚪ | ✓ solo only, 50 spots (39 taken on 10-05); all code written in build week; open repo + demo video. Idea: a game for a daily knee-physio routine. Tiny prize — operator's call |
 | Oct 10 | [ForgeHacks Online 2026](https://forgehacks.dev) | — | ❌ | students only |
 | Oct 10 | ETH Lagos 2026 (Oct 8–10, Lagos) | — | ❌ | in person, Lagos |
@@ -81,6 +81,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | — | [InnoHacks 4.0](https://innohacks-4.devfolio.co) | — | ❌ | students |
 | — | [OxHack '26](https://26.oxhack.net) | — | ❌ | students, Oxford |
 | — | [HackOHI/O](https://hack.osu.edu) | — | ❌ | students, Ohio State |
+| TBA | **[#HackCanton Season 4](https://appsfactory.cc/hackathons)** — dates not published | up to $50K cash + credits (Season 2/3 pool) | ✅ registered 10-06 | Online, solo OK; DAML on Canton (testnet or local nodes are eligible). Going by the Season 2 rules, it's a ~3-week build, not a weekend: submitting needs **2,000 Mana, earned by 20+ days of daily activity on the platform**, plus a project journal, a public repo, a demo of 5 min or less and pitch materials. Judged on MVP and also on go-to-market, ICP, validation (user interviews) and the pitch. Idea: the bot's decisions as auditable DAML contracts |
 | TBA | @commonsmade builder hackathon | — | ⚪ | announcement expected later in October |
 | TBA | [Arca: The Agent Capital Hackathon](https://form.typeform.com/to/tBJ8Q1io) | — | ⚪ | date not announced |
 
@@ -93,7 +94,6 @@ Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. C
 | Deadline (IST) | Entry | Registered | Session | Progress |
 |---|---|---|---|---|
 | Oct 8 (done by night of Oct 7) | Solana Mobile: Clock In | ✓ 10-06 (profile needs name + country) | S11 | [#30](https://github.com/JannetEkka/DSProjects/issues/30) |
-| Oct 9 (done by night of Oct 8) | #HackCanton S3 | **not yet** | S12 | [#29](https://github.com/JannetEkka/DSProjects/issues/29) |
 | Oct 11, 23:59 (window opens Oct 10 00:00) | neatHack | ✓ | S5 | [#28](https://github.com/JannetEkka/DSProjects/issues/28) |
 | Oct 12, 04:30 (sprint from Oct 10 04:30) | Qollab × IonQ — Quantum Impact | ✓ | S9 | [#27](https://github.com/JannetEkka/DSProjects/issues/27) |
 | Oct 14, 09:29 | Monad Metropolis — SMT Receipts | ✓ | S8 | [#26](https://github.com/JannetEkka/DSProjects/issues/26) |
@@ -106,5 +106,6 @@ Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. C
 | Oct 27, 02:30 | Build With AI: Basics | ✓ | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
 | Oct 27 | GitLab: Life After Code | ✓ | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
 | Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | ✓ | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
+| TBA (dates not published) | #HackCanton Season 4 | ✓ 10-06 | S12 | [#29](https://github.com/JannetEkka/DSProjects/issues/29) |
 | Oct 30 | Nebius × NVIDIA — only on free credits | — | — | not entered |
 | Dec 5 | HackWithUs Accelerate | — | — | not entered — operator's call |
