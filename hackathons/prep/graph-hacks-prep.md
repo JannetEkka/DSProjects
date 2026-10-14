@@ -199,7 +199,7 @@ A second check if the data allows it: for issues closed as duplicates, does Lore
 
 | Day (IST) | Claude builds | Jannet (minutes, phone OK) |
 |---|---|---|
-| Oct 15 | Public repo `lore` under JannetEkka; GitHub ingestion for any public org or repo, with the size caps, timed on FalkorDB's org; schema; `KNOWS` scoring; questions 1, 3, 4 and 6; tests; `EXPLAIN.md` | Night: read `EXPLAIN.md` (graph model and scoring) and reply with questions |
+| Oct 15 | Public repo `lore` under JannetEkka; GitHub ingestion for any public org or repo, with the size caps, timed on FalkorDB's org; schema; `KNOWS` scoring; questions 1, 3, 4 and 6; tests; `EXPLAIN.md` | Morning: create the empty public repo `lore` (no README, no licence), then work with Claude. Night: read `EXPLAIN.md` |
 | Oct 16 | Agent on Gemini with the graph tools; model picker and fallback; the Under the hood step stream; decisions with sources (question 2); triage; first contribution and memory; incremental sync; first version of the workspace | Night: open the preview link and ask Lore three questions about FalkorDB |
 | Oct 17 | Landing, How it works, the tour; live deploy; then the Should row (Sign in with GitHub, Add a project, My memory, Knowledge risk, Teams, MCP); backtest and baselines; README with data model and Cypher; demo questions picked and every answer checked on GitHub; Track 02 decision | Once the deploy URL exists: create the GitHub OAuth app (about 3 min). Night: look at the backtest numbers and the demo questions |
 | Oct 18 | Screen recording; video script by noon; video cut with Jannet's clips (or synthetic voice); blog post draft; submission text in #24 by **18:00 IST** | Afternoon: record one voice clip per script row (about 10 min). Night: watch the video, then submit before **23:59 IST** |
@@ -208,7 +208,11 @@ The project repo is new and public, and the build pushes straight to its `main` 
 
 ## Where the build runs
 
-This session started before `GEMINI_API_KEY` was added to the cloud environment, so it can't see the key; only sessions started after it was added can. At 00:02 IST it re-reads the rules and starts a fresh session in the same environment for the build, briefed from this file. Status stays in #24.
+- **This session only** (Jannet, 10-14): no new sessions, no subagents, no workflows, no check-in loops, nothing left running in the background.
+- **Usage budget:** about 15% of the weekly allowance is left for the whole build (the reset is Monday 17:30 IST). Work lean: build the Must row first, read only what's needed, and ask Jannet for the usage % each morning. If it climbs fast, cut Should items before anything in Must.
+- **The repo:** Jannet creates the empty public repo `JannetEkka/lore` on the morning of Oct 15 (Claude can't create repos). Until then, the code lives in `lore/` on this session's DSProjects branch, pushed often because an idle container can be reclaimed. Then it moves to `lore` with its history and timestamps kept (`git subtree split`), and the folder leaves this branch.
+- **Working rhythm:** one unattended run at 00:02 IST on Oct 15 (the day-1 core, then it stops). After that, Claude works with Jannet each morning, and she has all of Oct 18 free.
+- **Gemini key:** an AI Studio key on the free tier with no billing (Jannet's screenshot, 10-14), in the environment as `GEMINI_API_KEY`. This session started before it was added, so check `[ -n "$GEMINI_API_KEY" ]` at each start; a fresh container may pick it up. Day 1 doesn't need it. If it's still missing when the agent needs it, test the agent on the live host, where the key goes into the host's settings anyway. Jannet never pastes the key in chat.
 
 ## Demo
 
@@ -246,7 +250,7 @@ Jannet chose the idea and the name (Oct 14, from three options). She signs off o
 ## Risks
 
 - **GitHub API access** from the cloud session may be limited. If so, Jannet adds a fine-grained, read-only token (public repos only) to the environment.
-- **The Gemini key** isn't in the usual AI Studio format. The build session checks it works with the Gemini API, on the free tier, before relying on it.
+- **The Gemini key** may not reach this session's container (see *Where the build runs*); day 1 doesn't need it, and the live host is the fallback.
 - **Wrong answers about the judges' own project.** Every answer in the demo is checked against the repo, and the backtest reports misses.
 - **Rate limits:** ingestion is cached, and the deploy runs on a snapshot.
 - **Scope.** The product is big for four days. The Must row ships complete before the Should row starts, and the video only shows what works.
