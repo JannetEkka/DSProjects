@@ -34,7 +34,7 @@ The other two ideas, kept for later:
 
 **The idea.** Treat an open-source organisation as the company. It's the one kind of real organisation that does its internal work in public: who wrote what, who reviewed whom, and why a decision was made are all in issues and PRs anyone can read. Lore loads that history into FalkorDB, and an agent answers and acts on it.
 
-**Demo org: FalkorDB's own GitHub org.** The repos are the teams, the contributors are the people, the issues and PRs are the work and the decisions. A second org in the video shows it works anywhere (WeMakeDevs' org if it has enough activity, otherwise another mid-sized one).
+**Main example: FalkorDB's own GitHub org** (the sponsor's project; the hackathon page links its repos). The repos are the teams, the contributors are the people, the issues and PRs are the work and the decisions. Users can pick any public org or repo instead (see *The product*).
 
 **What the agent does:**
 
@@ -49,7 +49,75 @@ The other two ideas, kept for later:
 
 **How it maps to the tracks.** Track 03's list: knowledge from docs, tickets and chats in one graph (docs, issues, PR threads); who owns what and who knows what; tracing decisions to their source; keeping knowledge current (incremental sync); answers with clear sources. Track 01's list: multi-hop reasoning; graph queries and algorithms as agent tools; tool selection through MCP; actions based on the graph (triage); explainable results (every answer shows its path).
 
-**Why it can win.** Most Track 03 entries will run on a fake company an LLM wrote; Lore runs on a real team's real history, mess included. The judges can check its answers because the project is theirs. Getting newcomers into open source is what WeMakeDevs is about. And it's a real tool afterwards: point it at any GitHub org.
+**Why it can win.** Most Track 03 entries will run on a fake company an LLM wrote; Lore runs on a real team's real history, mess included. The judges aren't named, but the sponsor's team will likely be among them, and they can check its answers because the project is theirs. Getting newcomers into open source is what WeMakeDevs is about. And it's a real tool afterwards: point it at any public GitHub project.
+
+## The product (what people see and do)
+
+**Who uses it.** Judges and visitors, who want to see it work in under a minute without signing up. Newcomers to a project, who want a first contribution and someone to ask. Maintainers, who want new issues triaged and to see where knowledge is thin.
+
+### Where the data comes from
+
+Lore reads GitHub's public API. When a project is picked, Lore fetches its PRs (with the files each one changed and who reviewed it), its issues (with labels and the links between them), and CODEOWNERS and docs where they exist. Each becomes nodes and edges in FalkorDB. Nothing is typed in by hand and nothing is made up: every name Lore shows is a GitHub login from that project's public history, with the PRs to prove it.
+
+**A repo vs an org.** A repo is one codebase (github.com/FalkorDB/FalkorDB). An org is the account that holds a project's repos (github.com/FalkorDB holds the database, the browser, GraphRAG-SDK, the client libraries and more). Lore accepts either. With an org, each repo plays the part of a team, and people who work across repos are the links between teams.
+
+**Any public project, chosen by the user.** Paste an org or repo URL and Lore builds its graph. Size caps keep a build to a few minutes: the last 12 months, the most active repos (about 10 at most), about 500 PRs per repo. The numbers are set on day 1 after timing FalkorDB's build. Private repos are impossible by construction: Lore's GitHub access is public-read only.
+
+**Ready-made projects,** so nobody waits: FalkorDB (the main example) and one or two others, built ahead of time and kept in sync.
+
+### Pages
+
+1. **Landing:** one line on what Lore does, a short looping clip, and two buttons: *Try it on FalkorDB (no sign-in)* and *Sign in with GitHub to add your own project*. Below: the three things it does, with a screenshot each.
+2. **How to use:** a first-visit tour (four steps, skippable) and a 60-second video, always reachable from the help button.
+3. **Workspace,** the main screen. Top bar: project picker (ready-made, your own, *Add a project*), model picker, sign-in. Middle: tabs **Ask**, **Triage an issue**, **First contribution**, **Knowledge risk**, **Teams**. Right: the **Under the hood** panel while Lore works, then **Proof** when the answer lands.
+4. **Add a project:** paste a URL; Lore checks the size and shows an estimate, then builds with a live progress view (repos read, PRs read, people found, nodes and edges created) and opens the workspace.
+5. **How it works:** the graph model, what's kept and what isn't, the scoring rule, the Cypher, the algorithms and the backtest. The page for a technical check (submission rule 10); it mirrors the README.
+6. **My memory:** what Lore remembers about you (interests, questions, the issue you picked), with one button that deletes it all.
+
+### The main flows
+
+- **Ask:** type a question or tap a suggested one ("Who knows the query planner?", "Why does FalkorDB do X?").
+- **Triage an issue:** pick from the project's open issues (newest, unlabelled, no reply yet) or paste an issue URL. Out come related past issues and PRs, the area, an active reviewer, labels and a draft reply, with a *dry run* badge and a *Copy reply* button. Lore never posts on anyone's repo.
+- **First contribution:** say what you know and what interests you; get the docs to read, a good first issue near that interest, and who reviews that area. It's saved to your memory, and the next visit starts with what changed.
+- **Knowledge risk:** areas only one active person knows, as a map.
+- **Teams:** who actually works together, from community detection over who reviews whom.
+
+### Under the hood, then Proof
+
+While Lore works, the right panel shows each step as it happens: the tool it chose, the Cypher it ran, how many nodes came back, and the part of the graph being searched lighting up. When the answer lands, the panel switches to **Proof**: the evidence path drawn as a graph, each name with the PRs and reviews behind it, every claim linked to the GitHub page it came from. Nothing appears without a source.
+
+### Sign in
+
+**Sign in with GitHub** is login and registration in one step, with no passwords to store. It's needed for three things:
+
+- **Adding your own project.** Building a graph takes many GitHub API calls. GitHub allows 60 an hour without a login and 5,000 an hour with one, so signing in brings your own allowance.
+- **Memory.** Lore has to know it's you to remember you across sessions: one memory per user (Track 02).
+- **Public only.** The sign-in asks for no permissions, so Lore can only ever read public data.
+
+Guests can do everything on the ready-made projects; only adding a project and memory need a sign-in. Lore stores the GitHub login and nothing else (no email).
+
+**Jannet's one task for this:** create a GitHub OAuth app (GitHub → Settings → Developer settings → OAuth Apps → New, about 3 minutes, once the deploy URL exists on Oct 17) and put its two values in the host's environment settings, never in chat.
+
+### Models
+
+- **Model picker:** lists the Gemini models the key can actually use, fetched from Google at startup rather than hard-coded, with a recommended default.
+- **Automatic fallback:** each Gemini model has its own free limit. When the chosen one runs out, Lore moves to the next free model and says so in the Under the hood panel.
+- **Your own key (optional):** paste your own free Gemini key to use your own quota. It's used for that request only and never stored.
+- **Saved answers** for the suggested questions on the ready-made projects, so guests see a full demo even if every free limit is used up.
+
+### Hosting
+
+Decided on day 1, free only. Render's free plan has 512 MB of memory and sleeps after 15 idle minutes; a free Hugging Face Space has much more memory and suits a graph better. Ready-made graphs ship with the app so a restart doesn't lose them. FalkorDB Cloud's free tier keeps user-added graphs, if it needs no card.
+
+### What gets built first
+
+| Priority | Parts |
+|---|---|
+| **Must** (by Oct 17) | Landing; workspace on the ready-made FalkorDB graph; Ask, Triage and First contribution with Under the hood and Proof; model picker with fallback; How it works page; live deploy |
+| **Should** | Sign in with GitHub; Add a project with live progress; My memory; the tour; Knowledge risk and Teams; MCP server |
+| **Could** | Your own key; a third ready-made project |
+
+If time runs short, the Must row ships complete before anything in the Should row starts.
 
 ## Data
 
@@ -124,16 +192,16 @@ A second check if the data allows it: for issues closed as duplicates, does Lore
 - **FalkorDB:** FalkorDBLite (embedded, already confirmed to run in the cloud session) or Docker. FalkorDB Browser for the video.
 - **Python:** the `falkordb` client, FastAPI, and a small web page that draws evidence paths (Cytoscape.js from a CDN).
 - **Gemini** (free key, `GEMINI_API_KEY` in the cloud environment): turns questions into graph tool calls, pulls decisions out of threads, drafts triage replies. The graph queries are the tools; the LLM never states anything the graph can't back.
-- **MCP server** with the graph tools (`who_knows`, `why`, `triage`, `newcomer_path`, `knowledge_risk`), so any agent can use Lore. Day 2.
-- **Live deployment:** Render's free tier, running on a snapshot of the graph so the public demo needs no GitHub token. If Render won't work: full local setup steps plus the video.
+- **MCP server** with the graph tools (`who_knows`, `why`, `triage`, `newcomer_path`, `knowledge_risk`), so any agent can use Lore. A *Should*, built once the Must row is done.
+- **Live deployment:** see *The product → Hosting*. If no free host works: full local setup steps plus the video, which the rules accept.
 
 ## Build plan (Jannet away Oct 15–18, laptop mornings and nights only)
 
 | Day (IST) | Claude builds | Jannet (minutes, phone OK) |
 |---|---|---|
-| Oct 15 | Public repo `lore` under JannetEkka; GitHub ingestion for the FalkorDB org; schema; `KNOWS` scoring; questions 1, 3, 4 and 6; tests | Night: read `EXPLAIN.md` (graph model and scoring) and reply with questions |
-| Oct 16 | Agent on Gemini with the graph tools; decisions with sources (question 2); triage; newcomer path and memory; incremental sync; MCP server | Night: ask Lore three questions about FalkorDB |
-| Oct 17 | Web UI with evidence paths; backtest and baselines; questions 7 and 8; README with data model and Cypher; Render deploy; demo questions picked and every answer checked on GitHub; Track 02 decision | Night: look at the backtest numbers and the demo questions |
+| Oct 15 | Public repo `lore` under JannetEkka; GitHub ingestion for any public org or repo, with the size caps, timed on FalkorDB's org; schema; `KNOWS` scoring; questions 1, 3, 4 and 6; tests; `EXPLAIN.md` | Night: read `EXPLAIN.md` (graph model and scoring) and reply with questions |
+| Oct 16 | Agent on Gemini with the graph tools; model picker and fallback; the Under the hood step stream; decisions with sources (question 2); triage; first contribution and memory; incremental sync; first version of the workspace | Night: open the preview link and ask Lore three questions about FalkorDB |
+| Oct 17 | Landing, How it works, the tour; live deploy; then the Should row (Sign in with GitHub, Add a project, My memory, Knowledge risk, Teams, MCP); backtest and baselines; README with data model and Cypher; demo questions picked and every answer checked on GitHub; Track 02 decision | Once the deploy URL exists: create the GitHub OAuth app (about 3 min). Night: look at the backtest numbers and the demo questions |
 | Oct 18 | Screen recording; video script by noon; video cut with Jannet's clips (or synthetic voice); blog post draft; submission text in #24 by **18:00 IST** | Afternoon: record one voice clip per script row (about 10 min). Night: watch the video, then submit before **23:59 IST** |
 
 The project repo is new and public, and the build pushes straight to its `main` so judges see a commit history inside the window. If the repo can't be created from the cloud session, Jannet creates an empty public one (a minute on the phone).
@@ -152,14 +220,14 @@ Two parts, both required: a video of about 3 minutes, and a live link where judg
 
 | Time | On screen | What it proves |
 |---|---|---|
-| 0:00 | FalkorDB's GitHub org, then the counts (repos, contributors, issues, PRs). "You want to help. Where do you start, and who do you ask?" | The problem, on a real project |
-| 0:15 | **The LLM alone vs Lore.** Gemini on its own is asked "who should review a change to the vector index?" and guesses. Lore gets the same question and names people, each with the PRs and reviews behind them; the path lights up in the graph panel | The graph is what makes the answer right (rule 3) |
+| 0:00 | The landing page, then FalkorDB's GitHub org and its counts (repos, contributors, issues, PRs). "You want to help. Where do you start, and who do you ask?" | The problem, on a real project |
+| 0:15 | **The LLM alone vs Lore.** Gemini on its own is asked "who should review a change to the vector index?" and guesses. Lore gets the same question: the Under the hood panel shows each step (tool chosen, Cypher run, nodes found) with the graph lighting up, then Proof names people, each with the PRs and reviews behind them | The graph is what makes the answer right (rule 3); every answer shows its path (Track 01) |
 | 0:45 | "Why does FalkorDB do X?" The decision, the quote, the link; click through to the real PR on GitHub | Decisions traced to their source (Track 03) |
 | 1:10 | **An issue opened on FalkorDB this week, during the hackathon.** Lore's triage draft: related past issues, the area, an active reviewer, labels, a reply with sources. A "dry run" badge: nothing is posted | It acts on what the graph shows, and the graph is current (Tracks 01 and 03) |
 | 1:35 | A newcomer: "I know Python and want to help with vector search" gets docs to read, a good first issue and a reviewer. New session: "I'm back." Lore remembers them and says what changed since | Memory across sessions |
-| 2:00 | Under the hood: the graph in FalkorDB Browser, the "who knows" Cypher on screen, and community detection showing the teams that actually work together | The Cypher and algorithms the product runs on (submission rule 10) |
+| 2:00 | The graph itself in FalkorDB Browser, the "who knows" Cypher on screen, and the Teams tab: community detection showing who actually works together | The Cypher and algorithms the product runs on (submission rule 10) |
 | 2:20 | The backtest table: how often Lore's top 3 contains the person who really reviewed, against the baselines, misses included. Five seconds of an editor agent calling Lore's MCP tools | Honest numbers; MCP tool use (Track 01) |
-| 2:40 | Another org's name typed in, and its own graph builds (sped up). Repo link, live link, tracks | It works on any org |
+| 2:40 | **Your own project:** sign in with GitHub, paste another public repo, and watch its graph build live (sped up), then ask it one question. Repo link, live link, tracks | It works on any public project, not only the example |
 
 Fallback for 1:10: if FalkorDB gets no new issue during Oct 15–18, use their most recent one and say when it was opened.
 
@@ -167,15 +235,11 @@ Fallback for 1:10: if FalkorDB gets no new issue during Oct 15–18, use their m
 
 ### The live link
 
-The same web app on Render's free tier, preloaded with a snapshot of FalkorDB's org: a question box, an answer panel with sources, and the graph panel that lights up the evidence path.
-
-- **Suggested questions as buttons**, with answers saved ahead of time, so the demo works even when the free Gemini quota is used up. Typed questions go to Gemini live, with a per-visitor limit.
-- **No GitHub token needed** to run it: it reads the snapshot.
-- **First load takes about a minute** because Render's free tier sleeps; the README says so, as Wiretrap's does.
+The live link is the whole product (see *The product*). A judge lands on the landing page, taps *Try it on FalkorDB*, and can ask, triage and plan a first contribution without signing in. Signing in with GitHub adds their own project and memory. Saved answers for the suggested questions keep it working when free Gemini limits run out. If the host sleeps when idle, the first load is slow, and the README says so, as Wiretrap's does.
 
 ## Jannet's part (rules 11–13)
 
-Jannet chose the idea and the name (Oct 14, from three options). She signs off on the graph model and the scoring rule above, reads `EXPLAIN.md` on day 1, checks the backtest on day 3, and must be able to explain the model, the "who knows" query and the trade-offs. Disclosure for the submission:
+Jannet chose the idea and the name (Oct 14, from three options). She signs off on the graph model and the scoring rule above, set the product requirements (landing, sign-in, tour, project and model pickers, the Under the hood panel), reads `EXPLAIN.md` on day 1, checks the backtest on day 3, and must be able to explain the model, the "who knows" query and the trade-offs. Disclosure for the submission:
 
 > Built with Claude Code as the coding assistant. I chose the problem, the graph model and the scoring rule, and I reviewed the code, tests and backtest. All data is public GitHub activity; no emails or private data.
 
@@ -185,4 +249,6 @@ Jannet chose the idea and the name (Oct 14, from three options). She signs off o
 - **The Gemini key** isn't in the usual AI Studio format. The build session checks it works with the Gemini API, on the free tier, before relying on it.
 - **Wrong answers about the judges' own project.** Every answer in the demo is checked against the repo, and the backtest reports misses.
 - **Rate limits:** ingestion is cached, and the deploy runs on a snapshot.
+- **Scope.** The product is big for four days. The Must row ships complete before the Should row starts, and the video only shows what works.
+- **GitHub limits for user-added projects:** the size caps keep a build within one signed-in user's hourly allowance; a build that would go over says so before it starts.
 - **Rules can change before the start:** re-read at window open.
