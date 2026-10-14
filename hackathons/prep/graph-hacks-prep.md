@@ -133,8 +133,8 @@ A second check if the data allows it: for issues closed as duplicates, does Lore
 |---|---|---|
 | Oct 15 | Public repo `lore` under JannetEkka; GitHub ingestion for the FalkorDB org; schema; `KNOWS` scoring; questions 1, 3, 4 and 6; tests | Night: read `EXPLAIN.md` (graph model and scoring) and reply with questions |
 | Oct 16 | Agent on Gemini with the graph tools; decisions with sources (question 2); triage; newcomer path and memory; incremental sync; MCP server | Night: ask Lore three questions about FalkorDB |
-| Oct 17 | Web UI with evidence paths; backtest and baselines; questions 7 and 8; README with data model and Cypher; Render deploy; Track 02 decision | Night: look at the backtest numbers |
-| Oct 18 | Demo video recorded and narrated; blog post draft; submission text in #24 by **18:00 IST** | Night: watch the video, then submit before **23:59 IST** |
+| Oct 17 | Web UI with evidence paths; backtest and baselines; questions 7 and 8; README with data model and Cypher; Render deploy; demo questions picked and every answer checked on GitHub; Track 02 decision | Night: look at the backtest numbers and the demo questions |
+| Oct 18 | Screen recording; video script by noon; video cut with Jannet's clips (or synthetic voice); blog post draft; submission text in #24 by **18:00 IST** | Afternoon: record one voice clip per script row (about 10 min). Night: watch the video, then submit before **23:59 IST** |
 
 The project repo is new and public, and the build pushes straight to its `main` so judges see a commit history inside the window. If the repo can't be created from the cloud session, Jannet creates an empty public one (a minute on the phone).
 
@@ -142,17 +142,36 @@ The project repo is new and public, and the build pushes straight to its `main` 
 
 This session started before `GEMINI_API_KEY` was added to the cloud environment, so it can't see the key; only sessions started after it was added can. At 00:02 IST it re-reads the rules and starts a fresh session in the same environment for the build, briefed from this file. Status stays in #24.
 
-## Demo video (about 2½ minutes)
+## Demo
 
-1. 0:00. "You want to contribute to FalkorDB. Where do you start, and who do you ask?"
-2. 0:15. Who knows a part of the code: ranked people, with the PRs that prove it.
-3. 0:40. Why FalkorDB does something a certain way: the decision, the quote, the link to the PR.
-4. 1:05. A real issue opened this week: the triage draft with related issues, area, reviewer and reply (dry run).
-5. 1:30. A newcomer gets a first-contribution plan; in a new session, Lore remembers them.
-6. 1:55. The graph in FalkorDB Browser, and the one Cypher query behind "who knows".
-7. 2:10. Backtest table, a second org, the repo link.
+Two parts, both required: a video of about 3 minutes, and a live link where judges ask their own questions.
 
-Recorded by Claude in a headless browser and narrated with a synthetic voice ([tools/demo-video](../tools/demo-video/)). Jannet can record her own voice over it instead.
+**The rule for every answer on camera:** the questions are picked on Oct 17, after the data is loaded, and every answer shown is checked against GitHub first. The judges know their own project, so one wrong name costs more than any feature adds.
+
+### The video (about 3 minutes)
+
+| Time | On screen | What it proves |
+|---|---|---|
+| 0:00 | FalkorDB's GitHub org, then the counts (repos, contributors, issues, PRs). "You want to help. Where do you start, and who do you ask?" | The problem, on a real project |
+| 0:15 | **The LLM alone vs Lore.** Gemini on its own is asked "who should review a change to the vector index?" and guesses. Lore gets the same question and names people, each with the PRs and reviews behind them; the path lights up in the graph panel | The graph is what makes the answer right (rule 3) |
+| 0:45 | "Why does FalkorDB do X?" The decision, the quote, the link; click through to the real PR on GitHub | Decisions traced to their source (Track 03) |
+| 1:10 | **An issue opened on FalkorDB this week, during the hackathon.** Lore's triage draft: related past issues, the area, an active reviewer, labels, a reply with sources. A "dry run" badge: nothing is posted | It acts on what the graph shows, and the graph is current (Tracks 01 and 03) |
+| 1:35 | A newcomer: "I know Python and want to help with vector search" gets docs to read, a good first issue and a reviewer. New session: "I'm back." Lore remembers them and says what changed since | Memory across sessions |
+| 2:00 | Under the hood: the graph in FalkorDB Browser, the "who knows" Cypher on screen, and community detection showing the teams that actually work together | The Cypher and algorithms the product runs on (submission rule 10) |
+| 2:20 | The backtest table: how often Lore's top 3 contains the person who really reviewed, against the baselines, misses included. Five seconds of an editor agent calling Lore's MCP tools | Honest numbers; MCP tool use (Track 01) |
+| 2:40 | Another org's name typed in, and its own graph builds (sped up). Repo link, live link, tracks | It works on any org |
+
+Fallback for 1:10: if FalkorDB gets no new issue during Oct 15–18, use their most recent one and say when it was opened.
+
+**Voice.** Jannet's own voice is better than a synthetic one: judges hear that she knows the project (rules 12–13). The script is ready by Oct 18 noon; she records one short clip per row on her phone (about 10 minutes in all), and Claude lines them up with the screen recording. Fallback: synthetic narration via [tools/demo-video](../tools/demo-video/). Claude records the screen in a headless browser either way.
+
+### The live link
+
+The same web app on Render's free tier, preloaded with a snapshot of FalkorDB's org: a question box, an answer panel with sources, and the graph panel that lights up the evidence path.
+
+- **Suggested questions as buttons**, with answers saved ahead of time, so the demo works even when the free Gemini quota is used up. Typed questions go to Gemini live, with a per-visitor limit.
+- **No GitHub token needed** to run it: it reads the snapshot.
+- **First load takes about a minute** because Render's free tier sleeps; the README says so, as Wiretrap's does.
 
 ## Jannet's part (rules 11–13)
 
