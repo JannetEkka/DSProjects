@@ -1,4 +1,0 @@
-falkordb>=1.0
-falkordblite>=0.10
-requests>=2.31
-pytest>=8
