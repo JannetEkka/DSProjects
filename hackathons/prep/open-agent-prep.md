@@ -2,16 +2,29 @@
 
 Build window: **Oct 22, 05:30 IST → Oct 28, 05:15 IST** (Oct 22 00:00 UTC → Oct 27 23:45 UTC). Submit on HackOS. Progress: [#23](https://github.com/JannetEkka/DSProjects/issues/23). Event page: [hackathon.genai.works](https://hackathon.genai.works/event/open-agent-hackathon-2026) · submit: [HackOS dashboard](https://hackathon.genai.works/dashboard) · help desk: [HackOS messages](https://hackathon.genai.works/messages) · rules questions: hackathons@genai.works.
 
-This is the brief for the build session. It comes from the course material Jannet pasted on 10-20 (Start Here, How the Week Runs, Welcome Guide, Journey Map, Overview, the APPROACH guide, Event Calendar, FAQ, and the Participant Setup Guide dated 20 October), plus a read of [zetaris/getting-started](https://github.com/zetaris/getting-started) and [Meterless/Meterless](https://github.com/Meterless/Meterless) the same day. The workshop videos (Data Day, Build Day, Power Day) were not watched.
+This is the brief for the build session. It comes from the course material Jannet pasted on 10-20 (Start Here, How the Week Runs, Welcome Guide, Journey Map, Overview, the APPROACH guide, Event Calendar, FAQ, and the Participant Setup Guide dated 20 October), plus a read of [zetaris/getting-started](https://github.com/zetaris/getting-started) and [Meterless/Meterless](https://github.com/Meterless/Meterless) the same day. There are no workshop videos; the only live session is the onboarding call on Oct 21.
 
-**No project code before the window opens.** "Work committed before the build window opens is not eligible, except for clearly declared pre-existing components." Installing Zetaris, Nightshift and Cursor and running the smoke test is setup, not project code, and should happen before Oct 22. The repo's first commit lands inside the window.
+**No project code before the window opens.** "Work committed before the build window opens is not eligible, except for clearly declared pre-existing components." Setting up the laptop (Zetaris, Nightshift, Cursor) is setup, not project code, and should happen before Oct 22. The repo is created and gets its first commit after **Oct 22, 05:30 IST**.
+
+## Go / no-go: Jannet's laptop (10-20)
+
+The laptop (details in [.claude/CLAUDE.md](../../.claude/CLAUDE.md)) against what the stack needs:
+
+| Need | Laptop | Verdict |
+|---|---|---|
+| Nightshift, Windows edition: "a 64-bit Windows 10 or 11 PC **with a dedicated graphics card**" ([editions](https://github.com/Meterless/Meterless/blob/main/docs/products/nightshift/editions.md)) | AMD Radeon 610M, **integrated** | **The deciding question.** Unknown whether it installs and serves NVIDIA cloud lanes without a dedicated card. Test it first; ask on the call |
+| Docker: 8 GB memory | 16 GB RAM in total | OK but tight: about 7 GB left for Windows, Cursor, a browser, Nightshift and screen recording. Stop Zetaris when not using it |
+| Docker: 4 CPUs | not checked | Task Manager → Performance → CPU: needs 4 or more logical processors |
+| 15 GB free disk | C: about 10 GB free, D: about 137 GB free | OK if Docker's disk image and Ubuntu go on D:, and a few GB are freed on C: for the Docker Desktop program |
+
+**Order:** test Nightshift first (about 20 minutes). If it won't run without a dedicated card, and the call doesn't offer another route (for example NVIDIA's API directly, "Option B" in the sponsor diagram), we skip this hackathon at no cost. Don't spend an hour on Zetaris before Nightshift passes. **Hard stop:** if the setup isn't working by Oct 22 midday IST, drop it.
 
 ## Dates (IST)
 
 | When (IST) | UTC | What |
 |---|---|---|
 | Oct 21, 17:30–19:00 | Oct 21, 12:00–13:30 | Onboarding call (YouTube live, recording on HackOS). "Additional challenges and prizes" are announced here |
-| Oct 22, 05:30 | Oct 22, 00:00 | Build window opens |
+| Oct 22, 05:30 | Oct 22, 00:00 | Build window opens; repo created |
 | Oct 23, 05:15 | Oct 22, 23:45 | Registration closes (Jannet registered 10-20) |
 | Oct 24 | — | Suggested mid-build check: "if the deadline were tomorrow, what would fail?" |
 | **Oct 28, 05:15** | **Oct 27, 23:45** | **Submissions close. Hard deadline; no edits after** |
@@ -25,7 +38,7 @@ The same week: RSNA Knee final (Oct 22/23), Amazon Fire TV (Oct 24, 00:30), IEEE
 
 - **Required:** Zetaris integrated, Meterless integrated, Cursor used for development. NVIDIA "wherever it contributes"; in practice the product runs on Nemotron through Meterless.
 - **Meterless means two things** (setup guide of 20 October):
-  - **Build:** at least one **Meterless Engine** (H-MEM, Markovian, World Model, Scout Intent) working in a real feature. "Simply mentioning an engine in your submission, copying a prompt, or adding an unused dependency does not satisfy the Build rule." Show the feature and a passing conformance suite or test.
+  - **Build:** at least one **Meterless Engine** (H-MEM, World Model, Markovian, Scout Intent) working in a real feature. "Simply mentioning an engine in your submission, copying a prompt, or adding an unused dependency does not satisfy the Build rule." Show the feature and a passing conformance suite or test.
   - **Power:** the app supports **Meterless Nightshift** as its primary AI provider (OpenAI-compatible, local runtime). NVIDIA's API key goes in Nightshift's Providers tab, never in the app.
 - **One primary track** per submission, changeable until the deadline in the team workspace. Cross-track relevance "is not scored twice".
 - **Solo is fine**; same pool as teams. Team locks when the first submission is created.
@@ -33,6 +46,10 @@ The same week: RSNA Knee final (Oct 22/23), Amazon Fire TV (Oct 24, 00:30), IEEE
 - **Data:** open, legal, small. No real personal or confidential data. Small synthetic samples are fine. Keep the repo light, add a `SAMPLE_MODE=true` fallback, bound every API call with a timeout.
 - **Secrets:** `.env` in `.gitignore`, a `.env.example` with placeholders only, no keys in README, notebooks, screenshots or logs.
 - **IP:** we keep all rights; the organiser and sponsors get a licence to show the demo.
+
+### Why Cursor (Jannet asked: "why not you?")
+
+Because the rules require it: "teams must use Cursor as their development environment". Cursor is a sponsor (with SpaceX AI), and the submission has to explain how Cursor was used. Claude still writes most of the code in cloud sessions. Cursor is where Jannet opens, runs and fixes it on the laptop, with Cursor's own agent (Composer or Grok) on the sponsor's free credit. That also saves Claude usage, which ran out once on 10-20. The submission says plainly which parts were Cursor and which were Claude Code. **Ask on the call that this mix is acceptable.** If it isn't, Jannet does the main coding in Cursor and Claude only advises.
 
 ## Tracks and prizes
 
@@ -68,142 +85,207 @@ The same week: RSNA Knee final (Oct 22/23), Amazon Fire TV (Oct 24, 00:30), IEEE
 4. **Sponsor-tech explanation:** how Zetaris was integrated, how Meterless was integrated (engine + provider), how Cursor was used, where NVIDIA contributes.
 5. **In the form:** the primary track, and any pre-existing components declared.
 
+## Ideas
+
+Jannet wants something fun, and floated two ideas: SMT in Track 02, or a coding teacher that sets tasks, asks you to explain why, and uses games. **Recommendation: A, the detective game.** It is the coding teacher, pointed at the one kind of coding where Zetaris is the playground instead of a bolt-on. Jannet names it.
+
+| | Idea | Track | In one line |
+|---|---|---|---|
+| **A** | SQL detective game (recommended) | 03 | Learn to query data by cracking cases; the game master checks every answer against the real data and remembers you |
+| B | Why did SMT do that? | 02 | Explains any SMT decision from its own log plus market data, with the evidence |
+| C | Supplier renewal check | 01 | Safe and enterprise-y, but not fun |
+
+Dropped: taxi "why did demand move" (depends on the sample's dates, weak user), Retraction Radar (no internal data for Zetaris to serve), Lore as a Wildcard ($1,000 top prize).
+
+### A. SQL detective game (recommended; working names: Case Files, Query Quest, SQL Noir)
+
+**One line:** a detective game that teaches you to query data. The game master gives you a case ("which supplier quietly raised prices after the contract renewed?"). You write SQL to crack it. It runs your query through Zetaris, checks the answer against the data, gives hints, and asks you to explain why your query proves it. It remembers what you got stuck on and builds the next case around it.
+
+**User and problem.** People learning SQL and data analysis: students, bootcamp learners, junior analysts, and new users of a data platform such as Zetaris itself. What they need is fast, correct feedback on real data, and to be made to explain their reasoning. A tutor that is only an LLM can't reliably tell whether your answer is right; this one checks against the data.
+
+**Why it fits the hackathon:**
+
+- **Zetaris does real work:** it is the game board. Cases run on Zetaris's seeded sample data (TPC-H business data and NY Taxi; confirm on install) and on public sources with verified Zetaris recipes (PokéAPI, SEC EDGAR). Later levels need a join across two sources, which teaches exactly what Zetaris is for. No private data and no file-loading problem.
+- **Track 03 reliability story: the model proposes, Zetaris proves.** No case is shown until its answer has been checked against live data (exactly one answer, not empty). Every grade comes from comparing result sets, not from the model's opinion.
+- **Fun to watch:** case file, clue board, escalating hints, XP and badges, and a trace panel that shows the agents arguing.
+
+**Agents (a loop, not a chain):**
+
+- **Case Designer** (deep lane): writes a case from the schema and the learner's memory, aimed at a weak skill.
+- **Validator:** writes the reference query, runs it on Zetaris, and checks the answer is unique and non-empty. If not, it sends the case back with the reason. A case is never posed until it passes.
+- **Game Master:** runs the play. Scout Intent sorts each learner message (SQL to run, hint request, explanation, chat) and keeps SQL read-only.
+- **Grader:** runs the learner's SQL on Zetaris, compares the result with the reference, and produces the evidence (missing rows, extra rows, wrong column).
+- **Coach** (fast lane): hints that escalate (nudge → concept → partial query), then the "why" question. It grades the explanation against the evidence and follows up when it's vague.
+- **Memory:** after each case, H-MEM records skills mastered and misconceptions (for example "filters an aggregate with WHERE instead of HAVING"), with the trust ledger showing where each came from.
+
+**Engines:** **H-MEM (must)**: the learner model across sessions; in the demo, the player comes back the next day and the first case targets yesterday's weak spot. **World Model (should)**: the shared case state (case, clues found, hints used, score) that the agents read and write. **Scout Intent (should)**: message routing and the read-only guard, visible in play ("that DROP TABLE won't run here, detective"). **Markovian (could)**: a long campaign in bounded steps.
+
+**Nemotron:** fast lane (`nemotron-3.5-lightning-30b-a3b`) for the Game Master and Coach; deep lane (`nemotron-3-super-120b-a12b`) for the Case Designer and Validator; both pinned so Nightshift's run details show Nemotron did the work.
+
+**Demo (about 3 minutes):** a new player opens case 1 → a wrong answer → a hint built from the evidence → solved → "why does your query prove it?" → the next day it remembers → a cross-source case where Zetaris joins two sources → the trace panel showing the Validator rejecting a broken case.
+
+**Risks.** Generated cases can be bad, which is what the Validator is for. Zetaris queries can be slow, so cache the REST tables. Zetaris speaks Lightning SQL (Spark-like), so the Coach has to translate its error messages.
+
+### B. Why did SMT do that? (Track 02)
+
+An agent that explains any SMT decision ("why did it buy SOL at 14:00?", "why did it sit out yesterday?"). It investigates SMT's own decision log alongside public market data (prices, volume, funding rates) and shows the evidence for each step; a critic checks every claim against the data. Real data, Jannet's own bot, and a clean Track 02 fit. Two things decide it:
+
+1. Where SMT's decision logs live, and whether a local Zetaris can read them. An HTTP endpoint SMT already serves would work as a REST table; files on the laptop would not.
+2. Our earlier rule that SMT shows no PnL in public. Explaining trades in a public demo and repo may cross it.
+
+SMT itself would be declared as pre-existing; the explainer is new work.
+
+### C. Supplier renewal check (Track 01)
+
+Before a supplier contract renews, an agent pulls together what every system knows about the supplier: synthetic internal ERP, ticket and contract data plus SEC EDGAR and SIC codes, on Zetaris's verified recipes and its USL data-quality rules. It finds where the systems disagree and recommends renew, renegotiate or escalate, with every fact traced to its query. A safe entry with a strong sponsor-tech story, but it's the guide's own Track 01 example and not fun.
+
 ## The stack, as it actually works (checked 10-20)
 
 ### Data: Zetaris, local in Docker
 
-- Get `zetaris-platform.zip` and the registry sign-in from Zetaris Cloud's [Run locally page](https://cloud.enterprise.zetaris.com/dashboard/download). Needs **8 GB of memory and 4 CPUs given to Docker, 15 GB free disk** (a 16 GB laptop). First pull and start take 30–45 minutes.
+- Get `zetaris-platform.zip` and the registry sign-in from Zetaris Cloud's [Run locally page](https://cloud.enterprise.zetaris.com/dashboard/download). Needs **8 GB of memory and 4 CPUs given to Docker, 15 GB free disk**. First pull and start take 30–45 minutes.
 - Set `ZETARIS_ADMIN_EMAIL`, `ZETARIS_ADMIN_PASSWORD` and `ZETARIS_ADMIN_ORG` in the bundle's own `.env` **before the first start**; changing them later doesn't reset the account. Keep `ZETARIS_SEED_TPCH=true` for the supplied sample data.
 - Web UI and SQL Editor on `localhost:3000`. REST on `http://localhost:8888/api/v1.0`. JDBC on port 10000. Never call 8889.
 - **REST call:** `POST /sql-editor/sqls/run` with `Authorization: Bearer <ZETARIS_API_KEY>`, `X-Org-ID: 1` (local), and a fresh UUID `X-Request-ID`. Body: `{"queryId": <uuid>, "sql": "...", "source": "SqlEditor", "limit": N}`. Rows come back in `data`. 401 = bad key; 400 = bad org ID or non-UUID request ID. The API reference is served at `localhost:8888/redoc/index.html`.
 - **SQL is Lightning SQL**, not Spark or Hive SQL: one statement per call, no trailing semicolon, qualified names.
 - **A REST table is one fixed URL.** `CREATE LIGHTNING REST TABLE ... REQUEST(endpoint "...")`, then a `CREATE SCHEMASTORE VIEW` with `LATERAL VIEW explode(...)` to flatten it. It **re-fetches the source on every query** unless you `CACHE TABLE` it (one test went from 49.7 s to 1.2 s). Per-entity lookups need one table per entity; the EDGAR recipe makes one table per company.
-- **Files:** only from S3 or S3-compatible storage. "Zetaris can't read a file sitting on your laptop." How to get our own small dataset into a local install is a question for the call.
-- **Verified recipes** in the getting-started repo: PokéAPI, SEC EDGAR company facts and submissions, `company_dns` SIC / NACE / Japan codes, Eurostat, ABS, StatCan, Open Food Facts, NASA NeoWs, NOAA GHCN (S3), AWS public blockchain (S3), and a **USL model joining EDGAR to SIC with a foreign-key data-quality rule** (it found IBM's SIC code `3570` missing from the reference list). Known to fail: PUDL, Foursquare, Overture, Ookla, GBIF, Singapore PM2.5, NASA DONKI.
+- **Files:** only from S3 or S3-compatible storage. "Zetaris can't read a file sitting on your laptop."
+- **Verified recipes** in the getting-started repo: PokéAPI, SEC EDGAR company facts and submissions, `company_dns` SIC / NACE / Japan codes, Eurostat, ABS, StatCan, Open Food Facts, NASA NeoWs, NOAA GHCN (S3), AWS public blockchain (S3), and a USL model joining EDGAR to SIC with a foreign-key data-quality rule. Known to fail: PUDL, Foursquare, Overture, Ookla, GBIF, Singapore PM2.5, NASA DONKI.
 - The repo's `AGENTS.md` is written for coding agents (Cursor, Claude Code, Codex): preflight first, read-only first, dry-run before any create, never print keys.
 
 ### Build: Cursor and the Meterless Engines
 
 - Cursor with its own models (Composer for speed, Grok for longer work) on the Cursor credit. Keep every Meterless and NVIDIA key out of Cursor's settings. How to claim the credit is still "[Organisers: add ...]" in the guide.
 - **Engines are implementation specs, not npm packages:** each folder in `engines/` has an `AGENTS.md` contract, a runnable **TypeScript** reference (H-MEM, World Model, Markovian), examples and a conformance suite, run as `HMEM_IMPL=/abs/path/index.ts npx tsx conformance/runner.ts`. Scout Intent is spec plus an eval harness.
-- `templates/agentathon-starter` is a TypeScript CLI that vendors the H-MEM reference. It shows how to map each feature to a named engine service, which is what the engine-usage judging looks for.
+- `templates/agentathon-starter` is a TypeScript CLI that vendors the H-MEM reference and maps each command to a named engine service, which is what judges look for.
 - **So the build is TypeScript (Node).** Python would mean re-implementing an engine to pass a TypeScript conformance runner.
 - The prompts at [meterless.ai/engines.html](https://meterless.ai/engines.html) (Ideate, Implement, Combine, Harden, Power) are written for Cursor or Claude Code.
 
 ### Power: Nightshift, with Nemotron behind it
 
-- Nightshift is a desktop app: **Windows (for PCs with a dedicated GPU), Mac (free M1+ edition for M1–M4; the M5+ edition looks paid), or DGX Spark.** No Linux edition, so it can't run in a cloud session.
+- Nightshift is a desktop app: **Windows (needs a dedicated GPU), Mac (free M1+ edition for M1–M4; the M5+ edition is a $199 preorder), or DGX Spark.** No Linux edition, so it can't run in a cloud session. The Windows edition's price says "see the Windows page"; if it asks for money, stop (our no-own-money rule) and ask on the call.
 - NVIDIA key from [build.nvidia.com](https://build.nvidia.com/models) (free endpoints, rate-limited) → Nightshift **Setup → Providers → NVIDIA**. Then lanes: Lane 1 fast `nvidia/nemotron-3.5-lightning-30b-a3b`, Lane 2 deep `nvidia/nemotron-3-super-120b-a12b`, optional judge lane. Use the exact names Nightshift shows.
 - The app gets the **Runtime URL and token from Nightshift's Console** (top right), e.g. `METERLESS_BASE_URL=http://127.0.0.1:8088/v1`, `METERLESS_RUNTIME_TOKEN=...`, `METERLESS_MODEL=meterless/auto`.
 - **Provider contract** (the "Add Meterless as a provider" prompt, Runtime 1.4): `Authorization: Bearer <token>` on every call; `meterless-app: <app id>` on every call; `meterless-scope: user` on chat; `GET /v1/models` decides online / unauthorized / offline (`/healthz` only proves the process is up); `POST /v1/chat/completions`; 180 s timeout; model ids are routing modes (`meterless/auto|fast|deep|cheap|local|fusion`, `meterless/<class>.<disposition>`).
 - Not yet known: whether OpenAI-style tool calling (`tools` / `tool_calls`) passes through Nightshift to Nemotron. Plan for a JSON-output fallback.
 
-## Ideas
+## Setup on Jannet's laptop (Windows), step by step
 
-Three new ideas plus the Wildcard fallback, roughly scored with the guide's 0–2 self-check (10 questions, 20 max; 16+ is "strong", 11–15 "feasible, reduce scope"). Jannet picks and names it.
+Do these in order and send back **PASS or the exact error text** after each step. Never send keys, passwords or the registry sign-in command. Everything heavy goes on **D:**, because C: has about 10 GB free.
 
-| | Idea | Track | Self-score |
-|---|---|---|---|
-| **A** | Supplier renewal check (recommended) | 01 | 17 |
-| B | Why did demand move? | 02 | 15 |
-| C | Retraction Radar | 01 or 02 | 12 |
-| D | Lore + Zetaris (Wildcard) | 04 | not recommended |
+**Step 0 — check the CPU and GPU (5 min).** Ctrl+Shift+Esc → Performance. Send a screenshot of **CPU** (name, Cores, Logical processors) and say whether there is a **GPU 1** besides the Radeon 610M.
 
-### A. Supplier renewal check (recommended)
+**Step 1 — Nightshift first; this decides go/no-go (20 min).**
 
-**One line:** before a supplier contract renews, an agent pulls together what every system knows about that supplier, finds where the systems disagree, and recommends renew, renegotiate or escalate, with every fact traced to the query that produced it.
+1. At [meterless.ai](https://meterless.ai), scroll to the download cards at the bottom and pick **Windows**. Enter your email at the access gate, confirm it from the email, then download and install. If the installer asks for a folder, choose one on D:.
+2. If it refuses to install or run without a dedicated graphics card, or asks for payment: **stop and tell me.** Unless the call offers another route, we skip the hackathon.
+3. If it opens: at [build.nvidia.com/models](https://build.nvidia.com/models), sign in, open a Nemotron model with an API endpoint, and create an API key.
+4. In Nightshift: **Setup → Providers → NVIDIA**, paste the key and save. Then **NIGHT → LANES**, add a lane with a Nemotron model, and run a short test inside Nightshift.
+5. Make sure Nightshift is not downloading local models to C:.
 
-**User and problem.** A procurement or vendor manager at a mid-size company, a few weeks before a renewal. The facts are in the ERP (spend, invoices), the ticket system (late deliveries, quality issues), the contract store (terms, renewal date) and outside sources (the supplier's SEC filings, its industry). The systems name the supplier differently ("Dell", "DELL INC", "Dell Technologies"), keep different IDs, and sometimes contradict each other. So people either spend a day reconciling or renew on autopilot.
+**Step 2 — free space on C: (10–20 min).** Aim for 20 GB free. Settings → System → Storage → Cleanup recommendations and Temporary files. Move the Downloads folder to D: (right-click Downloads → Properties → Location → `D:\Downloads` → Move).
 
-**Data, all landing in Zetaris:**
+**Step 3 — WSL with Ubuntu on D: (15 min).** In PowerShell as administrator:
 
-- **Internal (synthetic, small):** ERP vendor master, purchase orders and invoices; service tickets; contracts. About 15–25 suppliers, each a real US-listed company so EDGAR has it, with realistic mess: abbreviations, old names after a rename, a subsidiary billed under the parent's name, a tax ID typo. How it gets into Zetaris is a day-1 check: served as small internal REST endpoints (the way SaaS ERPs expose data) and registered as Zetaris REST tables, or whatever local route the Zetaris mentors confirm.
-- **External, on verified recipes:** SEC EDGAR submissions (profile, SIC code, former names) and company facts (revenue, net income, liabilities); `company_dns` SIC reference; SEC's `company_tickers.json` for name → CIK matching.
-- **Zetaris USL** over internal vendor ↔ EDGAR company ↔ SIC code, with foreign-key data-quality rules, so the agent can ask Zetaris which records are invalid instead of guessing. This is the Zetaris team's own EDGAR/SIC showcase, taken one step further: the agent finds and explains such mismatches itself.
+```powershell
+wsl --install --no-distribution
+# restart Windows, then:
+wsl --update
+wsl --install Ubuntu --location D:\WSL\Ubuntu
+```
 
-**Agents (a loop, not a chain):**
+If `--location` isn't recognised, run `wsl --install Ubuntu` and then `wsl --manage Ubuntu --move D:\WSL\Ubuntu`. When Ubuntu opens, create a Linux username and password.
 
-- **Planner:** splits the question into sub-questions and picks sources from what Zetaris lists.
-- **Resolver:** matches the supplier across systems (names, tax IDs, former names, tickers) and writes candidate matches with confidence to shared state. Below a threshold, it asks the user instead of guessing.
-- **Analyst:** writes read-only Lightning SQL, one statement at a time, runs it through Zetaris, and records each finding with its query and rows.
-- **Critic:** rejects claims without a query behind them, flags conflicts between sources, sends revision requests ("that revenue is FY2021; get the latest filing"), escalates identity conflicts.
-- **Reporter:** the renewal brief, with confidence and limits stated.
-- **Source onboarding (the Track 01 "discovery" part):** when a supplier has no EDGAR tables yet, the agent drafts the `CREATE LIGHTNING REST TABLE` and `CACHE TABLE` statements for its CIK, shows the dry run, and creates them only after the user approves.
+**Step 4 — cap WSL's memory and keep its swap on D: (2 min).** Create `C:\Users\<you>\.wslconfig` containing:
 
-**Engines:**
+```ini
+[wsl2]
+memory=8GB
+swap=4GB
+swapFile=D:\\WSL\\swap.vhdx
+```
 
-- **H-MEM (must):** remembers confirmed identity matches, user corrections ("the 2025 ticket spike was our warehouse move, not the supplier") and past renewal decisions, with the trust ledger showing why each fact is believed. Demo: the second check on the same supplier starts from memory and asks nothing it already knows.
-- **World Model (must):** the shared state (supplier entity, findings, open conflicts) that Resolver, Analyst and Critic read and write.
-- **Scout Intent (should):** a guard that lets model-written SQL be read-only; anything that creates goes through the approval path.
-- **Markovian (could):** "check all renewals due next quarter" as a long run in bounded steps.
+Then run `wsl --shutdown` in PowerShell.
 
-**Nemotron:** the fast lane for Resolver and Analyst, the deep lane for Planner and Critic, both pinned so Nightshift's run details show Nemotron did the work.
+**Step 5 — Docker Desktop (20 min).**
 
-**Why it can win.** Impact: renewals are real money and a real job. Sponsor tech: Zetaris joins internal and external data in one SQL query, the agent onboards a source at runtime, and USL data-quality rules feed the critic. Demo: one question, a sourced brief, a conflict the agent escalates, then the "it remembered" second run.
+1. Install Docker Desktop. The program goes on C:, which is why Step 2 comes first.
+2. Before pulling anything, open Settings → Resources → Advanced → **Disk image location** → `D:\Docker` → Apply & restart.
+3. Settings → Resources → WSL integration → turn on **Ubuntu**.
+4. In Ubuntu, check that `docker version` and `docker compose version` both answer.
 
-**Risks.** Supplier risk is the guide's own Track 01 example, so others will build near it; the edge is entity resolution, runtime source onboarding and USL checks. The internal data is synthetic; say so. EDGAR covers US-listed companies only; scope to them. Per-supplier REST tables are slow to create, so cache them and pre-onboard the demo suppliers.
+**Step 6 — Zetaris (about 1 hour, mostly waiting).**
 
-### B. Why did demand move? (Track 02)
+1. From the [Run locally page](https://cloud.enterprise.zetaris.com/dashboard/download), download `zetaris-platform.zip` and copy the registry sign-in command it shows.
+2. In Ubuntu:
 
-A city mobility analyst or a fleet dispatcher asks "why did taxi trips from JFK drop on this date?" The agent tests hypotheses against the seeded NY Taxi sample, NOAA GHCN weather (a verified S3 recipe), NYC 311 requests and public holidays, refutes the weak ones with counter-queries (same weekday in earlier weeks), and reports the explanation with evidence and what it ruled out. H-MEM keeps known events and analyst feedback.
+   ```bash
+   sudo apt update && sudo apt install -y unzip
+   cp /mnt/d/Downloads/zetaris-platform.zip ~/ && cd ~ && unzip zetaris-platform.zip && cd zetaris-platform
+   # paste the registry sign-in command from the Run locally page here
+   ./preflight.sh
+   nano .env
+   ```
 
-Real data, a clear "why" and an easy demo. But the user is weaker, the data is historic, and it depends on which months the NY Taxi sample covers (unknown until Zetaris is installed).
+   In `.env`, set:
+   - `ZETARIS_ADMIN_EMAIL` and `ZETARIS_ADMIN_ORG`.
+   - `ZETARIS_ADMIN_PASSWORD`: 8+ characters, with an uppercase letter, a lowercase letter, a digit and one of `$ @ ! % * ? &` (no other punctuation).
+   - The laptop values: `ZSPARK_DRIVER_MEM=2g`, `ZSPARK_DRIVER_CORES=2`, `ZSPARK_MASTER_URL=local[2]`, `ZETARIS_API_MAX_HEAP=1g`, `UI_PORT=3000`, `ALLOWED_ORIGINS` and `GUI_URL` both `http://localhost:3000`, `COMPOSE_PROFILES` empty, `ZETARIS_SEED_TPCH=true`.
 
-### C. Retraction Radar (Track 01 or 02)
+   Save with Ctrl+O, Enter, Ctrl+X. Then:
 
-Saved from the Graph Hacks shortlist. "Which references in this manuscript are retracted, why, and which of my references lean on retracted work?" Sources: OpenAlex, Crossref and the Retraction Watch database, which disagree on retraction status.
+   ```bash
+   chmod 600 .env && docker compose config --quiet
+   docker compose pull && docker compose up -d
+   docker compose ps --all     # wait until init and bootstrap show Exited (0)
+   ./verify.sh                 # all 9 checks should pass
+   ```
 
-A real problem with good data. But Zetaris REST tables are fixed URLs, so every reference list needs new tables at runtime, and there is no internal-data side for Zetaris to serve, which is Zetaris's whole pitch.
+3. Open `http://localhost:3000`, sign in, open the SQL Editor and run `SELECT 1 AS one`.
+4. Create an API key in the web UI and keep it in a password manager. It goes into the project's `.env` on Oct 22.
+5. When you're not using Zetaris, run `docker compose stop` to free memory, and `docker compose start` to resume. Never run `docker compose down -v`: it deletes everything.
 
-### D. Wildcard: Lore with Zetaris and Meterless
+**Step 7 — Cursor (10 min).** Install and sign in. Claim the credit once the organisers say how (expected on the call). Then ask Cursor's agent, on Composer or Grok, to create and run a Python file that prints `hello`.
 
-Allowed (pre-existing code declared, only the extension scored), but the top prize is $1,000 against $2,000, and Lore is still being judged at Graph Hacks. Fallback only.
+**Step 8 — smoke test:** on Oct 22, as the first thing in the new project.
 
 ## How we build it (who does what)
 
 **The constraint:** Zetaris and Nightshift run on Jannet's laptop. A cloud session can't reach that laptop's `localhost`, and Nightshift has no Linux edition. So:
 
-- **Claude (cloud session):** writes the app in TypeScript: engines vendored from the Meterless references with their conformance suites, the agent loop, the Zetaris and Meterless clients, a small web UI with the trace, and tests against **recorded Zetaris responses and a mock Meterless server**. Also `SAMPLE_MODE` for when a source is down. The demo itself always runs live.
-- **Jannet (laptop, in Cursor):** keeps Zetaris and Nightshift running, pulls each push, runs the Zetaris source onboarding with Cursor's agent following Zetaris's `AGENTS.md` (dry run first), runs the app end to end, and pastes back errors and outputs (never keys). Records the demo on the laptop.
-- This is real Cursor use, and the submission says plainly which parts were Cursor and which were Claude Code. **Confirm on the onboarding call that this mix is acceptable.** The Power prompt itself names Claude Code as one of the assistants it works with, but the Build rule says "you must use Cursor". If the answer is no, Jannet has to do the main coding in Cursor, which changes the plan.
-
-**Two options that cut the round trips (Jannet's call):**
-
-1. **A real Zetaris in the cloud session for testing.** This container has Docker, 4 CPUs, 15 GB of memory and 30 GB of free disk, which meets Zetaris's minimum. It needs the platform bundle and the registry sign-in, added as environment secrets, never pasted in chat. About 30–45 minutes per new container. The credentials are Jannet's own, so check Zetaris's terms first. The demo still runs on the laptop.
-2. **Claude Code on the laptop** (in Cursor's terminal), which can reach `localhost` directly.
+- **Claude (cloud session):** creates the repo after 05:30 IST on Oct 22 and writes the app in TypeScript: engines vendored from the Meterless references with their conformance suites, the agent loop, the Zetaris and Meterless clients, a small web UI with the trace, and tests against **recorded Zetaris responses and a mock Meterless server**. Also `SAMPLE_MODE` for when a source is down. The demo itself always runs live.
+- **Jannet (laptop, in Cursor):** keeps Zetaris and Nightshift running, pulls each push, runs the app end to end, uses Cursor's agent for the local wiring and fixes, and pastes back errors and outputs (never keys). Records the demo on the laptop.
+- **Jannet's time:** about 2–3 hours of setup before Oct 22, then roughly an hour a day to run, test and send results, plus about 2 hours on Oct 26 for the demo video.
+- **Optional, to cut round trips:** a real Zetaris inside the cloud session for testing. The container has Docker, 4 CPUs, 15 GB of memory and 30 GB of free disk. It needs the platform bundle and registry sign-in as environment secrets, never pasted in chat; the credentials are Jannet's own, so check Zetaris's terms first.
 
 ## Day plan (IST)
 
 | Day | Goal |
 |---|---|
-| **Oct 21** | Jannet: laptop check, installs, smoke test (3 × PASS). Onboarding call 17:30, with the questions below. Pick the idea |
-| **Oct 22** (from 05:30) | Repo created. Engines vendored and their conformance suites passing. Zetaris + Nightshift end to end: one question → one SQL → one answer. Internal sample data designed and loaded |
-| **Oct 23–24** | The full loop with the critic, World Model and H-MEM; source onboarding; trace in the UI. Oct 24: the "what would fail tomorrow?" check |
-| **Oct 25** | Conflicts, retries, fallbacks, `SAMPLE_MODE`; more than one sample case working |
+| **Oct 20–21** | Jannet: setup steps 0–7, Nightshift first. Onboarding call Oct 21 at 17:30 with the questions below. Pick the idea and its name |
+| **Oct 22** (from 05:30) | Repo created. Engines vendored and their conformance suites passing. Zetaris + Nightshift end to end: one question → one SQL → one answer. **Hard stop at midday if the setup still isn't working** |
+| **Oct 23–24** | The full agent loop with the critic, World Model and H-MEM; the trace in the UI. Oct 24: the "what would fail tomorrow?" check |
+| **Oct 25** | Retries and fallbacks, `SAMPLE_MODE`; several sample cases working |
 | **Oct 26** | Feature freeze. README, `data/README.md`, deck, sponsor-tech text; demo video recorded on the laptop; clean-setup test |
 | **Oct 27** | Final checks (secrets, declared components, track selected) and **submit by evening IST** |
 
 ## Questions for the onboarding call (Oct 21, 17:30 IST)
 
-1. Is Claude Code acceptable alongside Cursor, as long as Cursor is genuinely used for development?
-2. Which prize table is right ($2,000 or $1,600 for first)? What are the "additional challenges and prizes"? How do we enter the NVIDIA DGX Spark award: a form field, or automatic?
-3. How do we load our own small dataset into a **local** Zetaris: a mounted folder, a JDBC database on the Docker network, or only S3? Can a local Zetaris register a REST endpoint served from the host (`host.docker.internal`)?
-4. Does Nightshift on Windows need a dedicated GPU when every lane is an NVIDIA cloud model? Does tool calling (`tools` / `tool_calls`) pass through to Nemotron?
-5. Do judges run submissions themselves? The stack needs a local Zetaris (8 GB) and Nightshift. Is a video plus a reproducible README enough?
-6. Is one Meterless Engine with its conformance suite passing enough evidence for the Build rule?
+1. **My laptop has integrated AMD graphics, no dedicated GPU. Can Nightshift's Windows edition run using NVIDIA cloud lanes only? If not, is calling Nemotron through NVIDIA's API directly ("Option B") enough for the Power rule?**
+2. Is Claude Code acceptable alongside Cursor, as long as Cursor is genuinely used for development?
+3. Which prize table is right ($2,000 or $1,600 for first)? What are the "additional challenges and prizes"? How do we enter the NVIDIA DGX Spark award?
+4. How do we get our own small dataset into a **local** Zetaris? Can a local install read a mounted folder, or a REST endpoint served from the host (`host.docker.internal`)?
+5. Does tool calling (`tools` / `tool_calls`) pass through Nightshift to Nemotron?
+6. Do judges run submissions themselves, given the stack needs a local Zetaris and Nightshift? Is a video plus a reproducible README enough?
+7. Is one Meterless Engine with its conformance suite passing enough for the Build rule?
 
 ## Waiting on Jannet
 
-1. **Laptop check (go / no-go):** OS, total RAM, free disk, GPU. Zetaris needs 8 GB and 4 CPUs given to Docker plus 15 GB free; Nightshift needs Windows with a dedicated GPU or an M1–M4 Mac. If the laptop can't run both, the only other route the guide offers is Zetaris on AWS (about US$1 per 8 hours, on an account with a card), which breaks our no-own-money rule. Then we stop here.
-2. **Zetaris:** download the bundle, `docker login`, set the admin email, password and org in its `.env` before the first start, `docker compose pull` and `up -d`, then `./verify.sh` (9 checks), `SELECT 1`, and the Pikachu query. Create a Zetaris API key yourself.
-3. **Nightshift:** install, verify the email, add the NVIDIA key in Providers, set up a Nemotron lane, copy the Runtime URL and token from the Console into the project's `.env`.
-4. **Cursor:** install, sign in, claim the credit when the organisers post how; check 2 (Composer or Grok creates and runs a hello file).
-5. **Smoke test** from the 20 October guide: three PASS lines.
-6. **Onboarding call** Oct 21, 17:30 IST, with the questions above.
-7. **Pick the idea** (A, B or C) and name it.
-8. Optional: decide on either option for cutting round trips.
-
-Keys and passwords go in `.env` files and Nightshift's settings, never in chat or in an issue.
+1. **Step 0:** the CPU and GPU screenshot from Task Manager.
+2. **Step 1, Nightshift: the go/no-go.**
+3. Steps 2–7, only if Nightshift passes.
+4. The onboarding call, with question 1 first.
+5. Say yes or no to idea A (or pick B or C), and pick a name.
 
 ## Where the course material contradicts itself
 
