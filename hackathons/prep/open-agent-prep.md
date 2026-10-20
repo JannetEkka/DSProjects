@@ -178,7 +178,10 @@ Before a supplier contract renews, an agent pulls together what every system kno
   - Use the exact names Nightshift shows. Turn the local lanes off while working, to save memory.
 - The app gets the **Runtime URL and token from Nightshift's Console** (top right), e.g. `METERLESS_BASE_URL=http://127.0.0.1:8088/v1`, `METERLESS_RUNTIME_TOKEN=...`, `METERLESS_MODEL=meterless/auto`.
 - **Provider contract** (the "Add Meterless as a provider" prompt, Runtime 1.4): `Authorization: Bearer <token>` on every call; `meterless-app: <app id>` on every call; `meterless-scope: user` on chat; `GET /v1/models` decides online / unauthorized / offline (`/healthz` only proves the process is up); `POST /v1/chat/completions`; 180 s timeout; model ids are routing modes (`meterless/auto|fast|deep|cheap|local|fusion`, `meterless/<class>.<disposition>`).
-- Not yet known: whether OpenAI-style tool calling (`tools` / `tool_calls`) passes through Nightshift to Nemotron. Plan for a JSON-output fallback.
+- **Tool calling:** Nightshift's setup screen advertises the endpoint as "OpenAI-compatible · streaming · tool calls" (10-20). Confirm with a real `tools` request on day 1, and keep a JSON-output fallback.
+- **Jannet's Nightshift (v1.2.1), 10-20:** two cloud lanes, both "ready" with "nvidia accepted the key", both on the Race duty: `nemotron-3-super-120b-a12b` and `nemotron-3.5-lightning-30b-a3b`. No local lanes.
+  - Nightshift warns that no lane has the Judge or Verify duty, which its own judging needs; its suggested fix is Verify on the Super lane.
+  - A red banner said the runtime endpoint was offline to external apps ("Fix endpoint"). Fix it before any app test.
 
 ## Setup on Jannet's laptop (Windows), step by step
 
