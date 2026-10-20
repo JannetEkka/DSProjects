@@ -62,7 +62,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Nov 02 | ET AI Hackathon 2026: Agentic Edition | ₹2 lakh + Accenture interviews | ⛔ | ✓ registration closed Sep 20 |
 | Nov 02 | [Run October Jam](https://events.run.world/events/octoberjam) (Oct 8–Nov 2) | $30K | ❌ | games and stories on Run |
 | Nov 02 | [YouCam API Skin AI & eCommerce VTO](https://youcam-api-skin-ai-ecommerce.devpost.com) | — | ❌ | virtual try-on |
-| Nov 05 | **[Meta Global AI Developer Hackathon](https://cerebralvalley.ai/e/meta-ai-developer-hackathon)** — **apply by Oct 25, 23:59 ET (Oct 26, 09:29 IST)**; build Oct 26 → Nov 4, 21:00 ET | $1M across two tracks + API credits | ✅ applying 10-20, indie track (answers: [prep](prep/meta-hackathon-application.md)) | ✓ 10-20: virtual, worldwide (India not restricted), free if selected. Capped at 20,000, reviewed on a rolling basis, so apply early. Indie (solo) or startup track. Must use Meta Model API (Muse Spark, Muse Image, SAM 3.1). The application is scored on the idea and on a described AI project |
+| Nov 05 | **[Meta Global AI Developer Hackathon](https://cerebralvalley.ai/e/meta-ai-developer-hackathon)** — **apply by Oct 25, 23:59 ET (Oct 26, 09:29 IST)**; build Oct 26 → Nov 4, 21:00 ET | $1M across two tracks + API credits | ✅ applied 10-20, indie track (answers: [prep](prep/meta-hackathon-application.md)) | ✓ 10-20: virtual, worldwide (India not restricted), free if selected. Capped at 20,000, reviewed on a rolling basis, so apply early. Indie (solo) or startup track. Must use Meta Model API (Muse Spark, Muse Image, SAM 3.1). The application is scored on the idea and on a described AI project |
 | Nov 06 | [PortalDot Hacker House 2026](https://dorahacks.io/hackathon/portaldot-hacker-house-2026) | $5.2K | ❌ | Rust / ink! contracts |
 | Nov 07 | [ETHGlobal Mumbai](https://ethglobal.com/events/mumbai) (Nov 5–7) | — | ⚪ | in person, Mumbai — travel |
 | Nov 08 | Vultr: Agent Rush on lablab (online Nov 3–8) | — | ⚪ | after the October deadlines |
@@ -70,7 +70,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Nov 11 | [Ryo-chan Virtual Hackathon 2026](https://ryobuild.com) | $15K in tokens + Tokyo trip | ❓ | page did not load its rules |
 | Nov 12 | [Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent) | $65K | ⚪ | fine-tuning Gemma to fix code; heavy compute |
 | Nov 12 | **[PayPal AI Hackathon](https://paypalaihackathon.devpost.com/)** (Oct 1–Nov 12, 12:00 PT) | $67.5K cash ($12K first) | ✅ registered 10-20 | ✓ 10-20 (from a guide to it, not the rules page): open from most countries, India not excluded; free sandbox. No tracks; must use one PayPal technology (Agent Toolkit and the MCP server count) |
-| Nov 13 | **[Airwallex Agentic Banking Hackathon](https://airwallex.hackerearth.com/)** — **apply by Oct 23**; build Oct 25 → Nov 13 | $30K + $20K + $15K + $15K, plus credits | ✅ applied 10-20 | ✓ 10-20: online, 18+, anywhere; solo or up to 4. Agents that run real financial workflows on Airwallex APIs (12 tracks, e.g. treasury, payouts, disputes). SF demo day optional. Check the sandbox needs no money |
+| Nov 13 | **[Airwallex Agentic Banking Hackathon](https://airwallex.hackerearth.com/)** — **apply by Oct 23**; build Oct 25 → Nov 13 | $30K + $20K + $15K + $15K, plus credits | ✅ registered 10-20 | ✓ 10-20: online, 18+, anywhere; solo or up to 4. Agents that run real financial workflows on Airwallex APIs (12 tracks, e.g. treasury, payouts, disputes). SF demo day optional. Check the sandbox needs no money |
 | Nov 13 | [Beyond the Benchmark: Binance Agentic AI Challenge](https://dorahacks.io/hackathon/binance) | $6K + Binance internship / full-time track | ❌ | ✓ live autonomous trades on BNB Chain tokenized stocks — needs a funded wallet |
 | Nov 15 | [Mezo Buildathon Wave 1](https://app.akindo.io/wave-hacks) (Oct 16–Nov 15) | $7K in MEZO | ❌ | Bitcoin DeFi |
 | Nov 18 | [Meta VR Start Developer Competition](https://start-developer-competition-26.devpost.com) | $1M | ❌ | needs a Quest 3 and the VR Start programme |
@@ -111,13 +111,13 @@ Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. C
 | Oct 24, 18:00 → Oct 25, ~18:00 (24 h) | HackerRank Orchestrate | ✓ 10-20 | S17 | [#42](https://github.com/JannetEkka/DSProjects/issues/42) |
 | Oct 25, 19:30 | IEEE ClimateChain | **not yet** | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
 | Oct 25 (time not shown) | Web3 for Social Good (DoraHacks) | ✓ 10-20 | S20 | [#45](https://github.com/JannetEkka/DSProjects/issues/45) |
-| Oct 26, 09:29 apply → Nov 5, 07:30 submit | Meta Global AI Developer Hackathon | applying 10-20 | S15 | [#40](https://github.com/JannetEkka/DSProjects/issues/40) |
+| Oct 26, 09:29 apply → Nov 5, 07:30 submit | Meta Global AI Developer Hackathon | applied 10-20 | S15 | [#40](https://github.com/JannetEkka/DSProjects/issues/40) |
 | Oct 27, 02:30 | Build With AI: Basics | ✓ | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
 | Oct 27 | GitLab: Life After Code | ✓ | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
 | Oct 27 (event Oct 22–27; register by Oct 22, 23:59 UTC) | Open Agent | **not yet** — doing the workshops | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
 | Oct 31, 17:00 | Galuxium Nexus V2 | ✓ 10-20 | S19 | [#44](https://github.com/JannetEkka/DSProjects/issues/44) |
 | Nov 2 (online Oct 26 → Nov 2, TBA) | Rise of AI Agents (lablab) | **not yet**: page not open | S22 | [#47](https://github.com/JannetEkka/DSProjects/issues/47) |
-| Nov 13 (build from Oct 25) | Airwallex Agentic Banking | applied 10-20 | S16 | [#41](https://github.com/JannetEkka/DSProjects/issues/41) |
+| Nov 13 (build from Oct 25) | Airwallex Agentic Banking | ✓ registered 10-20 | S16 | [#41](https://github.com/JannetEkka/DSProjects/issues/41) |
 | Nov 13, 01:30 | PayPal AI Hackathon | ✓ 10-20 | S18 | [#43](https://github.com/JannetEkka/DSProjects/issues/43) |
 | Nov 30 (200 monthly users) | Anna AI App Builder (grants) | ✓ 10-20 | S21 | [#46](https://github.com/JannetEkka/DSProjects/issues/46) |
 | Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | ✓ | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
