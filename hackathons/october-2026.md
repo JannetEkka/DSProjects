@@ -30,7 +30,6 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 16 | **[Hack Apertus](https://hackapertus.devpost.com/)** — closes **Oct 16, 12:00 CEST (15:30 IST)** | €10,680+ (2,500 CHF per track) | ✅ **submitted** (operator, 10-14) | ✓ global, solo OK, no cost. Tracks: Red-Teaming · Swiss Voices · Academia · Own Projects, all on Apertus (Switzerland's open LLM). Red-Teaming = Wiretrap's method on a new target. Grand Finals are in St. Gallen in May 2027 — check whether attending is required for the prize |
 | Oct 18 | **[Graph Hacks: Context for AI Agents (FalkorDB)](https://wemakedevs.org/hackathons/falkordb)** — **Oct 15 00:01 → Oct 18 23:59 IST** | iPhone 18 Pro / PS5 / M6 Mac Mini per track ($20K pool) + AirPods for the best blog post | ✅ **submitted 10-18** | Entry: **Lore** ([repo](https://github.com/JannetEkka/lore) · [live](https://lore-gh5y.onrender.com) · [video](https://youtu.be/V-Ifwi_jxhg) · [blog](https://medium.com/@jannetaekka/i-built-a-company-brain-for-open-source-projects-on-falkordb-47f519f9ce08)), a company brain for open-source orgs on FalkorDB, demoed on FalkorDB's own org. All three tracks. Backtest: a real reviewer in the top 3 for 90% of 300 PRs. Graphs on FalkorDB Cloud's free tier. Prep: [graph-hacks-prep.md](prep/graph-hacks-prep.md) |
 | Oct 18 | [Ayiti AI](https://ayiti.ai) | — | ❓ | not checked |
-| Oct 20 | **[Open Agent Hackathon 2026](https://hackathon.genai.works)** — register by Oct 13, build Oct 15–20 | up to $20K | ⚪ doing the workshops (operator, 10-14) | ✓ register by Oct 13; overlaps Graph Hacks — decide Oct 15 when prizes are posted · has workshop material to go through first — its own session |
 | Oct 20 | TechEx Amsterdam on lablab (online Oct 16–19) | — | ❌ | not entering (operator, 10-14); it also overlapped Graph Hacks |
 | Oct 20 | North America HPC Hackathon (Oct 19–20) | — | ❌ | HPC, North America |
 | Oct 22 | **[RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection)** — **join by Oct 15** (entry + team-merger deadline); final Oct 22 | $77K, incl. new awards for the most efficient models | ✅ joined | ✓ multimodal: knee MRI + the radiology report → 12 abnormality types. Personal (operator 10-05). Honest odds: a 2.5-week start against medical-imaging teams makes the main prizes unlikely; the efficiency award is the realistic lane, and a strong public notebook is a portfolio piece either way. Compute: Kaggle's free GPUs + AMD's $100 credits (lablab) |
@@ -40,6 +39,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 25 | **[IEEE ClimateChain](https://ieee-climatechain-hack.devpost.com)** — online Oct 5–25 | $3K | ✅ | ✓ open worldwide. Climate + blockchain; a new project |
 | Oct 26 | [OpenCV AI Competition 2026](https://opencv26.devpost.com) | $20,250 | ❌ | ✓ needs a component running on AWS (an account with a card on file) |
 | Oct 26 | **[Build With AI: Basics](https://learn-ai-basics.devpost.com/)** — closes Oct 26, 17:00 EDT | $2,500 ($1,250 first) | ✅ registered | ✓ 18+, all countries; a new project started from an empty folder; 1–3 min video + public repo. Beginner-friendly, so a polished small build stands out |
+| Oct 27 | **[Open Agent Hackathon 2026](https://hackathon.genai.works)** — moved to **Oct 22–27**; register by **Oct 22, 23:59 UTC** | prizes not posted (10-20) | ⚪ doing the workshops (operator, 10-14) | ✓ dates re-checked 10-20; submission deadline still not shown. Has workshop material to go through first — its own session |
 | Oct 27 | **[GitLab: Life After Code](https://gitlab-transcend.devpost.com)** | $45K total | ✅ registered | ✓ India eligible, solo allowed. "Proof of Fix": an agent that checks production after a merge and reopens the issue if the promised log line never appears |
 | Oct 28 | [AWS CDS Agentic AI Partner Hackathon](https://aws-cds-partner.devpost.com) | $40K | ❌ | ✓ AWS Partner organisations only |
 | Oct 30 | **[Nebius × NVIDIA Global AI Hackathon](https://nebiusglobalaihackathon.devpost.com)** | $50K+ ($20K first) | ⚪ | ✓ must run on Nebius + an NVIDIA open model; free trial is ~$1 — only on free Builder Program credits, never a paid top-up |
@@ -99,12 +99,12 @@ Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. C
 | Oct 14, 09:29 | Monad Metropolis — SMT Receipts | ✅ submitted 10-14 | S8 | [#26](https://github.com/JannetEkka/DSProjects/issues/26) |
 | Oct 16, 15:30 (ready by night of Oct 14) | Hack Apertus | ✅ submitted | S7 | [#25](https://github.com/JannetEkka/DSProjects/issues/25) |
 | Oct 18, 23:59 (window opens Oct 15 00:01) | Graph Hacks / FalkorDB — Lore | ✅ submitted 10-18 | S5 | [#24](https://github.com/JannetEkka/DSProjects/issues/24) |
-| Oct 20 (register by Oct 13) | Open Agent | doing the workshops | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
 | Oct 23, 05:29 | RSNA Knee (Kaggle) | ✓ joined | S6 | [#22](https://github.com/JannetEkka/DSProjects/issues/22) |
 | Oct 24, 00:30 | Amazon: Build, Ship, Shape — Fire TV | ✓ | S3 | [#21](https://github.com/JannetEkka/DSProjects/issues/21) |
 | Oct 25 | IEEE ClimateChain | **not yet** | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
 | Oct 27, 02:30 | Build With AI: Basics | ✓ | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
 | Oct 27 | GitLab: Life After Code | ✓ | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
+| Oct 27 (event Oct 22–27; register by Oct 22, 23:59 UTC) | Open Agent | **not yet** — doing the workshops | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
 | Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | ✓ | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
 | TBA (dates not published) | #HackCanton Season 4 | ✓ 10-06 | S12 | [#29](https://github.com/JannetEkka/DSProjects/issues/29) |
 | Oct 30 | Nebius × NVIDIA — only on free credits | — | — | not entered |
