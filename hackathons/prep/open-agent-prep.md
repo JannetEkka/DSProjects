@@ -6,18 +6,18 @@ This is the brief for the build session. It comes from the course material Janne
 
 **No project code before the window opens.** "Work committed before the build window opens is not eligible, except for clearly declared pre-existing components." Setting up the laptop (Zetaris, Nightshift, Cursor) is setup, not project code, and should happen before Oct 22. The repo is created and gets its first commit after **Oct 22, 05:30 IST**.
 
-## Go / no-go: Jannet's laptop (10-20)
+## Go / no-go: Jannet's laptop (10-20): go
 
 The laptop (details in [.claude/CLAUDE.md](../../.claude/CLAUDE.md)) against what the stack needs:
 
 | Need | Laptop | Verdict |
 |---|---|---|
-| Nightshift, Windows edition: "a 64-bit Windows 10 or 11 PC **with a dedicated graphics card**" ([editions](https://github.com/Meterless/Meterless/blob/main/docs/products/nightshift/editions.md)) | AMD Radeon 610M, **integrated** | **The deciding question.** Unknown whether it installs and serves NVIDIA cloud lanes without a dedicated card. Test it first; ask on the call |
-| Docker: 8 GB memory | 16 GB RAM in total | OK but tight: about 7 GB left for Windows, Cursor, a browser, Nightshift and screen recording. Stop Zetaris when not using it |
-| Docker: 4 CPUs | not checked | Task Manager → Performance → CPU: needs 4 or more logical processors |
-| 15 GB free disk | C: about 10 GB free, D: about 137 GB free | OK if Docker's disk image and Ubuntu go on D:, and a few GB are freed on C: for the Docker Desktop program |
+| Nightshift, Windows edition (its docs ask for "a dedicated graphics card") | AMD Radeon 610M, integrated | **Passed 10-20.** It installed, ran on the 610M ("Runs Llama 3.2 3B locally") and serves `http://127.0.0.1:8088/v1` |
+| Docker: 8 GB memory | 16 GB RAM, **13.8 GB usable** | Tight: about 6 GB left for Windows, Cursor, a browser, Nightshift and screen recording. Restart first, cap WSL at 7 GB, turn off Nightshift's local lanes while using NVIDIA's, and stop Zetaris when not using it |
+| Docker: 4 CPUs | Ryzen 5 7520U, 4 cores / 8 logical processors, virtualization on | OK |
+| 15 GB free disk | C: about 17–21 GB free after Nightshift, D: about 137 GB free | OK if Docker's disk image and Ubuntu go on D: |
 
-**Order:** test Nightshift first (about 20 minutes). If it won't run without a dedicated card, and the call doesn't offer another route (for example NVIDIA's API directly, "Option B" in the sponsor diagram), we skip this hackathon at no cost. Don't spend an hour on Zetaris before Nightshift passes. **Hard stop:** if the setup isn't working by Oct 22 midday IST, drop it.
+**Hard stop:** if the setup isn't working by Oct 22 midday IST, drop the entry.
 
 ## Dates (IST)
 
@@ -87,7 +87,7 @@ Because the rules require it: "teams must use Cursor as their development enviro
 
 ## Ideas
 
-Jannet wants something fun, and floated two ideas: SMT in Track 02, or a coding teacher that sets tasks, asks you to explain why, and uses games. **Recommendation: A, the detective game.** It is the coding teacher, pointed at the one kind of coding where Zetaris is the playground instead of a bolt-on. Jannet names it.
+Jannet wants something fun, and floated two ideas: SMT in Track 02, or a coding teacher that sets tasks, asks you to explain why, and uses games. **Decided 10-20: A, the SQL detective game** (Jannet: "yeah i like the sql learning game too"). It is the coding teacher, pointed at the one kind of coding where Zetaris is the playground instead of a bolt-on. The name is still to be picked. B and C stay below for reference.
 
 | | Idea | Track | In one line |
 |---|---|---|---|
@@ -163,8 +163,19 @@ Before a supplier contract renews, an agent pulls together what every system kno
 
 ### Power: Nightshift, with Nemotron behind it
 
-- Nightshift is a desktop app: **Windows (needs a dedicated GPU), Mac (free M1+ edition for M1–M4; the M5+ edition is a $199 preorder), or DGX Spark.** No Linux edition, so it can't run in a cloud session. The Windows edition's price says "see the Windows page"; if it asks for money, stop (our no-own-money rule) and ask on the call.
-- NVIDIA key from [build.nvidia.com](https://build.nvidia.com/models) (free endpoints, rate-limited) → Nightshift **Setup → Providers → NVIDIA**. Then lanes: Lane 1 fast `nvidia/nemotron-3.5-lightning-30b-a3b`, Lane 2 deep `nvidia/nemotron-3-super-120b-a12b`, optional judge lane. Use the exact names Nightshift shows.
+- Nightshift is a desktop app: Windows, Mac (free M1+ edition for M1–M4; the M5+ edition is a $199 preorder), or DGX Spark. No Linux edition, so it can't run in a cloud session. Its docs ask for a dedicated GPU on Windows, but **it installed and runs on Jannet's integrated Radeon 610M** (10-20, free). On first launch it downloads about 3.8 GB of local models (Llama 3.2 3B, a memory index, voice) into `%LOCALAPPDATA%` on C:.
+- **One NVIDIA key covers every model** on [build.nvidia.com](https://build.nvidia.com/models) (free endpoints, rate-limited). It goes in Nightshift **Setup → Providers → NVIDIA**.
+- **Free-endpoint Nemotron models listed on 10-20:**
+  - `nemotron-3.5-lightning-30b-a3b`: fast agentic MoE.
+  - `nemotron-3.5-super-vl-120b-a12b`: early access, 5 days old; reasoning, tool calling, multimodal.
+  - `nemotron-3-ultra-550b-a55b`: 1M context; big and slow.
+  - `nemotron-3-nano-omni-30b-a3b-reasoning`.
+  - `nemotron-3-embed-1b`: embeddings.
+  - `nemotron-3.5-content-safety`.
+- **Lanes:**
+  - Lane 1, fast: `nemotron-3.5-lightning-30b-a3b`, for the Game Master, Coach and intent routing.
+  - Lane 2, deep: `nemotron-3-super-120b-a12b` (the guide's pick) if Nightshift lists it, otherwise `nemotron-3.5-super-vl-120b-a12b`, for the Case Designer and Validator.
+  - Use the exact names Nightshift shows. Turn the local lanes off while working, to save memory.
 - The app gets the **Runtime URL and token from Nightshift's Console** (top right), e.g. `METERLESS_BASE_URL=http://127.0.0.1:8088/v1`, `METERLESS_RUNTIME_TOKEN=...`, `METERLESS_MODEL=meterless/auto`.
 - **Provider contract** (the "Add Meterless as a provider" prompt, Runtime 1.4): `Authorization: Bearer <token>` on every call; `meterless-app: <app id>` on every call; `meterless-scope: user` on chat; `GET /v1/models` decides online / unauthorized / offline (`/healthz` only proves the process is up); `POST /v1/chat/completions`; 180 s timeout; model ids are routing modes (`meterless/auto|fast|deep|cheap|local|fusion`, `meterless/<class>.<disposition>`).
 - Not yet known: whether OpenAI-style tool calling (`tools` / `tool_calls`) passes through Nightshift to Nemotron. Plan for a JSON-output fallback.
@@ -173,15 +184,19 @@ Before a supplier contract renews, an agent pulls together what every system kno
 
 Do these in order and send back **PASS or the exact error text** after each step. Never send keys, passwords or the registry sign-in command. Everything heavy goes on **D:**, because C: has about 10 GB free.
 
-**Step 0 — check the CPU and GPU (5 min).** Ctrl+Shift+Esc → Performance. Send a screenshot of **CPU** (name, Cores, Logical processors) and say whether there is a **GPU 1** besides the Radeon 610M.
+**Step 0: check the CPU and GPU.** Done 10-20: Ryzen 5 7520U (8 logical processors), Radeon 610M only.
 
-**Step 1 — Nightshift first; this decides go/no-go (20 min).**
+**Step 1: Nightshift, then NVIDIA (20 min).** Installed and running 10-20. What's left:
 
-1. At [meterless.ai](https://meterless.ai), scroll to the download cards at the bottom and pick **Windows**. Enter your email at the access gate, confirm it from the email, then download and install. If the installer asks for a folder, choose one on D:.
-2. If it refuses to install or run without a dedicated graphics card, or asks for payment: **stop and tell me.** Unless the call offers another route, we skip the hackathon.
-3. If it opens: at [build.nvidia.com/models](https://build.nvidia.com/models), sign in, open a Nemotron model with an API endpoint, and create an API key.
-4. In Nightshift: **Setup → Providers → NVIDIA**, paste the key and save. Then **NIGHT → LANES**, add a lane with a Nemotron model, and run a short test inside Nightshift.
-5. Make sure Nightshift is not downloading local models to C:.
+1. Finish Nightshift's 5-step setup wizard. Don't press "Skip setup".
+2. **NVIDIA key, one for all models:** on [build.nvidia.com](https://build.nvidia.com/models), open `nemotron-3.5-lightning-30b-a3b` and click **Get API Key** → Generate → copy the key (it starts with `nvapi-`). If it asks for a card or payment, stop and tell me. Paste the key only into Nightshift, never into Cursor, a file in the project, or chat.
+3. In Nightshift: **Setup → Providers → NVIDIA**, paste the key and save. Refresh the model list if needed.
+4. **NIGHT → LANES:**
+   - Lane 1: `nemotron-3.5-lightning-30b-a3b`.
+   - Lane 2: `nemotron-3-super-120b-a12b` if it's listed, otherwise `nemotron-3.5-super-vl-120b-a12b`.
+   - Turn off the local Llama and voice lanes while working, to save memory.
+5. Run a short test inside Nightshift. Send a screenshot that shows which model answered, with the key hidden.
+6. If Nightshift's settings let you move its models folder to D:, do it; it holds about 3.8 GB on C: now.
 
 **Step 2 — free space on C: (10–20 min).** Aim for 20 GB free. Settings → System → Storage → Cleanup recommendations and Temporary files. Move the Downloads folder to D: (right-click Downloads → Properties → Location → `D:\Downloads` → Move).
 
@@ -196,16 +211,16 @@ wsl --install Ubuntu --location D:\WSL\Ubuntu
 
 If `--location` isn't recognised, run `wsl --install Ubuntu` and then `wsl --manage Ubuntu --move D:\WSL\Ubuntu`. When Ubuntu opens, create a Linux username and password.
 
-**Step 4 — cap WSL's memory and keep its swap on D: (2 min).** Create `C:\Users\<you>\.wslconfig` containing:
+**Step 4 — cap WSL's memory and keep its swap on D: (2 min).** Restart Windows first; on 10-20, 12.1 of 13.8 GB was in use after 5 days without a restart. Then create `C:\Users\<you>\.wslconfig` containing:
 
 ```ini
 [wsl2]
-memory=8GB
-swap=4GB
+memory=7GB
+swap=6GB
 swapFile=D:\\WSL\\swap.vhdx
 ```
 
-Then run `wsl --shutdown` in PowerShell.
+Then run `wsl --shutdown` in PowerShell. 7 GB is under the guide's 8 GB but over the 6 GB where preflight fails, and it leaves about 6.8 GB for Windows. If Zetaris containers keep restarting, raise it to 8 GB and close other apps.
 
 **Step 5 — Docker Desktop (20 min).**
 
@@ -262,7 +277,7 @@ Then run `wsl --shutdown` in PowerShell.
 
 | Day | Goal |
 |---|---|
-| **Oct 20–21** | Jannet: setup steps 0–7, Nightshift first. Onboarding call Oct 21 at 17:30 with the questions below. Pick the idea and its name |
+| **Oct 20–21** | Jannet: setup steps 1–7 (Nightshift installed 10-20). Onboarding call Oct 21 at 17:30 with the questions below. Pick the game's name |
 | **Oct 22** (from 05:30) | Repo created. Engines vendored and their conformance suites passing. Zetaris + Nightshift end to end: one question → one SQL → one answer. **Hard stop at midday if the setup still isn't working** |
 | **Oct 23–24** | The full agent loop with the critic, World Model and H-MEM; the trace in the UI. Oct 24: the "what would fail tomorrow?" check |
 | **Oct 25** | Retries and fallbacks, `SAMPLE_MODE`; several sample cases working |
@@ -271,8 +286,8 @@ Then run `wsl --shutdown` in PowerShell.
 
 ## Questions for the onboarding call (Oct 21, 17:30 IST)
 
-1. **My laptop has integrated AMD graphics, no dedicated GPU. Can Nightshift's Windows edition run using NVIDIA cloud lanes only? If not, is calling Nemotron through NVIDIA's API directly ("Option B") enough for the Power rule?**
-2. Is Claude Code acceptable alongside Cursor, as long as Cursor is genuinely used for development?
+1. Is Claude Code acceptable alongside Cursor, as long as Cursor is genuinely used for development?
+2. Our Zetaris runs with 7 GB on a 16 GB laptop (13.8 GB usable). Is that enough with the laptop settings, or will it fall over?
 3. Which prize table is right ($2,000 or $1,600 for first)? What are the "additional challenges and prizes"? How do we enter the NVIDIA DGX Spark award?
 4. How do we get our own small dataset into a **local** Zetaris? Can a local install read a mounted folder, or a REST endpoint served from the host (`host.docker.internal`)?
 5. Does tool calling (`tools` / `tool_calls`) pass through Nightshift to Nemotron?
@@ -281,11 +296,10 @@ Then run `wsl --shutdown` in PowerShell.
 
 ## Waiting on Jannet
 
-1. **Step 0:** the CPU and GPU screenshot from Task Manager.
-2. **Step 1, Nightshift: the go/no-go.**
-3. Steps 2–7, only if Nightshift passes.
-4. The onboarding call, with question 1 first.
-5. Say yes or no to idea A (or pick B or C), and pick a name.
+1. **Step 1, the rest:** finish the wizard, add the NVIDIA key in Providers, set up the two Nemotron lanes, and send a test screenshot.
+2. Restart Windows, then steps 2–7 (WSL and Docker on D:, Zetaris, Cursor).
+3. The onboarding call, Oct 21 at 17:30 IST, with the questions above.
+4. A name for the game.
 
 ## Where the course material contradicts itself
 

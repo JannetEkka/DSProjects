@@ -4,16 +4,17 @@
 
 This laptop is Jannet's only setup. Check every project and hackathon requirement against it before planning around local installs. Recorded 2026-10-20 from Jannet's screenshots.
 
-- **Windows** laptop, **16 GB RAM**.
-- **Graphics: AMD Radeon 610M, integrated.** No dedicated GPU has been seen. If Task Manager → Performance lists a second GPU, update this line.
-- **CPU:** not recorded yet (Task Manager → Performance → CPU shows name, cores and logical processors).
-- **C: (Windows-SSD), 274 GB, about 10 GB free.** C: is nearly full. Put large installs, Docker's disk image, WSL distros, datasets and models on D:.
+- **Windows** laptop, **16 GB RAM, of which 13.8 GB is usable** (the rest is reserved for the integrated GPU). On 10-20, 12.1 GB was already in use after 5 days without a restart, so restart before heavy work.
+- **CPU: AMD Ryzen 5 7520U**, 4 cores, 8 logical processors, virtualization enabled.
+- **Graphics: AMD Radeon 610M, integrated, 2 GB.** Task Manager shows only GPU 0; there is no dedicated GPU.
+- **C: (Windows-SSD), 274 GB, about 10–20 GB free.** C: is nearly full. Put large installs, Docker's disk image, WSL distros, datasets and models on D:.
 - **D: (New Volume), 199 GB, about 137 GB free.**
+- **Installed:** Meterless Nightshift, Windows edition (10-20). It runs on the 610M and serves the OpenAI-compatible runtime at `http://127.0.0.1:8088/v1`. It downloaded about 3.8 GB of local models (Llama 3.2 3B and others) into `%LOCALAPPDATA%` on C:.
 
 What this means when planning:
 
-- Anything that needs a dedicated or NVIDIA GPU on the laptop is out: CUDA, local LLMs beyond tiny ones, and tools whose requirements say "dedicated graphics card" (for example Meterless Nightshift's Windows edition). Prefer free cloud endpoints.
-- Docker runs through WSL 2. A container stack that wants 8 GB leaves little room for an editor, a browser and screen recording at the same time.
+- Anything that needs a dedicated or NVIDIA GPU on the laptop is out: CUDA and local LLMs beyond small ones (Nightshift runs Llama 3.2 3B locally). Prefer free cloud endpoints, such as NVIDIA's build.nvidia.com models through Nightshift.
+- Docker runs through WSL 2. With 13.8 GB usable, a container stack that wants 8 GB leaves about 6 GB for Windows, an editor, a browser and screen recording. Cap WSL's memory and stop containers when they aren't in use.
 - Claude works in cloud sessions and cannot reach the laptop's `localhost`. Anything that must run locally is a step Jannet does, so say exactly what to run and what output to send back, and never ask for keys in chat.
 
 ## Hackathon rules and status
