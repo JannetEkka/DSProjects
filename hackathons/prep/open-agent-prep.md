@@ -181,7 +181,10 @@ Before a supplier contract renews, an agent pulls together what every system kno
 - **Tool calling:** Nightshift's setup screen advertises the endpoint as "OpenAI-compatible · streaming · tool calls" (10-20). Confirm with a real `tools` request on day 1, and keep a JSON-output fallback.
 - **Jannet's Nightshift (v1.2.1), 10-20:** two cloud lanes, both "ready" with "nvidia accepted the key", both on the Race duty: `nemotron-3-super-120b-a12b` and `nemotron-3.5-lightning-30b-a3b`. No local lanes.
   - Nightshift warns that no lane has the Judge or Verify duty, which its own judging needs; its suggested fix is Verify on the Super lane.
-  - A red banner said the runtime endpoint was offline to external apps ("Fix endpoint"). Fix it before any app test.
+  - A red banner said the runtime endpoint was offline to external apps ("Fix endpoint"). Jannet fixed it 10-20.
+- **Power test passed 10-20.** From PowerShell with the Console token, `POST /v1/chat/completions` on `meterless/auto` answered "The connection is working perfectly." Nightshift's Monitor showed "via providers 100%, answered locally 0%, cloud · nvidia".
+  - `GET /v1/models` also lists dozens of `local-runtime/*` models (Qwen, DeepSeek, Nemotron Nano and others). Most are far too big for this laptop; never route to them.
+  - During the test the laptop showed cpu 96%, mem 94% and "thermal hot". Quit Nightshift when it isn't needed, and restart Windows before installing Docker.
 
 ## Setup on Jannet's laptop (Windows), step by step
 
@@ -189,7 +192,7 @@ Do these in order and send back **PASS or the exact error text** after each step
 
 **Step 0: check the CPU and GPU.** Done 10-20: Ryzen 5 7520U (8 logical processors), Radeon 610M only.
 
-**Step 1: Nightshift, then NVIDIA (20 min).** Installed and running 10-20. What's left:
+**Step 1: Nightshift, then NVIDIA (20 min).** **Done 10-20:** wizard finished, NVIDIA key accepted, two Nemotron lanes ready, endpoint fixed, and a PowerShell test answered through NVIDIA. The steps, for the record:
 
 1. Finish Nightshift's 5-step setup wizard. Don't press "Skip setup".
 2. **NVIDIA key, one for all models:** on [build.nvidia.com](https://build.nvidia.com/models), open `nemotron-3.5-lightning-30b-a3b` and click **Get API Key** → Generate → copy the key (it starts with `nvapi-`). If it asks for a card or payment, stop and tell me. Paste the key only into Nightshift, never into Cursor, a file in the project, or chat.
@@ -299,7 +302,7 @@ Then run `wsl --shutdown` in PowerShell. 7 GB is under the guide's 8 GB but over
 
 ## Waiting on Jannet
 
-1. **Step 1, the rest:** finish the wizard, add the NVIDIA key in Providers, set up the two Nemotron lanes, and send a test screenshot.
+1. ~~Step 1~~: done 10-20.
 2. Restart Windows, then steps 2–7 (WSL and Docker on D:, Zetaris, Cursor).
 3. The onboarding call, Oct 21 at 17:30 IST, with the questions above.
 4. A name for the game.

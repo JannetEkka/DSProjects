@@ -9,7 +9,7 @@ This laptop is Jannet's only setup. Check every project and hackathon requiremen
 - **Graphics: AMD Radeon 610M, integrated, 2 GB.** Task Manager shows only GPU 0; there is no dedicated GPU.
 - **C: (Windows-SSD), 274 GB, about 10–20 GB free.** C: is nearly full. Put large installs, Docker's disk image, WSL distros, datasets and models on D:.
 - **D: (New Volume), 199 GB, about 137 GB free.**
-- **Installed:** Meterless Nightshift, Windows edition (10-20). It runs on the 610M and serves the OpenAI-compatible runtime at `http://127.0.0.1:8088/v1`. It downloaded about 3.8 GB of local models (Llama 3.2 3B and others) into `%LOCALAPPDATA%` on C:.
+- **Installed:** Meterless Nightshift, Windows edition (10-20). It runs on the 610M and serves the OpenAI-compatible runtime at `http://127.0.0.1:8088/v1`. It downloaded about 3.8 GB of local models (Llama 3.2 3B and others) into `%LOCALAPPDATA%` on C:. Two NVIDIA cloud lanes are set up (Nemotron 3.5 Lightning 30B, Nemotron 3 Super 120B), and a PowerShell request through the runtime was answered by NVIDIA on 10-20. While it ran, the laptop hit cpu 96%, mem 94% and "thermal hot", so quit Nightshift when it isn't needed.
 
 What this means when planning:
 
