@@ -35,8 +35,9 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 22 | **[RSNA Knee Abnormality Detection](https://www.kaggle.com/competitions/rsna-knee-abnormality-detection)** — **join by Oct 15** (entry + team-merger deadline); final Oct 22 | $77K, incl. new awards for the most efficient models | ✅ joined | ✓ multimodal: knee MRI + the radiology report → 12 abnormality types. Personal (operator 10-05). Honest odds: a 2.5-week start against medical-imaging teams makes the main prizes unlikely; the efficiency award is the realistic lane, and a strong public notebook is a portfolio piece either way. Compute: Kaggle's free GPUs + AMD's $100 credits (lablab) |
 | Oct 23 | **[Amazon: Build, Ship, Shape](https://amazonappdev2026.devpost.com)** — closes 12:00 PDT | $138K ($25K first per track) | ✅ registered | ✓ **Fire TV track**: a demo-ready app on Fire OS (web tech or Android accepted; simulator OK) — the operator owns a Fire TV Stick for a real-device demo. SMT World on the TV ("AI-enhanced viewing"), reusing the Solana Android wrapper. Existing apps allowed with a note on what was built in the window. Submit: repo, video under 3 min, product feedback |
 | Oct 23 | [AiTHON 2.0](https://aithon2-0.xyz/) | — | ❌ | skipped (operator, 10-05) |
-| Oct 24 | [Web3 for Social Good](https://dorahacks.io/hackathon/web3-social-good-2026) | — | ❓ | rules page did not load (10-05). DAO / impact contracts — would need a testnet faucet that asks for no money |
+| Oct 25 | [Web3 for Social Good](https://dorahacks.io/hackathon/web3-social-good-2026/detail) — build phase ends Oct 25 | not listed | ⚪ | ✓ 10-20: open to anyone, not only students. Shortlist Oct 26–31; finals in person at SMU Singapore, Nov 26 (travel not offered). Web3 + AI for social impact |
 | Oct 25 | **[IEEE ClimateChain](https://ieee-climatechain-hack.devpost.com)** — online Oct 5–25 | $3K | ✅ | ✓ open worldwide. Climate + blockchain; a new project |
+| Oct 25 | **[HackerRank Orchestrate](https://internshala.com/competitions/?p=11959)** — 24 h, starts **Oct 24, 18:00 IST**; live AI-judge evaluation Oct 26–27 | $1,200 first, $300 for 2nd–5th | ⚪ | ✓ 10-20 (Internshala listing; no official HackerRank page found). Online, free, solo only, worldwide, not only students. Build an AI agent; submit code, agent output and the AI chat transcript. Claude Code allowed |
 | Oct 26 | [OpenCV AI Competition 2026](https://opencv26.devpost.com) | $20,250 | ❌ | ✓ needs a component running on AWS (an account with a card on file) |
 | Oct 26 | **[Build With AI: Basics](https://learn-ai-basics.devpost.com/)** — closes Oct 26, 17:00 EDT | $2,500 ($1,250 first) | ✅ registered | ✓ 18+, all countries; a new project started from an empty folder; 1–3 min video + public repo. Beginner-friendly, so a polished small build stands out |
 | Oct 27 | **[Open Agent Hackathon 2026](https://hackathon.genai.works)** — moved to **Oct 22–27**; register by **Oct 22, 23:59 UTC** | prizes not posted (10-20) | ⚪ doing the workshops (operator, 10-14) | ✓ dates re-checked 10-20; submission deadline still not shown. Has workshop material to go through first — its own session |
@@ -47,7 +48,8 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 30 | [GSMA MENA Ignite Open Gateway](https://www.gsma.com/solutions-and-impact/gsma-open-gateway) | top 3 + travel | ❌ | telecom network APIs |
 | Oct 30 | HackFW: MADE Challenge (Fort Worth, Oct 1–30) | — | ❌ | in person, Texas |
 | Oct 31 | TUM Blockchain & AI Hackathon (Munich, Oct 30–31) | — | ❌ | in person, Munich |
-| Oct 31 | [Anna AI App Builder Program](https://dorahacks.io/hackathon/2349) | $6K | ❓ | not checked |
+| Nov 30 | [Anna AI App Builder Program](https://dorahacks.io/hackathon/2349/detail) | up to $5–6K per app per month | ⚪ | ✓ 10-20: a grant programme, not a hackathon. Pays monthly once an app reaches 200 qualified monthly users; existing agents, MCP servers and SaaS are welcome. Qualify by Nov 30 |
+| Oct 31 | [Galuxium Nexus V2](https://galuxium-nexus-v2-29411.devpost.com) — closes Oct 31, 17:00 IST | "$14,644", mostly credits and licences | ⚪ | ✓ 10-20: open to professionals and founders worldwide. Needs a live SaaS product built in the window, a repo and a 2–5 min video. The "cash" is described as credit pools, so low value |
 | Oct 31 | [3alet Hackathon (JigJoy × Mozaik)](https://jigjoy.ai/hackathon-2026) | $1K | ❌ | small prize for the build time |
 | Oct 31 | [BLI Legal Tech Hackathon 2](https://dorahacks.io/hackathon/legal-hack-2026) | $20K | ❌ | legal / regtech contracts |
 | Oct 31 | Event Contracts Hackathon (online) | — | ❓ | not checked |
@@ -55,17 +57,20 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 31 | [Raspberry Pi RP2350 Hacking Challenge 2](https://github.com/raspberrypi/rp2350_hacking_challenge_2) | $20K bounty | ❌ | hardware side-channel attack |
 | Oct 31 | Tapeout Genesis Transistor Hackathon | $14K | ❌ | circuit / processor design |
 | Oct 31 | [Hacktoberfest 2026](https://hacktoberfest.com) | swag | ⚪ | open-source PRs all month; low effort, low value |
+| Nov 02 | **[The Rise of AI Agents / AI Genesis (lablab)](https://lablab.ai/ai-hackathons/ai-genesis-2026)** — online Oct 26 → Nov 2 | $60K+ (Internshala); lablab page says TBA | ⚪ | ✓ 10-20: online for anyone; Dubai build day is invite-only and self-paid. Partner challenges are revealed at kickoff. Open source, MIT |
 | Nov 02 | [ARC Prize 2026](https://arcprize.org) — merger Oct 26 | ~$700–850K | ❌ | research-grade visual reasoning |
 | Nov 02 | ET AI Hackathon 2026: Agentic Edition | ₹2 lakh + Accenture interviews | ⛔ | ✓ registration closed Sep 20 |
 | Nov 02 | [Run October Jam](https://events.run.world/events/octoberjam) (Oct 8–Nov 2) | $30K | ❌ | games and stories on Run |
 | Nov 02 | [YouCam API Skin AI & eCommerce VTO](https://youcam-api-skin-ai-ecommerce.devpost.com) | — | ❌ | virtual try-on |
+| Nov 05 | **[Meta Global AI Developer Hackathon](https://cerebralvalley.ai/e/meta-ai-developer-hackathon)** — **apply by Oct 25, 23:59 ET (Oct 26, 09:29 IST)**; build Oct 26 → Nov 4, 21:00 ET | $1M across two tracks + API credits | ⚪ | ✓ 10-20: virtual, worldwide (India not restricted), free if selected. Capped at 20,000, reviewed on a rolling basis, so apply early. Indie (solo) or startup track. Must use Meta Model API (Muse Spark, Muse Image, SAM 3.1). The application is scored on the idea and on a described AI project |
 | Nov 06 | [PortalDot Hacker House 2026](https://dorahacks.io/hackathon/portaldot-hacker-house-2026) | $5.2K | ❌ | Rust / ink! contracts |
 | Nov 07 | [ETHGlobal Mumbai](https://ethglobal.com/events/mumbai) (Nov 5–7) | — | ⚪ | in person, Mumbai — travel |
 | Nov 08 | Vultr: Agent Rush on lablab (online Nov 3–8) | — | ⚪ | after the October deadlines |
 | Nov 08 | [Redhawk Builds 2026](https://redhawk-builds-2026.devpost.com) (Nov 7–8) | $3.5K | ❓ | not checked |
 | Nov 11 | [Ryo-chan Virtual Hackathon 2026](https://ryobuild.com) | $15K in tokens + Tokyo trip | ❓ | page did not load its rules |
 | Nov 12 | [Gemma 4 Developer Agent Competition](https://www.kaggle.com/competitions/gemma-4-developer-agent) | $65K | ⚪ | fine-tuning Gemma to fix code; heavy compute |
-| Nov 12 | Build What's Next with PayPal and AI (Oct 1–Nov 12) | $67.5K | ❓ | could not find the official page |
+| Nov 12 | **[PayPal AI Hackathon](https://paypalaihackathon.devpost.com/)** (Oct 1–Nov 12, 12:00 PT) | $67.5K cash ($12K first) | ⚪ | ✓ 10-20 (from a guide to it, not the rules page): open from most countries, India not excluded; free sandbox. No tracks; must use one PayPal technology (Agent Toolkit and the MCP server count) |
+| Nov 13 | **[Airwallex Agentic Banking Hackathon](https://airwallex.hackerearth.com/)** — **apply by Oct 23**; build Oct 25 → Nov 13 | $30K + $20K + $15K + $15K, plus credits | ⚪ | ✓ 10-20: online, 18+, anywhere; solo or up to 4. Agents that run real financial workflows on Airwallex APIs (12 tracks, e.g. treasury, payouts, disputes). SF demo day optional. Check the sandbox needs no money |
 | Nov 13 | [Beyond the Benchmark: Binance Agentic AI Challenge](https://dorahacks.io/hackathon/binance) | $6K + Binance internship / full-time track | ❌ | ✓ live autonomous trades on BNB Chain tokenized stocks — needs a funded wallet |
 | Nov 15 | [Mezo Buildathon Wave 1](https://app.akindo.io/wave-hacks) (Oct 16–Nov 15) | $7K in MEZO | ❌ | Bitcoin DeFi |
 | Nov 18 | [Meta VR Start Developer Competition](https://start-developer-competition-26.devpost.com) | $1M | ❌ | needs a Quest 3 and the VR Start programme |
@@ -84,6 +89,8 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | TBA | **[#HackCanton Season 4](https://appsfactory.cc/hackathons)** — dates not published | up to $50K cash + credits (Season 2/3 pool) | ✅ registered 10-06 | Online, solo OK; DAML on Canton (testnet or local nodes are eligible). Going by the Season 2 rules, it's a ~3-week build, not a weekend: submitting needs **2,000 Mana, earned by 20+ days of daily activity on the platform**, plus a project journal, a public repo, a demo of 5 min or less and pitch materials. Judged on MVP and also on go-to-market, ICP, validation (user interviews) and the pitch. Idea: the bot's decisions as auditable DAML contracts |
 | TBA | @commonsmade builder hackathon | — | ⚪ | announcement expected later in October |
 | TBA | [Arca: The Agent Capital Hackathon](https://form.typeform.com/to/tBJ8Q1io) | — | ⚪ | date not announced |
+
+**Also checked 10-20 and skipped:** Neighborhood Hacks and EurekaDev (high school only), Build North (Canada residents only), AgentX (teams of 2–4, and ₹499 if shortlisted), India Runs by Redrob (closed in July), GatewayHacks (closed Oct 2), AI for Good Hackathon (ages 14–22), Agents for Humans (closed Sep 14), GoDaddy Inclusive Innovation (a 2-hour test), AKI HACKS Kolkata (Oct 31, a student-club event for teams). Kaggle has nothing new before November apart from the ARC Prize and the Gemma 4 paper track. No Kolkata event for working builders found this week.
 
 ## The entries — progress board
 
