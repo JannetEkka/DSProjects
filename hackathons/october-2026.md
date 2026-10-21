@@ -6,6 +6,8 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 
 **Rule:** no hackathon that needs our own money — no funded trading account, gas we pay for, or paid credits. Free tiers and organiser-provided credits only. **Testnet and devnet wallets with free faucet tokens are fine** (operator, 10-06), and so is linking a wallet address to receive a prize; never a wallet that holds real funds.
 
+**Rule: keys and accounts (operator, 10-21).** Never use an API key, token or account that is already in the cloud environment (`GEMINI_API_KEY`, `KAGGLE_API_TOKEN` and the like) for a new entry: each one belongs to another entry. Before an entry needs a key, **ask Jannet to create one for that entry**, with step-by-step instructions: where to click, what to name it, and the exact environment-variable name the session will read. Gemini keys come from AI Studio, in a project named after the entry. **No GCP.** If an entry needs a cloud, use Oracle Cloud. A new environment variable only reaches sessions started after it was added.
+
 **Decision key:** ✅ entering · ⚪ maybe (decide by the date shown) · ❓ not checked yet · ❌ skipping (reason given) · ⛔ already closed
 
 | Closes | Hackathon | Prize | Decision | Why |
