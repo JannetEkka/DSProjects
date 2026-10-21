@@ -91,7 +91,7 @@ Jannet wants something fun, and floated two ideas: SMT in Track 02, or a coding 
 
 | | Idea | Track | In one line |
 |---|---|---|---|
-| **A** | SQL detective game (recommended) | 03 | Learn to query data by cracking cases; the game master checks every answer against the real data and remembers you |
+| **A** | SQL detective game (chosen) | 02 or 03 | Learn to query data by cracking cases; the game master checks every answer against the real data and remembers you |
 | B | Why did SMT do that? | 02 | Explains any SMT decision from its own log plus market data, with the evidence |
 | C | Supplier renewal check | 01 | Safe and enterprise-y, but not fun |
 
@@ -106,7 +106,11 @@ Dropped: taxi "why did demand move" (depends on the sample's dates, weak user), 
 **Why it fits the hackathon:**
 
 - **Zetaris does real work:** it is the game board. Cases run on Zetaris's seeded sample data (TPC-H business data and NY Taxi; confirm on install) and on public sources with verified Zetaris recipes (PokéAPI, SEC EDGAR). Later levels need a join across two sources, which teaches exactly what Zetaris is for. No private data and no file-loading problem.
-- **Track 03 reliability story: the model proposes, Zetaris proves.** No case is shown until its answer has been checked against live data (exactly one answer, not empty). Every grade comes from comparing result sets, not from the model's opinion.
+- **The model proposes, Zetaris proves.** No case is shown until its answer has been checked against live data (exactly one answer, not empty). Every grade comes from comparing result sets, not from the model's opinion.
+- **Track: 02 or 03, decided by Oct 26.** The track can be changed in the team workspace until the deadline, and the build is the same either way.
+  - **Track 02 (The Agent That Can Explain Why):** every verdict comes with evidence from the data ("your query missed these 3 rows, because…"). Cross-source cases make the agent investigate across sources, and the player has to explain why too. Jannet's own idea was "explain why".
+  - **Track 03 (Reasoning Architecture):** memory plus validated data drive the game master's decisions (which case, which hint).
+  - On 10-21, during the onboarding call, Jannet said Track 03's prize is low. Both documents already put Track 03 slightly below 01 and 02 ($1,300 vs $1,350 second, or $1,500 vs $1,600 first). **Lean Track 02** unless the call's numbers say otherwise, and build the evidence panel as a first-class feature, since it serves both.
 - **Fun to watch:** case file, clue board, escalating hints, XP and badges, and a trace panel that shows the agents arguing.
 
 **Agents (a loop, not a chain):**
