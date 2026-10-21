@@ -461,7 +461,24 @@ footer a:hover{color:var(--tx)}
     </article>
     <div class="filters reveal"><button class="filter is-on" data-filter="all">All work</button><button class="filter" data-filter="agents">AI Agents</button><button class="filter" data-filter="genai">Generative AI</button><button class="filter" data-filter="cv">Computer Vision</button><button class="filter" data-filter="ml">Machine Learning</button><button class="filter" data-filter="analytics">Analytics</button><button class="filter" data-filter="automation">Automation</button></div>
     <div class="grid" id="grid">
-      <article class="card reveal wide" data-cat="agents" style="--i:0">
+      <article class="card reveal wide" data-cat="cv" style="--i:0">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Afterburn</h3>
+            
+          </div>
+          <p class="card-sub">Farm-Fire Verification from Satellite Burn Scars</p>
+          <p class="card-meta">2026 · IEEE ClimateChain Global Hackathon · submitted Oct 21</p>
+          <p class="card-desc"><strong>Punjab&rsquo;s farm-fire count fell 90% since 2021. Burnt area fell a third.</strong> Farmers now light stubble after the 1:30 pm satellite pass, so the official count misses most fires. Afterburn reads the burn scar in Sentinel-2 imagery instead, which stays for days whatever hour the fire was lit.<br><br>On this season&rsquo;s data for 80 × 52 km of Amritsar, Tarn Taran and Kapurthala it mapped 23,963 ha of scars. Between the Oct 13 and Oct 18 passes, only 2.9% of the scars it found had a VIIRS fire detection nearby. Inside VIIRS fire footprints it finds 3.4× more burnt land than on random harvested land. A positive-unlabeled model did worse, so a dozen published thresholds make the verdicts.<br><br>The verdicts settle a pay-for-not-burning pact on Monad testnet, built on a J-PAL trial in 171 Punjab villages: a quarter paid at sign-up, the rest after a clean season, and a village bonus only if every enrolled field stays clean. Each verdict goes on-chain with the hash of its evidence, and a recheck script rebuilds it from public scenes. All 24 demo verdicts match.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">23,963 ha</span><span class="clab">burn scars mapped this season</span></div><div class="cstat"><span class="cnum">3.4×</span><span class="clab">lift against VIIRS fire footprints</span></div><div class="cstat"><span class="cnum">24 / 24</span><span class="clab">verdicts recheck from public data</span></div><div class="cstat"><span class="cnum">98</span><span class="clab">transactions on Monad testnet</span></div></div>
+          
+          <div class="tags"><span class="tag">Sentinel-2</span><span class="tag">Remote Sensing</span><span class="tag">NASA FIRMS</span><span class="tag">rasterio</span><span class="tag">Positive-Unlabeled Learning</span><span class="tag">Solidity</span><span class="tag">Monad testnet</span><span class="tag">Hardhat</span><span class="tag">Leaflet</span><span class="tag">Gemini API</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://jannetekka.github.io/afterburn" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live demo</a><a class="lnk sm code" href="https://github.com/JannetEkka/afterburn" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a><a class="lnk sm doc" href="https://youtu.be/XqyN4N3_2TY" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Demo video</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal wide" data-cat="agents" style="--i:1">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -478,7 +495,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:1">
+      <article class="card reveal wide" data-cat="agents" style="--i:2">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -495,7 +512,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:2">
+      <article class="card reveal" data-cat="genai" style="--i:3">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -512,7 +529,7 @@ footer a:hover{color:var(--tx)}
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:3">
+      <article class="card reveal wide" data-cat="agents" style="--i:4">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -529,7 +546,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:4">
+      <article class="card reveal" data-cat="agents" style="--i:5">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -546,7 +563,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:5">
+      <article class="card reveal" data-cat="agents" style="--i:6">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -563,7 +580,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:6">
+      <article class="card reveal" data-cat="agents" style="--i:7">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -580,7 +597,7 @@ footer a:hover{color:var(--tx)}
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal wide" data-cat="genai" style="--i:7">
+      <article class="card reveal wide" data-cat="genai" style="--i:8">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -597,7 +614,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:8">
+      <article class="card reveal" data-cat="genai" style="--i:9">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -614,7 +631,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:9">
+      <article class="card reveal" data-cat="genai" style="--i:10">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -631,7 +648,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:10">
+      <article class="card reveal" data-cat="genai" style="--i:11">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -648,7 +665,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:11">
+      <article class="card reveal" data-cat="cv" style="--i:12">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -665,7 +682,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:12">
+      <article class="card reveal" data-cat="cv" style="--i:13">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -682,7 +699,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:13">
+      <article class="card reveal" data-cat="cv" style="--i:14">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -699,7 +716,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:14">
+      <article class="card reveal" data-cat="ml" style="--i:15">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -716,7 +733,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:15">
+      <article class="card reveal" data-cat="ml" style="--i:16">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -733,7 +750,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:16">
+      <article class="card reveal" data-cat="ml" style="--i:17">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -750,7 +767,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:17">
+      <article class="card reveal" data-cat="ml" style="--i:18">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -767,7 +784,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:18">
+      <article class="card reveal" data-cat="ml" style="--i:19">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -784,7 +801,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:19">
+      <article class="card reveal" data-cat="ml" style="--i:20">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -801,7 +818,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:20">
+      <article class="card reveal" data-cat="analytics" style="--i:21">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -818,7 +835,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:21">
+      <article class="card reveal" data-cat="analytics" style="--i:22">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -835,7 +852,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:22">
+      <article class="card reveal" data-cat="analytics" style="--i:23">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -852,7 +869,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:23">
+      <article class="card reveal" data-cat="analytics" style="--i:24">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -869,7 +886,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="automation" style="--i:24">
+      <article class="card reveal" data-cat="automation" style="--i:25">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
