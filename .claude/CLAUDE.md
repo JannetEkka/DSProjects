@@ -8,7 +8,8 @@ This laptop is Jannet's only setup. Check every project and hackathon requiremen
 - **CPU: AMD Ryzen 5 7520U**, 4 cores, 8 logical processors, virtualization enabled.
 - **Graphics: AMD Radeon 610M, integrated, 2 GB.** Task Manager shows only GPU 0; there is no dedicated GPU.
 - **C: (Windows-SSD), 274 GB.** About 10 GB free on 10-20; on 10-21 Jannet freed 20 GB and moved Downloads to `D:\Downloads`. C: still fills up easily, so put large installs, Docker's disk image, WSL distros, datasets and models on D:.
-- **D: (New Volume), 199 GB, about 137 GB free.**
+- **D: (New Volume), 199 GB.** On 10-21, after the moves: C: 33.8 GB free, D: 128 GB free.
+- **Installed:** Docker Desktop 4.96.0 (Engine 29.9.1, Compose v5.6.0), updated 10-21. Its disk image was moved to D:, WSL integration is on for Ubuntu, and `hello-world` ran from Ubuntu. `%USERPROFILE%\.wslconfig` caps WSL at 7 GB of memory with 6 GB of swap on `D:\WSL\swap.vhdx`. Ubuntu is the default WSL distro.
 - **Installed:** WSL 3.0.3 with **Ubuntu at `D:\WSL\Ubuntu`** (10-21), Linux user `planejane`. Jannet has sticky keys, so for passwords prefer pasting from Notepad over typing blind. A forgotten Linux password can be reset from PowerShell with `wsl -d Ubuntu -u root passwd planejane`.
 - **Installed:** Meterless Nightshift, Windows edition (10-20). It runs on the 610M and serves the OpenAI-compatible runtime at `http://127.0.0.1:8088/v1`. It downloaded about 3.8 GB of local models (Llama 3.2 3B and others) into `%LOCALAPPDATA%` on C:. Two NVIDIA cloud lanes are set up (Nemotron 3.5 Lightning 30B, Nemotron 3 Super 120B), and a PowerShell request through the runtime was answered by NVIDIA on 10-20. While it ran, the laptop hit cpu 96%, mem 94% and "thermal hot", so quit Nightshift when it isn't needed.
 
