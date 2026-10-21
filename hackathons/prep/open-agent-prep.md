@@ -105,7 +105,7 @@ Dropped: taxi "why did demand move" (depends on the sample's dates, weak user), 
 
 **Why it fits the hackathon:**
 
-- **Zetaris does real work:** it is the game board. Cases run on Zetaris's seeded sample data (TPC-H business data and NY Taxi; confirm on install) and on public sources with verified Zetaris recipes (PokéAPI, SEC EDGAR). Later levels need a join across two sources, which teaches exactly what Zetaris is for. No private data and no file-loading problem.
+- **Zetaris does real work:** it is the game board. Cases run on Zetaris's seeded sample data (**confirmed 10-21: `NY_TAXI` and `TPCDS_DB`, the TPC-DS retail benchmark; 39 tables across the two**) and on public sources with verified Zetaris recipes (PokéAPI, SEC EDGAR). Later levels need a join across two sources, which teaches exactly what Zetaris is for. No private data and no file-loading problem.
 - **The model proposes, Zetaris proves.** No case is shown until its answer has been checked against live data (exactly one answer, not empty). Every grade comes from comparing result sets, not from the model's opinion.
 - **Track: 02 or 03, decided by Oct 26.** The track can be changed in the team workspace until the deadline, and the build is the same either way.
   - **Track 02 (The Agent That Can Explain Why):** every verdict comes with evidence from the data ("your query missed these 3 rows, because…"). Cross-source cases make the agent investigate across sources, and the player has to explain why too. Jannet's own idea was "explain why".
