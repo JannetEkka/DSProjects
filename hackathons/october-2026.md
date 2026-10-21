@@ -37,7 +37,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 | Oct 23 | **[Amazon: Build, Ship, Shape](https://amazonappdev2026.devpost.com)** — closes 12:00 PDT | $138K ($25K first per track) | ✅ registered | ✓ **Fire TV track**: a demo-ready app on Fire OS (web tech or Android accepted; simulator OK) — the operator owns a Fire TV Stick for a real-device demo. SMT World on the TV ("AI-enhanced viewing"), reusing the Solana Android wrapper. Existing apps allowed with a note on what was built in the window. Submit: repo, video under 3 min, product feedback |
 | Oct 23 | [AiTHON 2.0](https://aithon2-0.xyz/) | — | ❌ | skipped (operator, 10-05) |
 | Oct 24 | [Web3 for Social Good](https://dorahacks.io/hackathon/web3-social-good-2026) | — | ❓ | rules page did not load (10-05). DAO / impact contracts — would need a testnet faucet that asks for no money |
-| Oct 25 | **[IEEE ClimateChain](https://ieee-climatechain-hack.devpost.com)** — online Oct 5–25 | $3K | ✅ | ✓ open worldwide. Climate + blockchain; a new project |
+| Oct 25 | **[IEEE ClimateChain](https://ieee-climatechain-hack.devpost.com)** — online Oct 5–25; closes **Oct 25, 17:00 +03 (19:30 IST)** | $3K ($1,500 first) | ✅ entering: **Afterburn** (picked 10-21) | ✓ (10-20) climate + blockchain + AI, solo OK, demo video 3–5 min. **Eligibility contradicts itself:** the Devpost sidebar says "students only", while the rules page lists independent developers and startups. Unanswered on the forum since Oct 17; we enter under the written rules. Entry: farm-fire verification from burn scars, not flames, plus a pay-for-not-burning pact on Monad testnet (Climate Data & Environmental Monitoring track). Progress in [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
 | Oct 26 | [OpenCV AI Competition 2026](https://opencv26.devpost.com) | $20,250 | ❌ | ✓ needs a component running on AWS (an account with a card on file) |
 | Oct 26 | **[Build With AI: Basics](https://learn-ai-basics.devpost.com/)** — closes Oct 26, 17:00 EDT | $2,500 ($1,250 first) | ✅ registered | ✓ 18+, all countries; a new project started from an empty folder; 1–3 min video + public repo. Beginner-friendly, so a polished small build stands out |
 | Oct 27 | **[GitLab: Life After Code](https://gitlab-transcend.devpost.com)** | $45K total | ✅ registered | ✓ India eligible, solo allowed. "Proof of Fix": an agent that checks production after a merge and reopens the issue if the promised log line never appears |
@@ -103,7 +103,7 @@ Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. C
 | Oct 20 (register by Oct 13) | Open Agent | doing the workshops | S14 | [#23](https://github.com/JannetEkka/DSProjects/issues/23) |
 | Oct 23, 05:29 | RSNA Knee (Kaggle) | ✓ joined | S6 | [#22](https://github.com/JannetEkka/DSProjects/issues/22) |
 | Oct 24, 00:30 | Amazon: Build, Ship, Shape — Fire TV | ✓ | S3 | [#21](https://github.com/JannetEkka/DSProjects/issues/21) |
-| Oct 25 | IEEE ClimateChain | **not yet** | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
+| Oct 25, 19:30 | IEEE ClimateChain — Afterburn | ✓ 10-20 | S13 | [#20](https://github.com/JannetEkka/DSProjects/issues/20) |
 | Oct 27, 02:30 | Build With AI: Basics | ✓ | S10 | [#19](https://github.com/JannetEkka/DSProjects/issues/19) |
 | Oct 27 | GitLab: Life After Code | ✓ | S4 | [#18](https://github.com/JannetEkka/DSProjects/issues/18) |
 | Dec 2, 00:30 | Lablab × AMD AI Academy (credits for RSNA) | ✓ | S6 | [#17](https://github.com/JannetEkka/DSProjects/issues/17) |
