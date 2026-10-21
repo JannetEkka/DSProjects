@@ -90,7 +90,7 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 
 ## The entries — progress board
 
-**Progress lives in one GitHub issue per entry** (label [`hackathon`](https://github.com/JannetEkka/DSProjects/issues?q=label%3Ahackathon)), never in this file. Each issue holds the deadline, the session that owns it, a checklist (registered → rules read → repo → build → demo → submission text → submitted → result) and a "Waiting on Jannet" list. **Every session ticks its own issue and comments at each milestone** — no PR or merge needed for a status change. This file holds decisions only.
+**Progress lives in one GitHub issue per entry** (label [`hackathon`](https://github.com/JannetEkka/DSProjects/issues?q=label%3Ahackathon)), never in this file. Each issue holds the deadline, the session that owns it, a checklist (registered → rules read → repo → build → demo → submission text → submitted → result) and a "Waiting on Jannet" list. **Every session ticks its own issue and comments at each milestone** — no PR or merge needed for a status change. This file holds decisions only. **Every change to a repo, this one or an entry's own, goes up as a pull request for Jannet to review and merge** (operator, 10-21): push to the session's branch and open the PR, never push to `main`.
 
 Away days: **Oct 8–10** and **Oct 15–18** — laptop mornings/nights only. Claude builds in cloud sessions; Jannet registers, creates free accounts, checks the video and submits. Prep for the fixed-window entries is in [prep/](prep/). Every session records its own demo video with [tools/demo-video](tools/demo-video/).
 
