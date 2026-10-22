@@ -294,6 +294,36 @@ Then run `wsl --shutdown` in PowerShell. 7 GB is under the guide's 8 GB but over
 | **Oct 26** | Feature freeze. README, `data/README.md`, deck, sponsor-tech text; demo video recorded on the laptop; clean-setup test |
 | **Oct 27** | Final checks (secrets, declared components, track selected) and **submit by evening IST** |
 
+## Paused 10-22, resume Mon Oct 26 after 17:30 IST
+
+Jannet's Claude usage was at 84% on 10-22, and it resets Mondays at 17:30 IST. The Amazon, Orchestrate and GitLab entries come first. From the reset to the deadline (**Wed Oct 28, 05:15 IST**) is about 36 hours, and GitLab is also due Oct 27 at 18:30 IST.
+
+**Done:**
+- Laptop: Zetaris, Nightshift with two NVIDIA lanes, Docker, WSL, Node, Git and Cursor, with the repo cloned at `D:\code\sql-noir`.
+- [sql-noir](https://github.com/JannetEkka/sql-noir), 6 commits, 36 tests passing, H-MEM conformance 13/13:
+  - the Zetaris client and read-only SQL guard;
+  - the Meterless provider;
+  - the evidence-based grader;
+  - the case validator and six seed cases;
+  - the smoke test, schema recorder and case validation scripts.
+
+**Restart order on the laptop:**
+1. Docker Desktop.
+2. Ubuntu: `cd ~/zetaris-platform && docker compose start`.
+3. Nightshift.
+4. Cursor, opening sql-noir, then `git pull`.
+5. Fill in the two keys with `notepad .env`.
+6. `npm run smoke`, `npm run record:schema`, `npm run validate:cases`, and send the output to Claude.
+
+**What's left, smallest version that can win:**
+- the coach on Nemotron (hints and the "why" question, built from the grader's evidence);
+- H-MEM player memory;
+- a single-page web UI with the evidence panel and agent trace;
+- a case designer only if time allows (seed cases are enough to play);
+- a README a judge can follow from scratch, the deck, and a 2–3 minute video.
+
+**Cut first if short of time:** the case designer, then Scout Intent and World Model.
+
 ## Organisers' answers (Israel Hosana, help desk, 10-22)
 
 1. **Claude Code alongside Cursor:** yes, it's okay.
