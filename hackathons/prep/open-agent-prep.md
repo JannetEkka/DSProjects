@@ -294,6 +294,15 @@ Then run `wsl --shutdown` in PowerShell. 7 GB is under the guide's 8 GB but over
 | **Oct 26** | Feature freeze. README, `data/README.md`, deck, sponsor-tech text; demo video recorded on the laptop; clean-setup test |
 | **Oct 27** | Final checks (secrets, declared components, track selected) and **submit by evening IST** |
 
+## Organisers' answers (Israel Hosana, help desk, 10-22)
+
+1. **Claude Code alongside Cursor:** yes, it's okay.
+2. **One Meterless Engine (H-MEM) enough for the Build rule:** yes.
+3. **NVIDIA DGX Spark award:** anyone using Nemotron through Nightshift is considered.
+4. **Judges run the project themselves,** and the video helps too. So the README's setup must work for someone starting from scratch: Zetaris, Nightshift with an NVIDIA lane, Node and `.env`, step by step.
+5. **The SQL game fits Track 02:** yes.
+6. **Video:** an unlisted YouTube link is fine, or Google Drive with access granted.
+
 ## Questions for the onboarding call (Oct 21, 17:30 IST)
 
 1. Is Claude Code acceptable alongside Cursor, as long as Cursor is genuinely used for development?
