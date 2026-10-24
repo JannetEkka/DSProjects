@@ -153,6 +153,11 @@ svg text { font-family: var(--f-body); }
 .stripe-REMEDIATION { box-shadow: inset 3px 0 0 var(--accent); }
 .stripe-VERIFICATION { box-shadow: inset 3px 0 0 var(--ok); }
 .empty { padding: 28px 16px; color: var(--muted); text-align: center; }
+.skip { position: absolute; left: 12px; top: -48px; z-index: 10; padding: 8px 12px; border-radius: 6px; background: var(--accent); color: var(--bg); font: 600 13px var(--f-body); text-decoration: none; }
+.skip:focus { top: 12px; }
+.conf { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); font: 600 10px/1.5 var(--f-body); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
+.conf.low { border-color: var(--warn); color: var(--warn); }
+.conf.medium { border-color: var(--flow); color: var(--flow); }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn { padding: 6px 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; font-size: 12.5px; }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -204,12 +209,14 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
   <section class="main">
     <aside class="panel ledger" aria-label="Cases">
       <div class="tools">
-        <input class="search" id="q" type="search" placeholder="Search case, email or resource (e.g. search_428)" aria-label="Search cases">
+        <input class="search" id="q" type="search" placeholder="Search case, resource (e.g. search_428) or email" aria-label="Search cases">
         <div class="filters" id="filters"></div>
       </div>
-      <div class="list" id="list" role="list"></div>
+      <a class="skip" href="#dossier" id="skiplink">Skip to case dossier</a>
+      <div class="list" id="list" role="list" aria-describedby="listhelp"></div>
+      <p class="label" id="listhelp" hidden>Use the arrow keys to move between cases, Enter to open one.</p>
     </aside>
-    <div class="dossier" id="dossier"></div>
+    <div class="dossier" id="dossier" tabindex="-1" aria-live="polite"></div>
   </section>
 </div>
 
@@ -234,8 +241,8 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
   const STATE_WORD = { ABSENT: "gone", CLEAN: "de-identified", DISABLED: "disabled / blocked", PRESENT: "present", IDENT: "identifiable", ACTIVE: "active", UNKNOWN: "unknown" };
   const RETAINED = new Set(["SECURITY_AUDIT_LOG", "LEGAL_HOLD_RECORD"]);
 
-  let masked = store.get("gl-mask") !== "0";
-  let statusFilter = "ALL", cellFilter = null, query = "", current = null;
+  let masked = true; // always masked on load; the unmask choice is never persisted
+  let statusFilter = "ALL", cellFilter = null, query = "", current = null, rover = null;
 
   // ---------- masking
   function maskEmail(e) {
@@ -301,21 +308,22 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
     const q = query.trim().toLowerCase();
     return CASES.filter((c) => (statusFilter === "ALL" || c.status === statusFilter)
       && (!cellFilter || cellFilter === c.claim + "|" + c.status)
-      && (!q || c.id.toLowerCase().includes(q) || c.email.toLowerCase().includes(q) || (c.user || "").toLowerCase() === q
+      && (!q || c.id.toLowerCase().includes(q) || (masked ? maskEmail(c.email) : c.email).toLowerCase().includes(q) || (c.user || "").toLowerCase() === q
           || c.res.some((r) => r.resource_id.toLowerCase().includes(q))));
   }
   function renderList() {
     const v = visible();
+    rover = v.some((c) => c.id === current) ? current : (v[0] || {}).id;
     $("list").innerHTML = v.length ? v.map((c) => {
       const f = c.steps.filter((s) => s.phase === "FINDING").length;
       const ghost = c.claim === "COMPLETE" && c.status === "INCOMPLETE";
-      return `<button type="button" role="listitem" class="item" data-id="${c.id}" aria-current="${current === c.id}">
+      return `<button type="button" role="listitem" class="item" data-id="${c.id}" aria-current="${current === c.id}" tabindex="${c.id === rover ? 0 : -1}">
         <span class="cid">${c.id}${ghost ? ' <span class="ghostflag" title="Reported COMPLETE, actually incomplete">● ghost</span>' : ""}</span>
         <span class="em">${esc(maskEmail(c.email))}</span>
         <span class="meta"><span class="pill ${c.status}">${c.status.replace("_", " ")}</span><span class="count">${c.status === "NOT_APPLICABLE" ? "no deletion" : f ? f + " finding" + (f > 1 ? "s" : "") : c.steps.length + " checks"}</span></span>
       </button>`;
     }).join("") : `<div class="empty">No case matches. Clear the search or pick another filter.</div>`;
-    $("list").querySelectorAll(".item").forEach((b) => b.addEventListener("click", () => select(b.dataset.id)));
+    $("list").querySelectorAll(".item").forEach((b) => b.addEventListener("click", () => select(b.dataset.id, true)));
   }
 
   // ---------- dossier
@@ -394,6 +402,17 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
     return s + `</svg><p class="count">Solid line: identifier match in evidence · dashed: attributed through the request's workflow job or a verified catalog link. Blue nodes are records policy requires us to keep.</p>`;
   }
 
+  function confChip(r) {
+    if (r.confidence == null || r.confidence === "") return "";
+    const v = String(r.confidence).toLowerCase(), n = Number(r.confidence);
+    const lvl = isNaN(n) ? v : n >= 0.9 ? "high" : n >= 0.6 ? "medium" : "low";
+    return `<span class="conf ${esc(lvl)}" title="Linkage confidence">${esc(isNaN(n) ? v : "conf " + n.toFixed(2))}</span>`;
+  }
+  function assumptions(r) {
+    const a = Array.isArray(r.assumptions) ? r.assumptions : r.assumptions ? [r.assumptions] : [];
+    return a.length ? `<div><b>Assumptions:</b> ${a.map((x) => esc(typeof x === "string" ? x : JSON.stringify(x))).join("; ")}</div>` : "";
+  }
+
   function stepsHtml(c) {
     if (!c.steps.length) return `<div class="empty">Nothing to do: the request does not authorize deletion, so steps_json is <span class="mono">[]</span>.</div>`;
     const byRid = Object.fromEntries(c.res.map((r) => [r.resource_id, r]));
@@ -408,23 +427,32 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
         return `<div class="step stripe-${ph}"><button type="button" aria-expanded="false">
           <span class="no">${s.step_no}</span>
           <span class="what"><span class="op">${OP[s.operation][0]}</span><span class="tgt">${esc(s.system_id)} / ${esc(s.resource_id)} → ${esc(s.state)}</span></span>
-          <span class="ev ${s.evidence_id ? "" : "none"}">${s.evidence_id ? esc(s.evidence_id) : "future"}</span>
+          ${confChip(r)}<span class="ev ${s.evidence_id ? "" : "none"}">${s.evidence_id ? esc(s.evidence_id) : "future"}</span>
         </button><div class="why" hidden>
           <div><b>State at audit_at:</b> ${STATE_WORD[r.state] || "—"}${r.t ? " (observed " + fmtT(r.t) + ")" : ""}</div>
           <div>${evidenceLine(s.evidence_id)}</div>
           <div><b>Linked to subject by:</b> ${esc(linkWords(r.linked_by))}</div>
-          <div>${rule}</div>
+          <div>${rule}</div>${assumptions(r)}
         </div></div>`;
       }).join("")}</div>`;
     }).join("");
   }
 
-  function select(id) {
-    current = id;
+  function notFound(id) {
+    current = null;
+    $("list").querySelectorAll(".item").forEach((b) => b.setAttribute("aria-current", "false"));
+    $("dossier").innerHTML = `<section class="panel"><div class="empty" role="alert">Case <span class="mono">${esc(id)}</span> not found in this run (${CASES.length} cases from ${esc(D.source)}). Pick a case from the list.</div></section>`;
+  }
+  function reveal() {
+    if (window.matchMedia("(max-width: 820px)").matches) $("dossier").scrollIntoView({ block: "start" });
+  }
+  function select(id, user) {
     const c = CASES.find((x) => x.id === id);
-    if (!c) return;
-    try { history.replaceState(null, "", "#" + id); } catch {}
-    $("list").querySelectorAll(".item").forEach((b) => b.setAttribute("aria-current", String(b.dataset.id === id)));
+    if (!c) return notFound(id);
+    current = id;
+    if (location.hash.slice(1) !== id) { try { history.replaceState(null, "", "#" + id); } catch {} }
+    $("list").querySelectorAll(".item").forEach((b) => { b.setAttribute("aria-current", String(b.dataset.id === id)); b.tabIndex = b.dataset.id === id ? 0 : -1; });
+    rover = id;
     const idn = c.identity || {};
     const emails = (idn.emails || []).map((e) => `<div class="${e === (c.email || "").trim().toLowerCase() ? "" : "hist"}">${esc(maskEmail(e))}${e === (c.email || "").trim().toLowerCase() ? " ← request" : ""}</div>`).join("");
     const intent = c.intent || {};
@@ -457,19 +485,33 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
     }));
     const json = JSON.stringify(c.steps);
     $("copybtn").addEventListener("click", async (e) => {
-      try { await navigator.clipboard.writeText(json); e.target.textContent = "Copied"; }
-      catch { const r = $("raw"); r.hidden = false; r.textContent = json; const sel = getSelection(); const rg = document.createRange(); rg.selectNodeContents(r); sel.removeAllRanges(); sel.addRange(rg); e.target.textContent = "Selected, press Ctrl+C"; }
+      const b = e.currentTarget; clearTimeout(b._t);
+      try { await navigator.clipboard.writeText(json); b.textContent = "Copied"; }
+      catch { const r = $("raw"); r.hidden = false; r.textContent = json; const sel = getSelection(); const rg = document.createRange(); rg.selectNodeContents(r); sel.removeAllRanges(); sel.addRange(rg); b.textContent = "Selected, press Ctrl+C"; }
+      b._t = setTimeout(() => { b.textContent = "Copy steps_json"; }, 2000);
     });
     $("rawbtn").addEventListener("click", (e) => {
       const r = $("raw"); r.hidden = !r.hidden; r.textContent = `${c.id},${c.status},${json}`; e.target.setAttribute("aria-expanded", String(!r.hidden));
       e.target.textContent = r.hidden ? "Show raw row" : "Hide raw row";
     });
+    if (user) reveal();
   }
 
   // ---------- controls
   $("q").addEventListener("input", (e) => { query = e.target.value; renderList(); });
+  $("list").addEventListener("keydown", (e) => {
+    const items = [...$("list").querySelectorAll(".item")], i = items.indexOf(document.activeElement);
+    if (i < 0) return;
+    const j = { ArrowDown: i + 1, ArrowUp: i - 1, Home: 0, End: items.length - 1 }[e.key];
+    if (j == null) return;
+    e.preventDefault();
+    const t = items[Math.max(0, Math.min(items.length - 1, j))];
+    items.forEach((b) => { b.tabIndex = b === t ? 0 : -1; }); rover = t.dataset.id; t.focus();
+  });
+  $("list").addEventListener("focusin", () => { $("listhelp").hidden = false; });
+  $("skiplink").addEventListener("click", (e) => { e.preventDefault(); $("dossier").focus(); reveal(); });
   function setMask(v) {
-    masked = v; store.set("gl-mask", v ? "1" : "0");
+    masked = v;
     $("maskbtn").setAttribute("aria-pressed", String(v)); $("maskbtn").textContent = v ? "PII masked" : "PII visible";
     renderList(); if (current) select(current);
   }
@@ -483,8 +525,12 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
   $("themebtn").addEventListener("click", () => { theme = themes[(themes.indexOf(theme) + 1) % 3]; store.set("gl-theme", theme); applyTheme(); });
 
   applyTheme(); setMask(masked); renderSummary(); renderFilters(); renderList();
-  const fromHash = (location.hash || "").slice(1);
-  const first = CASES.find((c) => c.id === fromHash) || CASES.find((c) => c.claim === "COMPLETE" && c.status === "INCOMPLETE") || CASES[0];
-  if (first) select(first.id);
+  const fromHash = decodeURIComponent((location.hash || "").slice(1));
+  if (fromHash && fromHash !== "dossier") select(fromHash, true);
+  else { const first = CASES.find((c) => c.claim === "COMPLETE" && c.status === "INCOMPLETE") || CASES[0]; if (first) select(first.id); }
+  window.addEventListener("hashchange", () => {
+    const h = decodeURIComponent(location.hash.slice(1));
+    if (h && h !== "dossier" && h !== current) select(h, true);
+  });
 })();
 </script>

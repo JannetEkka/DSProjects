@@ -263,3 +263,26 @@ branch=claude/happy-mayer-u2r4c5
 repo_root=/home/user/DSProjects
 worktree=hackathons/hackerrank-orchestrate-oct26
 parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ
+
+## [2026-10-24T17:27:43Z] Interview prep, README safety/monitoring sections, console fixes
+
+User Prompt (verbatim, secrets redacted):
+(brief from parent session) Write docs/INTERVIEW_PREP.md for the human participant (7 interview topics, likely questions with spoken answers citing real files and numbers, 60-second pitch, 2-minute architecture script, limitations, numbers cheat sheet). Add README sections "Failure handling and safety", "Production monitoring" and "How we used AI to build this". Fix the console bugs from review/REVIEW.md (hashchange, case not found, keyboard reachability, phone scroll, search must not match raw PII while masked, never persist PII visible, reset Copy label) and show per-resource confidence/assumptions chips when the trace has them; verify with Playwright at 1440/400 px, light and dark. Rebuild the console, commit, push, log. (Follow-up: organizers confirmed sample cases 18 and 20 do not affect the score; the refactor session is not running in parallel.)
+
+Agent Response Summary:
+Wrote docs/INTERVIEW_PREP.md with every number checked against the current reports and a fresh run (518 rows, 164 ghost cases, --no-llm changes only case_45). Added the three README sections to both READMEs, describing only what the code does today; the monitoring design is marked as not built, and the intent schema's missing enum check is stated as a gap. Fixed all 7 console bugs from the review table and added confidence/assumption chips that only appear when the trace carries those fields. Playwright at 1440 and 400 px, light and dark: no horizontal overflow, no console errors, and every fix was checked. output.csv is unchanged; code.zip was not rebuilt (the refactor session packages it).
+
+Actions:
+* docs/INTERVIEW_PREP.md (new)
+* README.md, code/README.md: failure handling and safety, production monitoring, how we used AI, console privacy notes, case_18/20 scoring note
+* code/ui/console_template.html: hashchange + not-found, roving tabindex + skip link, phone scroll, masked-only search, no persisted unmask, Copy reset, confidence/assumptions chips
+* rebuilt code/ui/ghost_ledger.html from python3 code/main.py output (byte-identical output.csv)
+* Playwright check (scratchpad script), 4 viewport/theme combinations
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ
