@@ -2,3 +2,4 @@ google-genai>=1.0
 rapidocr-onnxruntime>=1.2
 pdfplumber>=0.10
 pypdf>=4.0
+pytest>=7  # unit tests only (code/tests)

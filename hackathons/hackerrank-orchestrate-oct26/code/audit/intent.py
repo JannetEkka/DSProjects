@@ -48,7 +48,8 @@ NEGATION_PATTERNS = [
     r"no (borren|eliminen)", r"ne (supprimez|fermez) pas", r"não (excluam|apaguem)",
 ]
 NON_DELETION_HINTS = {
-    "ACCESS": r"what personal information|copy of the information|information request|what data|copy of|invoices",
+    "ACCESS": r"what personal information|copy of the information|information request|what data|copy of|invoices"
+              r"|kopie meiner daten|copia de mis datos|copie de mes données|cópia dos meus dados",
     "PORTABILITY": r"download my|portable format|export my",
     "CORRECTION": r"out of date|misspelled|correct it|replace it|change the email|update my",
     "MARKETING_OPT_OUT": r"promotional emails|marketing|unsubscribe|newsletter",

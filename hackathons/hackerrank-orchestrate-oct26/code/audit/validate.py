@@ -70,7 +70,7 @@ def validate_output(out_path: Path, requests_path: Path, manifest: dict, engine=
                     problems.append(f"{cid}#{i}: future step must have empty evidence_id")
             if ev:
                 if ev in manifest:
-                    seen_before = engine is None or any(
+                    seen_before = engine is not None and any(
                         o.evidence_id == ev and o.time <= audit_at for o in engine.by_resource.get(s["resource_id"], []))
                     if manifest[ev]["captured_at"] > audit_at and not seen_before:
                         problems.append(f"{cid}#{i}: cites {ev} with no observation at or before audit_at")
