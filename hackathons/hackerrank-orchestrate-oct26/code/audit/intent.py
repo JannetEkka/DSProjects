@@ -4,15 +4,18 @@ Two independent classifiers vote:
   * an LLM (Gemini, JSON-constrained, temperature 0) when GEMINI_API_KEY is set;
   * a deterministic multilingual rule model (negation-aware) that always runs.
 A third, independent signal is the privacy-intake CLASSIFY_REQUEST activity in system_activity.csv.
-The LLM decides when present, within a strict schema, and the deterministic rule model is the
-tie-breaker when the two disagree, in both directions:
-  * veto - the LLM says "deletion" but the text negates deletion or states another purpose without a
-    deletion cue: authorizing a non-deletion would be a destructive error, so the rules win;
-  * override - the LLM says "not deletion" but the text has a clear deletion cue, no negation and no
-    non-deletion purpose: refusing a genuine deletion would be a compliance failure, so the rules win.
-Both are recorded in the trace (`override`, `confidence: low`). On this dataset the two models agree on
-all 550 texts, so neither rule changes the output; they protect against a model that misreads (in a
-cold run one fallback model refused two "please verify my deletion" follow-ups).
+The LLM decides when present, within a strict schema, and the deterministic rule model breaks ties,
+asymmetrically in favour of not deleting:
+  * veto - the LLM says "deletion" but the rule model finds a negated deletion cue (multilingual
+    negation tokens inside the cue's clause) or a non-deletion purpose without a cue: authorizing a
+    non-deletion would be irreversible, so the rules win;
+  * override - the LLM says "not deletion": the rules may overrule it only when the text has a deletion
+    cue, no other purpose and no negation-like token anywhere. Otherwise the refusal stands, flagged
+    `needs_human_review` (refusing a genuine deletion is a recoverable compliance miss; a wrong
+    deletion is not).
+Disagreements are recorded in the trace (`override`, `confidence: low`, the LLM's own vote). The rule
+model itself needs a positive deletion cue to authorize anything. On this dataset the two models agree on
+all 550 texts, so neither rule changes the output.
 LLM answers are cached by text hash (code/cache/intent.json) so re-runs cost nothing. Uncached texts are
 sent in chunks (prefetch) over a model chain with retries (audit.llm: Gemini, then Mistral / Groq / NVIDIA
 when their keys are set), so one bad model doesn't end the run.
@@ -55,6 +58,52 @@ NEGATION_PATTERNS = [
     r"continue using", r"still (want|need|use)", r"marketing lists only", r"keep the account as it is",
     r"no (borren|eliminen)", r"ne (supprimez|fermez) pas", r"não (excluam|apaguem)",
 ]
+# Negation-like tokens across the request languages. Broad on purpose: used (a) anywhere in the text to
+# decide whether the rule model may overrule an LLM refusal, and (b) inside the deletion cue's own
+# clause to detect a negated deletion ("Bitte löschen Sie mein Konto nicht", "削除しないでください").
+NEGATION_TOKEN_RE = re.compile(
+    r"\b(?:not|never|no longer|cannot|rather not|don'?t|didn'?t|doesn'?t|won'?t|wouldn'?t|shouldn'?t|can'?t)\b"
+    r"|n['’]t\b"                                                       # en (incl. typographic apostrophe)
+    r"|\b(?:nicht|kein|keine|keinen|keinesfalls|niemals|nie)\b"        # de
+    r"|\b(?:ne|pas|jamais)\b|\bn['’]"                                 # fr
+    r"|\b(?:no|nunca|jamás)\b"                                         # es
+    r"|\b(?:non|mai)\b"                                                # it
+    r"|\b(?:não|nunca)\b"                                              # pt
+    r"|\b(?:niet|nooit|geen)\b"                                        # nl
+    r"|しないで|ないで|しない|ません|不要"                                # ja
+    r"|하지\s?마|않"                                                     # ko
+    r"|不要|别|勿"                                                       # zh
+    r"|\b(?:не|нельзя|никогда)\b"                                      # ru
+    r"|नहीं|मत\b"                                                       # hi
+    r"|(?<![\u0600-\u06FF])لا(?![\u0600-\u06FF])",                    # ar
+    re.I)
+# phrases that contain a negation token but do not negate the request ("not just the profile")
+NEGATION_EXEMPT_RE = re.compile(r"\bnot (?:just|only)\b|\bno matter\b|\bno later than\b", re.I)
+CLAUSE_SPLIT_RE = re.compile(r"[.,;:!?\n。、，；！？]")
+
+
+def has_negation_token(text: str) -> bool:
+    """Any negation-like token anywhere in the text (exempt phrases removed)."""
+    return bool(NEGATION_TOKEN_RE.search(NEGATION_EXEMPT_RE.sub(" ", text or "")))
+
+
+def negated_deletion(text: str) -> bool:
+    """A deletion cue whose own clause carries a negation token within a few words of it."""
+    t = NEGATION_EXEMPT_RE.sub(" ", (text or "").lower())
+    for cue in DELETION_PATTERNS:
+        for m in re.finditer(cue, t):
+            end = m.end() + len(re.match(r"[a-zà-ɏа-яё]*", t[m.end():]).group())  # rest of an alphabetic word ("lösch" -> "löschen"); CJK has no word breaks
+            starts = [b.end() for b in CLAUSE_SPLIT_RE.finditer(t, 0, m.start())]
+            lo = starts[-1] if starts else 0
+            nxt = CLAUSE_SPLIT_RE.search(t, end)
+            hi = nxt.start() if nxt else len(t)
+            before, after = t[lo:m.start()], t[end:hi]
+            window = " ".join(before.split()[-4:]) + " " + before[-8:] + " | " + after[:10] + " " + " ".join(after.split()[:4])
+            if NEGATION_TOKEN_RE.search(window):
+                return True
+    return False
+
+
 NON_DELETION_HINTS = {
     "ACCESS": r"what personal information|copy of the information|information request|what data|copy of|invoices"
               r"|kopie meiner daten|copia de mis datos|copie de mes données|cópia dos meus dados",
@@ -70,6 +119,8 @@ def rule_signals(text: str) -> tuple[list[str], list[str], str | None]:
     t = (text or "").lower()
     neg = [p for p in NEGATION_PATTERNS if re.search(p, t)]
     pos = [p for p in DELETION_PATTERNS if re.search(p, t)]
+    if negated_deletion(t):
+        neg.append("negated deletion cue")
     rtype = next((k for k, p in NON_DELETION_HINTS.items() if re.search(p, t)), None)
     return pos, neg, rtype
 
@@ -83,7 +134,8 @@ def rule_classify(text: str) -> dict:
         return {"authorizes_deletion": False, "request_type": "OTHER", "engine": "rules",
                 "rationale": "empty request text"}
     pos, neg, rtype = rule_signals(text)
-    authorizes = not (neg or (rtype and not pos))
+    # a destructive action needs positive evidence: a deletion cue that is not negated
+    authorizes = bool(pos) and not neg
     return {"authorizes_deletion": authorizes, "request_type": "DELETION" if authorizes else (rtype or "OTHER"),
             "engine": "rules", "rationale": f"deletion cues={len(pos)} negations={len(neg)} purpose={rtype}"}
 
@@ -195,11 +247,15 @@ class IntentClassifier:
                           "override": "rules_over_llm", "confidence": "low"}
             elif not result["authorizes_deletion"] and rules["authorizes_deletion"]:
                 pos, neg, rtype = rule_signals(clean)
-                if pos and not neg and rtype is None:
-                    # override: a clear, un-negated deletion request with no other purpose
+                vote = {"request_type": llm["request_type"], "rationale": llm["rationale"]}
+                if pos and not neg and rtype is None and not has_negation_token(clean):
+                    # override: a clear deletion request with no other purpose and no negation-like token
+                    # anywhere in the text (any doubt keeps the refusal)
                     result = {**rules, "engine": f"rules (override of {llm['model']})",
-                              "override": "rules_over_llm", "confidence": "low",
-                              "llm_vote": {"request_type": llm["request_type"], "rationale": llm["rationale"]}}
+                              "override": "rules_over_llm", "confidence": "low", "llm_vote": vote}
+                else:
+                    # the LLM's refusal stands, but the models disagree: a human should look
+                    result = {**result, "confidence": "low", "needs_human_review": True}
         result["rules_vote"] = rules["authorizes_deletion"]
         result["agreement"] = (result["authorizes_deletion"] == rules["authorizes_deletion"]
                                and "override" not in result)

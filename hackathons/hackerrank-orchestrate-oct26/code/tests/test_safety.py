@@ -62,16 +62,56 @@ def test_llm_refusal_kept_when_the_text_states_another_purpose():
     assert r["authorizes_deletion"] is False and "override" not in r and r["agreement"] is False
 
 
-@pytest.mark.parametrize("text", [
-    # sample case_12 and case_21: in a cold run a fallback model refused both as ACCOUNT_SUPPORT
-    "I changed the email on this account before deleting it. Please check that nothing tied to the old "
-    "address was left behind, even in systems that do not display the email.",
-    "I deleted my account and received the confirmation email. Could you verify that the profile is gone and "
-    "that anything retained for security is limited to what is required?",
-])
-def test_cold_run_refusals_of_deletion_follow_ups_are_overridden(text):
-    r = _with_cached(text, REFUSAL)
+CASE_12 = ("I changed the email on this account before deleting it. Please check that nothing tied to the old "
+           "address was left behind, even in systems that do not display the email.")
+CASE_21 = ("I deleted my account and received the confirmation email. Could you verify that the profile is gone and "
+           "that anything retained for security is limited to what is required?")
+
+
+def test_cold_run_refusal_without_negation_is_overridden():
+    # sample case_21: in a cold run a fallback model refused it as ACCOUNT_SUPPORT
+    r = _with_cached(CASE_21, REFUSAL)
     assert r["authorizes_deletion"] is True and r["override"] == "rules_over_llm"
+
+
+def test_refusal_is_kept_when_any_negation_token_appears():
+    # sample case_12 contains "do not display": any doubt keeps the LLM's refusal, flagged for a human
+    r = _with_cached(CASE_12, REFUSAL)
+    assert r["authorizes_deletion"] is False and "override" not in r
+    assert r["needs_human_review"] is True and r["confidence"] == "low"
+
+
+REVIEWER_NEGATIONS = [
+    "Bitte löschen Sie mein Konto nicht. Ich möchte nur meine Adresse ändern.",
+    "Bitte mein Konto nicht löschen.",
+    "Non cancellate il mio account, per favore.",
+    "削除しないでください",
+    "Не удаляйте мой аккаунт.",
+    "Please never delete my account.",
+    "I'd rather you didn't erase anything.",
+]
+
+
+@pytest.mark.parametrize("text", REVIEWER_NEGATIONS)
+def test_correct_llm_refusal_of_a_negated_deletion_is_never_overruled(text):
+    r = _with_cached(text, REFUSAL)
+    assert r["authorizes_deletion"] is False and "override" not in r
+
+
+@pytest.mark.parametrize("text", REVIEWER_NEGATIONS)
+def test_offline_rule_model_reads_the_negation(text):
+    assert IntentClassifier(use_llm=False).classify(text)["authorizes_deletion"] is False
+
+
+@pytest.mark.parametrize("text", ["Hello", "Thanks for the quick reply!", "Order 4411 arrived damaged."])
+def test_no_deletion_cue_never_authorizes_deletion(text):
+    assert IntentClassifier(use_llm=False).classify(text)["authorizes_deletion"] is False
+
+
+@pytest.mark.parametrize("text", ["Please delete my account.", "Bitte löschen Sie mein Konto.", "アカウントを削除してください",
+                                  "Удалите мой аккаунт.", "Please erase my data, not just the profile."])
+def test_plain_deletions_still_authorize(text):
+    assert IntentClassifier(use_llm=False).classify(text)["authorizes_deletion"] is True
 
 
 @pytest.mark.parametrize("text", [
