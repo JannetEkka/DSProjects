@@ -132,7 +132,8 @@ class LLMChain:
             body["messages"][0]["content"] = (content if image else prompt + "\n\nRespond with JSON only.")
         req = urllib.request.Request(base + "/chat/completions", data=json.dumps(body).encode(),
                                      headers={"Authorization": f"Bearer {os.environ[key_var]}",
-                                              "Content-Type": "application/json"})
+                                              "Content-Type": "application/json",
+                                              "User-Agent": "deletion-audit/1.0"})  # Groq's CDN 403s urllib's default UA
         try:
             with urllib.request.urlopen(req, timeout=TIMEOUT_S) as r:
                 data = json.loads(r.read())
