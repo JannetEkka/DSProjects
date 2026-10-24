@@ -15,14 +15,14 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 | 7 | Validator: 29 rows with missing citations | Syslog dialect parsed with shifted fields, so every line shared one trace and a subject absorbed strangers' records; log exports are captured after their lines | Fixed RFC5424 field order; cite the observation's own timestamp when the export file post-dates `audit_at` | validator clean |
 | 8 | Metamorphic test "upper-case duplicate submission" failed | Two submissions of one workflow competed for its job | Duplicate submissions share their workflow | 8/8 suite |
 | 9 | Full run took 27 s | Linear scan of all observations per subject | Inverted identifier index + memoised linking (byte-identical output) | 9 s |
+| 10 | Anonymized analytics rows missed when several requests report in the same minute (cases 26-28); case_11 got a stranger's row | Overlapping workflow windows made the "only one window covers it" rule refuse or misfire | **Chain linkage**: a request's policy actions (`Policy action completed for ...`) form a chain spaced by exact gaps learned from evidence-owned pairs (390 s and 449 s; 0 cross-owner collisions within +-1 s). An orphan in a chain whose owned links belong to one person inherits that owner (36 chains, each 1 owner + 1 orphan). **Single-instance categories** (learned: no subject ever holds two analytics/search/data_flow/backup/tombstone/export records) block a second orphan of the same category | 28/32 |
+| 11 | case_23 got `account_7015`; singleton analytics rows (cases 03, 25) left unattributed | Several FAILED account jobs in one slot, no evidence ties any of them | **Workflow lattice**: every event a workflow emits sits at a fixed phase after its account job modulo 30 s (learned period; 'received the final result' at +20..22 s, policy actions at +9..11 s; 328/328 evidence-owned pairs). Candidate account jobs are kept only if in phase with the subject's own workflow events; an orphan is attributed only to the in-phase request among those whose windows cover it | 28/32 |
+| 12 | case_04's legacy-format analytics row missed | Request had no account job, so no workflow window opened | When no account job exists at all, the reporting window itself is the workflow window (same uniqueness test) | 29/32; 518-run unchanged |
 
 ### Known limitations (left deliberately)
 
-* **Anonymized analytics rows with no identifier** (cases 03, 04, 21, 25-28): the only link is a
-  `deletion_worker` ANONYMIZE activity, and several requests' workflow windows overlap. We attribute
-  such a row only when exactly one request's window contains it. Guessing would trade recall for
-  wrong steps in other cases.
+* **case_21 `analytics_5335`**: the row is in phase with two requests' account jobs (case_21 and case_23
+  report in the same minute; phases 11 s and 9 s both fall in the policy band), so it is not guessed.
 * `audit_record_6645` (case_18) and `audit_record_5569` (case_20) appear in no participant-visible file,
   so they cannot be derived.
-* case_23: three NOT_STARTED requests share the same `reported_at` and three FAILED account jobs with
-  no other distinguishing evidence; the one-to-one assignment is a principled guess.
+* case_23 is now resolved by the workflow lattice (only `account_410` is in phase with the subject's own export/search results).

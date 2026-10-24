@@ -1,19 +1,19 @@
 {
  "cases": 32,
  "status_accuracy": 1.0,
- "case_exact_match": 0.65625,
- "step_precision": 0.9891891891891892,
- "step_recall": 0.9481865284974094,
- "step_f1": 0.9682539682539684,
+ "case_exact_match": 0.90625,
+ "step_precision": 1.0,
+ "step_recall": 0.9844559585492227,
+ "step_f1": 0.9921671018276762,
  "field_accuracy": {
-  "phase": 0.9533678756476683,
-  "system_id": 0.8963730569948186,
-  "resource_id": 0.8911917098445595,
-  "operation": 0.8963730569948186,
-  "state": 0.8963730569948186,
-  "evidence_id": 0.9533678756476683
+  "phase": 0.9844559585492227,
+  "system_id": 0.9637305699481865,
+  "resource_id": 0.9637305699481865,
+  "operation": 0.9637305699481865,
+  "state": 0.9637305699481865,
+  "evidence_id": 0.9844559585492227
  },
  "sequence_accuracy_relative_order": 1.0,
- "sequence_similarity_mean": 0.9540860291129689,
- "evidence_citation_accuracy": 0.9066666666666666
+ "sequence_similarity_mean": 0.9905092592592593,
+ "evidence_citation_accuracy": 0.9866666666666667
 }

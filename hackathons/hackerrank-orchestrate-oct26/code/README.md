@@ -7,7 +7,7 @@ applies `deletion_rules.csv`, and writes `COMPLETE` / `INCOMPLETE` / `NOT_APPLIC
 ordered, evidence-cited plan.
 
 **Results on the 32 public samples** (`python3 code/evaluation/main.py`): status accuracy **100%**,
-step F1 **96.8%**, relative step order **100%**, 8/8 team-authored metamorphic tests pass. The full
+step F1 **99.2%** (29/32 exact), relative step order **100%**, 9/9 team-authored metamorphic tests pass. The full
 518-case run takes about 9 s and passes a contract validator that checks every rule in the problem statement.
 
 ---
@@ -92,6 +92,12 @@ flowchart LR
      an all-null analytics row) carries no identifier any more. The workflow's account job runs shortly
      before `reported_at`, and its result mirrors the reported claim (COMPLETE→SUCCESS,
      PARTIALLY_COMPLETE→PARTIAL, NOT_STARTED→FAILED). Jobs are assigned one-to-one across all requests.
+   * **Workflow timing (chain linkage + lattice).** Learned from evidence-owned activity only: a
+     workflow's policy actions are chained by exact gaps (390 s / 449 s, never seen between two
+     different owners), and every workflow event sits at a fixed phase after its account job modulo
+     30 s (one band per event template). An identifier-free record chained to someone's owned record
+     inherits that owner; ambiguous account jobs and orphan records go only to the request whose
+     account job is in phase, and nothing is attributed when two requests fit.
    * Evidence older than the same subject's *previous* request belongs to that request ("eras").
 5. **State at `audit_at`.** The latest observation at or before `audit_at` wins. Workflow statuses and
    activity results are claims, so they are never treated as state. Records shown in screenshots and
@@ -127,7 +133,7 @@ See `evaluation/evaluation_report.md` for:
 * status, step, field, sequence and citation metrics;
 * ablations showing what each component contributes;
 * the metamorphic suite: historical email, upper-case email, negated and Hindi requests, time cutoff,
-  catalog decoy, similar-email decoy, and retention;
+  catalog decoy, similar-email decoy, retention, and workflow-chain attribution;
 * error analysis, including the cases we deliberately do not guess.
 
 See `evaluation/usage_report.md` for tokens and cost.

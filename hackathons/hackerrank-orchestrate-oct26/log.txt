@@ -193,3 +193,49 @@ repo_root=/home/user/hackerrank-orchestrate-october26
 worktree=main
 parent_agent=none
 
+
+## [2026-10-24T15:00:32Z] Independent reviewer + accuracy hand-off
+
+User Prompt (verbatim, secrets redacted):
+should we run our own ai judge and qa testcases in a new session? it can also then see all the api keys and domains allowed usage.
+and also this: we have about 33 hours left. I'd use some of it to raise the 21/32 exact matches on the samples; the two weak spots are the anonymized analytics records and the account matching for case_23.
+no u dont do it here. use new session.
+
+Agent Response Summary:
+Launched an independent reviewer session (judge mock, contract audit, CLI/UI QA, cold LLM run) and discovered the 449/390 s workflow-chain spacing (0 cross-owner collisions in 506 pairs), handed off to a separate accuracy session.
+
+Actions:
+* spawned reviewer session (writes only review/)
+* timing analysis of deletion_worker activity; spawned accuracy session with the hand-off brief
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=none
+
+## [2026-10-24T15:00:32Z] Accuracy pass: workflow chain linkage + 30 s lattice
+
+User Prompt (verbatim, secrets redacted):
+(hand-off brief from parent session) Implement chain linkage for orphan anonymized analytics records, use timing to resolve ambiguous account-job assignment (case_23), reconsider case_11's extra analytics_9447; add a metamorphic test; update notes/README; regenerate reports; package; copy back; log; commit and push.
+wait if theres somethings youre not able process liek the records and cases, can u give me the question to ask the organisers?
+
+Agent Response Summary:
+Learned two timing regularities from evidence-owned activity only (no labels): (1) policy-action chains spaced by exact gaps 390/449 s (36 chains, each one owner + one orphan); (2) a 30 s workflow lattice: every workflow event sits at a fixed phase after its account job (received-final +20..22 s, policy +9..11 s; 328/328 owned pairs). Added learned single-instance categories (blocks case_11's stranger row) and a reporting-window fallback for requests with no account job (case_04). Samples: exact 21/32 -> 29/32, step F1 96.8% -> 99.2%, precision 98.9% -> 100%, status 100% kept, metamorphic 9/9 (new chain test). Full run: 137/518 rows changed (89 analytics rows added, 62 account reassignments, 0 status changes), validator OK, clean-room byte-identical. Drafted organiser questions for the unresolved items (case_18/20 audit records absent from all files; case_21 ambiguity).
+
+Actions:
+* code/audit/engine.py: _learn_workflow_timing, lattice_fit, chain_owner, single_instance; prepare() lattice filter for account candidates; workflow_resources chain/lattice/exclusivity rules
+* code/evaluation/main.py: DISABLE_TIMING ablation; metamorphic test 9 (orphan follows its chain)
+* code/evaluation/report_notes.md rows 10-12; code/README.md How it works bullet
+* regenerated evaluation_report.md, ui/ghost_ledger.html, usage_report.md (usage_warm_run.json refreshed)
+* code.zip rebuilt; clean-room test byte-identical; copied to submission/
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ

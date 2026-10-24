@@ -110,7 +110,7 @@ class Agent:
         if self._engine is None:
             self._engine = AuditEngine(DS, self.store, self.ids)
         eng = self._engine
-        for k in ("DISABLE_WORKFLOW", "TRUST_CATALOG", "DISABLE_ERAS"):
+        for k in ("DISABLE_WORKFLOW", "TRUST_CATALOG", "DISABLE_ERAS", "DISABLE_TIMING"):
             setattr(eng, k, ablate.get(k, False))
         universe = {}
         for p in (DS / "deletion_requests.csv", DS / "sample_deletion_requests.csv"):
@@ -198,6 +198,14 @@ def custom_cases():
     # 8. Retention: security audit records are verified PRESENT, never deleted.
     t = _case("case_11")
     tests.append(("Security audit log retained, never deleted", t, {"retained": "security_service"}))
+
+    # 9. Workflow timing: case_25 and case_26 report at the same minute, so both workflow windows
+    #    cover both orphan (identifier-free) analytics rows. analytics_4566 sits at an exact chain gap
+    #    from case_26's own support record -> it must NOT attach to case_25; analytics_1895 is in phase
+    #    only with case_25's account job -> it must attach.
+    t = _case("case_25")
+    tests.append(("Orphan record follows its workflow chain, not a co-timed request", t,
+                  {"absent_resource": "analytics_4566", "present_resource": "analytics_1895"}))
     return tests
 
 
@@ -220,7 +228,7 @@ def check(test, result, store):
         detail = f"status={status}, later-evidence citations={bad or 'none'}"
     elif "absent_resource" in exp:
         rids = {s["resource_id"] for s in steps}
-        ok = exp["absent_resource"] not in rids
+        ok = exp["absent_resource"] not in rids and exp.get("present_resource") in rids | {None}
         detail = f"status={status}, resources={', '.join(sorted(rids))}"
     else:
         sec = [s for s in steps if s["system_id"] == exp["retained"]]
@@ -249,6 +257,7 @@ def main():
         ("Full engine", {}),
         ("- workflow attribution (evidence-only linking)", {"DISABLE_WORKFLOW": True}),
         ("- artifact verification of catalog links", {"TRUST_CATALOG": True}),
+        ("- workflow timing model (lattice + chain)", {"DISABLE_TIMING": True}),
         ("- per-subject request eras", {"DISABLE_ERAS": True}),
     ]
     abl_rows = [(name, score(agent.run(cases, **flags), gold)) for name, flags in ablations]
