@@ -1,0 +1,37 @@
+[1440 light] scrollWidth=1440 clientWidth=1440 overflow=false bg=rgb(242, 244, 247) errors=[] overflowing=[]
+[1440 dark] scrollWidth=1440 clientWidth=1440 overflow=false bg=rgb(13, 19, 27) errors=[] overflowing=[]
+[400 light] scrollWidth=400 clientWidth=400 overflow=false bg=rgb(242, 244, 247) errors=[] overflowing=[]
+[400 dark] scrollWidth=400 clientWidth=400 overflow=false bg=rgb(13, 19, 27) errors=[] overflowing=[]
+initial items 518 dossier= case_33
+search "case_63" -> 1 first= case_63 empty-msg= no
+search "search_428" -> 1 first= case_35 empty-msg= no
+search "gmail" -> 213 first= case_35 empty-msg= no
+search "user_130" -> 1 first= case_132 empty-msg= no
+search "CASE_63" -> 1 first= case_63 empty-msg= no
+search "  case_63  " -> 1 first= case_63 empty-msg= no
+search "zzzz" -> 0 first= (none) empty-msg= yes
+filter INCOMPLETE 356
+filter COMPLETE 152
+filter NOT_APPLICABLE 10
+filter ALL 518
+matrix cells [["COMPLETE|COMPLETE","90proven gone"],["COMPLETE|INCOMPLETE","164ghosts"],["COMPLETE|NOT_APPLICABLE","0no deletion asked"],["PARTIALLY_COMPLETE|COMPLETE","36proven gone"],["PARTIALLY_COMPLETE|INCOMPLETE","116still open"],["PARTIALLY_COMPLETE|NOT_APPLICABLE","0no deletion asked"],["NOT_STARTED|COMPLETE","26proven gone"],["NOT_STARTED|INCOMPLETE","76still open"],["NOT_STARTED|NOT_APPLICABLE","10no deletion asked"]]
+cell filter COMPLETE|INCOMPLETE -> 164
+cell + status COMPLETE -> 0 empty msg true
+cell toggled off -> 518
+deep link #case_63 dossier= case_33
+masked: aria-pressed true emails visible: []
+masked: emails in DOM attributes []
+masked search "gmail" still filters (oracle on hidden PII): 213
+unmasked: emails visible sample true
+mask persisted after reload: false
+theme cycle [["Theme: light","light","rgb(242, 244, 247)"],["Theme: dark","dark","rgb(13, 19, 27)"],["Theme: system","(none)","rgb(242, 244, 247)"]]
+hashchange to #case_35 -> dossier case_33
+copy button text after click Selected, press Ctrl+C raw visible true
+tab path ["maskbtn","themebtn","cell okcell ","cell ghostcell ","cell okcell ","cell ghostcell ","cell okcell ","cell ghostcell ","cell nacell ","q","BUTTON","BUTTON","BUTTON","BUTTON","case_33"] reached case {"tabs":15,"id":"case_33"}
+focus ring solid 2px none
+Enter opened case_33
+tabs from case to first step expander 520
+step expanded via Enter true
+phone: after tapping case, scrollY/dossierTop {"scrollY":891,"dossierTop":614,"vh":860}
+phone overflow with dossier open [400,400]
+page errors []
