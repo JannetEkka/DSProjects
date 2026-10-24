@@ -50,17 +50,17 @@ python3 code/ui/build_console.py                # -> code/ui/ghost_ledger.html (
 
 ```mermaid
 flowchart LR
-  R[request_text] --> I{Intent<br/>Gemini JSON + rule model}
-  I -- not deletion --> NA[NOT_APPLICABLE, []]
-  I -- deletion --> ID[Identity resolution<br/>current + historical emails, phones, hashes]
-  E[(94 evidence files<br/>SQL, JSON, 6 log dialects,<br/>text, PDF, screenshots)] --> N[Normalizer<br/>time-stamped observations]
-  S[(system_activity.csv)] --> L
-  ID --> L[Linking<br/>identifier match, verified catalog links,<br/>connector/restore lineage, workflow jobs]
+  R["request_text"] --> I{"Intent<br/>Gemini JSON + rule model"}
+  I -- "not deletion" --> NA["NOT_APPLICABLE, no steps"]
+  I -- "deletion" --> ID["Identity resolution<br/>current + historical emails, phones, hashes"]
+  E[("94 evidence files<br/>SQL, JSON, 6 log dialects,<br/>text, PDF, screenshots")] --> N["Normalizer<br/>time-stamped observations"]
+  S[("system_activity.csv")] --> L
+  ID --> L["Linking<br/>identifier match, verified catalog links,<br/>connector/restore lineage, workflow jobs"]
   N --> L
-  L --> ST[State at audit_at<br/>latest observation wins; claims ignored]
-  ST --> P[Policy<br/>deletion_rules.csv]
-  P --> O[Ordered steps<br/>findings, remediation, verification]
-  O --> V[Contract validator]
+  L --> ST["State at audit_at<br/>latest observation wins; claims ignored"]
+  ST --> P["Policy<br/>deletion_rules.csv"]
+  P --> O["Ordered steps<br/>findings, remediation, verification"]
+  O --> V["Contract validator"]
 ```
 
 1. **Intent** (`audit/intent.py`). An LLM (Gemini Flash, falling back to Groq `gpt-oss-120b`; 10 texts per batched call) classifies the request into DELETION / ACCESS / PORTABILITY /

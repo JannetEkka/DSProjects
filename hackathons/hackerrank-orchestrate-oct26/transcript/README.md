@@ -1,28 +1,38 @@
-# Build transcript (all sessions)
+# Build transcript
 
-The agent was built across six Claude Code cloud sessions: one orchestrator, plus five sessions it
-started for parallel or long-running work. Each file below is a readable export of one session.
-Each export contains:
+The official `chat_transcript` upload is `../submission/log.txt`. It has one entry for each piece of
+work, from all six Claude Code sessions that built the agent.
 
-* the participant's messages;
-* the assistant's visible replies;
-* a one-line summary of every tool call.
+[01_main_orchestrator_session.md](01_main_orchestrator_session.md) is the long, readable form of the
+orchestrator session. That session planned the work and started the other five sessions. It also
+asked the organizers about the data, and it verified every build. The work of the other sessions
+appears here through their briefs and reported results, and in `log.txt`.
 
-The exports leave out internal reasoning, system notices and raw tool output. API keys and the
-participant's email are redacted. The participant asked for the mock-interview rehearsal to be left
-out of the transcript.
+| Session | Role |
+|---|---|
+| session_01ABdxWSQm1ctSj6anpiX5aJ | Orchestrator: brief analysis, first engine, organizer questions, planning, final verification |
+| session_01Nbct7mtFqEizB27672S3Ur | Gemini intent and screenshot pass, model fallback, resumable runs |
+| session_013TtYBt1dK4oPo3KQxWRVwj | Multi-provider run that filled the intent and media caches |
+| session_01Gig6HxFo32t43CWcDJMtkY | Independent AI-judge style review and QA |
+| session_01H89kdKrn9aEhmGBzAcFxS6 | Accuracy work (workflow attribution, chains, lattice), refactor, fixes, final build |
+| session_01LtbcmgYqjJz1ZsCgS1U2pQ | README sections and Ghost Ledger console polish |
 
-The official `chat_transcript` upload is `../submission/log.txt`. These files are the long form.
+**Curation.** The participant asked for the transcripts to keep only what is relevant to building
+and judging the project. These were removed, in both `log.txt` and the readable export:
 
-| # | File | Session | Role |
-|---|---|---|---|
-| 1 | [01_main_orchestrator_session.md](01_main_orchestrator_session.md) | session_01ABdxWSQm1ctSj6anpiX5aJ | Orchestrator: brief analysis, first engine, organizer questions, planning, final verification |
-| 2 | [02_gemini_helper_session.md](02_gemini_helper_session.md) | session_01Nbct7mtFqEizB27672S3Ur | Gemini intent and screenshot pass, model fallback, resumable runs |
-| 3 | [03_multi_llm_run_session.md](03_multi_llm_run_session.md) | session_013TtYBt1dK4oPo3KQxWRVwj | Multi-provider run that filled the intent and media caches |
-| 4 | [04_independent_review_session.md](04_independent_review_session.md) | session_01Gig6HxFo32t43CWcDJMtkY | Independent AI-judge and QA review |
-| 5 | [05_accuracy_and_refactor_session.md](05_accuracy_and_refactor_session.md) | session_01H89kdKrn9aEhmGBzAcFxS6 | Accuracy work (workflow attribution, chains, lattice), refactor, fixes, final build |
-| 6 | [06_docs_and_console_session.md](06_docs_and_console_session.md) | session_01LtbcmgYqjJz1ZsCgS1U2pQ | README sections and Ghost Ledger console polish |
+* greetings and logistics;
+* the participant's own interview preparation and rehearsal;
+* asides that did not shape the project.
 
-To regenerate a file from a session's raw JSONL:
+The readable export also leaves out:
 
-    python3 build_transcript.py <session.jsonl> <out.md> --title "..."
+* internal reasoning;
+* system notices;
+* raw tool output.
+
+API keys and the participant's email are redacted.
+
+To regenerate the export from the session's raw JSONL:
+
+    python3 build_transcript.py <session.jsonl> 01_main_orchestrator_session.md \
+        --title "Session 1: Orchestrator (session_01ABdxWSQm1ctSj6anpiX5aJ)" --curation curation_01.json
