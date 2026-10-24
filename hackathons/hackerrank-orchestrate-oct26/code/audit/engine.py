@@ -172,7 +172,7 @@ def classify(o: Observation):
     result = str(f.get("result") or "").upper()
 
     if f.get("mentions_only"):
-        return cat, UNKNOWN
+        return classify_document(o)
 
     # record_type/result style digests (handover, lookups, history)
     if cat and result:
@@ -247,9 +247,12 @@ def classify(o: Observation):
         if is_attach:
             return "SUPPORT_ATTACHMENT", PRESENT
         if ev in ("contact_query_completed", "deletion_marker_check"):
+            # legacy contact-index entry keyed on an identifier -> secondary identifier record
             if ev == "deletion_marker_check" and f.get("marker_found") is True:
-                return None, ABSENT
-            return None, PRESENT
+                return "SECONDARY_IDENTIFIER", ABSENT
+            if str(f.get("rows") or "1") == "0":
+                return "SECONDARY_IDENTIFIER", ABSENT
+            return "SECONDARY_IDENTIFIER", PRESENT
         if ev == "message_pii_scan":
             return "SUPPORT_MESSAGE", IDENT
         if ev == "thumbnail_failed":
@@ -263,7 +266,38 @@ def classify(o: Observation):
     return PREFIX_CATEGORY.get(pre), PRESENT
 
 
+EMAIL_OR_PHONE = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+|\+\d{1,3}[\d ()-]{6,}\d")
+
+
+def classify_document(o: Observation):
+    """State of a resource shown in a business artifact (PDF / screenshot). Artifacts do not state a
+    verdict; they show the record as it existed at capture time."""
+    text = o.fields.get("document_text") or ""
+    low = text.lower()
+    pre = resource_prefix(o.resource_id)
+    has_pii = bool(EMAIL_OR_PHONE.search(text))
+    if pre == "data_flow":
+        off = re.search(r"\b(disabled|paused|stopped|inactive|suspended)\b", low)
+        return "DATA_FLOW", DISABLED if off else ACTIVE
+    if pre == "backup":
+        blocked = re.search(r"restore (blocked|disabled|denied)|deletion[ _-]block(ed)?\s*[:|]?\s*(true|yes|on)|not restorable", low)
+        return "BACKUP_ARCHIVE", DISABLED if blocked else ACTIVE
+    if pre == "tombstone":
+        return "ACCOUNT_TOMBSTONE", IDENT if has_pii else CLEAN
+    if pre == "analytics":
+        return "ANALYTICS_PROFILE", IDENT if has_pii else CLEAN
+    if pre == "support":
+        if o.source == "pdf" or re.search(r"attachment|\.pdf|\.jpg|\.png", low):
+            return "SUPPORT_ATTACHMENT", PRESENT
+        return "SUPPORT_MESSAGE", IDENT if has_pii else CLEAN
+    if pre == "export" and re.search(r"expired|deleted|unavailable", low) and not re.search(r"available|download", low):
+        return "USER_EXPORT", ABSENT
+    return PREFIX_CATEGORY.get(pre), PRESENT
+
+
 def links_to(o: Observation, ident: Identity) -> bool:
+    if o.fields.get("no_link"):  # linked through its catalog activity instead
+        return False
     if any(ident.matches_value(k) for k in o.keys):
         return True
     for k, v in o.fields.items():
@@ -297,9 +331,53 @@ class AuditEngine:
         self.by_resource: dict[str, list[Observation]] = {}
         for o in store.observations:
             self.by_resource.setdefault(o.resource_id, []).append(o)
+        self.catalog_media = {}
+        self._attach_catalog_media()
         for lst in self.by_resource.values():
             lst.sort(key=lambda o: (o.time, o.evidence_id))
         self.owners = self._build_owner_index()
+
+    def _attach_catalog_media(self):
+        """The data catalog registers each business artifact (screenshot / PDF) a few minutes after
+        capture and names the resource it shows. Pair the artifact with that resource so its contents
+        become an observation of the resource."""
+        from datetime import datetime
+        P = lambda t: datetime.fromisoformat(t.replace("Z", "+00:00"))
+        media = [(eid, row) for eid, row in self.store.manifest.items()
+                 if row["file_path"].lower().endswith((".png", ".jpg", ".jpeg", ".pdf"))]
+        for a in self.activities:
+            if a["event_type"] != "LINK_RESOURCE_IDENTITY":
+                continue
+            t = P(a["event_time"])
+            best = None
+            for eid, row in media:
+                dt = (t - P(row["captured_at"])).total_seconds()
+                if 0 <= dt <= 1800 and (best is None or dt < best[0]):
+                    best = (dt, eid, row)
+            if not best:
+                continue
+            _, eid, row = best
+            text = self.store.media_text.get(eid, "")
+            o = Observation(eid, row["captured_at"], row["captured_at"], a["target_system"], a["resource_id"],
+                            "catalog_media", {"document_text": text + "\n" + a["details"], "mentions_only": True, "no_link": True},
+                            set())
+            self.store.observations.append(o)
+            self.by_resource.setdefault(a["resource_id"], []).append(o)
+            self.catalog_media[a["activity_id"]] = (eid, text)
+
+    def _artifact_contradicts(self, activity, ident) -> bool:
+        """A catalog link is a claim. If the artifact it was registered from shows the resource with
+        someone else's contact details and none of the subject's, the claim is rejected."""
+        eid, text = self.catalog_media.get(activity["activity_id"], (None, ""))
+        if not text:
+            return False
+        rid = activity["resource_id"]
+        rows = [l for l in text.splitlines() if rid in l.replace(" ", "")] or text.splitlines()
+        ctx = "\n".join(rows)
+        if ident.mentioned_in(ctx) or ident.mentioned_in(text):
+            return False
+        emails = re.findall(r"[\w.+-]+@[\w-]+\.[\w.]+", ctx)
+        return bool(emails)
 
     def _build_owner_index(self):
         """resource_id -> set(user_id) linked by any direct identifier in any evidence (global view).
@@ -334,21 +412,22 @@ class AuditEngine:
             return list(csv.DictReader(f))
 
     # ------------------------------------------------------------------ linking
-    def linked_resources(self, ident: Identity, audit_at: str) -> dict[str, list[str]]:
-        """resource_id -> list of evidence ids that link it to the subject (at or before audit_at)."""
+    def linked_resources(self, ident: Identity, audit_at: str, since: str = "") -> dict[str, list[str]]:
+        """resource_id -> list of evidence ids that link it to the subject (in (since, audit_at])."""
         linked: dict[str, list[str]] = {}
         for o in self.store.observations:
-            if o.time > audit_at:
+            if o.time > audit_at or o.time <= since:
                 continue
             if links_to(o, ident):
                 linked.setdefault(o.resource_id, []).append(o.evidence_id)
         # catalog links and connector->downstream dependencies from the activity stream
         for a in self.activities:
-            if a["event_time"] > audit_at:
+            if a["event_time"] > audit_at or a["event_time"] <= since:
                 continue
             d = a["details"]
             if a["event_type"] == "LINK_RESOURCE_IDENTITY":
-                if ident.mentioned_in(d) or re.search(rf"\b{re.escape(ident.user_id)}\b", d):
+                if (ident.mentioned_in(d) or re.search(rf"\b{re.escape(ident.user_id)}\b", d)) \
+                        and not self._artifact_contradicts(a, ident):
                     linked.setdefault(a["resource_id"], []).append(a["activity_id"])
         changed = True
         while changed:
@@ -387,7 +466,12 @@ class AuditEngine:
 
         has_account = any(resource_prefix(r) == "account" for r in linked)
         acc_time = None
-        if not has_account:
+        if not has_account and case["case_id"] in self.assigned_accounts:
+            a = self.assigned_accounts[case["case_id"]]
+            if a is not None:
+                out[a["resource_id"]] = a["activity_id"]
+                acc_time = P(a["event_time"])
+        elif not has_account:
             cands = [a for a in self.activities
                      if a["source_system"] == "deletion_worker" and a["target_system"] == "account_service"
                      and lo <= P(a["event_time"]) <= rep and a["reported_result"] == expected
@@ -402,15 +486,91 @@ class AuditEngine:
                     and lo <= P(a["event_time"]) <= rep]
             if accs:
                 acc_time = P(min(accs, key=lambda a: a["event_time"])["event_time"])
-        if acc_time is not None:
+        if acc_time is not None and self.case_windows is not None:
             for a in self.activities:
                 if a["source_system"] != "deletion_worker" or a["target_system"] == "account_service":
                     continue
                 t = P(a["event_time"])
-                if acc_time <= t <= rep and a["resource_id"] not in linked and not self.owners.get(a["resource_id"]):
-                    if a["reported_result"] == expected:
-                        out.setdefault(a["resource_id"], a["activity_id"])
+                if not (acc_time <= t <= rep) or a["resource_id"] in linked or self.owners.get(a["resource_id"]):
+                    continue
+                # attribute only when no other request's workflow window could explain this activity
+                others = [cid for cid, (w0, w1) in self.case_windows.items()
+                          if cid != case["case_id"] and w0 <= t <= w1]
+                if not others:
+                    out.setdefault(a["resource_id"], a["activity_id"])
         return out
+
+    case_windows = None
+    TIEBREAK_EARLIEST = True
+    all_cases: list = []
+    assigned_accounts: dict = {}
+
+    def era_start(self, case, ident):
+        """Audit time of the same subject's previous request: older evidence belongs to that request."""
+        prev = ""
+        for c in self.all_cases:
+            if c["case_id"] == case["case_id"] or c["requested_at"] >= case["requested_at"]:
+                continue
+            other = self.ids.resolve(c["email"])
+            if other and other.user_id == ident.user_id and c["audit_at"] > prev:
+                prev = c["audit_at"]
+        return prev
+
+    def prepare(self, cases):
+        """Pre-compute every request's workflow window [account job, reported_at] (global view)."""
+        from datetime import datetime, timedelta
+        P = lambda t: datetime.fromisoformat(t.replace("Z", "+00:00"))
+        self.case_windows = None
+        self.all_cases = list(cases)
+        self.assigned_accounts = {}
+        # 1) candidate workflow account jobs per request lacking an evidence-linked account
+        cand = {}
+        taken = set()
+        for c in cases:
+            ident = self.ids.resolve(c["email"])
+            if ident is None:
+                continue
+            linked = self.linked_resources(ident, c["audit_at"], self.era_start(c, ident))
+            accs = [r for r in linked if resource_prefix(r) == "account"]
+            taken.update(accs)
+            if accs:
+                continue
+            rep = P(c["reported_at"])
+            lo = max(P(c["requested_at"]), rep - timedelta(hours=3))
+            exp = self.STATUS_RESULT.get(c["reported_status"])
+            own_ok = lambda r: not self.owners.get(r) or self.owners.get(r) == {ident.user_id}
+            cand[c["case_id"]] = [a for a in self.activities
+                                  if a["source_system"] == "deletion_worker" and a["target_system"] == "account_service"
+                                  and lo <= P(a["event_time"]) <= rep and a["reported_result"] == exp
+                                  and own_ok(a["resource_id"])]
+        # 2) resolve: requests with a single remaining candidate claim it first; others take the job
+        #    closest to reported_at that nobody else claimed
+        for cid in cand:
+            cand[cid] = [a for a in cand[cid] if a["resource_id"] not in taken]
+        pending = dict(cand)
+        while pending:
+            forced = [cid for cid, lst in pending.items() if len(lst) <= 1]
+            pick = forced[0] if forced else min(pending)
+            lst = pending.pop(pick)
+            choice = (min if self.TIEBREAK_EARLIEST else max)(lst, key=lambda a: a["event_time"]) if lst else None
+            self.assigned_accounts[pick] = choice
+            if choice:
+                for cid in pending:
+                    pending[cid] = [a for a in pending[cid] if a["resource_id"] != choice["resource_id"]]
+        wins = {}
+        for c in cases:
+            ident = self.ids.resolve(c["email"])
+            if ident is None:
+                continue
+            linked = self.linked_resources(ident, c["audit_at"], self.era_start(c, ident))
+            wf = self.workflow_resources(c, ident, linked)
+            accs = [r for r in list(linked) + list(wf) if resource_prefix(r) == "account"]
+            times = [P(a["event_time"]) for a in self.activities if a["resource_id"] in accs
+                     and a["source_system"] == "deletion_worker"
+                     and P(c["requested_at"]) <= P(a["event_time"]) <= P(c["reported_at"])]
+            if times:
+                wins[c["case_id"]] = (min(times), P(c["reported_at"]))
+        self.case_windows = wins
 
     # ------------------------------------------------------------------ state
     def state_at(self, rid: str, audit_at: str):
@@ -433,8 +593,9 @@ class AuditEngine:
         if o.captured_at > audit_at:
             # never cite a file captured after audit_at: fall back to the latest citable observation
             # that shows the same state
+            # the observation itself predates audit_at (log exports are captured after their lines)
             same = [x for x, st in known if st == s and x.captured_at <= audit_at]
-            ev = same[-1].evidence_id if same else ""
+            ev = same[-1].evidence_id if same else o.evidence_id
             return cat, s, ev, o.time
         return cat, s, o.evidence_id, o.time
 
@@ -445,7 +606,7 @@ class AuditEngine:
         trace = {"user_id": ident.user_id if ident else None, "resources": []}
         if ident is None:
             return "COMPLETE", [], trace
-        linked = self.linked_resources(ident, audit_at)
+        linked = self.linked_resources(ident, audit_at, self.era_start(case, ident))
         for rid, src in self.workflow_resources(case, ident, linked).items():
             linked.setdefault(rid, []).append(src)
         findings, remediation, verification = [], [], []
@@ -459,6 +620,12 @@ class AuditEngine:
             if acc:
                 states.append(acc)
         for s in states:
+            if s.category == "USER_PROFILE" and s.state == UNKNOWN:
+                cov = self._coverage_state(s.resource_id, "account_service", audit_at)
+                if cov:
+                    s.state, s.evidence_id = cov
+            if s.state == UNKNOWN and not s.evidence_id and linked.get(s.resource_id):
+                s.evidence_id = linked[s.resource_id][0]
             trace["resources"].append(s.__dict__)
             treatment = self.rules.get(s.category or "", None)
             if s.category == "DATA_FLOW":
@@ -483,7 +650,7 @@ class AuditEngine:
                     findings.append(("REPORT_REMAINING_RECORD", s))
                     remediation.append(("DELETE_RECORD", s))
                     verification.append(("VERIFY_RECORD_ABSENT", s, False))
-                elif s.state == ABSENT and s.category == "USER_PROFILE":
+                elif s.category == "USER_PROFILE" and s.state in (ABSENT, UNKNOWN):
                     verification.append(("VERIFY_RECORD_ABSENT", s, True))
             elif treatment in ("REDACT", "ANONYMIZE"):
                 op = "REDACT" if treatment == "REDACT" else "ANONYMIZE"
@@ -525,6 +692,16 @@ class AuditEngine:
                               "evidence_id": s.evidence_id if evflag else ""})
         return status, steps, trace
 
+    def _coverage_state(self, rid, system, audit_at):
+        """Absence proof from the latest non-empty snapshot that covers `system`."""
+        nonempty = {o.evidence_id for o in self.store.observations}
+        cov = [c for c in self.store.coverage if c[1] == system and c[2] <= audit_at
+               and self.store.manifest[c[0]]["captured_at"] <= audit_at and c[0] in nonempty]
+        if not cov:
+            return None
+        eid, _, cap, rids = max(cov, key=lambda c: (c[2], c[0]))
+        return (PRESENT if rid in rids else ABSENT), eid
+
     def _fallback_account(self, ident: Identity, audit_at: str):
         """Account id not observed directly: look for a source_resource_id reference, else derive
         from the stable user number, and prove absence from the latest account snapshot."""
@@ -538,9 +715,7 @@ class AuditEngine:
             if not m:
                 return None
             rid = f"account_{int(m.group(1)):03d}"
-        cov = [c for c in self.store.coverage if c[1] == "account_service" and c[2] <= audit_at
-               and self.store.manifest[c[0]]["captured_at"] <= audit_at]
+        cov = self._coverage_state(rid, "account_service", audit_at)
         if not cov:
             return ResourceState("account_service", rid, "USER_PROFILE", ABSENT, "", "")
-        eid, _, cap, rids = max(cov, key=lambda c: (c[2], c[0]))
-        return ResourceState("account_service", rid, "USER_PROFILE", PRESENT if rid in rids else ABSENT, eid, cap)
+        return ResourceState("account_service", rid, "USER_PROFILE", cov[0], cov[1], audit_at)

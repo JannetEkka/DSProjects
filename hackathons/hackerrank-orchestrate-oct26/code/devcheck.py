@@ -9,8 +9,10 @@ from audit.evidence import EvidenceStore
 from audit.engine import AuditEngine, IdentityResolver
 
 DS = Path(__file__).resolve().parent.parent / "dataset"
-store = EvidenceStore(DS)
+from audit.media import MediaExtractor
+store = EvidenceStore(DS, MediaExtractor())
 eng = AuditEngine(DS, store, IdentityResolver(DS))
+eng.prepare(list(csv.DictReader(open(DS / "sample_deletion_requests.csv"))) + list(csv.DictReader(open(DS / "deletion_requests.csv"))))
 gold = {r["case_id"]: r for r in csv.DictReader(open(DS / "sample_output.csv"))}
 ok = 0
 only = sys.argv[1:]

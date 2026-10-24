@@ -19,6 +19,11 @@ RESOURCE_RE = re.compile(
     r"tombstone|legal_hold|marketing|object|cache|email_log|telemetry)_\d+\b"
 )
 
+DOC_RESOURCE_RE = re.compile(
+    r"(?<![A-Za-z_])(account|search|analytics|support|export|data_flow|backup|audit_record|"
+    r"tombstone|legal_hold|marketing|object|cache)_\d+\b"
+)
+
 PREFIX_SYSTEM = {
     "account": "account_service",
     "search": "search_service",
@@ -125,11 +130,12 @@ def parse_log_line(line: str):
         if "logger" in d and "service" not in d:
             d["service"] = d["logger"]
     elif rest.startswith("<"):  # RFC5424 syslog
+        # <pri>ver host app procid msgid sd kv...
         parts = rest.split(" ", 6)
         if len(parts) >= 7:
             d = parse_kv(parts[6])
-            d.setdefault("service", parts[3])
-            d.setdefault("trace_id", parts[4])
+            d.setdefault("service", parts[2])
+            d.setdefault("trace_id", parts[3])
     elif rest.startswith("["):  # [LEVEL] [service] [trace] event: kv
         mm = re.match(r"\[(\w+)\]\s*\[([^\]]+)\]\s*\[([^\]]+)\]\s*([\w.]+):\s*(.*)$", rest)
         if mm:
@@ -333,9 +339,17 @@ class EvidenceStore:
     def _load_document_text(self, eid, text, captured, source):
         """Unstructured business artifact (PDF/screenshot). Emit one observation per resource id
         mentioned, carrying the whole document text so identifiers can be matched."""
-        rids = sorted(set(m.group(0) for m in RESOURCE_RE.finditer(text)))
+        # OCR can glue a row number onto an id ("1data_flow_9846"), so do not require a word boundary
+        rids = sorted(set(m.group(0) for m in DOC_RESOURCE_RE.finditer(text)))
+        lines = text.splitlines()
         for rid in rids:
-            self._add(eid, captured, captured, rid, source, {"document_text": text, "mentions_only": True}, (), None)
+            if len(rids) == 1 and source == "pdf":
+                context = text  # single-subject artifact (e.g. one attachment, one detail page)
+            else:
+                # multi-row screen: only the row(s) naming this resource describe it
+                context = "\n".join(l for l in lines if re.search(rf"(?<![A-Za-z_]){re.escape(rid)}\b", l))
+            self._add(eid, captured, captured, rid, source,
+                      {"document_text": context, "full_text": text, "mentions_only": True}, (), None)
         self.media_text[eid] = text
 
     def _load_pdf(self, eid, path, captured):
