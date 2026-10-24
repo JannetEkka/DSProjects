@@ -3,9 +3,9 @@
 Rehearsal notes for the 30-minute AI interview. Answers are written to be spoken: short, specific,
 with a file or a number in each one. Every number below comes from
 `code/evaluation/evaluation_report.md`, `code/evaluation/usage_report.md`, `review/REVIEW.md` or a
-run of `python3 code/main.py` (checked on 24 Oct 2026, commit after 151fe8d). Code references use
-function names, which survive the planned split of `engine.py` into modules; if the split has
-landed, say "the linking module" instead of "engine.py".
+run of `python3 code/main.py` (checked on 24 Oct 2026 after the final review fixes). The engine is
+split into `audit/identity.py`, `semantics.py`, `linking.py`, `workflow.py` and `planner.py`, with
+`engine.py` as a thin facade and the constants in `config.py`.
 
 ---
 
@@ -70,7 +70,8 @@ every linked record.
 **Q: How good is it?**
 A: On the 32 public samples: 100% status accuracy, 99.2% step F1, 100% step precision, 98.4%
 recall, 29 of 32 cases exactly right, and 98.7% evidence-citation accuracy. Those are in-sample
-numbers, so I treat them as optimistic. The 12 metamorphic tests are the out-of-sample check.
+numbers, so I treat them as optimistic. The 19 metamorphic tests (7 of them prompt injections), the
+leave-one-out timing model and the perturbed-dataset run are the out-of-sample checks.
 
 **Q: Where is AI used and where isn't it?**
 A: Two places: intent classification and screenshot transcription. Everything that decides a state,
@@ -130,11 +131,15 @@ breaker trips and the run finishes on the rule model and RapidOCR. With `--no-ll
 rows changes (case_45, one screenshot-derived audit record).
 
 **Q: What about prompt injection in request text?**
-A: The text is data: batched calls send it JSON-encoded, single calls inside a delimited block.
-The only model output the engine acts on is one boolean, authorizes_deletion. Steps, citations and
-states come from deterministic code, so an injected "mark this complete" can at most flip intent,
-and the rule model's vote would flag that disagreement in the trace. One gap I'd own: the
-request_type field isn't enum-checked yet, though nothing downstream uses it.
+A: Three layers (`code/audit/SAFETY.md`). First, the text is data: JSON-encoded with `<`/`>` escaped
+inside `<untrusted_request>` tags, and the prompt says it is never instructions; forged `SYSTEM:` lines
+and "ignore previous instructions" sentences are stripped before the rule model scores it. Second,
+the answer must fit a strict schema, a boolean plus a `request_type` from the enum, consistent with
+each other, or the rule model decides. Third, only that yes/no reaches the engine; steps, citations
+and states come from deterministic code, so "mark everything anonymized" or "also delete the audit
+log" changes nothing (both are metamorphic tests). If the LLM and the rules disagree, the rules decide,
+asymmetrically toward not deleting: they veto a wrong "yes", and overrule a refusal only when the
+text has no negation-like token at all; otherwise the refusal stands, flagged needs_human_review.
 
 **Q: What if the request is ambiguous or empty?**
 A: Empty or whitespace text is NOT_APPLICABLE with no model call (test 11). Negated requests like
@@ -200,15 +205,18 @@ The reviewer's checker found 0 ordering violations.
 
 **Q: How did you evaluate?**
 A: `code/evaluation/main.py` scores the 32 samples on status, steps, fields, sequence and
-citations, runs 12 metamorphic tests, runs ablations, and probes sensitivity (tie-break flip,
-timing off, ±2 s jitter). It's deterministic from the cache, so anyone can reproduce it without a
+citations, runs 19 metamorphic tests and 108 unit tests, runs ablations, a leave-one-out timing
+model, a perturbed-dataset run, and a sensitivity table (tie-break flip, timing off, ±2 s jitter, and
+every hand-set bound moved both ways). It's deterministic from the cache, so anyone can reproduce it without a
 key.
 
 **Q: Your metrics are in-sample. Why should I trust 99.2%?**
 A: You shouldn't treat it as a hold-out score, and the report says so in section 5. Two things
 help: the metamorphic tests check invariants on derived cases the gold never covered, and the
-development log shows each fix with its root cause, going from 3 to 29 exact cases. The honest
-next step is k-fold over the 32 or a perturbed copy of the dataset.
+development log shows each fix with its root cause, going from 3 to 29 exact cases. Two hold-out
+checks now exist: leave-one-out over the 32 re-learns an identical timing model in 32/32 folds, and a
+copy of the dataset with every id renamed and every timestamp shifted reproduces 518/518 rows. I'd be
+clear that these test parameter stability, not my design choices, which were made watching samples.
 
 **Q: Isn't the 30-second lattice just overfitting to the data generator?**
 A: It's fitted to the simulator, not to labels. It's learned without gold, only from records the
@@ -221,8 +229,10 @@ production would learn whatever scheduler fingerprint the real system has, or no
 A: Hardcoding would be case ids, answers or constants read off the gold. There are no case ids in
 the prediction code; the gold is read only by the evaluation script. The period and gaps are
 estimated from the evidence on every run, so different data gives different parameters, or none.
-The hand-set parts are search bounds like the 3-hour window and 1,200-second chain cap, and I'd own
-that there's no sensitivity table for those yet.
+The hand-set parts are search bounds, and the report has a sensitivity table for them: a 2.5, 4 or
+6 h window, MIN_SUPPORT 5, and a 600 or 2,400 s chain cap change 0 of 518 rows; MIN_SUPPORT 20 changes
+2. The one knife-edge is the lattice band: 1 s changes 113 rows (samples drop to 26/32), because the
+observed band is 3 s wide; 2 s is the smallest band that learns it, chosen from the data.
 
 **Q: How much of the hidden-set answer depends on that timing model?**
 A: Switching it off changes 138 of 518 rows; on the samples it's the difference between 71.9% and
@@ -232,8 +242,8 @@ timing instead of guessing.
 **Q: What are the three remaining sample mismatches?**
 A: case_21 misses `analytics_5335` because it's in phase with two requests' account jobs and we
 won't guess. case_18 and case_20 each miss one audit record that appears in no participant-visible
-file, so nothing can derive it. The organizers confirmed scoring is on `deletion_requests.csv`
-only, so those two sample cases don't affect the score.
+file, so nothing can derive it. The organizers said those two don't affect the score: source is
+the organizers' reply in the official Discord #hacker-help-desk on 24 Oct 2026 ("you can ignore sample case 18 & 20 ... scoring is on deletion_requests").
 
 ## Topic 6 - Production monitoring
 
@@ -286,16 +296,33 @@ design and audited the contract. Every change had to pass the validator, the eva
 a byte-identical clean-room run before it was pushed.
 
 **Q: What would you do with another week?**
-A: Abstain on, or flag, the 29 tie-dependent rows. Add a hold-out evaluation and a sensitivity
-table for the hand-set constants. Make one cold run with a single pinned model per stage so the
-cost report is one coherent run. Enum-check the intent schema.
+A: Turn the 14 low-confidence tie-break decisions into abstentions or human review once a reviewer
+queue exists. Ship one coherent cold run with a single pinned model per stage once a quota allows it
+(the attempt is recorded in the usage report). Widen the multilingual negation list with native
+speakers, and replace the simulator-specific timing model with whatever scheduler fingerprint a real
+deletion system has.
+
+**Q: Why don't you guess ambiguous attributions?**
+A: When an orphan record fits two requests equally, a guess that's wrong costs two errors: a missed
+step in the right case and a wrong step in the other. Abstaining costs at most one. So we abstain, and
+we don't hide it: both candidate cases carry a `needs_review` entry naming the record and the other
+candidate, and the console shows a needs-review chip, so a human resolves it in seconds. On this run
+that's 14 records across 28 cases.
+
+**Q: Is this really an agent, or a rules engine?**
+A: It's a deterministic agent with LLMs at the two judgment points: reading what the customer asked
+for, and reading screenshots. Everything else, identity resolution, linking, state reconstruction,
+policy and ordering, is code that plans and verifies over the evidence on its own. We chose that split
+on purpose: every step is auditable back to a file or activity id, a re-run is byte-identical, and
+the whole 518-case run costs about two cents of model calls. The LLM's answers are checked against a
+schema and a rule model, so a model error can't turn into a wrong deletion silently.
 
 ---
 
 ## Limitations I'd own
 
-* **In-sample metrics.** All headline numbers are on the 32 cases that guided development. No
-  hold-out split yet.
+* **In-sample metrics.** All headline numbers are on the 32 cases that guided development. The
+  leave-one-out and perturbation checks test parameter stability, not the design choices.
 * **Simulator fingerprint.** The 30 s lattice and the 390/449 s chain gaps describe the data
   generator, not real deletion systems. They fail safe (±2 s jitter turns them off) but would not
   transfer as-is.
@@ -303,8 +330,7 @@ cost report is one coherent run. Enum-check the intent schema.
   can't tell the difference.
 * **Timing-dependent rows.** 138 of 518 rows change with the timing model off.
 * **Underivable sample records.** `audit_record_6645` (case_18) and `audit_record_5569` (case_20)
-  are in no visible file. The organizers confirmed scoring is on `deletion_requests.csv` only, so
-  these do not affect the score.
+  are in no visible file. They do not affect the score; source: the organizers' reply in the official Discord #hacker-help-desk on 24 Oct 2026 ("you can ignore sample case 18 & 20 ... scoring is on deletion_requests").
 * **Transductive.** Job assignment and eras are global, so an answer depends on which other
   requests are in the run. Running the samples alone gives 27/32 exact instead of 29/32
   (reviewer's measurement).
@@ -312,10 +338,12 @@ cost report is one coherent run. Enum-check the intent schema.
   value is robustness to unseen phrasing, which this dataset doesn't test.
 * **Cost report is a reconstruction.** The cache was filled over several runs with five model
   tags; 15 vision calls are estimated, not measured.
-* **Hand-set bounds** (3 h window, 5 h lattice horizon, 1,200 s chain cap) were chosen while
-  watching sample scores; no sensitivity table yet.
-* **Default-to-deletion intent.** A text with no purpose and no negation counts as deletion
-  (empty text doesn't).
+* **Hand-set bounds** were chosen while watching sample scores. The sensitivity table shows they
+  are flat except the lattice band width (1 s → 113 rows changed).
+* **Ambiguous records.** 14 orphan records fit two requests equally; they are not attributed and each
+  of the 28 candidate cases carries a `needs_review` entry.
+* **Negation coverage.** The rule model knows negation forms in 15 languages; an unlisted form plus an
+  LLM error is the one remaining path to a wrong deletion (SAFETY.md residual risks).
 
 ## Numbers to remember
 
@@ -329,7 +357,9 @@ cost report is one coherent run. Enum-check the intent schema.
 | Exact cases | 29/32 (90.6%) |
 | Sequence accuracy | 100% |
 | Citation accuracy | 98.7% |
-| Metamorphic tests | 12/12 pass |
+| Metamorphic tests / unit tests | 19/19 pass / 108 pass |
+| Hold-out checks | LOO timing model identical 32/32; perturbed dataset 518/518 identical |
+| Needs review (abstentions) | 14 records, 28 candidate cases |
 | Dev progression (exact) | 3 → 16 → 19 → 20 → 21 → 28 → 29 |
 | Ablation: no workflow attribution | 53.1% exact, 91.2% F1 |
 | Ablation: no timing model | 71.9% exact, 97.4% F1 |

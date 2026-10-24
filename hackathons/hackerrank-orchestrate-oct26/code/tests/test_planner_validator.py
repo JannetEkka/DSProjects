@@ -84,3 +84,16 @@ def test_planner_orders_phases_and_operations(engine):
             assert all(not s["evidence_id"] for s in steps if s["phase"] != "FINDING")
         sec = [s for s in steps if s["system_id"] == "security_service"]
         assert all(s["operation"] == "VERIFY_RECORD_PRESENT" for s in sec)  # retained, never deleted
+
+
+def test_ambiguous_orphan_is_flagged_for_review_on_every_candidate(engine):
+    """analytics_5335 fits case_21 and case_23 equally: not attributed, flagged on both."""
+    cases = list(csv.DictReader(open(engine.dataset_dir / "sample_deletion_requests.csv", encoding="utf-8-sig")))
+    engine.prepare(cases)
+    by_id = {c["case_id"]: c for c in cases}
+    for cid in ("case_21", "case_23"):
+        status, steps, trace = engine.audit(by_id[cid])
+        flagged = {e["resource_id"]: e for e in trace["needs_review"]}
+        assert "analytics_5335" in flagged, cid
+        assert {"case_21", "case_23"} <= set(flagged["analytics_5335"]["candidate_cases"])
+        assert "analytics_5335" not in {s["resource_id"] for s in steps}  # abstained, not guessed

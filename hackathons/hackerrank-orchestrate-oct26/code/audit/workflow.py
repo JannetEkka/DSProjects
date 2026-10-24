@@ -13,13 +13,18 @@ from .evidence import RESOURCE_RE, resource_prefix
 from .identity import Identity
 
 
+def _case_key(cid: str):
+    tail = cid.rsplit("_", 1)[-1]
+    return (0, int(tail), cid) if tail.isdigit() else (1, 0, cid)
+
+
 class WorkflowMixin:
     """Expects `activities`, `owners`, `ids` and `linked_resources()` on the engine."""
 
     STATUS_RESULT = {"COMPLETE": "SUCCESS", "PARTIALLY_COMPLETE": "PARTIAL", "NOT_STARTED": "FAILED"}
 
     def workflow_resources(self, case: dict, ident: Identity, linked: dict[str, list[str]],
-                           window_h: float = config.WORKFLOW_WINDOW_H) -> dict[str, str]:
+                           window_h: float | None = None) -> dict[str, str]:
         """Resources processed by *this request's* deletion workflow.
 
         Records that were already scrubbed (404 profile, anonymized analytics row) no longer carry
@@ -31,7 +36,7 @@ class WorkflowMixin:
             return {}
         P = lambda t: datetime.fromisoformat(t.replace("Z", "+00:00"))
         rep = P(case["reported_at"])
-        lo = max(P(case["requested_at"]), rep - timedelta(hours=window_h))
+        lo = max(P(case["requested_at"]), rep - timedelta(hours=window_h or config.WORKFLOW_WINDOW_H))
         expected = self.STATUS_RESULT.get(case["reported_status"])
         out = {}
         notes: dict[str, list[tuple[str, str]]] = {}  # rid -> [(confidence, assumption)]
@@ -99,6 +104,16 @@ class WorkflowMixin:
                 rivals = len(others)
                 if fit:
                     others = [cid for cid in others if self.lattice_fit(a, self.case_windows[cid][0])]
+                if others:
+                    # abstain: several requests fit equally; record it for a human on every candidate
+                    cands = sorted({case["case_id"], *others}, key=_case_key)
+                    entry = {"resource_id": a["resource_id"], "activity_id": a["activity_id"],
+                             "reason": ("orphan record processed by a deletion workflow; it fits "
+                                        f"{len(cands)} requests equally (" + ("timing lattice in phase with each"
+                                        if fit else "each workflow window covers it") + "), so it is not attributed"),
+                             "candidate_cases": cands}
+                    for cid in cands:
+                        self.needs_review.setdefault(cid, {})[a["resource_id"]] = entry
                 if not others:
                     out.setdefault(a["resource_id"], a["activity_id"])
                     why = ("timing: only workflow window covering this activity" if not rivals else
@@ -338,3 +353,12 @@ class WorkflowMixin:
                 wins[c["case_id"]] = (min(times), P(c["reported_at"]))
                 self.case_subject[c["case_id"]] = ident.user_id
         self.case_windows = wins
+        # one attribution pass over every request so each candidate of an ambiguous record is flagged
+        self.needs_review = {}
+        for c in cases:
+            ident = self.ids.resolve(c["email"])
+            if ident is not None and c["case_id"] not in alias:
+                self.workflow_resources(c, ident, self.linked_resources(ident, c["audit_at"], self.era_start(c, ident)))
+        for dup, orig in alias.items():
+            if orig in self.needs_review:
+                self.needs_review[dup] = self.needs_review[orig]

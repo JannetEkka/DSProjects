@@ -158,6 +158,8 @@ svg text { font-family: var(--f-body); }
 .conf { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 4px; border: 1px solid var(--line); color: var(--muted); font: 600 10px/1.5 var(--f-body); letter-spacing: .04em; text-transform: uppercase; white-space: nowrap; }
 .conf.low { border-color: var(--warn); color: var(--warn); }
 .conf.medium { border-color: var(--flow); color: var(--flow); }
+.review { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+.review a { color: inherit; }
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn { padding: 6px 12px; border-radius: 7px; border: 1px solid var(--line); background: var(--panel); cursor: pointer; font-size: 12.5px; }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
@@ -460,8 +462,10 @@ pre.json { margin: 0; max-height: 260px; overflow: auto; background: var(--bg); 
       <section class="panel dhead">
         <div class="top"><h2 class="mono">${c.id}</h2><span class="pill ${c.status}">${c.status.replace("_", " ")}</span>
           <span class="pill claim">workflow claimed ${c.claim.replace("_", " ").toLowerCase()}</span>
-          ${c.claim === "COMPLETE" && c.status === "INCOMPLETE" ? '<span class="ghostflag">● ghost data</span>' : ""}</div>
+          ${c.claim === "COMPLETE" && c.status === "INCOMPLETE" ? '<span class="ghostflag">● ghost data</span>' : ""}
+          ${(c.review || []).length || (c.intent || {}).needs_human_review ? `<span class="conf low" title="Ambiguous attribution or model disagreement left for a human">needs review</span>` : ""}</div>
         <p class="verdict">${verdict(c)}</p>
+        ${(c.review || []).map((r) => `<p class="review"><b>Needs review:</b> <span class="mono">${esc(r.resource_id)}</span> - ${esc(r.reason)}; candidates: ${(r.candidate_cases || []).map((x) => `<a href="#${esc(x)}" class="mono">${esc(x)}</a>`).join(", ")}</p>`).join("")}
         <blockquote class="quote">${esc(c.text)}<footer>Intent: ${esc((intent.request_type || "").replace("_", " ").toLowerCase())} · ${intent.authorizes_deletion ? "authorizes deletion" : "does not authorize deletion"} · ${esc(intent.engine || "")}${intent.agreement === false ? " · rule model disagreed" : ""}</footer></blockquote>
         <div class="actions"><button type="button" class="btn" id="copybtn">Copy steps_json</button><button type="button" class="btn" id="rawbtn" aria-expanded="false">Show raw row</button></div>
         <pre class="json" id="raw" hidden></pre>

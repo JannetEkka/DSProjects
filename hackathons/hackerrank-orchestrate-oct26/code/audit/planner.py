@@ -121,6 +121,7 @@ class PlannerMixin:
             return "NOT_APPLICABLE", [], trace
         wf = {} if adhoc else self.workflow_resources(case, ident, linked)
         trace["workflow"] = wf
+        trace["needs_review"] = list(self.needs_review.get(case["case_id"], {}).values())
         evidence_links = set(linked)
         for rid, src in wf.items():
             linked.setdefault(rid, []).append(src)

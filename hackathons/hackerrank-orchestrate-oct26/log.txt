@@ -333,3 +333,27 @@ branch=claude/happy-mayer-u2r4c5
 repo_root=/home/user/DSProjects
 worktree=hackathons/hackerrank-orchestrate-oct26
 parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ
+
+## [2026-10-24T22:35:31Z] Final review fixes: intent override safety, needs-review flags, docs, sensitivity
+
+User Prompt (verbatim, secrets redacted):
+(parent session, user-approved, after review/REVIEW_FINAL.md) 1. Override only without any multilingual negation token; otherwise keep the LLM refusal with low confidence and needs_human_review; fix SAFETY.md; tests for every reviewer example. 2. Same negation coverage in the offline rule model; no deletion cue means no deletion; --no-llm must keep the same 10 NOT_APPLICABLE rows. 3. needs_review entries for ambiguous orphans, a console chip, counts in the report and README. 4. Fix the 7 stale points in docs/INTERVIEW_PREP.md with the Discord source, make the README untrusted-text paragraph consistent, add two interview answers. 5. Named parse errors, a clear error for an unwritable output, and a computed sensitivity table. Rebuild, clean-room test, submission, logs, key scan, push.
+(user) continue
+
+Agent Response Summary:
+The rule model may now overrule an LLM refusal only if no negation-like token from a 15-language list appears anywhere. Otherwise the refusal stands, flagged needs_human_review. The offline rule model detects negation inside the deletion cue's clause and needs a positive cue to authorize anything. It still agrees with the cached LLM on all 550 texts, and the default and --no-llm 518 outputs are byte-identical to before. Consequence noted: sample case_12 contains "do not display", so a refusing LLM would no longer be overruled there; it would be flagged instead. Each of the 14 orphan records that fit two requests equally is flagged needs_review on both candidates (28 cases), with a console chip and report/README counts. The sensitivity table (all bounds flat except a 1 s lattice band, 113 rows), named parse errors and the early unwritable-output error (exit 2) are added. The interview prep and README are corrected. Tests 108, suite 19/19, validator OK, clean-room run byte-identical, key scan clean.
+
+Actions:
+* code/audit/intent.py (NEGATION_TOKEN_RE, has_negation_token, negated_deletion, cue-required rule model, guarded override), SAFETY.md
+* code/audit/workflow.py, planner.py, engine.py (needs_review); code/ui/console_template.html, build_console.py (chip)
+* code/main.py (named parse errors, _check_writable); code/evaluation/main.py (bounds table, review counts); report_notes row 15
+* code/tests (+23); docs/INTERVIEW_PREP.md; README.md and code/README.md
+* console rebuilt; code.zip rebuilt; clean-room test; copied to submission/
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ

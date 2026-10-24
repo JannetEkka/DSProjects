@@ -62,6 +62,7 @@ class AuditEngine(LinkingMixin, WorkflowMixin, PlannerMixin):
         self.timing_holdout: set[str] = set()  # users excluded from timing-model learning
         self.assignment_basis: dict[str, list[tuple[str, str]]] = {}  # case -> how its account job was chosen
         self.attribution_notes: dict[str, dict] = {}  # case -> rid -> [(confidence, assumption)]
+        self.needs_review: dict[str, dict] = {}  # case -> rid -> ambiguous-attribution record
 
     def _load_rules(self):
         rules = dict(DEFAULT_TREATMENT)

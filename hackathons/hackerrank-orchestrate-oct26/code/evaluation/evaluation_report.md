@@ -65,7 +65,7 @@ Each case is derived from a real request and checks an invariant the task demand
 
 **19/19 passed.**
 
-Unit tests (`python3 -m pytest code/tests -q`, offline): **85 passed in 0.53s**.
+Unit tests (`python3 -m pytest code/tests -q`, offline): **108 passed in 0.74s**.
 
 ## 4. Remaining sample mismatches (error analysis)
 
@@ -79,7 +79,24 @@ Unit tests (`python3 -m pytest code/tests -q`, offline): **85 passed in 0.53s**.
 
 * **Account-job tie-break.** When several requests compete for the same workflow jobs and nothing else separates them, the one-to-one assignment takes the earliest job per request. Flipping it to the latest changes **29 of 518** rows of the full run, while the samples score 90.6% exact / 99.2% step F1 either way (vs 90.6% / 99.2%): the public samples cannot discriminate this choice, so those rows are the least certain part of the output.
 * **Workflow timing model.** Switching the chain/lattice model off changes **138 of 518** rows. With every deletion-worker timestamp jittered by a random +-2 s, the learned lattice period is None and the learned chain gaps are none; the jittered run is identical to the timing-off run, i.e. the model refuses to learn from blurred timing and the engine falls back to the window-uniqueness rule (samples: 71.9% exact / 97.4% step F1).
+* **Hand-set bounds.** Each constant in `code/audit/config.py` moved down and up, full run and samples re-scored (computed by `evaluation/main.py`):
+
+  | Constant | Shipped | Tried | 518 rows changed | Sample exact | Sample step F1 |
+  |---|---|---|---|---|---|
+  | `WORKFLOW_WINDOW_H` | 3 h | 2.5 h | 0 | 90.6% | 99.2% |
+  | `WORKFLOW_WINDOW_H` | 3 h | 4 h | 0 | 90.6% | 99.2% |
+  | `WORKFLOW_WINDOW_H` | 3 h | 6 h | 0 | 90.6% | 99.2% |
+  | `MIN_SUPPORT` | 10  | 5  | 0 | 90.6% | 99.2% |
+  | `MIN_SUPPORT` | 10  | 20  | 2 | 90.6% | 99.2% |
+  | `CHAIN_MAX_GAP_S` | 1200 s | 600 s | 0 | 90.6% | 99.2% |
+  | `CHAIN_MAX_GAP_S` | 1200 s | 2400 s | 0 | 90.6% | 99.2% |
+  | `LATTICE_MAX_BAND_S` | 2 s | 1 s | 113 | 81.2% | 98.2% |
+  | `LATTICE_MAX_BAND_S` | 2 s | 4 s | 0 | 90.6% | 99.2% |
+
+  The window, support and chain-cap bounds are not knife-edges. The lattice band width is: the observed phase band is 3 s wide, so a 1 s band cannot learn it and the timing model switches off; 2 s is the smallest band that learns it, a choice made from the data.
+
 * **Confidence flags.** Every resource in the trace carries `confidence` (high = tied by evidence, medium = attributed by workflow timing or a derived id, low = depends on the tie-break) and the `assumptions` behind it; the console shows them as chips. Rows by weakest resource: 185 high, 309 medium, 14 low (low rows are exactly the tie-break decisions; each can also move the job its competitor receives, which is why flipping the tie-break touches more rows).
+* **Needs review (abstentions).** 14 orphan records fit more than one request equally (same workflow window and, where learned, in phase with each account job). They are not attributed to anyone; each of the 28 candidate cases carries a `needs_review` entry naming the record and the other candidates, and the console shows a *needs review* chip. Guessing would cost two errors when wrong (a missed step in one case, a wrong step in the other); abstaining costs at most one.
 * **Held-out timing model (leave-one-out).** For each of the 32 sample cases the chain/lattice model was re-learned with that subject's activity excluded from its statistics. In 32/32 folds the re-learned model is identical to the full one (periods, phase bands, chain gaps and chain owners), so no case's own activity is needed to learn the rule that scores it. Held-out scores: 100.0% status, 90.6% exact, 99.2% step F1.
 * **Perturbed dataset.** Every id in every file renamed consistently (`prefix_n -> prefix_(n+7000)` for users, resources, evidence, activities and audit entries) and every timestamp shifted by +3 d 7 h 11 min 13 s, then the agent re-run on the 518 evaluation requests: 518/518 identical statuses, 518/518 rows identical after mapping the original output through the same renaming (518/518 up to order within a system). Nothing depends on particular id values or absolute times.
 * **In-sample numbers.** Every metric above is measured on the same 32 public cases that guided development, so it is an optimistic estimate. The metamorphic suite (section 3) checks invariants on derived cases the gold never covered, and is the out-of-sample check.
@@ -107,6 +124,7 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 | 12 | case_04's legacy-format analytics row missed | Request had no account job, so no workflow window opened | When no account job exists at all, the reporting window itself is the workflow window (same uniqueness test) | 29/32; 518-run unchanged |
 | 13 | Independent review: BOM-prefixed requests CSV crashed (`KeyError 'case_id'`); unknown email gave `COMPLETE, []` with exit 0; empty request text defaulted to deletion | `utf-8` reader keeps the BOM in the first header; no fallback identity; deletion prior applied to empty text | All CSV inputs read as `utf-8-sig`; unknown email linked on the literal address, else the contract-valid `NOT_APPLICABLE, []`; `main.py` exits 1 on any validator problem; empty text is `NOT_APPLICABLE`; chain gaps must be sharp, so +-2 s jitter disables the timing model | 29/32; 518-run byte-identical; 12/12 suite |
 | 14 | Engineering and adversarial-safety pass | One 950-line engine module; prompts inside Python; no unit tests; LLM answers trusted without a schema; injected instructions scored by the rule model | Engine split into identity / semantics / linking / workflow / planner (+ config); prompts versioned in `code/prompts/`; 79 offline unit tests + `check.sh`; strict intent schema, rule-model veto, injection stripping, 7 injection cases; leave-one-out and perturbed-dataset checks; per-resource confidence flags in the trace. Unit tests found and fixed two defects (validator without engine, non-English access phrasing) | 29/32; 518-run byte-identical; 19/19 suite |
+| 15 | Final review: the intent override could overrule a *correct* LLM refusal of a negated deletion in German, Italian, Japanese, Russian or "never/didn't"; offline rules authorized "Hello" | Negation list too narrow; deletion was the default | Override only when no negation-like token appears anywhere (15 languages), else keep the refusal with `needs_human_review`; rule model detects negation in the deletion cue's clause and needs a positive cue; ambiguous orphans flagged `needs_review` on every candidate; sensitivity table for the hand-set bounds; named parse errors and an early unwritable-output error | 29/32; 518-run byte-identical (default and `--no-llm`) |
 
 ### Known limitations (left deliberately)
 
@@ -117,4 +135,4 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 * case_23 is now resolved by the workflow lattice (only `account_410` is in phase with the subject's own export/search results).
 
 
-_Evaluation runtime: 171.7s._
+_Evaluation runtime: 363.3s._

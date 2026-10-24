@@ -59,10 +59,14 @@ def build(dataset: Path, use_llm: bool):
     intent = IntentClassifier(use_llm=use_llm)
     log.info(f"[load] {len(store.manifest)} evidence files -> {len(store.observations)} observations "
           f"({time.time() - t0:.1f}s); parse errors: {len(store.parse_errors)}")
+    for err in store.parse_errors:
+        name = store.manifest.get(err.split(":", 1)[0], {}).get("file_path", "")
+        log.warning("   parse error in %s: %s", name or "?", err)
     return store, engine, intent
 
 
 def run(requests_path: Path, out_path: Path, dataset: Path, use_llm: bool, trace_path: Path | None):
+    _check_writable(out_path, trace_path)
     store, engine, intent = build(dataset, use_llm)
     cases = list(csv.DictReader(open(requests_path, newline="", encoding="utf-8-sig")))
     # all known requests (evaluation + sample) give the global view needed to attribute shared workflow jobs
@@ -111,6 +115,20 @@ def run(requests_path: Path, out_path: Path, dataset: Path, use_llm: bool, trace
     usage_path = out_path.with_suffix(".usage.json")
     usage_path.write_text(json.dumps({"requests": len(rows), "calls": calls, "cache_hits": hits}, indent=1))
     return rows, traces, problems
+
+
+def _check_writable(*paths) -> None:
+    """Fail fast, before the run, if an output location cannot be written."""
+    for p in paths:
+        if p is None:
+            continue
+        try:
+            p.parent.mkdir(parents=True, exist_ok=True)
+            with open(p, "a", encoding="utf-8"):
+                pass
+        except OSError as exc:
+            log.error("cannot write %s (%s); choose another --out / --trace location", p, exc.strerror or exc)
+            sys.exit(2)
 
 
 def _case_key(cid: str):

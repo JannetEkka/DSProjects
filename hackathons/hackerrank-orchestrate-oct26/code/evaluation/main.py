@@ -366,17 +366,35 @@ def sensitivity(agent, cases, gold):
     # confidence flags recorded in the trace (per resource: high = evidence, medium = timing/derived,
     # low = tie-break); a row takes its weakest resource
     rows = {"high": 0, "medium": 0, "low": 0}
+    review_cases, review_res = set(), set()
     for c in full:
         if base[c["case_id"]][0] == "NOT_APPLICABLE":
             continue
-        levels = {r["confidence"] for r in eng.audit(c)[2]["resources"]}
+        trace = eng.audit(c)[2]
+        levels = {r["confidence"] for r in trace["resources"]}
+        for e in trace.get("needs_review", []):
+            review_cases.add(c["case_id"])
+            review_res.add(e["resource_id"])
         rows["low" if "low" in levels else "medium" if "medium" in levels else "high"] += 1
     out["confidence_rows"] = rows
+    out["review"] = (len(review_res), len(review_cases))
     # (a) one-to-one account assignment tie-break
     eng.TIEBREAK_EARLIEST = False
     out["tiebreak_rows"] = changed(base, agent.run(full))
     out["tiebreak_sample"] = score(agent.run(cases), gold)
     eng.TIEBREAK_EARLIEST = True
+    # (a') hand-set bounds: each constant moved one way and the other
+    from audit import config as cfg
+    grid = [("WORKFLOW_WINDOW_H", "h", [2.5, 4.0, 6.0]), ("MIN_SUPPORT", "", [5, 20]),
+            ("CHAIN_MAX_GAP_S", "s", [600, 2400]), ("LATTICE_MAX_BAND_S", "s", [1, 4])]
+    out["bounds"] = []
+    for name, unit, values in grid:
+        orig = getattr(cfg, name)
+        for v in values:
+            setattr(cfg, name, v)
+            sm = score(agent.run(cases), gold)
+            out["bounds"].append((name, unit, orig, v, changed(base, agent.run(full)), sm["case_exact_match"], sm["step_f1"]))
+        setattr(cfg, name, orig)
     # (b) workflow timing model switched off
     out["timing_rows"] = changed(base, agent.run(full, DISABLE_TIMING=True))
     # (b') timing jitter: shift every deletion-worker event by a random -2..+2 s (seeded)
@@ -548,12 +566,26 @@ def write_report(m, abl_rows, suite_res, failures, sens, unit, secs):
                 f"the jittered run still differs from the timing-off run in {s['jitter_vs_off_rows']} rows")
              + f" (samples: {fmt_pct(s['jitter_sample']['case_exact_match'])} exact / "
              f"{fmt_pct(s['jitter_sample']['step_f1'])} step F1).")
+    L.append("* **Hand-set bounds.** Each constant in `code/audit/config.py` moved down and up, full run and samples "
+             "re-scored (computed by `evaluation/main.py`):\n")
+    L.append("  | Constant | Shipped | Tried | 518 rows changed | Sample exact | Sample step F1 |\n  |---|---|---|---|---|---|")
+    for name, unit, orig, v, rows, ex, f1 in s["bounds"]:
+        L.append(f"  | `{name}` | {orig:g} {unit} | {v:g} {unit} | {rows} | {fmt_pct(ex)} | {fmt_pct(f1)} |")
+    L.append("\n  The window, support and chain-cap bounds are not knife-edges. The lattice band width is: the observed "
+             "phase band is 3 s wide, so a 1 s band cannot learn it and the timing model switches off; 2 s is the "
+             "smallest band that learns it, a choice made from the data.\n")
     cr = s["confidence_rows"]
     L.append(f"* **Confidence flags.** Every resource in the trace carries `confidence` (high = tied by evidence, "
              f"medium = attributed by workflow timing or a derived id, low = depends on the tie-break) and the "
              f"`assumptions` behind it; the console shows them as chips. Rows by weakest resource: {cr['high']} high, "
              f"{cr['medium']} medium, {cr['low']} low (low rows are exactly the tie-break decisions; each can also move "
              f"the job its competitor receives, which is why flipping the tie-break touches more rows).")
+    nr, nc = s["review"]
+    L.append(f"* **Needs review (abstentions).** {nr} orphan records fit more than one request equally (same "
+             f"workflow window and, where learned, in phase with each account job). They are not attributed to "
+             f"anyone; each of the {nc} candidate cases carries a `needs_review` entry naming the record and the "
+             f"other candidates, and the console shows a *needs review* chip. Guessing would cost two errors when "
+             f"wrong (a missed step in one case, a wrong step in the other); abstaining costs at most one.")
     h, pz = s["held_out"], s["perturbed"]
     L.append(f"* **Held-out timing model (leave-one-out).** For each of the {h['folds']} sample cases the chain/lattice "
              f"model was re-learned with that subject's activity excluded from its statistics. In {h['same_model']}/"

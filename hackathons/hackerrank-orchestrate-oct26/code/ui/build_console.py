@@ -39,7 +39,7 @@ def build(trace_path: Path, dataset: Path, requests_path: Path, out_path: Path, 
             "intent": t.get("intent", {}), "user": t.get("user_id"), "identity": t.get("identity", {}),
             "era": t.get("era_start", ""), "workflow": t.get("workflow", {}),
             "res": [{k: v for k, v in x.items() if k != "time"} | {"t": x.get("time", "")} for x in t.get("resources", [])],
-            "steps": t.get("steps", []),
+            "steps": t.get("steps", []), "review": t.get("needs_review", []),
         })
     ev = {}
     for e in cited:
