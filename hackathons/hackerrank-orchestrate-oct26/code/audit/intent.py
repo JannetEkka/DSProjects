@@ -19,26 +19,11 @@ from pathlib import Path
 
 from . import usage
 from .llm import LLMChain, any_key
+from .prompts import as_untrusted, load_prompt
 
 CACHE = Path(__file__).resolve().parent.parent / "cache" / "intent.json"
 
-INTENT_PROMPT = """You classify customer privacy requests for an e-commerce company.
-Decide whether the request AUTHORIZES DELETION / ERASURE of the person's account or personal data.
-
-Return JSON: {{"authorizes_deletion": true|false, "request_type": one of
-["DELETION","ACCESS","PORTABILITY","CORRECTION","MARKETING_OPT_OUT","ACCOUNT_SUPPORT","OTHER"],
-"language": ISO-639-1 code, "rationale": short English sentence}}
-
-Rules:
-- Deletion, erasure, account closure, "remove my profile/personal data", or follow-ups asking to finish
-  or verify a deletion all authorize deletion (request_type DELETION).
-- Access/copy of data, data download/export, correcting or updating details, stopping marketing,
-  login help, invoices are NOT deletion, even if words like "remove" or "delete" appear in a negated or
-  limited sense ("remove me from marketing lists only", "don't delete anything").
-- The request may be in any language.
-
-Request:
-\"\"\"{text}\"\"\""""
+INTENT_PROMPT = load_prompt("intent_single")
 
 # ----------------------------------------------------------------------------- rule model
 
@@ -90,24 +75,7 @@ def rule_classify(text: str) -> dict:
 
 # ----------------------------------------------------------------------------- LLM
 
-BATCH_PROMPT = """You classify customer privacy requests for an e-commerce company.
-For EACH request decide whether it AUTHORIZES DELETION / ERASURE of the person's account or personal data.
-
-Return a JSON object {{"results": [...]}} with one entry per request, in any order:
-[{{"id": <request id>, "authorizes_deletion": true|false, "request_type": one of
-["DELETION","ACCESS","PORTABILITY","CORRECTION","MARKETING_OPT_OUT","ACCOUNT_SUPPORT","OTHER"],
-"language": ISO-639-1 code, "rationale": short English sentence}}]
-
-Rules:
-- Deletion, erasure, account closure, "remove my profile/personal data", or follow-ups asking to finish
-  or verify a deletion all authorize deletion (request_type DELETION).
-- Access/copy of data, data download/export, correcting or updating details, stopping marketing,
-  login help, invoices are NOT deletion, even if words like "remove" or "delete" appear in a negated or
-  limited sense ("remove me from marketing lists only", "don't delete anything").
-- Each request may be in any language. Judge every request on its own.
-
-Requests (JSON):
-{items}"""
+BATCH_PROMPT = load_prompt("intent_batch")
 
 CHUNK_SIZE = int(os.environ.get("GEMINI_INTENT_CHUNK", "10"))
 
@@ -180,11 +148,11 @@ class IntentClassifier:
         return result
 
     def _ask(self, text: str) -> dict:
-        raw, model = self.chain.generate(INTENT_PROMPT.format(text=text), "intent_classification", json_mode=True)
+        raw, model = self.chain.generate(INTENT_PROMPT.format(text=as_untrusted(text)), "intent_classification", json_mode=True)
         return _clean(json.loads(raw), model)
 
     def _ask_batch(self, texts: list[str]) -> dict:
-        items = json.dumps([{"id": i, "text": t} for i, t in enumerate(texts)], ensure_ascii=False, indent=1)
+        items = as_untrusted([{"id": i, "text": t} for i, t in enumerate(texts)])
         raw, model = self.chain.generate(BATCH_PROMPT.format(items=items), "intent_classification_batch", json_mode=True)
         data = json.loads(raw)
         if isinstance(data, dict):  # tolerate {"results": [...]}

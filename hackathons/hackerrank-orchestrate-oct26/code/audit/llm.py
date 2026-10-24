@@ -14,12 +14,15 @@ from __future__ import annotations
 
 import base64
 import json
+import logging
 import os
 import time
 import urllib.error
 import urllib.request
 
 from . import usage
+
+log = logging.getLogger(__name__)
 
 DEFAULT_MODELS = ["gemini-flash-latest", "gemini-3.8-flash", "gemini-3.5-flash",
                   "gemini-3-flash-preview", "gemini-flash-lite-latest", "gemini-2.5-flash"]
@@ -93,16 +96,16 @@ class LLMChain:
                     last = exc
                     code = _status(exc)
                     if code in (400, 401, 403, 404, 422):
-                        print(f"[{self.tag}] {provider}:{model} rejected ({code}); dropping it for this run")
+                        log.warning(f"[{self.tag}] {provider}:{model} rejected ({code}); dropping it for this run")
                         self.dead.add((provider, model))
                         break
                     if attempt + 1 < RETRIES_PER_MODEL:
                         time.sleep(BACKOFF_S * 2 ** attempt)
             else:
-                print(f"[{self.tag}] {provider}:{model} still failing ({_status(last) or type(last).__name__}); trying next model")
+                log.warning(f"[{self.tag}] {provider}:{model} still failing ({_status(last) or type(last).__name__}); trying next model")
         self.strikes += 1
         if not self.available:
-            print(f"[{self.tag}] LLM chain exhausted ({type(last).__name__}: {str(last)[:90]}); "
+            log.warning(f"[{self.tag}] LLM chain exhausted ({type(last).__name__}: {str(last)[:90]}); "
                   f"falling back for the rest of this run")
         raise RuntimeError(f"all models failed: {str(last)[:120]}")
 

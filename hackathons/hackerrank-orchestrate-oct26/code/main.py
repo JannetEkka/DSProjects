@@ -20,6 +20,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import logging
 import sys
 import time
 from pathlib import Path
@@ -35,6 +36,7 @@ from audit.media import MediaExtractor  # noqa: E402
 from audit.validate import validate_output  # noqa: E402
 
 ROOT = HERE.parent
+log = logging.getLogger("ghost_audit")
 
 
 def load_env_file():
@@ -55,7 +57,7 @@ def build(dataset: Path, use_llm: bool):
     store = EvidenceStore(dataset, media)
     engine = AuditEngine(dataset, store, IdentityResolver(dataset))
     intent = IntentClassifier(use_llm=use_llm)
-    print(f"[load] {len(store.manifest)} evidence files -> {len(store.observations)} observations "
+    log.info(f"[load] {len(store.manifest)} evidence files -> {len(store.observations)} observations "
           f"({time.time() - t0:.1f}s); parse errors: {len(store.parse_errors)}")
     return store, engine, intent
 
@@ -100,12 +102,12 @@ def run(requests_path: Path, out_path: Path, dataset: Path, use_llm: bool, trace
     counts = {}
     for r in rows:
         counts[r["deletion_status"]] = counts.get(r["deletion_status"], 0) + 1
-    print(f"[done] {len(rows)} rows -> {out_path}  {counts}")
-    print(f"[validate] {'OK' if not problems else str(len(problems)) + ' problem(s)'}")
+    log.info(f"[done] {len(rows)} rows -> {out_path}  {counts}")
+    log.info(f"[validate] {'OK' if not problems else str(len(problems)) + ' problem(s)'}")
     for p in problems:
-        print("   -", p)
+        log.error("   - %s", p)
     calls, hits = usage.snapshot()
-    print(f"[usage] model calls: {json.dumps(calls)}  cache hits: {hits}")
+    log.info(f"[usage] model calls: {json.dumps(calls)}  cache hits: {hits}")
     usage_path = out_path.with_suffix(".usage.json")
     usage_path.write_text(json.dumps({"requests": len(rows), "calls": calls, "cache_hits": hits}, indent=1))
     return rows, traces, problems
@@ -119,6 +121,7 @@ def _case_key(cid: str):
 
 
 def main():
+    logging.basicConfig(level=logging.INFO, format="%(message)s", stream=sys.stdout)
     load_env_file()
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--dataset", default=str(ROOT / "dataset"))

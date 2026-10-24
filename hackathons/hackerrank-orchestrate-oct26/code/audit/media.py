@@ -16,15 +16,11 @@ from pathlib import Path
 
 from . import usage
 from .llm import LLMChain, any_key
+from .prompts import load_prompt
 
 CACHE = Path(__file__).resolve().parent.parent / "cache" / "media_text.json"
 
-VLM_PROMPT = """You are transcribing an internal admin-console screenshot for a privacy deletion audit.
-Transcribe ALL visible text faithfully, top to bottom, left to right. Preserve every identifier exactly
-(resource ids like search_428 / backup_9287 / data_flow_1121, user ids like user_13, emails, phone numbers,
-hashes, order ids, dates, statuses such as Enabled/Disabled/Healthy/Active/Blocked/Restore allowed).
-For tables output one row per line with cells separated by ' | '. For key/value panels output 'key: value'.
-Do not summarize, do not add commentary."""
+VLM_PROMPT = load_prompt("vlm_transcription")
 
 
 class MediaExtractor:
