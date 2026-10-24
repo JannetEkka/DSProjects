@@ -52,8 +52,11 @@ Each case is derived from a real request and checks an invariant the task demand
 | 7 | Similar-email decoy search hit is not attributed | `case_35` | PASS | status=INCOMPLETE, resources=account_013, search_428 |
 | 8 | Security audit log retained, never deleted | `case_11` | PASS | security steps=[('audit_record_9394', 'VERIFY_RECORD_PRESENT')] |
 | 9 | Orphan record follows its workflow chain, not a co-timed request | `case_25` | PASS | status=COMPLETE, resources=account_3136, analytics_1895, audit_record_451 |
+| 10 | Unresolvable email gives a contract-valid NOT_APPLICABLE | `eval_unknown_email` | PASS | status=NOT_APPLICABLE steps=0 (expected NOT_APPLICABLE/0) |
+| 11 | Empty request text -> NOT_APPLICABLE | `eval_empty_text` | PASS | status=NOT_APPLICABLE steps=0 (expected NOT_APPLICABLE/0) |
+| 12 | BOM + CRLF copy of the requests gives identical predictions | `sample_deletion_requests.csv` | PASS | rows read back identical=True, differing predictions=0 |
 
-**9/9 passed.**
+**12/12 passed.**
 
 ## 4. Remaining sample mismatches (error analysis)
 
@@ -63,7 +66,14 @@ Each case is derived from a real request and checks an invariant the task demand
 | case_20 | INCOMPLETE | INCOMPLETE | VERIFY_RECORD_PRESENT audit_record_5569 | - |
 | case_21 | COMPLETE | COMPLETE | VERIFY_RECORD_ANONYMIZED analytics_5335 | - |
 
-## 5. Failures found and improvements made (development log)
+## 5. Sensitivity and limits
+
+* **Account-job tie-break.** When several requests compete for the same workflow jobs and nothing else separates them, the one-to-one assignment takes the earliest job per request. Flipping it to the latest changes **29 of 518** rows of the full run, while the samples score 90.6% exact / 99.2% step F1 either way (vs 90.6% / 99.2%): the public samples cannot discriminate this choice, so those rows are the least certain part of the output.
+* **Workflow timing model.** Switching the chain/lattice model off changes **138 of 518** rows. With every deletion-worker timestamp jittered by a random +-2 s, the learned lattice period is None and the learned chain gaps are none; the jittered run is identical to the timing-off run, i.e. the model refuses to learn from blurred timing and the engine falls back to the window-uniqueness rule (samples: 71.9% exact / 97.4% step F1).
+* **In-sample numbers.** Every metric above is measured on the same 32 public cases that guided development, so it is an optimistic estimate. The metamorphic suite (section 3) checks invariants on derived cases the gold never covered, and is the out-of-sample check.
+
+
+## 6. Failures found and improvements made (development log)
 
 Exact-match counts are on the 32 public sample cases; every change was also checked against the
 full 518-case run through the contract validator (`code/audit/validate.py`).
@@ -83,6 +93,7 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 | 10 | Anonymized analytics rows missed when several requests report in the same minute (cases 26-28); case_11 got a stranger's row | Overlapping workflow windows made the "only one window covers it" rule refuse or misfire | **Chain linkage**: a request's policy actions (`Policy action completed for ...`) form a chain spaced by exact gaps learned from evidence-owned pairs (390 s and 449 s; 0 cross-owner collisions within +-1 s). An orphan in a chain whose owned links belong to one person inherits that owner (36 chains, each 1 owner + 1 orphan). **Single-instance categories** (learned: no subject ever holds two analytics/search/data_flow/backup/tombstone/export records) block a second orphan of the same category | 28/32 |
 | 11 | case_23 got `account_7015`; singleton analytics rows (cases 03, 25) left unattributed | Several FAILED account jobs in one slot, no evidence ties any of them | **Workflow lattice**: every event a workflow emits sits at a fixed phase after its account job modulo 30 s (learned period; 'received the final result' at +20..22 s, policy actions at +9..11 s; 328/328 evidence-owned pairs). Candidate account jobs are kept only if in phase with the subject's own workflow events; an orphan is attributed only to the in-phase request among those whose windows cover it | 28/32 |
 | 12 | case_04's legacy-format analytics row missed | Request had no account job, so no workflow window opened | When no account job exists at all, the reporting window itself is the workflow window (same uniqueness test) | 29/32; 518-run unchanged |
+| 13 | Independent review: BOM-prefixed requests CSV crashed (`KeyError 'case_id'`); unknown email gave `COMPLETE, []` with exit 0; empty request text defaulted to deletion | `utf-8` reader keeps the BOM in the first header; no fallback identity; deletion prior applied to empty text | All CSV inputs read as `utf-8-sig`; unknown email linked on the literal address, else the contract-valid `NOT_APPLICABLE, []`; `main.py` exits 1 on any validator problem; empty text is `NOT_APPLICABLE`; chain gaps must be sharp, so +-2 s jitter disables the timing model | 29/32; 518-run byte-identical; 12/12 suite |
 
 ### Known limitations (left deliberately)
 
@@ -93,4 +104,4 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 * case_23 is now resolved by the workflow lattice (only `account_410` is in phase with the subject's own export/search results).
 
 
-_Evaluation runtime: 58.3s._
+_Evaluation runtime: 118.9s._

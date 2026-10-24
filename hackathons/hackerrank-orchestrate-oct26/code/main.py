@@ -62,12 +62,12 @@ def build(dataset: Path, use_llm: bool):
 
 def run(requests_path: Path, out_path: Path, dataset: Path, use_llm: bool, trace_path: Path | None):
     store, engine, intent = build(dataset, use_llm)
-    cases = list(csv.DictReader(open(requests_path, newline="", encoding="utf-8")))
+    cases = list(csv.DictReader(open(requests_path, newline="", encoding="utf-8-sig")))
     # all known requests (evaluation + sample) give the global view needed to attribute shared workflow jobs
     universe = {}
     for p in (dataset / "deletion_requests.csv", dataset / "sample_deletion_requests.csv", requests_path):
         if p.exists():
-            for r in csv.DictReader(open(p, newline="", encoding="utf-8")):
+            for r in csv.DictReader(open(p, newline="", encoding="utf-8-sig")):
                 universe[r["case_id"]] = r
     intent.prefetch(r["request_text"] for r in universe.values())
     intents = {cid: intent.classify(r["request_text"]) for cid, r in universe.items()}
@@ -102,13 +102,13 @@ def run(requests_path: Path, out_path: Path, dataset: Path, use_llm: bool, trace
         counts[r["deletion_status"]] = counts.get(r["deletion_status"], 0) + 1
     print(f"[done] {len(rows)} rows -> {out_path}  {counts}")
     print(f"[validate] {'OK' if not problems else str(len(problems)) + ' problem(s)'}")
-    for p in problems[:20]:
+    for p in problems:
         print("   -", p)
     calls, hits = usage.snapshot()
     print(f"[usage] model calls: {json.dumps(calls)}  cache hits: {hits}")
     usage_path = out_path.with_suffix(".usage.json")
     usage_path.write_text(json.dumps({"requests": len(rows), "calls": calls, "cache_hits": hits}, indent=1))
-    return rows, traces
+    return rows, traces, problems
 
 
 def _case_key(cid: str):
@@ -131,7 +131,9 @@ def main():
     req = Path(a.requests) if a.requests else dataset / "deletion_requests.csv"
     out = Path(a.out)
     trace = Path(a.trace) if a.trace else out.with_suffix(".trace.jsonl")
-    run(req, out, dataset, not a.no_llm, trace)
+    _, _, problems = run(req, out, dataset, not a.no_llm, trace)
+    if problems:
+        sys.exit(1)  # the output breaks the contract; problems were printed above
 
 
 if __name__ == "__main__":

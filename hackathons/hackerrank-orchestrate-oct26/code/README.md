@@ -7,7 +7,7 @@ applies `deletion_rules.csv`, and writes `COMPLETE` / `INCOMPLETE` / `NOT_APPLIC
 ordered, evidence-cited plan.
 
 **Results on the 32 public samples** (`python3 code/evaluation/main.py`): status accuracy **100%**,
-step F1 **99.2%** (29/32 exact), relative step order **100%**, 9/9 team-authored metamorphic tests pass. The full
+step F1 **99.2%** (29/32 exact), relative step order **100%**, 12/12 team-authored metamorphic tests pass. The full
 518-case run takes about 9 s and passes a contract validator that checks every rule in the problem statement.
 
 ---
@@ -68,10 +68,15 @@ flowchart LR
    multilingual rule model votes too and disagreements are recorded in the trace (on this dataset the
    two agree on all 550 request texts). A request is
    `NOT_APPLICABLE` when it negates deletion ("not asking for deletion", "do not close") or states a
-   non-deletion purpose with no deletion cue.
+   non-deletion purpose with no deletion cue. An empty or whitespace-only request states no purpose and is `NOT_APPLICABLE` without asking the LLM.
 2. **Identity** (`audit/engine.py: IdentityResolver`). The request email may be current or historical.
    All emails, phones and email hashes ever held by the stable `user_id` come from `user_identities.csv`
    plus `user_audit_log.csv`. Names are never used to link because different customers share names.
+   An address that no identity table knows is linked on the literal email only (no workflow
+   attribution, no derived account id). If nothing matches it either, no personal data is in scope
+   and nothing can be verified; since `COMPLETE` needs evidence-backed checks and `INCOMPLETE` needs
+   evidenced findings, the agent writes the only contract-valid row, `NOT_APPLICABLE` with `[]`, and
+   records the reason in the trace.
 3. **Evidence normalizer** (`audit/evidence.py`). Each file becomes `Observation(evidence_id, time,
    system, resource, fields, lookup keys)`:
    * SQL snapshots are executed in in-memory SQLite. Primary, regional, reporting and failover replica
@@ -108,7 +113,7 @@ flowchart LR
    restores blocked first, then records are fixed, then the checks are listed. Within a phase, steps
    follow the operation order from the problem statement, then `system_id`, then `resource_id`. The
    account is always verified absent; retained security and legal records are verified present.
-7. **Validator** (`audit/validate.py`) checks every `output.csv` against the contract:
+7. **Validator** (`audit/validate.py`) checks every `output.csv` against the contract (`main.py` prints every problem and exits with code 1 if there is any; all input CSVs are read as UTF-8 with or without BOM):
    * header, row count, sort order and JSON validity;
    * consecutive step numbers and the phase→operation→state table;
    * COMPLETE rows contain verification only, each with evidence;
@@ -133,7 +138,7 @@ See `evaluation/evaluation_report.md` for:
 * status, step, field, sequence and citation metrics;
 * ablations showing what each component contributes;
 * the metamorphic suite: historical email, upper-case email, negated and Hindi requests, time cutoff,
-  catalog decoy, similar-email decoy, retention, and workflow-chain attribution;
+  catalog decoy, similar-email decoy, retention, workflow-chain attribution, unknown email, empty request, and a BOM + CRLF input copy;
 * error analysis, including the cases we deliberately do not guess.
 
 See `evaluation/usage_report.md` for tokens and cost.

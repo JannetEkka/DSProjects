@@ -120,14 +120,14 @@ class Identity:
 class IdentityResolver:
     def __init__(self, dataset_dir: Path):
         self.users = {}
-        with open(dataset_dir / "user_identities.csv", newline="", encoding="utf-8") as f:
+        with open(dataset_dir / "user_identities.csv", newline="", encoding="utf-8-sig") as f:
             for r in csv.DictReader(f):
                 self.users[r["user_id"]] = Identity(r["user_id"], {r["email"].lower()}, {r["phone"]},
                                                    {r["email_hash"]}, {r["name"]})
         self.history = []
         p = dataset_dir / "user_audit_log.csv"
         if p.exists():
-            with open(p, newline="", encoding="utf-8") as f:
+            with open(p, newline="", encoding="utf-8-sig") as f:
                 self.history = list(csv.DictReader(f))
         self.by_email = {}
         for u in self.users.values():
@@ -143,6 +143,12 @@ class IdentityResolver:
         if not cands:
             return None
         return self.resolve_user(sorted(cands)[0])
+
+    @staticmethod
+    def adhoc(email: str) -> Identity:
+        """Identity built from the request email alone, for an address no identity table knows."""
+        e = email.strip().lower()
+        return Identity(f"unregistered:{e}", {e})
 
     def resolve_user(self, uid: str) -> Identity:
         base = self.users[uid]
@@ -403,14 +409,14 @@ class AuditEngine:
         rules = dict(DEFAULT_TREATMENT)
         self.rule_rows = {}
         p = self.dataset_dir / "deletion_rules.csv"
-        with open(p, newline="", encoding="utf-8") as f:
+        with open(p, newline="", encoding="utf-8-sig") as f:
             for r in csv.DictReader(f):
                 rules[r["data_category"]] = r["required_action"]
                 self.rule_rows[r["data_category"]] = r
         return rules
 
     def _load_activities(self):
-        with open(self.dataset_dir / "system_activity.csv", newline="", encoding="utf-8") as f:
+        with open(self.dataset_dir / "system_activity.csv", newline="", encoding="utf-8-sig") as f:
             return list(csv.DictReader(f))
 
     # ------------------------------------------------------------------ linking
@@ -583,7 +589,8 @@ class AuditEngine:
           completed'). The period is the largest one for which every template's same-owner phases
           collapse into a band of <= 3 s.
         * Chain: consecutive policy actions of one workflow are spaced by a few exact gaps. A gap is
-          kept when it recurs for the same owner and never (+-1 s) separates two different owners;
+          kept when it recurs for the same owner, is sharp (>= 80% of same-owner pairs within +-3 s
+          fall exactly on it) and never (+-1 s) separates two different owners;
           gaps that are the sum of two kept gaps (two hops) are implied by the union below.
         Orphan activities (no owner in any evidence) that a chain connects to owned activities of a
         single person inherit that owner (`chain_owner`)."""
@@ -633,7 +640,10 @@ class AuditEngine:
                 bucket[tpl][d] += 1
         for tpl, hist in same.items():
             bad = cross.get(tpl, {})
+            # a chain gap must be sharp: nearly all same-owner pairs within +-3 s of it sit exactly on it
+            # (blurred timing means the workflow clock is not exact, so no chain is learned)
             gaps = sorted(g for g, n in hist.items() if n >= self.MIN_SUPPORT
+                          and n >= 0.8 * sum(hist.get(g + e, 0) for e in range(-3, 4))
                           and not any(bad.get(g + e) for e in (-1, 0, 1)))
             gaps = [g for g in gaps if not any(abs(g - x - y) <= 1 for x in gaps for y in gaps if x <= y < g)]
             if gaps:
@@ -828,11 +838,22 @@ class AuditEngine:
                                "hashes": sorted(ident.hashes), "names": sorted(ident.names),
                                "audit_ids": ident.audit_ids} if ident else {}),
                  "era_start": "", "workflow": {}}
-        if ident is None:
-            return "COMPLETE", [], trace
-        trace["era_start"] = self.era_start(case, ident)
+        adhoc = ident is None
+        if adhoc:
+            # unknown address: link only on the literal email (no workflow attribution, no derived
+            # account id - nothing ties a workflow job or a scrubbed record to an unregistered person)
+            ident = self.ids.adhoc(case["email"])
+            trace["identity"] = {"emails": sorted(ident.emails), "source": "request email only"}
+        trace["era_start"] = "" if adhoc else self.era_start(case, ident)
         linked = self.linked_resources(ident, audit_at, trace["era_start"])
-        wf = self.workflow_resources(case, ident, linked)
+        if adhoc and not linked:
+            # No customer and no record matches the address, so no personal data is in deletion
+            # scope and nothing can be verified. COMPLETE needs evidence-backed verification steps
+            # and INCOMPLETE needs evidenced findings; the only contract-valid row is
+            # NOT_APPLICABLE with [] (reason kept in the trace).
+            trace["not_applicable_reason"] = "unresolved identity: no customer or record matches the request email"
+            return "NOT_APPLICABLE", [], trace
+        wf = {} if adhoc else self.workflow_resources(case, ident, linked)
         trace["workflow"] = wf
         for rid, src in wf.items():
             linked.setdefault(rid, []).append(src)
@@ -842,7 +863,7 @@ class AuditEngine:
             cat, st, ev, t = self.state_at(rid, audit_at)
             states.append(ResourceState(system_for(rid), rid, cat, st, ev, t))
         has_account = any(s.category == "USER_PROFILE" for s in states)
-        if not has_account:
+        if not has_account and not adhoc:
             acc = self._fallback_account(ident, audit_at)
             if acc:
                 states.append(acc)

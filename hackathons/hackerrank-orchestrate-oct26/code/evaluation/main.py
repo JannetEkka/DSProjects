@@ -114,7 +114,7 @@ class Agent:
             setattr(eng, k, ablate.get(k, False))
         universe = {}
         for p in (DS / "deletion_requests.csv", DS / "sample_deletion_requests.csv"):
-            for r in csv.DictReader(open(p, newline="", encoding="utf-8")):
+            for r in csv.DictReader(open(p, newline="", encoding="utf-8-sig")):
                 universe[r["case_id"]] = r
         for r in list(cases) + list(universe_extra):
             universe[r["case_id"]] = r
@@ -133,18 +133,18 @@ class Agent:
 
 def load_gold():
     return {r["case_id"]: (r["deletion_status"], json.loads(r["steps_json"]))
-            for r in csv.DictReader(open(DS / "sample_output.csv", newline="", encoding="utf-8"))}
+            for r in csv.DictReader(open(DS / "sample_output.csv", newline="", encoding="utf-8-sig"))}
 
 
 def sample_cases():
-    return list(csv.DictReader(open(DS / "sample_deletion_requests.csv", newline="", encoding="utf-8")))
+    return list(csv.DictReader(open(DS / "sample_deletion_requests.csv", newline="", encoding="utf-8-sig")))
 
 
 # ----------------------------------------------------------------------------- metamorphic suite
 
 def _case(cid):
     for p in (DS / "sample_deletion_requests.csv", DS / "deletion_requests.csv"):
-        for r in csv.DictReader(open(p, newline="", encoding="utf-8")):
+        for r in csv.DictReader(open(p, newline="", encoding="utf-8-sig")):
             if r["case_id"] == cid:
                 return dict(r)
     raise KeyError(cid)
@@ -206,7 +206,81 @@ def custom_cases():
     t = _case("case_25")
     tests.append(("Orphan record follows its workflow chain, not a co-timed request", t,
                   {"absent_resource": "analytics_4566", "present_resource": "analytics_1895"}))
+
+    # 10. Identity: an address no identity table or record knows cannot be audited; the only
+    #     contract-valid row is NOT_APPLICABLE with [] (never COMPLETE without evidence).
+    t = dict(_case("case_01"), case_id="eval_unknown_email", email="no.such.person@example.invalid")
+    tests.append(("Unresolvable email gives a contract-valid NOT_APPLICABLE", t, {"status": "NOT_APPLICABLE", "steps": []}))
+
+    # 11. Intent: an empty / whitespace-only request states no purpose, so it authorizes nothing.
+    t = dict(_case("case_22"), case_id="eval_empty_text", request_text="  \n ")
+    tests.append(("Empty request text -> NOT_APPLICABLE", t, {"status": "NOT_APPLICABLE", "steps": []}))
     return tests
+
+
+def bom_crlf_equivalence(agent, pred):
+    """Input robustness: the sample requests re-encoded as UTF-8 with BOM and CRLF line endings must
+    read back to the same requests and give identical predictions."""
+    import tempfile
+    rows = sample_cases()
+    with tempfile.TemporaryDirectory() as d:
+        p = Path(d) / "requests_bom_crlf.csv"
+        with open(p, "w", newline="", encoding="utf-8-sig") as f:
+            w = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator="\r\n")
+            w.writeheader()
+            w.writerows(rows)
+        assert p.read_bytes().startswith(b"\xef\xbb\xbf")
+        back = list(csv.DictReader(open(p, newline="", encoding="utf-8-sig")))
+    same_rows = back == rows
+    got = agent.run(back) if same_rows else {}
+    diff = [c for c in pred if got.get(c) != pred[c]]
+    ok = same_rows and not diff
+    return ("BOM + CRLF copy of the requests gives identical predictions", "sample_deletion_requests.csv", ok,
+            f"rows read back identical={same_rows}, differing predictions={len(diff) if same_rows else 'n/a'}")
+
+
+def full_cases():
+    return list(csv.DictReader(open(DS / "deletion_requests.csv", newline="", encoding="utf-8-sig")))
+
+
+def changed(a, b):
+    return sum(a[c] != b[c] for c in a)
+
+
+def sensitivity(agent, cases, gold):
+    """What the 518-case output and the sample scores depend on (computed, not asserted)."""
+    import random
+    eng = agent._engine
+    full = full_cases()
+    base = agent.run(full)
+    out = {"n_full": len(full)}
+    # (a) one-to-one account assignment tie-break
+    eng.TIEBREAK_EARLIEST = False
+    out["tiebreak_rows"] = changed(base, agent.run(full))
+    out["tiebreak_sample"] = score(agent.run(cases), gold)
+    eng.TIEBREAK_EARLIEST = True
+    # (b) workflow timing model switched off
+    out["timing_rows"] = changed(base, agent.run(full, DISABLE_TIMING=True))
+    # (b') timing jitter: shift every deletion-worker event by a random -2..+2 s (seeded)
+    saved = [(a, a["event_time"]) for a in eng.activities]
+    from datetime import datetime, timedelta
+    rng = random.Random(7)
+    for a in eng.activities:
+        if a["source_system"] == "deletion_worker":
+            t = datetime.fromisoformat(a["event_time"].replace("Z", "+00:00")) + timedelta(seconds=rng.randint(-2, 2))
+            a["event_time"] = t.strftime("%Y-%m-%dT%H:%M:%SZ")
+    eng.__dict__.pop("_link_cache", None)
+    jit_full = agent.run(full)
+    out["jitter_lattice"] = eng.lattice_period
+    out["jitter_chain"] = {k: v for k, v in eng.chain_gaps.items()}
+    out["jitter_rows"] = changed(base, jit_full)
+    out["jitter_vs_off_rows"] = changed(agent.run(full, DISABLE_TIMING=True), jit_full)
+    out["jitter_sample"] = score(agent.run(cases), gold)
+    for a, t in saved:
+        a["event_time"] = t
+    eng.__dict__.pop("_link_cache", None)
+    assert agent.run(full) == base, "sensitivity probe did not restore the engine"
+    return out
 
 
 def check(test, result, store):
@@ -269,6 +343,9 @@ def main():
         res = agent.run([case], universe_extra=[case])[case["case_id"]]
         ok, detail = check(test, res, agent.store)
         suite_res.append((name, case["case_id"], ok, detail))
+    suite_res.append(bom_crlf_equivalence(agent, agent.run(cases)))
+    sens = sensitivity(agent, cases, gold)
+    agent.run(cases)
 
     failures = []
     for c, (gs, gsteps) in gold.items():
@@ -277,14 +354,14 @@ def main():
         if ps != gs or P != G:
             failures.append((c, gs, ps, [g for g in G if g not in P], [p for p in P if p not in G]))
 
-    write_report(m, abl_rows, suite_res, failures, time.time() - t0)
+    write_report(m, abl_rows, suite_res, failures, sens, time.time() - t0)
     print(json.dumps({k: v for k, v in m.items() if k != "field_accuracy"}, indent=1))
     print(f"metamorphic suite: {sum(r[2] for r in suite_res)}/{len(suite_res)} passed")
     for r in suite_res:
         print("  ", "PASS" if r[2] else "FAIL", r[0], "|", r[3])
 
 
-def write_report(m, abl_rows, suite_res, failures, secs):
+def write_report(m, abl_rows, suite_res, failures, sens, secs):
     L = []
     L.append("# Evaluation Report - Ghost Data Deletion Audit Agent\n")
     L.append("Generated by `python3 code/evaluation/main.py` (deterministic: LLM and VLM answers come from the response cache, so every number "
@@ -322,6 +399,26 @@ def write_report(m, abl_rows, suite_res, failures, secs):
         fm = "<br>".join(f"{x[3]} {x[2]}" for x in miss) or "-"
         fe = "<br>".join(f"{x[3]} {x[2]}" for x in extra) or "-"
         L.append(f"| {c} | {gs} | {ps} | {fm} | {fe} |")
+    s = sens
+    L.append("\n## 5. Sensitivity and limits\n")
+    L.append(f"* **Account-job tie-break.** When several requests compete for the same workflow jobs and nothing "
+             f"else separates them, the one-to-one assignment takes the earliest job per request. Flipping it "
+             f"to the latest changes **{s['tiebreak_rows']} of {s['n_full']}** rows of the full run, while the samples "
+             f"score {fmt_pct(s['tiebreak_sample']['case_exact_match'])} exact / {fmt_pct(s['tiebreak_sample']['step_f1'])} "
+             f"step F1 either way (vs {fmt_pct(m['case_exact_match'])} / {fmt_pct(m['step_f1'])}): the public "
+             f"samples cannot discriminate this choice, so those rows are the least certain part of the output.")
+    L.append(f"* **Workflow timing model.** Switching the chain/lattice model off changes **{s['timing_rows']} of "
+             f"{s['n_full']}** rows. With every deletion-worker timestamp jittered by a random +-2 s, the learned "
+             f"lattice period is {s['jitter_lattice']} and the learned chain gaps are {s['jitter_chain'] or 'none'}; "
+             + ("the jittered run is identical to the timing-off run, i.e. the model refuses to learn from blurred "
+                "timing and the engine falls back to the window-uniqueness rule"
+                if not s["jitter_vs_off_rows"] else
+                f"the jittered run still differs from the timing-off run in {s['jitter_vs_off_rows']} rows")
+             + f" (samples: {fmt_pct(s['jitter_sample']['case_exact_match'])} exact / "
+             f"{fmt_pct(s['jitter_sample']['step_f1'])} step F1).")
+    L.append(f"* **In-sample numbers.** Every metric above is measured on the same 32 public cases that guided "
+             f"development, so it is an optimistic estimate. The metamorphic suite (section 3) checks invariants on derived "
+             f"cases the gold never covered, and is the out-of-sample check.\n")
     notes = HERE / "report_notes.md"
     if notes.exists():
         L.append("\n" + notes.read_text(encoding="utf-8"))

@@ -13,13 +13,13 @@ KEYS = {"step_no", "phase", "system_id", "resource_id", "operation", "state", "e
 
 def validate_output(out_path: Path, requests_path: Path, manifest: dict, engine=None) -> list[str]:
     problems = []
-    with open(out_path, newline="", encoding="utf-8") as f:
+    with open(out_path, newline="", encoding="utf-8-sig") as f:
         reader = csv.reader(f)
         header = next(reader)
         if header != ["case_id", "deletion_status", "steps_json"]:
             problems.append(f"bad header {header}")
         rows = list(reader)
-    req = {r["case_id"]: r for r in csv.DictReader(open(requests_path, newline="", encoding="utf-8"))}
+    req = {r["case_id"]: r for r in csv.DictReader(open(requests_path, newline="", encoding="utf-8-sig"))}
     ids = [r[0] for r in rows]
     if sorted(ids) != sorted(req):
         problems.append(f"case ids differ from requests ({len(ids)} vs {len(req)})")

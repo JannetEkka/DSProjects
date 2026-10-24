@@ -167,7 +167,7 @@ class EvidenceStore:
     def __init__(self, dataset_dir: Path, media_extractor=None):
         self.dataset_dir = Path(dataset_dir)
         self.manifest = {}
-        with open(self.dataset_dir / "evidence_files.csv", newline="", encoding="utf-8") as f:
+        with open(self.dataset_dir / "evidence_files.csv", newline="", encoding="utf-8-sig") as f:
             for row in csv.DictReader(f):
                 self.manifest[row["file_id"]] = row
         self.observations: list[Observation] = []

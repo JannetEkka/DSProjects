@@ -239,3 +239,27 @@ branch=claude/happy-mayer-u2r4c5
 repo_root=/home/user/DSProjects
 worktree=hackathons/hackerrank-orchestrate-oct26
 parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ
+
+## [2026-10-24T15:24:23Z] Reviewer fixes: BOM input, unknown email, empty request, sensitivity section
+
+User Prompt (verbatim, secrets redacted):
+(follow-up from parent session, relaying the independent reviewer's findings on ac52ad7) 1. BOM-prefixed requests CSV crashes -> read every input CSV as utf-8-sig, add a BOM + CRLF metamorphic test. 2. Unknown email gives COMPLETE,[] with exit 0 -> ad-hoc identity from the request email, contract-safe behaviour if nothing is found, main.py exits 1 on validator problems. 3. Empty request_text defaults to deletion -> NOT_APPLICABLE, add a test. 4-6. Add a computed "Sensitivity and limits" section (tie-break flip, DISABLE_TIMING, +-2 s jitter, in-sample caveat). Regenerate, repackage, clean-room test, commit, push.
+
+Agent Response Summary:
+All input CSVs are now read as utf-8-sig. An unknown email is linked on the literal address only (no workflow attribution); if nothing matches, the row is the only contract-valid one, NOT_APPLICABLE with [], with the reason in the trace. main.py prints every validator problem and exits 1 (the real run exits 0). Empty or whitespace-only request text is NOT_APPLICABLE on both the rules and LLM paths. New tests: unknown email, empty text, BOM + CRLF equivalence (suite 12/12). The new report section 5 is computed at run time: flipping the tie-break changes 29/518 rows and the samples can't tell the difference; timing-off changes 138/518. The jitter probe showed the chain learner still accepted smeared gaps, so chain gaps must now be sharp; under +-2 s jitter the model learns nothing and the output is identical to timing-off. The 518 output.csv is byte-identical to ac52ad7. Samples unchanged at 29/32 exact, 99.2% step F1. Clean-room run byte-identical.
+
+Actions:
+* utf-8-sig in main.py, audit/engine.py, audit/evidence.py, audit/validate.py, evaluation/main.py, ui/build_console.py
+* audit/engine.py: IdentityResolver.adhoc, audit() unresolved-identity path, chain-gap sharpness test
+* audit/intent.py: empty-text rule, no LLM call for empty text
+* main.py: exit 1 on validator problems, all problems printed
+* evaluation/main.py: tests 10-12, sensitivity() probe, report section 5; report_notes row 13; README updates
+* regenerated evaluation_report.md, ghost_ledger.html, usage_report.md; code.zip; clean-room test
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ

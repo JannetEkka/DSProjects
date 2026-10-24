@@ -76,6 +76,10 @@ def rule_classify(text: str) -> dict:
     NOT a deletion when it explicitly negates deletion, or states a non-deletion purpose
     (access, export, correction, opt-out, login help) without any deletion cue."""
     t = (text or "").lower()
+    if not t.strip():
+        # an empty request states no purpose at all, so it cannot authorize deletion
+        return {"authorizes_deletion": False, "request_type": "OTHER", "engine": "rules",
+                "rationale": "empty request text"}
     neg = [p for p in NEGATION_PATTERNS if re.search(p, t)]
     pos = [p for p in DELETION_PATTERNS if re.search(p, t)]
     rtype = next((k for k, p in NON_DELETION_HINTS.items() if re.search(p, t)), None)
@@ -141,7 +145,7 @@ class IntentClassifier:
         it returns, so a run that loses Gemini part-way keeps everything done so far."""
         if not self.use_llm:
             return
-        todo = list(dict.fromkeys(t for t in texts if t and self._lookup(t) is None))
+        todo = list(dict.fromkeys(t for t in texts if t and t.strip() and self._lookup(t) is None))
         for i in range(0, len(todo), CHUNK_SIZE):
             if not self.chain.available:
                 return
@@ -157,6 +161,8 @@ class IntentClassifier:
     def classify(self, text: str) -> dict:
         rules = rule_classify(text)
         result = dict(rules)
+        if not (text or "").strip():  # nothing to ask a model about
+            return {**result, "rules_vote": False, "agreement": True}
         llm = self._lookup(text) if self.use_cache else None
         if llm is not None:
             usage.record_cache_hit("intent")

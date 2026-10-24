@@ -20,10 +20,10 @@ ROOT = HERE.parent.parent
 
 def build(trace_path: Path, dataset: Path, requests_path: Path, out_path: Path, body_only_path: Path | None):
     traces = [json.loads(l) for l in open(trace_path, encoding="utf-8")]
-    reqs = {r["case_id"]: r for r in csv.DictReader(open(requests_path, newline="", encoding="utf-8"))}
-    manifest = {r["file_id"]: r for r in csv.DictReader(open(dataset / "evidence_files.csv", newline="", encoding="utf-8"))}
-    acts = {r["activity_id"]: r for r in csv.DictReader(open(dataset / "system_activity.csv", newline="", encoding="utf-8"))}
-    rules = list(csv.DictReader(open(dataset / "deletion_rules.csv", newline="", encoding="utf-8")))
+    reqs = {r["case_id"]: r for r in csv.DictReader(open(requests_path, newline="", encoding="utf-8-sig"))}
+    manifest = {r["file_id"]: r for r in csv.DictReader(open(dataset / "evidence_files.csv", newline="", encoding="utf-8-sig"))}
+    acts = {r["activity_id"]: r for r in csv.DictReader(open(dataset / "system_activity.csv", newline="", encoding="utf-8-sig"))}
+    rules = list(csv.DictReader(open(dataset / "deletion_rules.csv", newline="", encoding="utf-8-sig")))
 
     cited = set()
     cases = []

@@ -1,4 +1,4 @@
-## 5. Failures found and improvements made (development log)
+## 6. Failures found and improvements made (development log)
 
 Exact-match counts are on the 32 public sample cases; every change was also checked against the
 full 518-case run through the contract validator (`code/audit/validate.py`).
@@ -18,6 +18,7 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 | 10 | Anonymized analytics rows missed when several requests report in the same minute (cases 26-28); case_11 got a stranger's row | Overlapping workflow windows made the "only one window covers it" rule refuse or misfire | **Chain linkage**: a request's policy actions (`Policy action completed for ...`) form a chain spaced by exact gaps learned from evidence-owned pairs (390 s and 449 s; 0 cross-owner collisions within +-1 s). An orphan in a chain whose owned links belong to one person inherits that owner (36 chains, each 1 owner + 1 orphan). **Single-instance categories** (learned: no subject ever holds two analytics/search/data_flow/backup/tombstone/export records) block a second orphan of the same category | 28/32 |
 | 11 | case_23 got `account_7015`; singleton analytics rows (cases 03, 25) left unattributed | Several FAILED account jobs in one slot, no evidence ties any of them | **Workflow lattice**: every event a workflow emits sits at a fixed phase after its account job modulo 30 s (learned period; 'received the final result' at +20..22 s, policy actions at +9..11 s; 328/328 evidence-owned pairs). Candidate account jobs are kept only if in phase with the subject's own workflow events; an orphan is attributed only to the in-phase request among those whose windows cover it | 28/32 |
 | 12 | case_04's legacy-format analytics row missed | Request had no account job, so no workflow window opened | When no account job exists at all, the reporting window itself is the workflow window (same uniqueness test) | 29/32; 518-run unchanged |
+| 13 | Independent review: BOM-prefixed requests CSV crashed (`KeyError 'case_id'`); unknown email gave `COMPLETE, []` with exit 0; empty request text defaulted to deletion | `utf-8` reader keeps the BOM in the first header; no fallback identity; deletion prior applied to empty text | All CSV inputs read as `utf-8-sig`; unknown email linked on the literal address, else the contract-valid `NOT_APPLICABLE, []`; `main.py` exits 1 on any validator problem; empty text is `NOT_APPLICABLE`; chain gaps must be sharp, so +-2 s jitter disables the timing model | 29/32; 518-run byte-identical; 12/12 suite |
 
 ### Known limitations (left deliberately)
 
