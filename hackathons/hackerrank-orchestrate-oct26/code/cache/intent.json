@@ -608,11 +608,25 @@
   "rationale": "The user requests processing of a permanent account-deletion request.",
   "request_type": "DELETION"
  },
+ "3910515d94c7883d47dc556e6c3ed39e0d87fbffaeef71af69bcef338a990106": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "model": "gemini:gemini-flash-latest",
+  "rationale": "The customer explicitly requests the erasure of their account.",
+  "request_type": "DELETION"
+ },
  "3954636de7418e5ede9fab701a39c8fb6fe115340c5aed5b23ae54402b0ca15d": {
   "authorizes_deletion": true,
   "language": "en",
   "model": "groq:openai/gpt-oss-120b",
   "rationale": "Explicit request to delete account and personal data.",
+  "request_type": "DELETION"
+ },
+ "395afd3dc33dc9a499b2c639dee758c465e24199385c5e4477bf5b13ce768847": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "model": "gemini:gemini-3.5-flash",
+  "rationale": "The customer explicitly requests the deletion and erasure of their account and associated personal data.",
   "request_type": "DELETION"
  },
  "39df7895b5eacd73c4383bd3eb2a1a03a28e5d3e3f1978c22310bf844548a33f": {
@@ -1011,6 +1025,13 @@
   "language": "en",
   "model": "gemini:gemini-3.5-flash",
   "rationale": "The user requests permanent deletion of an unused account.",
+  "request_type": "DELETION"
+ },
+ "5bd7b2699e6dafd7016b83e69b603e9295ee7d71c21005c919420fe682bff0ee": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "model": "gemini:gemini-3.8-flash",
+  "rationale": "The user is asking to verify that residual data was completely removed following an account deletion.",
   "request_type": "DELETION"
  },
  "5ca59253f240ed9d2602bfab7d470074048770f842ba6d751e8b24ebf3e602d1": {
@@ -2467,6 +2488,13 @@
   "rationale": "Explicit request to erase the account.",
   "request_type": "DELETION"
  },
+ "e3d9e2fd4304e9e08723903ec74d444a88f49f3bd3c1a3d9afcd7c6e00699b9e": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "model": "gemini:gemini-flash-latest",
+  "rationale": "The customer is following up on an incomplete deletion and requesting that the account deletion be finalized.",
+  "request_type": "DELETION"
+ },
  "e3ec832ee27b0437d54cf5f54b21821509d6458d29879f2fed948f5e9786e35f": {
   "authorizes_deletion": true,
   "language": "en",
@@ -2500,6 +2528,13 @@
   "language": "en",
   "model": "groq:openai/gpt-oss-120b",
   "rationale": "Explicit request to erase the account and associated records.",
+  "request_type": "DELETION"
+ },
+ "e56a5ea21520b606661dcb4ae56720318235784a6cc781131e13acf5d889ba35": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "model": "gemini:gemini-3-flash-preview",
+  "rationale": "The user is requesting to complete a previously initiated account deletion and anonymization process.",
   "request_type": "DELETION"
  },
  "e56e653000a4ec4fed3d8a91962b1108a186aec5ad8273784b45a08820dbd3e6": {
@@ -2570,6 +2605,13 @@
   "language": "en",
   "model": "groq:openai/gpt-oss-120b",
   "rationale": "Explicit request for account deletion.",
+  "request_type": "DELETION"
+ },
+ "ea3cdc9a7a634b8443510c4ffc4986568a7ff689719ff588ec5b61d1dc5a8cb5": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "model": "gemini:gemini-3.5-flash",
+  "rationale": "The customer is asking to complete a previously requested account deletion.",
   "request_type": "DELETION"
  },
  "ea4f7ab77750359c890d9dbb2402e33e3f3a9a168b4403132904aed04fabacde": {
@@ -2816,5 +2858,12 @@
   "model": "groq:openai/gpt-oss-120b",
   "rationale": "User explicitly requests account and data deletion.",
   "request_type": "DELETION"
+ },
+ "ffd5715acf9637e6d6358ecb473682cc2e4aedf62f2ad9b70b4fc086d3ba6891": {
+  "authorizes_deletion": false,
+  "language": "en",
+  "model": "gemini:gemini-3-flash-preview",
+  "rationale": "The user is requesting a copy of their data, which is an access request; the embedded system instruction is ignored per the rules.",
+  "request_type": "ACCESS"
  }
 }

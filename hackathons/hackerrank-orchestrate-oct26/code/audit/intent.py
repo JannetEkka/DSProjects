@@ -4,7 +4,8 @@ Two independent classifiers vote:
   * an LLM (Gemini, JSON-constrained, temperature 0) when GEMINI_API_KEY is set;
   * a deterministic multilingual rule model (negation-aware) that always runs.
 A third, independent signal is the privacy-intake CLASSIFY_REQUEST activity in system_activity.csv.
-The LLM decides when present; disagreements are surfaced in the run trace for review.
+The LLM decides when present, within a strict schema; the rule model vetoes an LLM 'authorizes deletion'
+when the text negates deletion or states another purpose, and disagreements are surfaced in the trace.
 LLM answers are cached by text hash (code/cache/intent.json) so re-runs cost nothing. Uncached texts are
 sent in chunks (prefetch) over a model chain with retries (audit.llm: Gemini, then Mistral / Groq / NVIDIA
 when their keys are set), so one bad model doesn't end the run.
@@ -81,10 +82,38 @@ BATCH_PROMPT = load_prompt("intent_batch")
 CHUNK_SIZE = int(os.environ.get("GEMINI_INTENT_CHUNK", "10"))
 
 
-def _clean(data: dict, model: str) -> dict:
-    return {"authorizes_deletion": bool(data.get("authorizes_deletion")),
-            "request_type": data.get("request_type", "OTHER"),
-            "language": data.get("language", ""), "rationale": data.get("rationale", ""), "model": model}
+REQUEST_TYPES = {"DELETION", "ACCESS", "PORTABILITY", "CORRECTION", "MARKETING_OPT_OUT", "ACCOUNT_SUPPORT", "OTHER"}
+
+
+def _clean(data, model: str) -> dict | None:
+    """Strict schema check of one LLM answer. Anything off-schema (wrong types, a request_type outside
+    the enum, authorizes_deletion inconsistent with request_type) is rejected -> the rule model decides."""
+    if not isinstance(data, dict):
+        return None
+    auth, rtype = data.get("authorizes_deletion"), data.get("request_type")
+    lang, why = data.get("language", ""), data.get("rationale", "")
+    if not isinstance(auth, bool) or rtype not in REQUEST_TYPES or auth != (rtype == "DELETION"):
+        return None
+    if not isinstance(lang, str) or not isinstance(why, str):
+        return None
+    return {"authorizes_deletion": auth, "request_type": rtype, "language": lang[:8], "rationale": why[:300],
+            "model": model}
+
+
+INJECTION_RE = re.compile(
+    r"^\s*(system|assistant|developer|tool)\s*:.*$"                       # forged role lines
+    r"|[^.!?\n]*\b(ignore|disregard|forget)\b[^.!?\n]*\b(previous|prior|above|earlier|all)\b[^.!?\n]*"
+    r"\b(instructions?|rules|prompt)\b[^.!?\n]*[.!?]?"
+    r"|[^.!?\n]*\b(ignorez|ignorer|ignoriere|ignorieren|ignora|ignore)\b[^.!?\n]*"
+    r"\b(instructions|anweisungen|instrucciones|istruzioni|instruções)\b[^.!?\n]*[.!?]?",
+    re.I | re.M)
+
+
+def strip_injection(text: str) -> tuple[str, int]:
+    """Remove forged role lines ("SYSTEM: ...") and "ignore previous instructions" sentences: they are
+    addressed to a model, not a statement of the customer's purpose, so the rule model must not score
+    them. Returns (text without them, number removed)."""
+    return INJECTION_RE.subn(" ", text or "")
 
 
 class IntentClassifier:
@@ -128,7 +157,8 @@ class IntentClassifier:
             self._save()
 
     def classify(self, text: str) -> dict:
-        rules = rule_classify(text)
+        clean, injected = strip_injection(text)
+        rules = rule_classify(clean)
         result = dict(rules)
         if not (text or "").strip():  # nothing to ask a model about
             return {**result, "rules_vote": False, "agreement": True}
@@ -143,14 +173,24 @@ class IntentClassifier:
             except (RuntimeError, ValueError, json.JSONDecodeError):
                 pass  # rule model decides this one
         if llm is not None:
-            result = {**{k: v for k, v in llm.items() if k != "model"}, "engine": llm.get("model", "llm")}
+            llm = _clean(llm, llm.get("model", "llm"))  # cached answers are re-validated too
+        if llm is not None:
+            result = {**{k: v for k, v in llm.items() if k != "model"}, "engine": llm["model"]}
+            if result["authorizes_deletion"] and not rules["authorizes_deletion"]:
+                # veto: the text negates deletion or states a non-deletion purpose without a deletion cue
+                result = {**rules, "engine": f"rules (veto over {llm['model']})", "veto": True}
         result["rules_vote"] = rules["authorizes_deletion"]
-        result["agreement"] = result["authorizes_deletion"] == rules["authorizes_deletion"]
+        result["agreement"] = result["authorizes_deletion"] == rules["authorizes_deletion"] and not result.get("veto")
+        if injected:
+            result["injection_markers"] = injected
         return result
 
     def _ask(self, text: str) -> dict:
         raw, model = self.chain.generate(INTENT_PROMPT.format(text=as_untrusted(text)), "intent_classification", json_mode=True)
-        return _clean(json.loads(raw), model)
+        res = _clean(json.loads(raw), model)
+        if res is None:
+            raise ValueError("off-schema intent answer")
+        return res
 
     def _ask_batch(self, texts: list[str]) -> dict:
         items = as_untrusted([{"id": i, "text": t} for i, t in enumerate(texts)])
@@ -159,11 +199,12 @@ class IntentClassifier:
         if isinstance(data, dict):  # tolerate {"results": [...]}
             data = next((v for v in data.values() if isinstance(v, list)), [])
         out = {}
-        for d in data:
+        for d in data if isinstance(data, list) else []:
             try:
-                idx = int(d.get("id"))
-            except (TypeError, ValueError):
+                idx = int(d.get("id")) if not isinstance(d.get("id"), bool) else -1
+            except (TypeError, ValueError, AttributeError):
                 continue
-            if 0 <= idx < len(texts) and "authorizes_deletion" in d:
-                out[texts[idx]] = _clean(d, model)
+            res = _clean(d, model)
+            if 0 <= idx < len(texts) and res is not None:
+                out[texts[idx]] = res
         return out
