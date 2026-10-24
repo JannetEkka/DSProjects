@@ -121,6 +121,7 @@ class PlannerMixin:
             return "NOT_APPLICABLE", [], trace
         wf = {} if adhoc else self.workflow_resources(case, ident, linked)
         trace["workflow"] = wf
+        evidence_links = set(linked)
         for rid, src in wf.items():
             linked.setdefault(rid, []).append(src)
         findings, remediation, verification = [], [], []
@@ -141,7 +142,15 @@ class PlannerMixin:
             if s.state == UNKNOWN and not s.evidence_id and linked.get(s.resource_id):
                 s.evidence_id = linked[s.resource_id][0]
             rr = self.rule_rows.get(s.category or "", {})
-            trace["resources"].append({**s.__dict__,
+            notes = self.attribution_notes.get(case["case_id"], {}).get(s.resource_id, []) if s.resource_id in wf else []
+            evidence_linked = s.resource_id in evidence_links
+            if s.resource_id not in linked:  # fallback account: id derived, not observed
+                notes = [("medium", "account id derived from the stable user reference; state from the latest "
+                                    "account snapshot")]
+            conf = ("high" if evidence_linked or not notes else
+                    "low" if any(c == "low" for c, _ in notes) else "medium")
+            trace["resources"].append({**s.__dict__, "confidence": conf,
+                                       "assumptions": [] if evidence_linked else [a for _, a in notes],
                                        "linked_by": sorted(set(linked.get(s.resource_id, []))),
                                        "rule_id": rr.get("rule_id", ""), "rule_action": rr.get("required_action", "DISABLE" if s.category == "DATA_FLOW" else ""),
                                        "rule_condition": rr.get("condition", "Active process can recreate data" if s.category == "DATA_FLOW" else "")})

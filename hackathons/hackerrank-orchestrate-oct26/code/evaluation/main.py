@@ -363,6 +363,15 @@ def sensitivity(agent, cases, gold):
     full = full_cases()
     base = agent.run(full)
     out = {"n_full": len(full)}
+    # confidence flags recorded in the trace (per resource: high = evidence, medium = timing/derived,
+    # low = tie-break); a row takes its weakest resource
+    rows = {"high": 0, "medium": 0, "low": 0}
+    for c in full:
+        if base[c["case_id"]][0] == "NOT_APPLICABLE":
+            continue
+        levels = {r["confidence"] for r in eng.audit(c)[2]["resources"]}
+        rows["low" if "low" in levels else "medium" if "medium" in levels else "high"] += 1
+    out["confidence_rows"] = rows
     # (a) one-to-one account assignment tie-break
     eng.TIEBREAK_EARLIEST = False
     out["tiebreak_rows"] = changed(base, agent.run(full))
@@ -539,6 +548,12 @@ def write_report(m, abl_rows, suite_res, failures, sens, unit, secs):
                 f"the jittered run still differs from the timing-off run in {s['jitter_vs_off_rows']} rows")
              + f" (samples: {fmt_pct(s['jitter_sample']['case_exact_match'])} exact / "
              f"{fmt_pct(s['jitter_sample']['step_f1'])} step F1).")
+    cr = s["confidence_rows"]
+    L.append(f"* **Confidence flags.** Every resource in the trace carries `confidence` (high = tied by evidence, "
+             f"medium = attributed by workflow timing or a derived id, low = depends on the tie-break) and the "
+             f"`assumptions` behind it; the console shows them as chips. Rows by weakest resource: {cr['high']} high, "
+             f"{cr['medium']} medium, {cr['low']} low (low rows are exactly the tie-break decisions; each can also move "
+             f"the job its competitor receives, which is why flipping the tie-break touches more rows).")
     h, pz = s["held_out"], s["perturbed"]
     L.append(f"* **Held-out timing model (leave-one-out).** For each of the {h['folds']} sample cases the chain/lattice "
              f"model was re-learned with that subject's activity excluded from its statistics. In {h['same_model']}/"

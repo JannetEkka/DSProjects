@@ -70,7 +70,10 @@ def test_planner_orders_phases_and_operations(engine):
     cases = list(csv.DictReader(open(engine.dataset_dir / "sample_deletion_requests.csv", encoding="utf-8-sig")))
     engine.prepare(cases)
     for c in cases[:12]:
-        status, steps, _ = engine.audit(c)
+        status, steps, trace = engine.audit(c)
+        for r in trace["resources"]:
+            assert r["confidence"] in ("high", "medium", "low")
+            assert r["confidence"] == "high" or r["assumptions"]  # anything weaker says why
         keys = [(PHASES.index(s["phase"]), OP_ORDER.index(s["operation"])) for s in steps]
         assert keys == sorted(keys), c["case_id"]
         assert [s["step_no"] for s in steps] == list(range(1, len(steps) + 1))

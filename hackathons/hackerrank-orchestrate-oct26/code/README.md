@@ -215,15 +215,26 @@ would be hand-checked to estimate accuracy outside the 32 public cases.
 
 ```
 code/
-  main.py                    entry point (writes output.csv, trace, usage)
+  main.py                    entry point (writes output.csv, trace, usage; exits 1 on a contract problem)
+  check.sh                   quality gate: unit tests + full run + validator + evaluation
+  audit/engine.py            thin facade wiring the modules below (public: AuditEngine, IdentityResolver)
+  audit/identity.py          current + historical identifiers of a user_id
+  audit/semantics.py         what one observation says: category, state, identifier match
+  audit/linking.py           evidence -> resources, catalog-link verification, owner index
+  audit/workflow.py          workflow attribution, one-to-one job assignment, learned timing model
+  audit/planner.py           state at audit_at, policy -> ordered steps, confidence flags
+  audit/config.py            tunable constants (windows, support thresholds), documented
   audit/evidence.py          evidence normalizer (all formats)
-  audit/engine.py            identity, linking, state, policy, step planner
-  audit/llm.py               model chain: Gemini -> Groq / Mistral / NVIDIA, retries, dead-model list
-  audit/intent.py            intent classifier (batched LLM + rule model) and prompts
-  audit/media.py             screenshot transcription (Gemini vision / RapidOCR) and prompt
+  audit/intent.py            intent: strict-schema LLM answers + rule model with veto
+  audit/media.py             screenshot transcription (Gemini vision / RapidOCR)
+  audit/llm.py               model chain: Gemini -> Groq / Mistral / NVIDIA, retries, circuit breaker
+  audit/prompts.py           prompt loader; untrusted text JSON-escaped inside delimiter tags
   audit/validate.py          output contract validator
   audit/usage.py             token / cost ledger
-  evaluation/main.py         evaluation workflow
+  audit/SAFETY.md            threat model for untrusted request text and evidence
+  prompts/*.md               versioned LLM prompts (intent single / batch, VLM transcription)
+  tests/                     offline pytest unit tests (python3 -m pytest code/tests -q)
+  evaluation/main.py         metrics, metamorphic + injection suite, ablations, held-out and perturbation checks
   evaluation/*.md            evaluation and usage reports
   ui/                        Ghost Ledger console (template + builder + built html)
   cache/                     content-hash keyed model responses (reproducible re-runs)

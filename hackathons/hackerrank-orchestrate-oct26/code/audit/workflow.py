@@ -34,6 +34,7 @@ class WorkflowMixin:
         lo = max(P(case["requested_at"]), rep - timedelta(hours=window_h))
         expected = self.STATUS_RESULT.get(case["reported_status"])
         out = {}
+        notes: dict[str, list[tuple[str, str]]] = {}  # rid -> [(confidence, assumption)]
 
         def eligible(rid):
             own = self.owners.get(rid, set())
@@ -46,6 +47,7 @@ class WorkflowMixin:
             if a is not None:
                 out[a["resource_id"]] = a["activity_id"]
                 acc_time = P(a["event_time"])
+                notes[a["resource_id"]] = self.assignment_basis.get(case["case_id"], [])
         elif not has_account:
             cands = [a for a in self.activities
                      if a["source_system"] == "deletion_worker" and a["target_system"] == "account_service"
@@ -55,6 +57,8 @@ class WorkflowMixin:
                 a = max(cands, key=lambda a: a["event_time"])
                 out[a["resource_id"]] = a["activity_id"]
                 acc_time = P(a["event_time"])
+                notes[a["resource_id"]] = [("low" if len(cands) > 1 else "medium",
+                                            f"latest of {len(cands)} matching account jobs (no global assignment)")]
         else:
             accs = [a for a in self.activities if a["resource_id"] in linked
                     and a["target_system"] == "account_service" and a["source_system"] == "deletion_worker"
@@ -78,6 +82,8 @@ class WorkflowMixin:
                 if chain is not None:
                     if chain == ident.user_id:
                         out.setdefault(a["resource_id"], a["activity_id"])
+                        notes.setdefault(a["resource_id"], [("medium", "timing: exact policy-action chain gap to "
+                                                             "the subject's own record")])
                     continue
                 # a subject never holds two records of a single-instance category
                 if resource_prefix(a["resource_id"]) in held:
@@ -90,10 +96,15 @@ class WorkflowMixin:
                 fit = self.lattice_fit(a, acc_time)
                 if fit is False:
                     continue
+                rivals = len(others)
                 if fit:
                     others = [cid for cid in others if self.lattice_fit(a, self.case_windows[cid][0])]
                 if not others:
                     out.setdefault(a["resource_id"], a["activity_id"])
+                    why = ("timing: only workflow window covering this activity" if not rivals else
+                           f"timing: in phase with this request's account job, not with {rivals} co-timed request(s)")
+                    notes.setdefault(a["resource_id"], [("medium", why)])
+        self.attribution_notes[case["case_id"]] = notes
         return out
 
 
@@ -231,6 +242,8 @@ class WorkflowMixin:
         self.case_subject = {}
         self.all_cases = list(cases)
         self.assigned_accounts = {}
+        self.assignment_basis = {}
+        lattice_note: dict[str, str] = {}
         self.single_instance = set()
         self._learn_workflow_timing()
         prefix_counts = {}
@@ -282,8 +295,11 @@ class WorkflowMixin:
             score = {a["activity_id"]: sum(bool(self.lattice_fit(b, P(a["event_time"]))) for b in own)
                      for a in cand[cid]}
             best = max(score.values(), default=0)
+            before = len(cand[cid])
             if best > 0:
                 cand[cid] = [a for a in cand[cid] if score[a["activity_id"]] == best]
+            if best > 0 and len(cand[cid]) < before:
+                lattice_note[cid] = f"timing lattice kept {len(cand[cid])} of {before} candidate account jobs"
         pending = dict(cand)
         while pending:
             forced = [cid for cid, lst in pending.items() if len(lst) <= 1]
@@ -291,12 +307,20 @@ class WorkflowMixin:
             lst = pending.pop(pick)
             choice = (min if self.TIEBREAK_EARLIEST else max)(lst, key=lambda a: a["event_time"]) if lst else None
             self.assigned_accounts[pick] = choice
+            basis = [("medium", lattice_note[pick])] if pick in lattice_note else []
+            if len(lst) > 1:
+                basis.append(("low", f"tie-break: {'earliest' if self.TIEBREAK_EARLIEST else 'latest'} of "
+                                     f"{len(lst)} indistinguishable account jobs"))
+            elif lst:
+                basis.append(("medium", "only matching account job left after one-to-one assignment"))
+            self.assignment_basis[pick] = basis
             if choice:
                 for cid in pending:
                     pending[cid] = [a for a in pending[cid] if a["resource_id"] != choice["resource_id"]]
         for dup, orig in alias.items():
             if orig in self.assigned_accounts:
                 self.assigned_accounts[dup] = self.assigned_accounts[orig]
+                self.assignment_basis[dup] = self.assignment_basis.get(orig, [])
         wins = {}
         for c in cases:
             if c["case_id"] in alias:

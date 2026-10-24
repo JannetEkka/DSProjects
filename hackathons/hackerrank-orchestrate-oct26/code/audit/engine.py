@@ -60,6 +60,8 @@ class AuditEngine(LinkingMixin, WorkflowMixin, PlannerMixin):
         self.chain_gaps: dict[str, list[int]] = {}
         self.chain_owner: dict[str, str] = {}
         self.timing_holdout: set[str] = set()  # users excluded from timing-model learning
+        self.assignment_basis: dict[str, list[tuple[str, str]]] = {}  # case -> how its account job was chosen
+        self.attribution_notes: dict[str, dict] = {}  # case -> rid -> [(confidence, assumption)]
 
     def _load_rules(self):
         rules = dict(DEFAULT_TREATMENT)
