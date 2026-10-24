@@ -21,9 +21,12 @@ pip install -r code/requirements.txt
 # offline, deterministic (rule intent model + local OCR) - no key needed
 python3 code/main.py --no-llm
 
-# with Gemini (intent classification + screenshot transcription)
-export GEMINI_API_KEY=...          # or put it in an uncommitted .env at the repo root
+# default: cached LLM/VLM answers in code/cache/ (no key needed, zero calls, reproduces output.csv)
 python3 code/main.py
+
+# refresh with live models: Gemini first, then any OpenAI-compatible fallback whose key is set
+export GEMINI_API_KEY=...          # optional: GROQ_API_KEY / MISTRAL_API_KEY / NVIDIA_API_KEY
+python3 code/main.py               # keys can also live in an uncommitted .env at the repo root
 ```
 
 Outputs (repository root):
@@ -60,9 +63,10 @@ flowchart LR
   O --> V[Contract validator]
 ```
 
-1. **Intent** (`audit/intent.py`). Gemini classifies the request into DELETION / ACCESS / PORTABILITY /
+1. **Intent** (`audit/intent.py`). An LLM (Gemini Flash, falling back to Groq `gpt-oss-120b`; 10 texts per batched call) classifies the request into DELETION / ACCESS / PORTABILITY /
    CORRECTION / MARKETING_OPT_OUT / ACCOUNT_SUPPORT with JSON output at temperature 0. A negation-aware
-   multilingual rule model votes too and disagreements are recorded in the trace. A request is
+   multilingual rule model votes too and disagreements are recorded in the trace (on this dataset the
+   two agree on all 550 request texts). A request is
    `NOT_APPLICABLE` when it negates deletion ("not asking for deletion", "do not close") or states a
    non-deletion purpose with no deletion cue.
 2. **Identity** (`audit/engine.py: IdentityResolver`). The request email may be current or historical.
@@ -135,7 +139,8 @@ code/
   main.py                    entry point (writes output.csv, trace, usage)
   audit/evidence.py          evidence normalizer (all formats)
   audit/engine.py            identity, linking, state, policy, step planner
-  audit/intent.py            intent classifier (Gemini + rules) and prompt
+  audit/llm.py               model chain: Gemini -> Groq / Mistral / NVIDIA, retries, dead-model list
+  audit/intent.py            intent classifier (batched LLM + rule model) and prompts
   audit/media.py             screenshot transcription (Gemini vision / RapidOCR) and prompt
   audit/validate.py          output contract validator
   audit/usage.py             token / cost ledger

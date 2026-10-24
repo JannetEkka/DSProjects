@@ -118,6 +118,7 @@ class IntentClassifier:
     def __init__(self, model: str | None = None, use_llm: bool = True):
         self.chain = LLMChain(model or os.environ.get("GEMINI_TEXT_MODEL"), tag="intent")
         self.use_llm = use_llm and any_key()
+        self.use_cache = use_llm  # --no-llm means rules only, even when cached LLM answers exist
         self.cache = json.loads(CACHE.read_text(encoding="utf-8")) if CACHE.exists() else {}
 
     def _save(self):
@@ -156,7 +157,7 @@ class IntentClassifier:
     def classify(self, text: str) -> dict:
         rules = rule_classify(text)
         result = dict(rules)
-        llm = self._lookup(text)
+        llm = self._lookup(text) if self.use_cache else None
         if llm is not None:
             usage.record_cache_hit("intent")
         elif self.use_llm and self.chain.available:

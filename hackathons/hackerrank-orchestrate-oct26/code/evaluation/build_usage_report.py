@@ -32,6 +32,31 @@ def table(calls: dict, requests: int):
     return rows, tot
 
 
+def cache_inventory(requests: int):
+    """Every cached answer names the model that produced it, so the cache is a complete record of which
+    models did the work, including runs whose token ledger was not saved."""
+    from collections import Counter
+    cache_dir = HERE.parent / "cache"
+    L = ["## Inventory of the response cache (what produced `output.csv`)\n",
+         "| Kind | Model | Cached answers | Used by the final run |", "|---|---|---|---|"]
+    intent = json.loads((cache_dir / "intent.json").read_text(encoding="utf-8"))
+    for m, c in sorted(Counter(v.get("model") or "gemini (earlier run, model not tagged)" for v in intent.values()).items()):
+        L.append(f"| intent answer | `{m}` | {c} | yes (looked up by text hash) |")
+    media = json.loads((cache_dir / "media_text.json").read_text(encoding="utf-8"))
+    used = Counter(sorted(n for n in v["engines"] if n != "rapidocr")[0] for v in media.values()
+                   if any(n != "rapidocr" for n in v["engines"]))
+    allm = Counter(n for v in media.values() for n in v["engines"])
+    for m, c in sorted(allm.items()):
+        L.append(f"| screenshot transcription | `{m}` | {c} | {used.get(m, 0)} of {len(media)} files |")
+    vlm_calls = sum(c for m, c in allm.items() if m != "rapidocr")
+    L.append(f"\nModel calls not in the ledger above: **{vlm_calls} vision transcriptions** and the intent answers "
+             "tagged with an earlier model, made in runs whose token ledger was not saved. A Gemini Flash "
+             "screenshot call costs roughly 1.3k input + 0.6k output tokens, so these add about "
+             f"{vlm_calls * 1.9:.0f}k tokens (about ${vlm_calls * (1300 * 0.30 + 600 * 2.50) / 1e6:.3f}) - an estimate, "
+             "marked as such. The whole build stays well under $0.10.\n")
+    return L
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cold", required=True)
@@ -43,18 +68,22 @@ def main():
          f"Final full-dataset run over `dataset/deletion_requests.csv`: **{n} requests**.\n",
          "## Where models are used\n",
          "| Stage | Model | When it is called |\n|---|---|---|",
-         "| Request intent (does the text authorize deletion?) | Gemini text model, JSON output, temperature 0 | once per *distinct* request text; identical texts share one call |",
-         "| Screenshot transcription (VLM) | Gemini vision model, temperature 0 | once per screenshot file (11 PNGs), keyed by SHA-256 |",
+         "| Request intent (does the text authorize deletion?) | Gemini Flash, falling back to Groq `gpt-oss-120b`; JSON output, temperature 0 | distinct texts only, 10 per batched call |",
+         "| Screenshot transcription (VLM) | Gemini Flash vision, temperature 0 | once per screenshot file (11 PNGs), keyed by SHA-256 |",
          "| Everything else (evidence parsing, identity, linking, state, policy, ordering) | none | deterministic Python, $0 |\n",
          "Responses are cached in `code/cache/` (keyed by content hash), so a re-run reproduces `output.csv` "
          "with zero model calls. A rule-based intent model and local OCR (RapidOCR) always run as a fallback "
          "and as a cross-check; if the API is unreachable the agent finishes offline.\n",
-         "## Cold run (empty cache) - the run that produced `output.csv`\n",
+         "## Model calls recorded by the token ledger\n",
+         "The response cache was filled across several helper runs because free-tier quotas and retired model "
+         "aliases interrupted the first attempts (the agent's model chain falls back Gemini -> Groq and keeps "
+         "every answer as it arrives). The table below is the ledger of the run that completed the cache.\n",
          "| Provider | Model | Calls by purpose | Calls | Input tokens | Output tokens | Total tokens | Avg tokens / request | Est. cost | Est. cost / request |",
          "|---|---|---|---|---|---|---|---|---|---|"]
     rows, tot = table(cold["calls"], n)
     L += rows
     L.append(f"\nCache hits during this run: {json.dumps(cold.get('cache_hits', {}))}.\n")
+    L += cache_inventory(n)
     if a.warm:
         warm = json.loads(Path(a.warm).read_text())
         wc = sum(v["calls"] for v in warm["calls"].values())
@@ -66,7 +95,7 @@ def main():
     for m, (pi, po) in PRICES.items():
         L.append(f"| `{m}` | ${pi:.2f} | ${po:.2f} |")
     L.append("\nToken counts come from the API's `usage_metadata` on every response (prompt and candidate tokens), "
-             "accumulated in `code/audit/usage.py`; nothing is estimated except the dollar figures.\n")
+             "accumulated in `code/audit/usage.py`. Estimated: dollar figures (list prices above) and the unledgered vision calls (marked).\n")
     (HERE / "usage_report.md").write_text("\n".join(L), encoding="utf-8")
     print((HERE / "usage_report.md").read_text())
 

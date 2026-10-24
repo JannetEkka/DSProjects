@@ -53,12 +53,14 @@ class MediaExtractor:
             entry.setdefault("engines", {})[entry.pop("engine", "rapidocr")] = entry.pop("text")
             self._save()
         engines = entry["engines"]
-        want_vlm = self.prefer in ("auto", "vlm") and any_key()
-        if want_vlm:
-            cached = next((n for n in engines if n != "rapidocr"), None)  # any LLM's transcription
+        if self.prefer in ("auto", "vlm"):
+            # a cached VLM transcription is reused with or without a key, so a re-run anywhere
+            # reproduces the run that produced output.csv; preference order is deterministic
+            cached = sorted(n for n in engines if n != "rapidocr")
             if cached:
                 usage.record_cache_hit("media")
-                return engines[cached]
+                return engines[cached[0]]
+        if self.prefer in ("auto", "vlm") and any_key():
             if self.chain.available:
                 try:
                     text, engine = self.chain.generate(VLM_PROMPT, "media_transcription", image=data)

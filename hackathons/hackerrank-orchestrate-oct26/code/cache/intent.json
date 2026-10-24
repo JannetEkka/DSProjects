@@ -587,6 +587,13 @@
   "rationale": "The request explicitly asks to erase the account linked to the email.",
   "request_type": "DELETION"
  },
+ "37dad9e92f1957bc073754aa47f37ce475c5d8a32d527ba1d9fc43d28bc271c7": {
+  "authorizes_deletion": true,
+  "language": "hi",
+  "model": "gemini:gemini-3-flash-preview",
+  "rationale": "The user is explicitly requesting the permanent deletion of their account and all associated personal data.",
+  "request_type": "DELETION"
+ },
  "38ae15cebdbcc4e24d03f0e0f87d3c104b5fa6de82dec0dc573cd82296c51ea2": {
   "authorizes_deletion": true,
   "language": "en",
@@ -2242,6 +2249,13 @@
   "model": "groq:openai/gpt-oss-120b",
   "rationale": "Explicit request to delete account and personal data.",
   "request_type": "DELETION"
+ },
+ "d560102b7eba2f17c8e06ab636a948aa36d7ce8aee184a8c46eea35237f0c7d5": {
+  "authorizes_deletion": false,
+  "language": "de",
+  "model": "gemini:gemini-3-flash-preview",
+  "rationale": "The user is requesting a copy of their data and explicitly states they do not want their account deleted.",
+  "request_type": "ACCESS"
  },
  "d5b921e389571cd49a98e2aa7ce10215f453dbf0a360e9bb8976faacb6275aa8": {
   "authorizes_deletion": true,
