@@ -108,7 +108,8 @@ class IntentClassifier:
                 self.cache[key] = llm
                 self._save()
             except Exception as exc:
-                print(f"[intent] LLM failed, using rules: {exc!r}")
+                print(f"[intent] Gemini unavailable ({type(exc).__name__}: {str(exc)[:90]}); using the rule model for the rest of this run")
+                self.use_llm = False  # circuit breaker
         if llm is not None:
             result = {**llm, "engine": f"gemini:{self.model}"}
         result["rules_vote"] = rules["authorizes_deletion"]

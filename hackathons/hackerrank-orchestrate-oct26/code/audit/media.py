@@ -42,23 +42,34 @@ class MediaExtractor:
         CACHE.write_text(json.dumps(self.cache, indent=1, sort_keys=True), encoding="utf-8")
 
     def extract(self, path: Path) -> str:
+        """Cache layout: sha256 -> {"file": name, "engines": {engine_name: text}}. With a key the VLM
+        transcription is used (computed once, then cached); offline runs use the local OCR entry."""
         data = Path(path).read_bytes()
         key = hashlib.sha256(data).hexdigest()
-        hit = self.cache.get(key)
-        if hit and (self.prefer != "vlm" or hit.get("engine", "").startswith("gemini")):
-            usage.record_cache_hit("media")
-            return hit["text"]
-        text, engine = "", ""
-        if self.prefer in ("auto", "vlm") and os.environ.get("GEMINI_API_KEY"):
+        entry = self.cache.setdefault(key, {"file": Path(path).name, "engines": {}})
+        if "text" in entry:  # migrate old single-engine layout
+            entry.setdefault("engines", {})[entry.pop("engine", "rapidocr")] = entry.pop("text")
+            self._save()
+        engines = entry["engines"]
+        want_vlm = self.prefer in ("auto", "vlm") and bool(os.environ.get("GEMINI_API_KEY"))
+        vlm_name = f"gemini:{self.model}"
+        if want_vlm:
+            if vlm_name in engines:
+                usage.record_cache_hit("media")
+                return engines[vlm_name]
             try:
-                text, engine = self._gemini(data, path), f"gemini:{self.model}"
-            except Exception as exc:  # network / quota problems -> fall back to OCR
-                print(f"[media] gemini failed for {Path(path).name}: {exc!r}; falling back to OCR")
-        if not text:
-            text, engine = self._rapidocr(path), "rapidocr"
-        self.cache[key] = {"file": Path(path).name, "engine": engine, "text": text}
+                engines[vlm_name] = self._gemini(data, path)
+                self._save()
+                return engines[vlm_name]
+            except Exception as exc:  # network / quota / auth problems -> fall back to OCR
+                print(f"[media] Gemini unavailable ({type(exc).__name__}: {str(exc)[:90]}); using local OCR for the rest of this run")
+                self.prefer = "ocr"  # circuit breaker
+        if "rapidocr" in engines:
+            usage.record_cache_hit("media")
+            return engines["rapidocr"]
+        engines["rapidocr"] = self._rapidocr(path)
         self._save()
-        return text
+        return engines["rapidocr"]
 
     def _gemini(self, data: bytes, path) -> str:
         from google import genai
