@@ -17,20 +17,17 @@ appears here through their briefs and reported results, and in `log.txt`.
 | session_01H89kdKrn9aEhmGBzAcFxS6 | Accuracy work (workflow attribution, chains, lattice), refactor, fixes, final build |
 | session_01LtbcmgYqjJz1ZsCgS1U2pQ | README sections and Ghost Ledger console polish |
 
-**Curation.** The participant asked for the transcripts to keep only what is relevant to building
-and judging the project. These were removed, in both `log.txt` and the readable export:
+**Curation.** The participant asked for the transcript to keep only what is relevant to building
+and judging the project. The readable export therefore leaves out:
 
 * greetings and logistics;
 * the participant's own interview preparation and rehearsal;
 * asides that did not shape the project.
 
-The readable export also leaves out:
+It also leaves out internal reasoning, system notices and raw tool output, and redacts API keys and
+the participant's email.
 
-* internal reasoning;
-* system notices;
-* raw tool output.
-
-API keys and the participant's email are redacted.
+`log.txt` is append-only under `AGENTS.md`, so its earlier entries are unchanged.
 
 To regenerate the export from the session's raw JSONL:
 

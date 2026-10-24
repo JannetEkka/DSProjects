@@ -319,6 +319,68 @@ schema and a rule model, so a model error can't turn into a wrong deletion silen
 
 ---
 
+## Questions another participant reported being asked
+
+They said the interviewer asked about COMPLETE vs INCOMPLETE logic, why a default value or threshold
+was chosen, how the output was validated, and retention and fallback logic.
+
+**Q: How does the agent decide COMPLETE vs INCOMPLETE?**
+A: Per record, not per claim. For every resource linked to the person, `planner.py` takes its state
+at `audit_at` (latest observation wins) and compares it with what `deletion_rules.csv` requires for
+its category. Any gap is a finding:
+- a record that should be deleted is still present;
+- identifiers are still visible where the rule says REDACT or ANONYMIZE;
+- a data flow is still active, or a backup can still be restored.
+
+One finding makes the case INCOMPLETE. Zero findings makes it COMPLETE, and then every step is an
+evidence-backed verification. The reported status is never used as evidence; 164 cases claimed
+COMPLETE and were really INCOMPLETE.
+
+**Q: Why that default value / threshold?**
+A: Every constant is in `code/audit/config.py` with a comment, and the evaluation report has a
+sensitivity table for them. Examples:
+- `MIN_SUPPORT = 10`: a learned pattern needs 10 evidence-owned examples before we trust it.
+  5 changes 0 rows and 20 changes 2.
+- `WORKFLOW_WINDOW_H = 3.0`: 2.5, 4 or 6 h change 0 rows.
+- `LATTICE_MAX_BAND_S = 2`: the one sensitive setting. 1 s changes 113 rows, because the observed
+  band is 3 s wide. 2 s is the smallest band that still learns it.
+
+So the defaults are upper bounds and support levels. The actual timing values (30 s period,
+390/449 s gaps) are learned from the data on every run.
+
+**Q: How did you validate the output?**
+A: In four layers:
+1. **Contract validator** (`audit/validate.py`) on every run: 518 rows, sorted, valid JSON,
+   consecutive steps, phase order, evidence IDs that exist, nothing cited from after `audit_at`.
+   `main.py` exits 1 if anything fails.
+2. **Sample scoring** against the 32 public samples: status 100%, step F1 99.2%, 29/32 exact.
+3. **19 metamorphic tests and 108 unit tests**, including prompt-injection cases.
+4. **Held-out checks.** Leave-one-out re-learns the same timing model 32/32 times, and a perturbed
+   copy of the dataset reproduces 518/518 rows.
+
+**Q: What's the retention logic?**
+A: `deletion_rules.csv` marks some categories RETAIN, such as security audit logs and legal holds.
+Those are never deleted. The agent adds a VERIFY_RECORD_PRESENT step so the deletion can't
+accidentally remove them. The account tombstone keeps the stable user reference but has direct
+identifiers redacted.
+
+**Q: What's the fallback logic?**
+A: Each step has a cheaper, safer fallback:
+
+| Job | Main | Fallback | Last resort |
+|---|---|---|---|
+| Intent | Gemini | Groq | The rule model; `--no-llm` changes only 1 row |
+| Screenshots | Gemini vision | Local RapidOCR | n/a |
+
+Answers are cached by content hash, so a re-run makes zero model calls and reproduces `output.csv`
+byte for byte. When rules and the LLM disagree, a negation or another purpose always blocks
+deletion. Anything still unclear is flagged `needs_human_review`, not guessed.
+
+**Interview format (from the official brief and help page):** a 30-minute voice interview with the
+camera on, open for 12 hours after you submit. Nothing we've seen mentions screen sharing.
+
+---
+
 ## Limitations I'd own
 
 * **In-sample metrics.** All headline numbers are on the 32 cases that guided development. The
