@@ -286,3 +286,27 @@ branch=claude/happy-mayer-u2r4c5
 repo_root=/home/user/DSProjects
 worktree=hackathons/hackerrank-orchestrate-oct26
 parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ
+
+## [2026-10-24T18:00:39Z] Engineering, safety and held-out pass (refactor, tests, injection defences, confidence flags)
+
+User Prompt (verbatim, secrets redacted):
+(brief from the parent session, user-approved) 1. Refactor engine.py into cohesive modules, byte-identical; instance state; config module; type hints; logging; prompts moved to code/prompts/*.md with design headers. 2. pytest unit tests + code/check.sh. 3. Adversarial safety: delimited untrusted text, strict JSON schema (incl. request_type enum), rule-model veto, evidence never sent to a text LLM, injection metamorphic tests, code/audit/SAFETY.md. 4. Leave-one-out timing model and perturbed-dataset run in the report. 5. Confidence/assumption flags in the trace; rebuild console; README Layout. Package, clean-room, log, push.
+
+Agent Response Summary:
+engine.py is now a facade over identity / semantics / linking / workflow / planner plus config.py. Per-run state lives on the instance, the CLI logs through logging with the same output, and the prompts are versioned .md files with untrusted text JSON-escaped inside tags. Added 79 offline pytest tests and check.sh. The tests found two defects, both fixed: the validator skipped the late-evidence check without an engine, and the rule model missed non-English access requests. Safety: strict intent schema (fresh and cached answers), rule-model veto, stripping of forged role lines and "ignore previous instructions" text, 7 injection metamorphic cases (suite 19/19), and SAFETY.md. Held-out: all 32 leave-one-out folds re-learn the identical timing model. The perturbed dataset (ids +7000, timestamps shifted by a constant) reproduces 518/518 rows. The trace now has per-resource confidence: 185 high / 309 medium / 14 low rows. The 518 output.csv is byte-identical throughout. Samples are unchanged at 29/32 exact, 99.2% step F1. The clean-room run without keys is byte-identical. Note: the session now has live LLM keys, so the injection texts were classified once by Gemini/Groq (v2 prompt; all ignored the injection) and cached.
+
+Actions:
+* code/audit/{engine,identity,semantics,linking,workflow,planner,config,prompts}.py; code/prompts/*.md; code/audit/SAFETY.md
+* code/audit/intent.py (schema, veto, strip_injection), validate.py, llm.py and main.py (logging)
+* code/tests/*.py (79 tests), code/check.sh, requirements.txt (pytest)
+* code/evaluation/main.py: injection cases, held_out(), perturbation_check(), confidence counts, unit-test line; report_notes row 14
+* README.md + code/README.md Layout section; console rebuilt; usage report regenerated
+* code.zip rebuilt; clean-room test byte-identical; copied to submission/
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ

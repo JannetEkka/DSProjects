@@ -29,9 +29,10 @@ Cache hits during this run: {"media": 11, "intent": 550}.
 | Kind | Model | Cached answers | Used by the final run |
 |---|---|---|---|
 | intent answer | `gemini (earlier run, model not tagged)` | 3 | yes (looked up by text hash) |
-| intent answer | `gemini:gemini-3-flash-preview` | 12 | yes (looked up by text hash) |
-| intent answer | `gemini:gemini-3.5-flash` | 100 | yes (looked up by text hash) |
-| intent answer | `gemini:gemini-flash-latest` | 10 | yes (looked up by text hash) |
+| intent answer | `gemini:gemini-3-flash-preview` | 14 | yes (looked up by text hash) |
+| intent answer | `gemini:gemini-3.5-flash` | 102 | yes (looked up by text hash) |
+| intent answer | `gemini:gemini-3.8-flash` | 1 | yes (looked up by text hash) |
+| intent answer | `gemini:gemini-flash-latest` | 12 | yes (looked up by text hash) |
 | intent answer | `groq:openai/gpt-oss-120b` | 278 | yes (looked up by text hash) |
 | screenshot transcription | `gemini:gemini-3.5-flash` | 2 | 2 of 11 files |
 | screenshot transcription | `gemini:gemini-3.8-flash` | 6 | 4 of 11 files |
