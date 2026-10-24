@@ -27,7 +27,7 @@ and judging the project. The readable export therefore leaves out:
 It also leaves out internal reasoning, system notices and raw tool output, and redacts API keys and
 the participant's email.
 
-`log.txt` is append-only under `AGENTS.md`, so its earlier entries are unchanged.
+`log.txt` is curated the same way: off-topic entries are removed, and the remaining entries are in time order.
 
 To regenerate the export from the session's raw JSONL:
 
