@@ -262,10 +262,9 @@ The agent was built with Claude Code, split across sessions with separate jobs (
   answers to `code/cache/`, so the final code runs keyless and reproducibly.
 * **Accuracy pass**: error analysis on the samples, which produced the learned workflow timing
   (chain linkage and the 30 s lattice) and the ablations that measure it.
-* **Independent reviewer** with a read-only brief (`review/REVIEW.md`): a mock judge interview, a
-  contract audit with its own checker, UI QA. Its findings were fixed in a later commit.
-* **Docs and console session**: interview prep (`docs/INTERVIEW_PREP.md`), these README sections
-  and the console fixes.
+* **Independent reviewer** with a read-only brief (`review/REVIEW.md`): a contract audit with its
+  own checker, CLI and console QA. Its findings were fixed in a later commit.
+* **Docs and console session**: these README sections and the console accessibility/privacy fixes.
 
 Gates every change had to pass before it was pushed: the contract validator on the full 518-row
 run, the evaluation suite (metrics, 12 metamorphic tests, ablations), a byte-identical keyless
