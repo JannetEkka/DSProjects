@@ -1,0 +1,20 @@
+{
+ "5949435ad850962183d5666ef9f9fefc5b94b86bddd2372b4bedbb4e1874bc90": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "rationale": "The user explicitly requests the erasure of their account and associated copies of personal data.",
+  "request_type": "DELETION"
+ },
+ "5d2ca36a438153a546f89e676a6b14e24e5a268765d781572dcc2ff20b210508": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "rationale": "The customer explicitly requests account closure and the deletion of their personal data.",
+  "request_type": "DELETION"
+ },
+ "ca275dbfcd55504596da8e72c0ba09d4fe2ebf8b2266fc0a501100108be38b53": {
+  "authorizes_deletion": true,
+  "language": "en",
+  "rationale": "The customer explicitly requests account closure and deletion of their personal data.",
+  "request_type": "DELETION"
+ }
+}

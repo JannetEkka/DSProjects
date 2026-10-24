@@ -69,6 +69,7 @@ def run(requests_path: Path, out_path: Path, dataset: Path, use_llm: bool, trace
         if p.exists():
             for r in csv.DictReader(open(p, newline="", encoding="utf-8")):
                 universe[r["case_id"]] = r
+    intent.prefetch(r["request_text"] for r in universe.values())
     intents = {cid: intent.classify(r["request_text"]) for cid, r in universe.items()}
     engine.prepare([r for cid, r in universe.items() if intents[cid]["authorizes_deletion"]])
 

@@ -1,7 +1,8 @@
 """Media text extraction for screenshots (and scanned documents).
 
 Order of preference:
-  1. Gemini vision model (if GEMINI_API_KEY is set) - transcribes every visible field.
+  1. A vision LLM - transcribes every visible field. Walks a model chain with retries (audit.llm):
+     Gemini first, then Mistral / Groq / NVIDIA when their keys are set, so one bad model doesn't end the run.
   2. Local RapidOCR (onnxruntime) - offline fallback, no key needed.
 Results are cached by file SHA-256 in code/cache/media_text.json so reruns are free and
 deterministic. Token usage of model calls is recorded via audit.usage.
@@ -14,6 +15,7 @@ import os
 from pathlib import Path
 
 from . import usage
+from .llm import LLMChain, any_key
 
 CACHE = Path(__file__).resolve().parent.parent / "cache" / "media_text.json"
 
@@ -28,7 +30,7 @@ Do not summarize, do not add commentary."""
 class MediaExtractor:
     def __init__(self, prefer: str = "auto", model: str | None = None):
         self.prefer = prefer
-        self.model = model or os.environ.get("GEMINI_VISION_MODEL", "gemini-2.5-flash")
+        self.chain = LLMChain(model or os.environ.get("GEMINI_VISION_MODEL"), tag="media", vision=True)
         self.cache = {}
         if CACHE.exists():
             try:
@@ -51,40 +53,26 @@ class MediaExtractor:
             entry.setdefault("engines", {})[entry.pop("engine", "rapidocr")] = entry.pop("text")
             self._save()
         engines = entry["engines"]
-        want_vlm = self.prefer in ("auto", "vlm") and bool(os.environ.get("GEMINI_API_KEY"))
-        vlm_name = f"gemini:{self.model}"
+        want_vlm = self.prefer in ("auto", "vlm") and any_key()
         if want_vlm:
-            if vlm_name in engines:
+            cached = next((n for n in engines if n != "rapidocr"), None)  # any LLM's transcription
+            if cached:
                 usage.record_cache_hit("media")
-                return engines[vlm_name]
-            try:
-                engines[vlm_name] = self._gemini(data, path)
-                self._save()
-                return engines[vlm_name]
-            except Exception as exc:  # network / quota / auth problems -> fall back to OCR
-                print(f"[media] Gemini unavailable ({type(exc).__name__}: {str(exc)[:90]}); using local OCR for the rest of this run")
-                self.prefer = "ocr"  # circuit breaker
+                return engines[cached]
+            if self.chain.available:
+                try:
+                    text, engine = self.chain.generate(VLM_PROMPT, "media_transcription", image=data)
+                    engines[engine] = text
+                    self._save()
+                    return text
+                except RuntimeError:  # whole model chain failed for this file -> local OCR for this one
+                    pass
         if "rapidocr" in engines:
             usage.record_cache_hit("media")
             return engines["rapidocr"]
         engines["rapidocr"] = self._rapidocr(path)
         self._save()
         return engines["rapidocr"]
-
-    def _gemini(self, data: bytes, path) -> str:
-        from google import genai
-        from google.genai import types
-
-        client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-        resp = client.models.generate_content(
-            model=self.model,
-            contents=[types.Part.from_bytes(data=data, mime_type="image/png"), VLM_PROMPT],
-            config=types.GenerateContentConfig(temperature=0),
-        )
-        um = getattr(resp, "usage_metadata", None)
-        usage.record("gemini", self.model, "media_transcription",
-                     getattr(um, "prompt_token_count", 0) or 0, getattr(um, "candidates_token_count", 0) or 0)
-        return resp.text or ""
 
     def _rapidocr(self, path) -> str:
         if self._ocr is None:

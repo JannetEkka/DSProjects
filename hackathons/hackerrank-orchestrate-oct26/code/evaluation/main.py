@@ -118,6 +118,7 @@ class Agent:
                 universe[r["case_id"]] = r
         for r in list(cases) + list(universe_extra):
             universe[r["case_id"]] = r
+        self.intent.prefetch(r["request_text"] for r in universe.values())
         intents = {cid: self.intent.classify(r["request_text"]) for cid, r in universe.items()}
         eng.prepare([r for cid, r in universe.items() if intents[cid]["authorizes_deletion"]])
         out = {}
