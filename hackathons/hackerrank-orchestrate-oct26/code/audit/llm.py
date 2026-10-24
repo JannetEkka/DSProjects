@@ -36,6 +36,11 @@ OPENAI_COMPAT = {
 }
 RETRIES_PER_MODEL = 3
 BACKOFF_S = 2.0
+# client-side pacing for rate-limited tiers: minimum seconds between two calls to one provider, and the
+# base backoff after a 429 (both overridable; 0 = no pacing)
+MIN_INTERVAL_S = float(os.environ.get("LLM_MIN_INTERVAL_S", "0"))
+RATE_LIMIT_BACKOFF_S = float(os.environ.get("LLM_RATE_LIMIT_BACKOFF_S", str(BACKOFF_S)))
+_last_call: dict[str, float] = {}
 TIMEOUT_S = 90
 MAX_STRIKES = 3
 
@@ -88,6 +93,10 @@ class LLMChain:
             for attempt in range(RETRIES_PER_MODEL):
                 try:
                     call = self._call_gemini if provider == "gemini" else self._call_openai_compat
+                    wait = _last_call.get(provider, 0.0) + MIN_INTERVAL_S - time.monotonic()
+                    if wait > 0:
+                        time.sleep(wait)
+                    _last_call[provider] = time.monotonic()
                     text, tin, tout = call(provider, model, prompt, image, json_mode)
                     usage.record(provider, model, purpose, tin, tout)
                     self.strikes = 0
@@ -100,7 +109,7 @@ class LLMChain:
                         self.dead.add((provider, model))
                         break
                     if attempt + 1 < RETRIES_PER_MODEL:
-                        time.sleep(BACKOFF_S * 2 ** attempt)
+                        time.sleep((RATE_LIMIT_BACKOFF_S if code == 429 else BACKOFF_S) * 2 ** attempt)
             else:
                 log.warning(f"[{self.tag}] {provider}:{model} still failing ({_status(last) or type(last).__name__}); trying next model")
         self.strikes += 1

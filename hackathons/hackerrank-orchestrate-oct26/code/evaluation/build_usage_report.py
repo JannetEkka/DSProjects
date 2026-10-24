@@ -57,10 +57,41 @@ def cache_inventory(requests: int):
     return L
 
 
+def experiment_section(x: dict) -> list[str]:
+    """A cold re-run from empty caches with one pinned model, kept as a record next to the shipped ledger."""
+    ra, rb = x["run_a"], x["run_b"]
+    led = ra["ledger"]
+    calls = sum(v["calls"] for v in led["calls"].values())
+    toks = sum(v["input"] + v["output"] for v in led["calls"].values())
+    cost = sum(v.get("cost_usd", 0) for v in led["calls"].values())
+    L = [f"## Cold-run experiment ({x['date']}, not shipped)\n",
+         "Goal: one coherent cold run (empty caches, one pinned model per stage) whose ledger could replace the "
+         "one above. It was not shipped; the ledger above stays the record of the shipped run.\n",
+         "**Model probe** (one tiny call each): " + "; ".join(f"`{m}` {r}" for m, r in x["probe"].items())
+         + f". Declared fallback: {x['fallback']}.\n",
+         f"**Run A** (all {led['requests']} requests, then the samples): {calls} calls, {toks / 1000:.0f}k tokens, "
+         f"${cost:.3f}. The pinned model served the first calls and then hit its rate limit; the fallback served the rest.\n",
+         "| Provider | Model | Calls by purpose | Calls | Input tokens | Output tokens | Total tokens | Avg tokens / request | Est. cost | Est. cost / request |",
+         "|---|---|---|---|---|---|---|---|---|---|"]
+    L += table(led["calls"], led["requests"])[0]
+    smp = ra["samples"]
+    L.append(f"\nResult: {ra['changed_rows_518']} of {led['requests']} output rows changed, but the samples dropped to "
+             f"{smp['exact']} exact / {smp['step_f1']} step F1 / {smp['status']} status (suite {smp['suite']}): "
+             f"{', '.join(ra['misreads'])} - {ra['misread_detail']}. **Fix:** the intent module now lets the "
+             "rule model override an LLM refusal when the text has a clear deletion cue, no negation and no other "
+             "purpose (the mirror of the existing veto), recorded as `override: rules_over_llm`; unit tests replay "
+             "both refusals.\n")
+    L.append(f"**Run B** ({rb['setup']}): {rb['result']}. That fully offline path reproduced "
+             f"{rb['offline_rows_identical']}/{led['requests']} rows; {rb['offline_diff']}.\n")
+    return L
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--cold", required=True)
     ap.add_argument("--warm", default=None)
+    ap.add_argument("--experiment", default=str(HERE / "usage_cold_experiment_20261024.json"),
+                    help="recorded cold-run experiment (not shipped); rendered as its own section")
     a = ap.parse_args()
     cold = json.loads(Path(a.cold).read_text())
     n = cold["requests"]
@@ -90,6 +121,8 @@ def main():
         L.append("## Warm re-run (response cache present)\n")
         L.append(f"{warm['requests']} requests, **{wc} model calls**, cache hits {json.dumps(warm.get('cache_hits', {}))}; "
                  "output identical to the cold run.\n")
+    if a.experiment and Path(a.experiment).exists():
+        L += experiment_section(json.loads(Path(a.experiment).read_text()))
     L.append("## Pricing assumptions (USD per 1M tokens, list price)\n")
     L.append("| Model | Input | Output |\n|---|---|---|")
     for m, (pi, po) in PRICES.items():

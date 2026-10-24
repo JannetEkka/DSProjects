@@ -65,7 +65,7 @@ Each case is derived from a real request and checks an invariant the task demand
 
 **19/19 passed.**
 
-Unit tests (`python3 -m pytest code/tests -q`, offline): **79 passed in 0.54s**.
+Unit tests (`python3 -m pytest code/tests -q`, offline): **85 passed in 0.53s**.
 
 ## 4. Remaining sample mismatches (error analysis)
 
@@ -117,4 +117,4 @@ full 518-case run through the contract validator (`code/audit/validate.py`).
 * case_23 is now resolved by the workflow lattice (only `account_410` is in phase with the subject's own export/search results).
 
 
-_Evaluation runtime: 174.9s._
+_Evaluation runtime: 171.7s._

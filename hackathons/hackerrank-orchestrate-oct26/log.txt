@@ -310,3 +310,26 @@ branch=claude/happy-mayer-u2r4c5
 repo_root=/home/user/DSProjects
 worktree=hackathons/hackerrank-orchestrate-oct26
 parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ
+
+## [2026-10-24T20:20:54Z] Cold-run experiment and symmetric intent disagreement policy
+
+User Prompt (verbatim, secrets redacted):
+(parent session, user-approved) Run one coherent cold run with a pinned model and compare it with the shipped build without replacing it. Then, on the decision "(a) keep the shipped build, plus (c) and the pacing knobs": implement the symmetric rules-over-LLM disagreement policy with tests (including the cold-run refusals of case_12/case_21), commit the LLM pacing knobs with a test, add a generated "Cold-run experiment" section to usage_report.md, verify everything, repackage, log, scan for keys, push.
+
+Agent Response Summary:
+Probed the Gemini models: only gemini-3-flash-preview worked for text and vision. Run A from empty caches: 50 calls, about 76k tokens, $0.042. Gemini served 14 calls before its rate limit; Groq gpt-oss-120b served 36. The 518 output was unchanged, but two sample follow-ups were refused by Groq, giving 27/32 exact. Run B (Gemini only, paced) hit an exhausted daily quota and ran fully offline, reproducing 517/518 rows (case_45 needs the VLM). Kept the shipped build. Added the override: when the LLM refuses a text with a clear, un-negated deletion cue and no other purpose, the rule model decides. Recorded as override: rules_over_llm with low confidence; the existing veto is the mirror case. Documented in SAFETY.md and the intent docstring. Added the pacing knobs LLM_MIN_INTERVAL_S and LLM_RATE_LIMIT_BACKOFF_S (off by default). Tests now 85. The usage report has a generated experiment section, built from usage_cold_experiment_20261024.json. The 518 output.csv is byte-identical, suite 19/19, validator OK, clean-room run byte-identical, key scan clean.
+
+Actions:
+* model probe; cold runs A and B in a scratch copy (caches emptied there only)
+* code/audit/intent.py (rule_signals, override), SAFETY.md T3, code/audit/llm.py (pacing)
+* code/tests/test_safety.py (+5), code/tests/test_intent_llm.py (+2)
+* code/evaluation/build_usage_report.py experiment section; usage_cold_experiment_20261024.json; usage_report.md, evaluation_report.md regenerated
+* console rebuilt; code.zip rebuilt; clean-room test; copied to submission/
+
+Context:
+tool=Claude Code
+model=claude-opus-5-5
+branch=claude/happy-mayer-u2r4c5
+repo_root=/home/user/DSProjects
+worktree=hackathons/hackerrank-orchestrate-oct26
+parent_agent=session_01ABdxWSQm1ctSj6anpiX5aJ

@@ -4,8 +4,15 @@ Two independent classifiers vote:
   * an LLM (Gemini, JSON-constrained, temperature 0) when GEMINI_API_KEY is set;
   * a deterministic multilingual rule model (negation-aware) that always runs.
 A third, independent signal is the privacy-intake CLASSIFY_REQUEST activity in system_activity.csv.
-The LLM decides when present, within a strict schema; the rule model vetoes an LLM 'authorizes deletion'
-when the text negates deletion or states another purpose, and disagreements are surfaced in the trace.
+The LLM decides when present, within a strict schema, and the deterministic rule model is the
+tie-breaker when the two disagree, in both directions:
+  * veto - the LLM says "deletion" but the text negates deletion or states another purpose without a
+    deletion cue: authorizing a non-deletion would be a destructive error, so the rules win;
+  * override - the LLM says "not deletion" but the text has a clear deletion cue, no negation and no
+    non-deletion purpose: refusing a genuine deletion would be a compliance failure, so the rules win.
+Both are recorded in the trace (`override`, `confidence: low`). On this dataset the two models agree on
+all 550 texts, so neither rule changes the output; they protect against a model that misreads (in a
+cold run one fallback model refused two "please verify my deletion" follow-ups).
 LLM answers are cached by text hash (code/cache/intent.json) so re-runs cost nothing. Uncached texts are
 sent in chunks (prefetch) over a model chain with retries (audit.llm: Gemini, then Mistral / Groq / NVIDIA
 when their keys are set), so one bad model doesn't end the run.
@@ -58,18 +65,24 @@ NON_DELETION_HINTS = {
 }
 
 
+def rule_signals(text: str) -> tuple[list[str], list[str], str | None]:
+    """(deletion cues, negations, non-deletion purpose) found in the text by the rule model."""
+    t = (text or "").lower()
+    neg = [p for p in NEGATION_PATTERNS if re.search(p, t)]
+    pos = [p for p in DELETION_PATTERNS if re.search(p, t)]
+    rtype = next((k for k, p in NON_DELETION_HINTS.items() if re.search(p, t)), None)
+    return pos, neg, rtype
+
+
 def rule_classify(text: str) -> dict:
     """Requests arrive through the deletion workflow, so deletion is the prior. A request is
     NOT a deletion when it explicitly negates deletion, or states a non-deletion purpose
     (access, export, correction, opt-out, login help) without any deletion cue."""
-    t = (text or "").lower()
-    if not t.strip():
+    if not (text or "").strip():
         # an empty request states no purpose at all, so it cannot authorize deletion
         return {"authorizes_deletion": False, "request_type": "OTHER", "engine": "rules",
                 "rationale": "empty request text"}
-    neg = [p for p in NEGATION_PATTERNS if re.search(p, t)]
-    pos = [p for p in DELETION_PATTERNS if re.search(p, t)]
-    rtype = next((k for k, p in NON_DELETION_HINTS.items() if re.search(p, t)), None)
+    pos, neg, rtype = rule_signals(text)
     authorizes = not (neg or (rtype and not pos))
     return {"authorizes_deletion": authorizes, "request_type": "DELETION" if authorizes else (rtype or "OTHER"),
             "engine": "rules", "rationale": f"deletion cues={len(pos)} negations={len(neg)} purpose={rtype}"}
@@ -178,9 +191,18 @@ class IntentClassifier:
             result = {**{k: v for k, v in llm.items() if k != "model"}, "engine": llm["model"]}
             if result["authorizes_deletion"] and not rules["authorizes_deletion"]:
                 # veto: the text negates deletion or states a non-deletion purpose without a deletion cue
-                result = {**rules, "engine": f"rules (veto over {llm['model']})", "veto": True}
+                result = {**rules, "engine": f"rules (veto over {llm['model']})", "veto": True,
+                          "override": "rules_over_llm", "confidence": "low"}
+            elif not result["authorizes_deletion"] and rules["authorizes_deletion"]:
+                pos, neg, rtype = rule_signals(clean)
+                if pos and not neg and rtype is None:
+                    # override: a clear, un-negated deletion request with no other purpose
+                    result = {**rules, "engine": f"rules (override of {llm['model']})",
+                              "override": "rules_over_llm", "confidence": "low",
+                              "llm_vote": {"request_type": llm["request_type"], "rationale": llm["rationale"]}}
         result["rules_vote"] = rules["authorizes_deletion"]
-        result["agreement"] = result["authorizes_deletion"] == rules["authorizes_deletion"] and not result.get("veto")
+        result["agreement"] = (result["authorizes_deletion"] == rules["authorizes_deletion"]
+                               and "override" not in result)
         if injected:
             result["injection_markers"] = injected
         return result

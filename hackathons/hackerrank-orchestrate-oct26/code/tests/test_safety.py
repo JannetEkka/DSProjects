@@ -42,10 +42,36 @@ def test_off_schema_cached_answer_falls_back_to_rules():
     assert r["engine"] == "rules" and r["authorizes_deletion"] is True
 
 
-def test_llm_refusal_is_kept_but_disagreement_logged():
-    r = _with_cached("Please delete my account.",
-                     {"authorizes_deletion": False, "request_type": "OTHER", "language": "en", "rationale": "r"})
-    assert r["authorizes_deletion"] is False and r["agreement"] is False
+REFUSAL = {"authorizes_deletion": False, "request_type": "ACCOUNT_SUPPORT", "language": "en", "rationale": "r"}
+
+
+def test_rules_override_llm_refusal_of_a_clear_deletion():
+    r = _with_cached("Please delete my account.", REFUSAL)
+    assert r["authorizes_deletion"] is True and r["override"] == "rules_over_llm"
+    assert r["confidence"] == "low" and r["agreement"] is False and r["llm_vote"]["request_type"] == "ACCOUNT_SUPPORT"
+
+
+def test_veto_is_also_recorded_as_an_override():
+    r = _with_cached("Do not delete anything, I still use the account.", GOOD)
+    assert r["override"] == "rules_over_llm" and r["confidence"] == "low"
+
+
+def test_llm_refusal_kept_when_the_text_states_another_purpose():
+    # a deletion cue plus a correction purpose is not a *clear* deletion: the LLM's reading stands
+    r = _with_cached("Please delete the typo and update my shipping address.", REFUSAL)
+    assert r["authorizes_deletion"] is False and "override" not in r and r["agreement"] is False
+
+
+@pytest.mark.parametrize("text", [
+    # sample case_12 and case_21: in a cold run a fallback model refused both as ACCOUNT_SUPPORT
+    "I changed the email on this account before deleting it. Please check that nothing tied to the old "
+    "address was left behind, even in systems that do not display the email.",
+    "I deleted my account and received the confirmation email. Could you verify that the profile is gone and "
+    "that anything retained for security is limited to what is required?",
+])
+def test_cold_run_refusals_of_deletion_follow_ups_are_overridden(text):
+    r = _with_cached(text, REFUSAL)
+    assert r["authorizes_deletion"] is True and r["override"] == "rules_over_llm"
 
 
 @pytest.mark.parametrize("text", [

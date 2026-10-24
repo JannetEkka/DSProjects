@@ -76,3 +76,37 @@ def test_rejected_model_is_dropped(monkeypatch):
     monkeypatch.setattr(chain, "_call_gemini", call)
     assert chain.generate("p", "test") == ('{"ok": true}', "gemini:good")
     assert ("gemini", "retired") in chain.dead
+
+
+def test_pacing_is_off_by_default_and_spaces_calls(monkeypatch):
+    assert llm.MIN_INTERVAL_S == 0.0  # LLM_MIN_INTERVAL_S unset -> no pacing
+    monkeypatch.setenv("GEMINI_API_KEY", "test-not-a-key")
+    monkeypatch.setenv("GEMINI_MODELS", "m1")
+    monkeypatch.setattr(llm, "MIN_INTERVAL_S", 5.0)
+    monkeypatch.setattr(llm, "_last_call", {})
+    clock = {"t": 100.0}
+    slept = []
+    monkeypatch.setattr(llm.time, "monotonic", lambda: clock["t"])
+    monkeypatch.setattr(llm.time, "sleep", lambda s: (slept.append(s), clock.__setitem__("t", clock["t"] + s)))
+    chain = llm.LLMChain(tag="test")
+    monkeypatch.setattr(chain, "_call_gemini", lambda *a: ("{}", 1, 1))
+    chain.generate("p", "test")
+    clock["t"] += 1.0
+    chain.generate("p", "test")
+    assert slept == [4.0]  # second call waits until 5 s after the first
+
+
+def test_rate_limit_uses_its_own_backoff(monkeypatch):
+    monkeypatch.setenv("GEMINI_API_KEY", "test-not-a-key")
+    monkeypatch.setenv("GEMINI_MODELS", "m1")
+    monkeypatch.setattr(llm, "RATE_LIMIT_BACKOFF_S", 20.0)
+    slept = []
+    monkeypatch.setattr(llm.time, "sleep", slept.append)
+    chain = llm.LLMChain(tag="test")
+
+    def limited(*a):
+        raise llm.HTTPStatusError(429, "slow down")
+    monkeypatch.setattr(chain, "_call_gemini", limited)
+    with pytest.raises(RuntimeError):
+        chain.generate("p", "test")
+    assert slept == [20.0, 40.0]
