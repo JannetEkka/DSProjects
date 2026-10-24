@@ -117,6 +117,7 @@ class WorkflowMixin:
           kept when it recurs for the same owner, is sharp (>= 80% of same-owner pairs within +-3 s
           fall exactly on it) and never (+-1 s) separates two different owners;
           gaps that are the sum of two kept gaps (two hops) are implied by the union below.
+        Users in `timing_holdout` contribute nothing to the statistics (held-out evaluation).
         Orphan activities (no owner in any evidence) that a chain connects to owned activities of a
         single person inherit that owner (`chain_owner`)."""
         P = lambda t: datetime.fromisoformat(t.replace("Z", "+00:00")).timestamp()
@@ -131,7 +132,7 @@ class WorkflowMixin:
         # --- lattice
         pairs = {}
         for tj, uj in jobs:
-            if uj is None:
+            if uj is None or uj in self.timing_holdout:
                 continue
             for te, tpl, ue, _ in events:
                 if ue == uj and 0 < te - tj <= config.LATTICE_HORIZON_S:
@@ -157,7 +158,7 @@ class WorkflowMixin:
                 d = int(tj - ti)
                 if d > config.CHAIN_MAX_GAP_S:
                     break
-                if tpl2 != tpl or ui is None or uj is None:
+                if tpl2 != tpl or ui is None or uj is None or {ui, uj} & self.timing_holdout:
                     continue
                 bucket = same if ui == uj else cross
                 bucket.setdefault(tpl, {}).setdefault(d, 0)

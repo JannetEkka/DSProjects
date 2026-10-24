@@ -59,6 +59,7 @@ class AuditEngine(LinkingMixin, WorkflowMixin, PlannerMixin):
         self.lattice_period: int | None = None
         self.chain_gaps: dict[str, list[int]] = {}
         self.chain_owner: dict[str, str] = {}
+        self.timing_holdout: set[str] = set()  # users excluded from timing-model learning
 
     def _load_rules(self):
         rules = dict(DEFAULT_TREATMENT)

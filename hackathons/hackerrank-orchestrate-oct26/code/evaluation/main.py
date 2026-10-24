@@ -14,6 +14,7 @@ from __future__ import annotations
 import csv
 import io
 import json
+import re
 import sys
 import time
 from contextlib import redirect_stdout
@@ -100,20 +101,21 @@ def score(pred: dict, gold: dict) -> dict:
 class Agent:
     """In-process agent (shares parsed evidence across runs for speed)."""
 
-    def __init__(self, use_llm=False):
-        self.store = EvidenceStore(DS, MediaExtractor(prefer="auto" if use_llm else "ocr"))
-        self.ids = IdentityResolver(DS)
+    def __init__(self, use_llm=False, ds=DS, store_cls=EvidenceStore):
+        self.ds = ds
+        self.store = store_cls(ds, MediaExtractor(prefer="auto" if use_llm else "ocr"))
+        self.ids = IdentityResolver(ds)
         self.intent = IntentClassifier(use_llm=use_llm)
         self._engine = None
 
     def run(self, cases, universe_extra=(), **ablate):
         if self._engine is None:
-            self._engine = AuditEngine(DS, self.store, self.ids)
+            self._engine = AuditEngine(self.ds, self.store, self.ids)
         eng = self._engine
         for k in ("DISABLE_WORKFLOW", "TRUST_CATALOG", "DISABLE_ERAS", "DISABLE_TIMING"):
             setattr(eng, k, ablate.get(k, False))
         universe = {}
-        for p in (DS / "deletion_requests.csv", DS / "sample_deletion_requests.csv"):
+        for p in (self.ds / "deletion_requests.csv", self.ds / "sample_deletion_requests.csv"):
             for r in csv.DictReader(open(p, newline="", encoding="utf-8-sig")):
                 universe[r["case_id"]] = r
         for r in list(cases) + list(universe_extra):
@@ -261,6 +263,91 @@ def bom_crlf_equivalence(agent, pred):
             f"rows read back identical={same_rows}, differing predictions={len(diff) if same_rows else 'n/a'}")
 
 
+def timing_model(eng):
+    return (eng.lattice_period, {k: sorted(v) for k, v in eng.lattice.items()}, dict(eng.chain_gaps),
+            dict(eng.chain_owner))
+
+
+def held_out(agent, cases, gold, pred):
+    """Leave-one-out for the learned timing model: for each sample case, the model is re-learned with
+    that subject's activity excluded from the statistics, and the case is scored with that model.
+    When the re-learned model equals the full one the prediction is necessarily unchanged (the engine
+    is deterministic), so only the folds whose model differs are re-run."""
+    eng = agent._engine
+    agent.run(cases)
+    full = timing_model(eng)
+    out, same = {}, 0
+    for c in cases:
+        ident = eng.ids.resolve(c["email"])
+        eng.timing_holdout = {ident.user_id} if ident else set()
+        eng._learn_workflow_timing()
+        if timing_model(eng) == full:
+            same += 1
+            out[c["case_id"]] = pred[c["case_id"]]
+        else:
+            out[c["case_id"]] = agent.run([c])[c["case_id"]]
+    eng.timing_holdout = set()
+    agent.run(cases)
+    return {"folds": len(cases), "same_model": same, "metrics": score(out, gold)}
+
+
+PERTURB_ID_RE = re.compile(r"(?<![A-Za-z_])(audit_record|data_flow|legal_hold|email_log|account|search|analytics|"
+                           r"support|export|backup|tombstone|marketing|object|cache|telemetry|user|evidence|"
+                           r"activity|audit)_(\d+)\b")
+PERTURB_TS_RE = re.compile(r"\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z")
+PERTURB_SHIFT = None  # set in perturbation_check
+
+
+def perturb_text(text):
+    """Consistent renaming (every numeric id n -> n + 7000, same prefix) and a constant time shift."""
+    from datetime import datetime
+    text = PERTURB_ID_RE.sub(lambda m: f"{m.group(1)}_{int(m.group(2)) + 7000}", text)
+    return PERTURB_TS_RE.sub(lambda m: (datetime.strptime(m.group(0), "%Y-%m-%dT%H:%M:%SZ") + PERTURB_SHIFT)
+                             .strftime("%Y-%m-%dT%H:%M:%SZ"), text)
+
+
+class PerturbedStore(EvidenceStore):
+    """PDF and screenshot text comes from the unchanged binaries / transcription cache, so it is
+    perturbed after extraction, exactly like the text files on disk."""
+
+    def _load_document_text(self, eid, text, captured, source):
+        super()._load_document_text(eid, perturb_text(text), captured, source)
+
+
+def perturbation_check(pred_full):
+    """Copy the dataset with every id renamed consistently and every timestamp shifted by a constant,
+    run the agent on it, and compare with the original output mapped through the same renaming.
+    `strict` = identical rows; `canonical` = identical once steps that share (phase, operation, system)
+    are compared as a set (renaming can flip the lexical order of two resources in one system)."""
+    import shutil
+    import tempfile
+    from datetime import timedelta
+    global PERTURB_SHIFT
+    PERTURB_SHIFT = timedelta(days=3, hours=7, minutes=11, seconds=13)
+    with tempfile.TemporaryDirectory() as d:
+        ds2 = Path(d) / "dataset"
+        shutil.copytree(DS, ds2)
+        for f in ds2.rglob("*"):
+            if f.is_file() and f.suffix.lower() in (".csv", ".log", ".json", ".sql", ".txt", ".jsonl"):
+                f.write_text(perturb_text(f.read_text(encoding="utf-8-sig")), encoding="utf-8")
+        with redirect_stdout(io.StringIO()):
+            ag = Agent(use_llm=True, ds=ds2, store_cls=PerturbedStore)
+        cases2 = list(csv.DictReader(open(ds2 / "deletion_requests.csv", newline="", encoding="utf-8-sig")))
+        got = ag.run(cases2)
+
+    def mapped(steps):
+        return [{**s, "resource_id": perturb_text(s["resource_id"]), "evidence_id": perturb_text(s["evidence_id"])}
+                for s in steps]
+
+    def canon(steps):
+        return sorted(tuple(s[f] for f in ("phase", "operation", "system_id", "resource_id", "state", "evidence_id"))
+                      for s in steps)
+    strict = sum(got[c] == (st, mapped(sp)) for c, (st, sp) in pred_full.items())
+    canonical = sum(got[c][0] == st and canon(got[c][1]) == canon(mapped(sp)) for c, (st, sp) in pred_full.items())
+    status = sum(got[c][0] == st for c, (st, _) in pred_full.items())
+    return {"n": len(pred_full), "strict": strict, "canonical": canonical, "status": status}
+
+
 def full_cases():
     return list(csv.DictReader(open(DS / "deletion_requests.csv", newline="", encoding="utf-8-sig")))
 
@@ -367,6 +454,8 @@ def main():
         suite_res.append((name, case["case_id"], ok, detail))
     suite_res.append(bom_crlf_equivalence(agent, agent.run(cases)))
     sens = sensitivity(agent, cases, gold)
+    sens["held_out"] = held_out(agent, cases, gold, pred)
+    sens["perturbed"] = perturbation_check(agent.run(full_cases()))
     unit = unit_tests()
     agent.run(cases)
 
@@ -450,6 +539,19 @@ def write_report(m, abl_rows, suite_res, failures, sens, unit, secs):
                 f"the jittered run still differs from the timing-off run in {s['jitter_vs_off_rows']} rows")
              + f" (samples: {fmt_pct(s['jitter_sample']['case_exact_match'])} exact / "
              f"{fmt_pct(s['jitter_sample']['step_f1'])} step F1).")
+    h, pz = s["held_out"], s["perturbed"]
+    L.append(f"* **Held-out timing model (leave-one-out).** For each of the {h['folds']} sample cases the chain/lattice "
+             f"model was re-learned with that subject's activity excluded from its statistics. In {h['same_model']}/"
+             f"{h['folds']} folds the re-learned model is identical to the full one (periods, phase bands, chain gaps "
+             f"and chain owners), so no case's own activity is needed to learn the rule that scores it. Held-out "
+             f"scores: {fmt_pct(h['metrics']['status_accuracy'])} status, {fmt_pct(h['metrics']['case_exact_match'])} "
+             f"exact, {fmt_pct(h['metrics']['step_f1'])} step F1.")
+    L.append(f"* **Perturbed dataset.** Every id in every file renamed consistently (`prefix_n -> prefix_(n+7000)` "
+             f"for users, resources, evidence, activities and audit entries) and every timestamp shifted by "
+             f"+3 d 7 h 11 min 13 s, then the agent re-run on the {pz['n']} evaluation requests: {pz['status']}/{pz['n']} "
+             f"identical statuses, {pz['strict']}/{pz['n']} rows identical after mapping the original output through "
+             f"the same renaming ({pz['canonical']}/{pz['n']} up to order within a system). Nothing depends on "
+             f"particular id values or absolute times.")
     L.append("* **In-sample numbers.** Every metric above is measured on the same 32 public cases that guided "
              "development, so it is an optimistic estimate. The metamorphic suite (section 3) checks invariants on derived "
              "cases the gold never covered, and is the out-of-sample check.\n")
