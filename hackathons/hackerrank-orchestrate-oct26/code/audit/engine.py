@@ -401,10 +401,12 @@ class AuditEngine:
 
     def _load_rules(self):
         rules = dict(DEFAULT_TREATMENT)
+        self.rule_rows = {}
         p = self.dataset_dir / "deletion_rules.csv"
         with open(p, newline="", encoding="utf-8") as f:
             for r in csv.DictReader(f):
                 rules[r["data_category"]] = r["required_action"]
+                self.rule_rows[r["data_category"]] = r
         return rules
 
     def _load_activities(self):
@@ -658,11 +660,18 @@ class AuditEngine:
     def audit(self, case: dict) -> tuple[str, list[dict], dict]:
         audit_at = case["audit_at"]
         ident = self.ids.resolve(case["email"])
-        trace = {"user_id": ident.user_id if ident else None, "resources": []}
+        trace = {"user_id": ident.user_id if ident else None, "resources": [],
+                 "identity": ({"emails": sorted(ident.emails), "phones": sorted(ident.phones),
+                               "hashes": sorted(ident.hashes), "names": sorted(ident.names),
+                               "audit_ids": ident.audit_ids} if ident else {}),
+                 "era_start": "", "workflow": {}}
         if ident is None:
             return "COMPLETE", [], trace
-        linked = self.linked_resources(ident, audit_at, self.era_start(case, ident))
-        for rid, src in self.workflow_resources(case, ident, linked).items():
+        trace["era_start"] = self.era_start(case, ident)
+        linked = self.linked_resources(ident, audit_at, trace["era_start"])
+        wf = self.workflow_resources(case, ident, linked)
+        trace["workflow"] = wf
+        for rid, src in wf.items():
             linked.setdefault(rid, []).append(src)
         findings, remediation, verification = [], [], []
         states = []
@@ -681,7 +690,11 @@ class AuditEngine:
                     s.state, s.evidence_id = cov
             if s.state == UNKNOWN and not s.evidence_id and linked.get(s.resource_id):
                 s.evidence_id = linked[s.resource_id][0]
-            trace["resources"].append(s.__dict__)
+            rr = self.rule_rows.get(s.category or "", {})
+            trace["resources"].append({**s.__dict__,
+                                       "linked_by": sorted(set(linked.get(s.resource_id, []))),
+                                       "rule_id": rr.get("rule_id", ""), "rule_action": rr.get("required_action", "DISABLE" if s.category == "DATA_FLOW" else ""),
+                                       "rule_condition": rr.get("condition", "Active process can recreate data" if s.category == "DATA_FLOW" else "")})
             treatment = self.rules.get(s.category or "", None)
             if s.category == "DATA_FLOW":
                 if s.state == ACTIVE:

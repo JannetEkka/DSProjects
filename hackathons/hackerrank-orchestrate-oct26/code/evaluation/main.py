@@ -63,14 +63,15 @@ def score(pred: dict, gold: dict) -> dict:
             else:
                 fn += 1
         fp += len(Pm)
-        # field-level: align on (operation, resource_id), then compare every field
+        # field-level: positional alignment (gold step k vs predicted step k), the strictest reading
         pidx = {(s["operation"], s["resource_id"]): s for s in psteps}
-        for g in gsteps:
+        for k, g in enumerate(gsteps):
             field_total += 1
-            p = pidx.get((g["operation"], g["resource_id"]))
+            p_pos = psteps[k] if k < len(psteps) else None
             for f in FIELDS:
-                if p is not None and p[f] == g[f]:
+                if p_pos is not None and p_pos[f] == g[f]:
                     field_hits[f] += 1
+            p = pidx.get((g["operation"], g["resource_id"]))
             if g["evidence_id"]:
                 ev_total += 1
                 ev_hits += int(p is not None and p["evidence_id"] == g["evidence_id"])
@@ -288,8 +289,8 @@ def write_report(m, abl_rows, suite_res, failures, secs):
     L.append(f"| Sequence accuracy (shared steps in identical relative order) | {fmt_pct(m['sequence_accuracy_relative_order'])} |")
     L.append(f"| Sequence similarity (mean difflib ratio of full step lists) | {fmt_pct(m['sequence_similarity_mean'])} |")
     L.append(f"| Evidence-citation accuracy (gold steps that cite evidence) | {fmt_pct(m['evidence_citation_accuracy'])} |")
-    L.append("\n### Field-level accuracy\nGold steps are aligned to predicted steps on `(operation, resource_id)`; "
-             "a missing prediction counts as wrong for every field.\n")
+    L.append("\n### Field-level accuracy\nPositional alignment: gold step *k* is compared with predicted step *k* "
+             "(the strictest reading - one missing step shifts every later step).\n")
     L.append("| Field | Accuracy |\n|---|---|")
     for f, v in m["field_accuracy"].items():
         L.append(f"| `{f}` | {fmt_pct(v)} |")

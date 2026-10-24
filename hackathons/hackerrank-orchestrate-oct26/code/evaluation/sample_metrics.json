@@ -6,12 +6,12 @@
  "step_recall": 0.9481865284974094,
  "step_f1": 0.9682539682539684,
  "field_accuracy": {
-  "phase": 0.9481865284974094,
-  "system_id": 0.9481865284974094,
-  "resource_id": 0.9481865284974094,
-  "operation": 0.9481865284974094,
-  "state": 0.9481865284974094,
-  "evidence_id": 0.9481865284974094
+  "phase": 0.9533678756476683,
+  "system_id": 0.8963730569948186,
+  "resource_id": 0.8911917098445595,
+  "operation": 0.8963730569948186,
+  "state": 0.8963730569948186,
+  "evidence_id": 0.9533678756476683
  },
  "sequence_accuracy_relative_order": 1.0,
  "sequence_similarity_mean": 0.9540860291129689,
