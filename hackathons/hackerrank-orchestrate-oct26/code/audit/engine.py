@@ -369,7 +369,7 @@ class AuditEngine:
         """A catalog link is a claim. If the artifact it was registered from shows the resource with
         someone else's contact details and none of the subject's, the claim is rejected."""
         eid, text = self.catalog_media.get(activity["activity_id"], (None, ""))
-        if not text:
+        if not text or self.TRUST_CATALOG:
             return False
         rid = activity["resource_id"]
         rows = [l for l in text.splitlines() if rid in l.replace(" ", "")] or text.splitlines()
@@ -414,8 +414,38 @@ class AuditEngine:
     # ------------------------------------------------------------------ linking
     def linked_resources(self, ident: Identity, audit_at: str, since: str = "") -> dict[str, list[str]]:
         """resource_id -> list of evidence ids that link it to the subject (in (since, audit_at])."""
-        linked: dict[str, list[str]] = {}
+        key = (ident.user_id, audit_at, since, self.TRUST_CATALOG)
+        cache = self.__dict__.setdefault("_link_cache", {})
+        if key not in cache:
+            cache[key] = self._linked_resources(ident, audit_at, since)
+        return {k: list(v) for k, v in cache[key].items()}
+
+    def _build_value_index(self):
+        """Inverted index: lower-cased identifier value -> observations carrying it (exact-value fields
+        and lookup keys). Free-text observations are kept aside and scanned with substring matching."""
+        idx, text_obs = {}, []
         for o in self.store.observations:
+            if o.fields.get("no_link"):
+                continue
+            vals = {k.strip().lower() for k in o.keys}
+            for k, v in o.fields.items():
+                if k in TEXT_FIELDS:
+                    if v:
+                        text_obs.append(o)
+                elif isinstance(v, str):
+                    vals.add(v.strip().lower())
+            for v in vals:
+                idx.setdefault(v, []).append(o)
+        self._value_index, self._text_obs = idx, text_obs
+
+    def _linked_resources(self, ident: Identity, audit_at: str, since: str = "") -> dict[str, list[str]]:
+        linked: dict[str, list[str]] = {}
+        if not hasattr(self, "_value_index"):
+            self._build_value_index()
+        cands = {id(o): o for v in ident.strong for o in self._value_index.get(v, [])}
+        for o in self._text_obs:
+            cands.setdefault(id(o), o)
+        for o in sorted(cands.values(), key=lambda o: (o.time, o.evidence_id, o.resource_id)):
             if o.time > audit_at or o.time <= since:
                 continue
             if links_to(o, ident):
@@ -445,6 +475,11 @@ class AuditEngine:
     # ------------------------------------------------------------------ workflow attribution
     STATUS_RESULT = {"COMPLETE": "SUCCESS", "PARTIALLY_COMPLETE": "PARTIAL", "NOT_STARTED": "FAILED"}
 
+    # ablation switches (used by evaluation/main.py)
+    DISABLE_WORKFLOW = False
+    TRUST_CATALOG = False
+    DISABLE_ERAS = False
+
     def workflow_resources(self, case, ident, linked, window_h=3.0):
         """Resources processed by *this request's* deletion workflow.
 
@@ -454,6 +489,8 @@ class AuditEngine:
         workflow reported (COMPLETE<-SUCCESS, PARTIALLY_COMPLETE<-PARTIAL, NOT_STARTED<-FAILED).
         Only resources that no evidence attributes to a different person are eligible."""
         from datetime import datetime, timedelta
+        if self.DISABLE_WORKFLOW:
+            return {}
         P = lambda t: datetime.fromisoformat(t.replace("Z", "+00:00"))
         rep = P(case["reported_at"])
         lo = max(P(case["requested_at"]), rep - timedelta(hours=window_h))
@@ -495,12 +532,14 @@ class AuditEngine:
                     continue
                 # attribute only when no other request's workflow window could explain this activity
                 others = [cid for cid, (w0, w1) in self.case_windows.items()
-                          if cid != case["case_id"] and w0 <= t <= w1]
+                          if cid != case["case_id"] and w0 <= t <= w1
+                          and self.case_subject.get(cid) != ident.user_id]
                 if not others:
                     out.setdefault(a["resource_id"], a["activity_id"])
         return out
 
     case_windows = None
+    case_subject: dict = {}
     TIEBREAK_EARLIEST = True
     all_cases: list = []
     assigned_accounts: dict = {}
@@ -508,6 +547,8 @@ class AuditEngine:
     def era_start(self, case, ident):
         """Audit time of the same subject's previous request: older evidence belongs to that request."""
         prev = ""
+        if self.DISABLE_ERAS:
+            return prev
         for c in self.all_cases:
             if c["case_id"] == case["case_id"] or c["requested_at"] >= case["requested_at"]:
                 continue
@@ -521,15 +562,23 @@ class AuditEngine:
         from datetime import datetime, timedelta
         P = lambda t: datetime.fromisoformat(t.replace("Z", "+00:00"))
         self.case_windows = None
+        self.case_subject = {}
         self.all_cases = list(cases)
         self.assigned_accounts = {}
         # 1) candidate workflow account jobs per request lacking an evidence-linked account
         cand = {}
         taken = set()
+        alias = {}  # duplicate submissions (same subject + same workflow timing) share one workflow
+        first_of = {}
         for c in cases:
             ident = self.ids.resolve(c["email"])
             if ident is None:
                 continue
+            wkey = (ident.user_id, c["requested_at"], c["reported_at"], c["reported_status"])
+            if wkey in first_of:
+                alias[c["case_id"]] = first_of[wkey]
+                continue
+            first_of[wkey] = c["case_id"]
             linked = self.linked_resources(ident, c["audit_at"], self.era_start(c, ident))
             accs = [r for r in linked if resource_prefix(r) == "account"]
             taken.update(accs)
@@ -557,8 +606,13 @@ class AuditEngine:
             if choice:
                 for cid in pending:
                     pending[cid] = [a for a in pending[cid] if a["resource_id"] != choice["resource_id"]]
+        for dup, orig in alias.items():
+            if orig in self.assigned_accounts:
+                self.assigned_accounts[dup] = self.assigned_accounts[orig]
         wins = {}
         for c in cases:
+            if c["case_id"] in alias:
+                continue
             ident = self.ids.resolve(c["email"])
             if ident is None:
                 continue
@@ -570,6 +624,7 @@ class AuditEngine:
                      and P(c["requested_at"]) <= P(a["event_time"]) <= P(c["reported_at"])]
             if times:
                 wins[c["case_id"]] = (min(times), P(c["reported_at"]))
+                self.case_subject[c["case_id"]] = ident.user_id
         self.case_windows = wins
 
     # ------------------------------------------------------------------ state
