@@ -1,0 +1,19 @@
+{
+ "cases": 32,
+ "status_accuracy": 1.0,
+ "case_exact_match": 0.90625,
+ "step_precision": 1.0,
+ "step_recall": 0.9844559585492227,
+ "step_f1": 0.9921671018276762,
+ "field_accuracy": {
+  "phase": 0.9844559585492227,
+  "system_id": 0.9637305699481865,
+  "resource_id": 0.9637305699481865,
+  "operation": 0.9637305699481865,
+  "state": 0.9637305699481865,
+  "evidence_id": 0.9844559585492227
+ },
+ "sequence_accuracy_relative_order": 1.0,
+ "sequence_similarity_mean": 0.9905092592592593,
+ "evidence_citation_accuracy": 0.9866666666666667
+}

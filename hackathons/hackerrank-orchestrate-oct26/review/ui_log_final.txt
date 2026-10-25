@@ -1,0 +1,26 @@
+[1440 light] overflow home=false dossier-expanded=false (1440,1440) bg=rgb(242, 244, 247) errors=[]
+[1440 dark] overflow home=false dossier-expanded=false (1440,1440) bg=rgb(13, 19, 27) errors=[]
+[400 light] overflow home=false dossier-expanded=false (400,400) bg=rgb(242, 244, 247) errors=[]
+[400 dark] overflow home=false dossier-expanded=false (400,400) bg=rgb(13, 19, 27) errors=[]
+B1 hashchange ->  case_35
+B2 unknown hash -> Case case_999 not found in this run (518 cases from deletion_requests.csv). Pick a case fr
+B5 masked search "gmail" -> 213
+B5 masked search "proton.me" -> 44
+B5 masked search "case_63" -> 1
+B5 masked search "search_428" -> 1
+mask: emails in innerText []
+unmasked -> emails visible true
+B5 unmasked search "gmail" -> 213
+B6 after reload mask aria-pressed true emails visible false
+B7 copy label Selected, press Ctrl+C -> after 3.5s Copy steps_json
+theme cycle ["light","dark","system"]
+B3 tab path to first case ["maskbtn","themebtn","cell okcell ","cell ghostcell ","cell okcell ","cell ghostcell ","cell okcell ","cell ghostcell ","cell nacell ","q","BUTTON","BUTTON","BUTTON","BUTTON","skiplink","case_33"] tabs 16
+ArrowDown focus -> case_34
+Enter opened case_34
+B3 tabs from case to first step 3
+step Enter aria-expanded true
+first Tab focuses maskbtn
+skip link -> focus maskbtn
+B4 phone deep link dossier top 0
+B4 phone tap dossier top 0
+page errors []

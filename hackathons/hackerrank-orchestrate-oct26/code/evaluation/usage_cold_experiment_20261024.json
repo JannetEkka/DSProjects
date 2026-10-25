@@ -1,0 +1,59 @@
+{
+ "date": "2026-10-24",
+ "shipped": false,
+ "probe": {
+  "gemini-flash-latest": "503 unavailable",
+  "gemini-3.8-flash": "timed out",
+  "gemini-3.5-flash": "503 unavailable",
+  "gemini-2.5-flash": "404 retired",
+  "gemini-3-flash-preview": "OK (text and vision) - pinned for both stages"
+ },
+ "fallback": "groq:openai/gpt-oss-120b (Mistral/NVIDIA keys unset)",
+ "run_a": {
+  "ledger": {
+   "requests": 518,
+   "calls": {
+    "gemini/gemini-3-flash-preview": {
+     "calls": 14,
+     "input": 15846,
+     "output": 7021,
+     "purposes": {
+      "media_transcription": 10,
+      "intent_classification_batch": 4
+     },
+     "cost_usd": 0.0223063
+    },
+    "groq/openai/gpt-oss-120b": {
+     "calls": 36,
+     "input": 33471,
+     "output": 19728,
+     "purposes": {
+      "intent_classification_batch": 36
+     },
+     "cost_usd": 0.019816649999999998
+    }
+   },
+   "cache_hits": {
+    "intent": 550
+   }
+  },
+  "changed_rows_518": 0,
+  "samples": {
+   "status": "93.8%",
+   "exact": "27/32",
+   "step_f1": "97.1%",
+   "suite": "18/19"
+  },
+  "misreads": [
+   "case_12",
+   "case_21"
+  ],
+  "misread_detail": "the fallback model returned authorizes_deletion=false (ACCOUNT_SUPPORT) for two 'please verify my deletion' follow-ups, which the prompt counts as deletion; the shipped cache has the same model answering true on the same texts"
+ },
+ "run_b": {
+  "setup": "Gemini only, paced (LLM_MIN_INTERVAL_S=13, LLM_RATE_LIMIT_BACKOFF_S=20)",
+  "result": "daily quota of gemini-3-flash-preview exhausted: 0 successful calls; the run finished on the rule model and RapidOCR",
+  "offline_rows_identical": 517,
+  "offline_diff": "case_45: audit_record_001 is only recovered by the VLM transcription, not by OCR"
+ }
+}
