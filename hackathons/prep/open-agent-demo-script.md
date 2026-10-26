@@ -13,7 +13,7 @@ The organisers want the video to show: the main workflow end to end, how the age
    Remove-Item -Recurse .data
    npm start
    ```
-3. Open **http://localhost:4321** in Chrome. Hide the bookmarks bar (Ctrl+Shift+B) and make the window full screen (F11).
+3. Run `npm run validate:cases` once if you like (it fills in the case files so the first case opens faster), then open **http://localhost:4321** in Chrome. Hide the bookmarks bar (Ctrl+Shift+B) and make the window full screen (F11).
 4. Have these ready, but out of sight:
    - a second terminal in `D:\code\sql-noir`, with `npm run conformance:hmem` typed in but not yet run;
    - Nightshift's **MONITOR** panel.
@@ -28,7 +28,8 @@ The organisers want the video to show: the main workflow end to end, how the age
 **2. A case that's been checked (0:15–0:45).** Click **Next case**. The spinner runs while the validator checks the case on Zetaris; trim most of the wait later. Point at the agent trace at the bottom.
 > "The game master picks a case. Before I see it, the validator runs the case's own answer on Zetaris and checks it: read-only, it has an answer, the answer is small, it's the same twice, and there's no tie at a cut-off. That's every line in the trace. Earlier it threw out two of my own cases because of a tie and a query too heavy for a laptop."
 
-Read the case on screen ("Damaged goods": list the return reasons that mention damage).
+Read the case on screen ("Damaged goods": list the return reasons that mention damage). Point at **The files** under the question.
+> "The case file tells me which tables I need. Zetaris describes them: columns, types and a few sample rows. I click a name to drop it into my query."
 
 **3. Wrong on purpose (0:45–1:15).** Type `SELECT * FROM TPCDS_DB.reason` and press Ctrl+Enter. Point at the red verdict and the Evidence panel.
 > "My query runs on Zetaris, and the grader compares my rows with the answer, value by value. I returned 35 rows; the case wants one. These are rows of mine that shouldn't be there. That's evidence, not the model's opinion, and the answer itself stays hidden."
