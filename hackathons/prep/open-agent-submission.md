@@ -10,7 +10,7 @@ Your partner Nemo is a 1940s detective running on NVIDIA Nemotron through Meterl
 
 Before a case reaches you, a validator runs its reference query on Zetaris and checks it: read-only, has an answer, small, the same twice, no tie at the cut-off. It threw out two of my own cases. Nemotron can also write new cases aimed at your weakest skill, and the validator sends the drafts back until one is fair.
 
-Memory is the Meterless H-MEM engine. It records what you got wrong, with a source and a confidence. The next case is picked to practise it, and Nemo reads those notes before helping. H-MEM passes its own conformance suite (13/13) on the engine the game uses, and the game has 48 tests. I built it solo, on a 16 GB Windows laptop with integrated graphics.
+Memory is the Meterless H-MEM engine. It records what you got wrong, with a source and a confidence. The next case is picked to practise it, and Nemo reads those notes before helping. H-MEM passes its own conformance suite (13/13) on the engine the game uses, and the game has 48 tests. I'm a team of one: I pull, run, test and play every change in Cursor on my 16 GB Windows laptop, against my local Zetaris and Nightshift.
 
 ## Sponsor technology
 
@@ -21,6 +21,8 @@ Meterless H-MEM is the Meterless Engine in the game. It is the player's memory: 
 Meterless Nightshift is the runtime provider for every model call, built to the Power prompt's contract: bearer token, meterless-app and meterless-scope headers, status from GET /v1/models, retries on 429. Code: src/meterless/provider.ts.
 
 NVIDIA Nemotron runs behind Nightshift, on the Nemotron 3.5 Lightning 30B and Nemotron 3 Super 120B lanes. It is Nemo's voice, judges the player's explanations and writes new cases. The trace shows which model answered each call.
+
+Cursor is where the game meets the real stack. On my laptop I pull each change in Cursor, run the tests, the smoke check and the case validator against my local Zetaris and Nightshift, start the game and play it. Claude Code wrote most of the code in cloud sessions, tested against stand-ins.
 
 What's unusual: the model never marks an answer. A comparison of result sets on Zetaris does. Zetaris also checks the game's own content, so a case with a tie or a query too heavy for a laptop never reaches a player.
 

@@ -15,7 +15,7 @@ The organisers want the video to show: the main workflow end to end, how the age
    ```
 3. Open **http://localhost:4321** in Chrome. Don't run `validate:cases` after the reset: then the first case is checked live on camera, which is the point of scene 2. Hide the bookmarks bar (Ctrl+Shift+B) and make the window full screen (F11).
 4. Have these ready, but out of sight:
-   - a second terminal in `D:\code\sql-noir`, with `npm run conformance:hmem` typed in but not yet run;
+   - Cursor open on `D:\code\sql-noir`, with a second terminal where `npm run conformance:hmem` is typed in but not yet run;
    - Nightshift's **MONITOR** panel.
 5. Open the Windows **Clipchamp** app → **Record & create** → **Screen recording** (with your microphone). Pick the Chrome window, then switch windows during the take for scene 7, or record that scene as a separate clip.
 6. Do one practice run, then reset again (stop the game, `Remove-Item -Recurse .data`, `npm start`).
@@ -43,8 +43,8 @@ Read the case on screen ("Damaged goods": list the return reasons that mention d
 **6. It remembers (2:10–2:35).** Point at the **Memory** panel and click a note to open its trust ledger. Then click **Next case**. It should be "Excuses, excuses", another filtering case. Point at "Why this case: practises … filter, which memory says you've struggled with" and at "Recalled from memory".
 > "Memory is the Meterless H-MEM engine. It wrote down what I got wrong, with a source and a confidence, and every change is in its trust ledger. It lives on my machine, so it's still here after a restart. The next case is picked to practise what I struggled with, and Nemo gets those notes before helping me."
 
-**7. Under the hood (2:35–2:55).** Switch to the terminal and run `npm run conformance:hmem` (13/13 checks pass). Then show Nightshift's **MONITOR**: Nemotron lanes, "via providers 100%".
-> "H-MEM passes its own conformance suite, 13 out of 13, on the engine the game uses. Every model call goes through Meterless Nightshift to NVIDIA Nemotron; here's the monitor. And Zetaris holds the data and runs every query, mine and the game's."
+**7. Under the hood (2:35–2:55).** Switch to Cursor and run `npm run conformance:hmem` in its terminal (13/13 checks pass). Then show Nightshift's **MONITOR**: Nemotron lanes, "via providers 100%".
+> "I run the whole thing from Cursor on my laptop: pull, test, start. H-MEM passes its own conformance suite, 13 out of 13, on the engine the game uses. Every model call goes through Meterless Nightshift to NVIDIA Nemotron; here's the monitor. And Zetaris holds the data and runs every query, mine and the game's."
 
 **8. Close (2:55–3:10).** Back to the game, with the stamped case and your score in view.
 > "SQL Noir. Learn SQL by cracking cases, with a partner who shows you why. The answers come from the data, so the game can't bluff. The code is on GitHub at JannetEkka slash sql-noir."
