@@ -22,10 +22,10 @@ The organisers want the video to show: the main workflow end to end, how the age
 
 ## Scenes
 
-**1. Hook (0:00–0:15).** The page is open, empty, with "Rookie 0 pts" in the header.
+**1. Hook (0:00–0:15).** The page is open on the welcome ("New in town, detective?"), with "Rookie 0 pts" in the header.
 > "This is SQL Noir, a detective game that teaches SQL on real data. You crack cases by writing queries. Every answer is checked against the data in Zetaris, and your partner Nemo, who runs on NVIDIA Nemotron through Meterless Nightshift, tells you why you're wrong, with evidence."
 
-**2. A case that's been checked (0:15–0:45).** Click **Next case**. The spinner runs while the validator checks the case on Zetaris; trim most of the wait later. Point at the agent trace at the bottom.
+**2. A case that's been checked (0:15–0:45).** Click **Take your first case**. The spinner runs while the validator checks the case on Zetaris; trim most of the wait later. Point at the agent trace at the bottom.
 > "The game master picks a case. Before I see it, the validator runs the case's own answer on Zetaris and checks it: read-only, it has an answer, the answer is small, it's the same twice, and there's no tie at a cut-off. That's every line in the trace. Earlier it threw out two of my own cases because of a tie and a query too heavy for a laptop."
 
 Read the case on screen ("Damaged goods": list the return reasons that mention damage). Point at **The files** under the question.
