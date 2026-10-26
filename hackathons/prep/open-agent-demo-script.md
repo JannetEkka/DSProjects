@@ -13,7 +13,7 @@ The organisers want the video to show: the main workflow end to end, how the age
    Remove-Item -Recurse .data
    npm start
    ```
-3. Run `npm run validate:cases` once if you like (it fills in the case files so the first case opens faster), then open **http://localhost:4321** in Chrome. Hide the bookmarks bar (Ctrl+Shift+B) and make the window full screen (F11).
+3. Open **http://localhost:4321** in Chrome. Don't run `validate:cases` after the reset: then the first case is checked live on camera, which is the point of scene 2. Hide the bookmarks bar (Ctrl+Shift+B) and make the window full screen (F11).
 4. Have these ready, but out of sight:
    - a second terminal in `D:\code\sql-noir`, with `npm run conformance:hmem` typed in but not yet run;
    - Nightshift's **MONITOR** panel.
