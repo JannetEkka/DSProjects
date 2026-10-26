@@ -9,6 +9,7 @@ The organisers want the video to show: the main workflow end to end, how the age
 1. Restart Windows if it's been on a while, then start **Docker Desktop**, Zetaris (`cd ~/zetaris-platform && docker compose start` in Ubuntu) and **Nightshift**. Close other apps: memory is tight.
 2. In Cursor's terminal, in `D:\code\sql-noir`, start fresh so the validator runs live on camera:
    ```powershell
+   git pull
    Remove-Item -Recurse .data
    npm start
    ```
@@ -38,7 +39,7 @@ Read the case on screen ("Damaged goods": list the return reasons that mention d
 **5. Crack it and explain why (1:40–2:10).** Type `SELECT * FROM TPCDS_DB.reason WHERE lower(r_reason_desc) LIKE '%damage%'` and run it. When it asks why, type something like: *"WHERE keeps only reasons whose description has the word damage. lower() makes it ignore capitals."* Click **Close the case**. The stamp lands and the points fly.
 > "Got it, and an extra column is fine. Now I have to explain why my query proves it, and Nemo grades that too. Case closed: points for the level, minus my mistake and the hint, plus a bonus for a solid explanation."
 
-**6. It remembers (2:10–2:35).** Point at the **Memory** panel and click a note to open its trust ledger. Then click **Next case** and point at "Why this case" and "Recalled from memory".
+**6. It remembers (2:10–2:35).** Point at the **Memory** panel and click a note to open its trust ledger. Then click **Next case**. It should be "Excuses, excuses", another filtering case. Point at "Why this case: practises … filter, which memory says you've struggled with" and at "Recalled from memory".
 > "Memory is the Meterless H-MEM engine. It wrote down what I got wrong, with a source and a confidence, and every change is in its trust ledger. It lives on my machine, so it's still here after a restart. The next case is picked to practise what I struggled with, and Nemo gets those notes before helping me."
 
 **7. Under the hood (2:35–2:55).** Switch to the terminal and run `npm run conformance:hmem` (13/13 checks pass). Then show Nightshift's **MONITOR**: Nemotron lanes, "via providers 100%".
