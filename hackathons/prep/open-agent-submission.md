@@ -10,11 +10,11 @@ Your partner Nemo is a 1940s detective running on NVIDIA Nemotron through Meterl
 
 Before a case reaches you, a validator runs its reference query on Zetaris and checks it: read-only, has an answer, small, the same twice, no tie at the cut-off. It threw out two of my own cases. Nemotron can also write new cases aimed at your weakest skill, and the validator sends the drafts back until one is fair.
 
-Memory is the Meterless H-MEM engine. It records what you got wrong, with a source and a confidence. The next case is picked to practise it, and Nemo reads those notes before helping. H-MEM passes its own conformance suite (13/13) on the engine the game uses, and the game has 48 tests. I'm a team of one: I pull, run, test and play every change in Cursor on my 16 GB Windows laptop, against my local Zetaris and Nightshift.
+Memory is the Meterless H-MEM engine. It records what you got wrong, with a source and a confidence. The next case is picked to practise it, and Nemo reads those notes before helping. H-MEM passes its own conformance suite (13/13) on the engine the game uses, and the game has 48 tests. I'm a team of one: I pull, run, test and play every change in Cursor on my 16 GB Windows laptop, with Zetaris running in Docker and Nightshift alongside.
 
 ## Sponsor technology
 
-Zetaris holds the data and runs every query over its REST API: the player's queries, each case's reference query (for the validator), and the DESCRIBE and sample-row reads behind the case files. Every query goes through a read-only guard first. Code: src/zetaris/client.ts, src/game/cases.ts, src/game/engine.ts.
+Zetaris runs locally in Docker (Docker Desktop on WSL 2). It holds the data and runs every query over its REST API: the player's queries, each case's reference query (for the validator), and the DESCRIBE and sample-row reads behind the case files. Every query goes through a read-only guard first. Code: src/zetaris/client.ts, src/game/cases.ts, src/game/engine.ts.
 
 Meterless H-MEM is the Meterless Engine in the game. It is the player's memory: mistakes and solved cases are H-MEM records with a source and a confidence, recalled before each case. A note that helped gets positive feedback, and each note's trust ledger opens with one click. The engine is vendored unmodified in vendor/meterless/hmem and passes its conformance suite, 13/13 (npm run conformance:hmem). Code: src/game/memory.ts.
 
