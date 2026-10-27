@@ -14,7 +14,7 @@ Your partner Nemo is a 1940s detective running on NVIDIA Nemotron through Meterl
 
 Before a case reaches you, a validator runs its reference query on Zetaris and checks it: read-only, has an answer, small, the same twice, no tie at the cut-off. It threw out two of my own cases. Nemotron can also write new cases aimed at your weakest skill, and the validator sends the drafts back until one is fair.
 
-Memory is the Meterless H-MEM engine. It records what you got wrong, with a source and a confidence. The next case is picked to practise it, and Nemo reads those notes before helping. H-MEM passes its own conformance suite (13/13) on the engine the game uses, and the game has 48 tests. I'm a team of one: I pull, run, test and play every change in Cursor on my 16 GB Windows laptop, with Zetaris running in Docker and Nightshift alongside.
+Memory is the Meterless H-MEM engine. It records what you got wrong, with a source and a confidence. The next case is picked to practise it, and Nemo reads those notes before helping. H-MEM passes its own conformance suite (13/13) on the engine the game uses, and the game has 50 tests. I'm a team of one: I pull, run, test and play every change in Cursor on my 16 GB Windows laptop, with Zetaris running in Docker and Nightshift alongside.
 
 ## Sponsor technology
 
