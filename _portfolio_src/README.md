@@ -22,15 +22,29 @@ No dependencies — plain Python 3, standard library only.
 
 ## The résumés
 
-Two résumés, both generated from HTML in this folder — the same build-and-verify
-approach as the site:
+Five résumés, all generated from HTML in this folder, the same build-and-verify
+approach as the site. Four are role variants for job applications; they share
+contact, experience and education, and differ in tagline, summary, skills and
+which projects lead.
 
-| PDF (repo root) | source | for | length |
+| PDF | source | for | length |
 |---|---|---|---|
-| `Jannet_Ekka_Resume.pdf` | `resume.html` | applied AI + AI evaluation roles (the site's nav button) | **exactly 2 pages** |
-| `Jannet_Ekka_Founder_Resume.pdf` | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
+| `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (the site's nav button) | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_FDE.pdf` | `resume_fde.html` | forward deployed engineer roles | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_AI_Trainer.pdf` | `resume_ai_trainer.html` | AI trainer / LLM output-evaluation work | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf` | `resume_model_eval.html` | model evaluation, AI QA, red-teaming | **exactly 2 pages** |
+| `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
 
-To regenerate after editing (from this folder):
+The four role variants carry the same `<style>` block. A change to one fact
+(a new project, a new number) usually belongs in all four.
+
+Build the four role variants and print their page counts in one go:
+
+```bash
+bash _portfolio_src/build_resumes.sh
+```
+
+Or one at a time (from this folder):
 
 ```bash
 chromium --headless --no-pdf-header-footer \
@@ -67,3 +81,10 @@ together); the 2-page résumé has about a third of page 2 free, so there is roo
 to add before anything has to go. Everything cut so far (VerseCanvas, the
 Location Intelligence agent, the Internship Studio role) is one click away on
 the site, which the header links.
+
+2026-10-20: the applied AI résumé became one of four role variants (FDE, AI
+trainer, model evaluation), built by `build_resumes.sh`. All four add the
+October hackathon entries (Lore, Klarbrief, SMT World: Clock In, SMT Receipts),
+and the eval and trainer variants add the RSNA label-quality check. Section
+headings now carry `break-after: avoid`, after a heading was left alone at the
+foot of page 1.

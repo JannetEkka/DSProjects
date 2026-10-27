@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Jannet Akanksha Ekka - Resume</title>
+<style>
+  @page { size: A4; margin: 10mm 11mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Calibri", "Carlito", "Helvetica Neue", Arial, sans-serif;
+    font-size: 10.12pt;
+    line-height: 1.3;
+    color: #1a1a1a;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: #1c3f6e; text-decoration: none; }
+
+  header { border-bottom: 2.42pt solid #1c3f6e; padding-bottom: 4.40pt; margin-bottom: 5.50pt; }
+  h1 { font-size: 20.90pt; font-weight: 700; letter-spacing: 0.76pt; color: #12294a; line-height: 1.02; }
+  .tagline { font-size: 10.34pt; font-weight: 600; color: #1c3f6e; margin-top: 1.10pt; }
+  .contact { font-size: 9.35pt; color: #333; margin-top: 3.30pt; }
+  .contact span { white-space: nowrap; }
+  .sep { color: #9aa8bb; padding: 0 3.85pt; }
+
+  h2 {
+    font-size: 10.12pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.16pt;
+    color: #12294a; border-bottom: 0.88pt solid #c3cede;
+    padding-bottom: 1.65pt; margin: 7.49pt 0 4.18pt;
+    break-after: avoid;
+  }
+  section:first-of-type h2 { margin-top: 1.65pt; }
+  .summary { text-align: justify; }
+
+  table.skills { width: 100%; border-collapse: collapse; }
+  table.skills td { vertical-align: top; padding: 1.55pt 0; }
+  table.skills td.k { width: 98.99pt; font-weight: 700; color: #1c3f6e; padding-right: 6.59pt; }
+
+  .entry { margin-bottom: 5.50pt; break-inside: avoid; }
+  .entry:last-child { margin-bottom: 0; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 11.00pt; }
+  .role { font-weight: 700; color: #12294a; font-size: 10.78pt; }
+  .role .org { font-weight: 600; color: #333; }
+  .meta { font-size: 9.13pt; color: #555; font-style: italic; white-space: nowrap; flex-shrink: 0; }
+  .sub { font-size: 9.46pt; color: #444; font-style: italic; margin-top: 0.45pt; }
+
+  ul { list-style: none; margin-top: 1.98pt; }
+  li { position: relative; padding-left: 10.45pt; margin-bottom: 1.76pt; }
+  li::before { content: "▪"; position: absolute; left: 0; top: -0.45pt; color: #1c3f6e; font-size: 8.36pt; }
+  .links { font-size: 9.01pt; margin-top: 1.32pt; padding-left: 0; color: #1c3f6e; }
+  .links a { color: #1c3f6e; }
+  .links .lbl { color: #666; font-style: italic; }
+  .links .dot { color: #9aa8bb; padding: 0 3.30pt; }
+  .tech { font-size: 9.24pt; color: #444; padding-left: 9.90pt; margin-top: 1.32pt; }
+  .tech b { color: #1c3f6e; font-weight: 700; }
+
+  b, strong { font-weight: 700; color: #0d1f38; }
+
+  .flagship { border-left: 2.64pt solid #1c3f6e; padding: 0.56pt 0 0.56pt 7.70pt; background: #f6f8fb; }
+  .flagship .row { padding-right: 4.40pt; }
+
+  .twocol { column-count: 2; column-gap: 16.50pt; }
+  .twocol li { break-inside: avoid; }
+  code { font-family: "DejaVu Sans Mono", "Courier New", monospace; font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>JANNET AKANKSHA EKKA</h1>
+  <div class="tagline">AI Trainer &nbsp;·&nbsp; LLM Output Evaluation · Coding &amp; ML Expert Review · Red-Teaming</div>
+  <div class="contact">
+    <span>jannetekka96@gmail.com</span><span class="sep">|</span><span>+91 90788 02572</span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/">linkedin.com/in/jannet-akanksha-ekka</a></span><span class="sep">|</span><span><a href="https://github.com/JannetEkka">github.com/JannetEkka</a></span><span class="sep">|</span><span><a href="https://jannetekka.github.io/DSProjects/">jannetekka.github.io/DSProjects</a></span><span class="sep">|</span><span>Kolkata, India · remote</span>
+  </div>
+</header>
+
+<section>
+  <h2>Professional Summary</h2>
+  <p class="summary">Most of my working day goes into reading what AI models produce and deciding whether it is right. I build my products by directing AI coding agents, and nothing merges without my review: 344 merged pull requests on my trading system, and a line-by-line audit of 98 of them found two production bugs the passing test suite had missed. I write attack prompts that get agents to misuse their tools, check model explanations against the source document, and build labelled question sets to score retrieval. Before AI I spent four years in QA automation at Deloitte, where the job was finding what was wrong before the client did. Rank&nbsp;1 in the UT Austin McCombs AI/ML postgrad.</p>
+</section>
+
+<section>
+  <h2>What I Bring to Model Training</h2>
+  <table class="skills">
+    <tr>
+      <td class="k">Judging Output</td>
+      <td>Grading answers against a source text; checking every date, amount, quote and citation; deciding whether a stated reason actually drove the decision (counterfactual tests); comparing a model against a simple baseline; writing each failure up with an example someone else can reproduce</td>
+    </tr>
+    <tr>
+      <td class="k">Writing Prompts &amp; Data</td>
+      <td>Attack scenarios for tool-using agents, written to read like ordinary work; system prompts and personas; task specs for AI coding agents; labelled question sets with expected answers; pass/fail criteria for judge models</td>
+    </tr>
+    <tr>
+      <td class="k">Reviewing Code</td>
+      <td><b>Python and SQL are the languages I take into a coding interview</b>; TypeScript and JavaScript I read fluently. Daily review of AI-written pull requests; pytest, Selenium; spotting the bug a green test suite misses</td>
+    </tr>
+    <tr>
+      <td class="k">Subject Areas</td>
+      <td>Machine learning and statistics (13 projects, Rank 1 postgrad); software testing and QA (4 years at Deloitte); LLM agents, RAG and evaluation; crypto markets and trading systems (building a trading agent since 2024); cloud deployment on GCP and AWS</td>
+    </tr>
+    <tr>
+      <td class="k">Tools</td>
+      <td>Claude Code, Gemini and Google AI Studio, Hugging Face, Jupyter, Kaggle, GitHub, JIRA, Google Workspace</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>Evaluation Work on AI Output</h2>
+
+  <div class="entry flagship">
+    <div class="row">
+      <div class="role">Smart Money Trading (SMT): reviewing an AI-built system <span class="org">· Founder &amp; sole engineer</span></div>
+      <div class="meta">Jan 2024 – Present</div>
+    </div>
+    <div class="sub">Patent-pending AI trading agent, live 24/7. Indian provisional application No. 202631090789</div>
+    <ul>
+      <li>Wrote the specs and directed AI coding agents to build <b>91,000 lines of Python with 3,000+ tests</b>. I review every pull request before it merges: 344 so far.</li>
+      <li>A line-by-line audit of 98 AI-written merges found two failures every test had passed: an order-format bug that had <b>rejected 1,137 live orders over three months</b>, and a memory freeze that kept the system down 60% of the time for ten days.</li>
+      <li>Graded the system's six AI agents on independent market data. <b>All six called direction at a coin flip.</b> I rebuilt the system so the agents advise and are graded on every call.</li>
+      <li>Every explanation passes a counterfactual test before a user sees it: flip the advisor's input and re-run the decision. If the decision doesn't change, the stated reason was not the real one, and it is dropped.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Klarbrief: checking an LLM's explanation against the letter <span class="org">· Hack Apertus</span></div>
+      <div class="meta">Oct 2026</div>
+    </div>
+    <div class="links"><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/klarbrief">github.com/JannetEkka/klarbrief</a></div>
+    <ul>
+      <li>An open LLM (Apertus 1.5 8B) explains official Swiss letters in the reader's language. Each point must quote the letter, and its date or CHF amount must match before it is shown; anything that fails is listed apart.</li>
+      <li>Scored 48 explanations of 28 synthetic letters: 48/48 in the reader's language, 28 of 29 real deadlines shown, <b>0 wrong CHF amounts</b> shown. The model offered 7 wrong dates and the check stopped 6.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Wiretrap: red-teaming AI agents <span class="org">· Gen AI Academy APAC, Cohort 3</span></div>
+      <div class="meta">2026</div>
+    </div>
+    <div class="links"><span class="lbl">Live:</span> <a href="https://wiretrap.onrender.com/">wiretrap.onrender.com</a><span class="dot">·</span><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/wiretrap">github.com/JannetEkka/wiretrap</a></div>
+    <ul>
+      <li>Attack prompts in 8 categories, written to look like ordinary work because current models refuse the obvious ones. A judge model reads which tools the agent actually called.</li>
+      <li>Caught a Google codelab agent saying &ldquo;I don't have access or authorization to modify configuration files&rdquo; after it had already run <code>ls -la</code> through its shell tool. Grading the reply alone would have passed it.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">SmartDesk: a labelled question set for retrieval <span class="org">· Gen AI Academy APAC hackathon, top 101 of 1,500+</span></div>
+      <div class="meta">2026</div>
+    </div>
+    <div class="links"><a href="https://github.com/JannetEkka/smartdesk/blob/main/evals/RESULTS.md">github.com/JannetEkka/smartdesk · evals/RESULTS.md</a></div>
+    <ul>
+      <li>Built 40 labelled questions over 120 notes before touching retrieval, scored with recall@k and MRR@k. A reranker that looked like a clear win on one embedder fell inside the noise on the production one, so it did not ship.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">RSNA Knee Abnormality Detection: label quality <span class="org">· Kaggle, 5,900+ teams</span></div>
+      <div class="meta">Oct 2026</div>
+    </div>
+    <ul>
+      <li>Most training studies had only a free-text radiology report, in one of several languages, so labels had to be derived from the reports. I scored two report-derived label sets against 58 radiologist labels (macro AUC 0.894 against 0.870) and retrained on the better one.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Lore: answers that cite their evidence <span class="org">· Graph Hacks, FalkorDB × WeMakeDevs</span></div>
+      <div class="meta">Oct 2026</div>
+    </div>
+    <div class="links"><span class="lbl">Live:</span> <a href="https://lore-gh5y.onrender.com/">lore-gh5y.onrender.com</a><span class="dot">·</span><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/lore">github.com/JannetEkka/lore</a></div>
+    <ul>
+      <li>A Gemini agent answers &ldquo;who knows this part of the code?&rdquo; from a graph of an open-source project's history and cites the pull requests behind every answer. Backtested on 300 real PRs against the obvious baseline (90% against 88% top-three hit rate); where the baseline wins, the write-up says so.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Professional Experience</h2>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">JTech Solutions (pre-incorporation) <span class="org">· Founder &amp; AI Engineer</span></div>
+      <div class="meta">Jan 2024 – Present · Kolkata</div>
+    </div>
+    <ul>
+      <li>Building SMT and SMT World as the company's first product, while a full-time family carer and alongside the PGP in AI/ML. Submitted four hackathon entries between 12 and 18 October 2026.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Deloitte Consulting LLP <span class="org">· Test Automation Engineer (Analyst)</span></div>
+      <div class="meta">Aug 2019 – Jan 2023 · Bangalore</div>
+    </div>
+    <ul>
+      <li><b>Led a 6-member QA engineering team</b> testing software for Fortune 500 clients including AT&amp;T Consumer Connect, Hewlett Packard Enterprise and The Dental Supply Company.</li>
+      <li>Worked directly with client teams in US, UK and India hours on requirement calls, demos and working sessions, and covered weekend on-call.</li>
+      <li>Built Selenium and Katalon Studio automation that <b>improved test execution efficiency by 83%</b>; Jenkins-based reporting cut manual analysis time by <b>75%</b>.</li>
+      <li>Tracked quality across <b>343 business components</b> with Python and Tableau, cutting test failures by 25%. 2 Spot Awards and an Applause Award.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">AutoKorrekt <span class="org">· Lead Frontend Developer (EdTech startup MVP)</span></div>
+      <div class="meta">May 2024 – Jan 2025</div>
+    </div>
+    <ul>
+      <li>Led the frontend of an AI answer-evaluation platform for teachers: scanned answer sheets go through OCR (AWS Textract), AI evaluation and validation, with English/German feedback on Amazon Comprehend. Scaled to 1,000+ concurrent submissions.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <h2>Education</h2>
+  <div class="entry">
+    <div class="row">
+      <div class="role">Post Graduate Program in AI &amp; Machine Learning <span class="org">· UT Austin McCombs &amp; Great Lakes</span></div>
+      <div class="meta">Mar 2025</div>
+    </div>
+    <div class="sub">Rank 1 in batch · GPA 4.09/5</div>
+  </div>
+  <div class="entry">
+    <div class="row">
+      <div class="role">Bachelor of Technology, Information Technology <span class="org">· KIIT University, Bhubaneswar</span></div>
+      <div class="meta">2015 – 2019</div>
+    </div>
+    <div class="sub">CGPA 7.17/10</div>
+  </div>
+</section>
+
+<section>
+  <h2>Achievements &amp; Certifications</h2>
+  <ul class="twocol">
+    <li><b>Provisional patent filed</b>, India, App. No. 202631090789 (Jul 2026), covering the SMT decision and verification architecture.</li>
+    <li><b>WEEX AI Wars I: #1 on the preliminary leaderboard</b> of 230+ teams, then one of 37 finalists in the live AI trading competition.</li>
+    <li><b>Winner, Best DeFi Application</b>, OpenServ × Hack2skill hackathon; runner-up, Best Website Application.</li>
+    <li><b>Top 101 of 1,500+ teams</b>, Google Cloud Gen AI Academy APAC 2026 Cohort 1 hackathon (SmartDesk).</li>
+    <li><b>Gen AI Exchange Hackathon 2025</b>, problem statement &ldquo;Automating Test Case Generation with AI&rdquo;; Google Cloud Gen AI Academy 2025 and APAC 2026 Cohorts 1, 2 and 3.</li>
+    <li><b>CPSAT</b>, Certified Professional Selenium Automation Testing, 2022. All credentials on <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges">Credly</a> and <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e">Google Skills</a>.</li>
+  </ul>
+</section>
+
+</body>
+</html>

@@ -1,35 +1,65 @@
 # neatHack: prep
 
-Window: **Oct 10, 00:00 IST → Oct 11, 23:59 IST** (48 h, from the Luma event data). Tracks are published **Oct 8**. Progress: [#28](https://github.com/JannetEkka/DSProjects/issues/28). Page: [luma.com/s5blr882](https://luma.com/s5blr882).
+Coding starts at the **Oct 10, 12:30 IST** kickoff. Submissions are open **Oct 12, 19:00–23:55 IST** only, as a quote post on X. Winners are announced Oct 16. Progress: [#28](https://github.com/JannetEkka/DSProjects/issues/28). Official page: [neatlogs.com/hackathon/1](https://neatlogs.com/hackathon/1). Luma's times are out of date.
 
-## What's known (read 2026-10-06)
+## The rules (published 2026-10-08)
 
-- **Organiser:** [neatlogs](https://neatlogs.com), a tool that traces agent runs, detects failures, investigates why they happened and runs evals ("the fastest path from failure to fix"). The judges will be people who spend their days on broken agents.
-- **Brief:** "Build an AI agent, ship something you're excited about." Up to $10K in prizes, plus engineering roles and internships.
-- **Format:** online, solo or a team. Team members each register with the same team name; solo needs nothing extra.
-- **Partners** give free credits and API access (names come with the tracks).
-- **Not published yet:** tracks, judging, the submission format, and whether anything can be prepared in advance. Until the rules say otherwise, **no project code is written before Oct 10, 00:00 IST.** What's prepared here is ideas, accounts and tooling.
-- **neatlogs free plan:** 100k spans a month (hard cap), 3 investigations, 5 detectors, 14-day retention. That covers a 48-hour build. Python SDK: `pip install neatlogs`.
+- **One track: "Build an Agent That Works (Literally)."** An agent, or a team of agents, that completes a substantial task from start to finish. The focus areas are planning, tool use, state, context, execution, recovery, verification and iteration.
+- **Before the start:** "You can plan your idea in advance, but all code must be written between the start on October 10 and the deadline on October 12." Judges check that commits are dated inside the window.
+- **Required tools:** both **neatlogs** and **[Entire](https://entire.io)**, each with a clear role in the agent or in how it's built. The demo has to cover both. **cfo.ai** (pricing, costs and runway for the agent as a product) earns bonus points.
+- **Judging:**
+  - the agent 30%
+  - use of neatlogs + Entire 25%
+  - demo video 20%
+  - building in public 15% (posts tagged #neatHack during the event)
+  - usefulness and originality 10%
+- **Evidence in the repo:**
+  - before/after runs (two neatlogs traces with the numbers compared)
+  - neatlogs trace links
+  - Entire checkpoints or entire-graph output
+  - a run where an action failed and the agent recovered
+  - the #neatHack posts
+- **Submission:** a quote post on X of the official neatlogs submission post, with team, name, project, public repo and demo link. The video is 3 minutes or less and covers the architecture, implementation, runtime, reasoning and result for each of the two tools.
+- **Prizes:** $2,000 / $1,000 / $500 cash, plus $5K / $3K / $1K in Dodo Payments credits; a $500 Community Winner prize; 3 months of neatlogs PRO for every winner. Crustdata gives 5,000 credits to everyone. The AWS credits need an AWS account, so we skip them.
 
-## Three candidate ideas (matched to the tracks on Oct 8)
+## Entire, and why the build gets its own session
 
-1. **Claimcheck: catch agents that say they did something they didn't, or the reverse.** It reads an agent's trace and compares what the agent *said* ("I've emailed Bob", "I didn't change any files") with what its tool calls *show*. Each mismatch is flagged with the spans as evidence: done but never claimed, claimed but never done, denied but done. A suggested fix is re-run against the failing case to confirm it holds. Wiretrap found the third kind in a Google codelab agent, so the failure is real and documented. It's a failure neatlogs' own examples don't name, which makes it a natural fit for their platform. **Default if the tracks are open-ended or about reliability, evals or observability.**
-2. **Fixloop: from a failing trace to a fix that's proven.** It takes one failed run, turns it into a regression case, proposes a prompt or tool change, and keeps the change only if the failure is gone *and* the passing cases still pass. The same rule Wiretrap uses for approved fixes. **Pick if a track is about developer tools or fixing agents.**
-3. **Rulebook: a hackathon-rules agent.** Paste event links and get each deadline in your own timezone, what's allowed before the window, a submission checklist, cost red flags (funded wallets, paid credits, KYC) and clashes between events. It's what this file was made by hand to do. **Pick if a track wants a consumer or productivity agent.**
+Entire is an open-source CLI (MIT). It turns every commit a coding agent makes into a "checkpoint" that holds the prompt, transcript and tool calls. The checkpoint is stored in the repo as a git ref, and Claude Code is supported. In a public repo those transcripts are public. So the code is written in a **fresh session holding only project context**, and the first checkpoint is inspected before anything is pushed. The core CLI works locally. An Entire account is only needed for hosted features (search, mirrors).
 
-Whichever is picked, the agent itself is instrumented with neatlogs, so its own traces are part of the demo.
+## The entry: Fixloop
 
-## Build plan (Jannet away Oct 8–10; IonQ runs the same weekend)
+**An agent that fixes another agent's failed run, and proves the fix with neatlogs traces.**
 
-| When (IST) | Claude | Jannet (minutes, phone OK) |
+1. It reads the failing run from neatlogs.
+2. It reproduces the failure as a test case.
+3. It changes the target agent (prompt or tool handling).
+4. It re-runs the failing case and the cases that already passed.
+5. It proposes the change as a PR only when the new trace shows the failure gone and nothing else broken. A failed attempt is recorded with its reason, and the loop tries again.
+
+**The failure it hunts:** agents that say they did something their tool calls show they didn't, or the reverse. "I've sent the email" with no send call in the trace. "I didn't change anything" after a write. Wiretrap documented the second kind in a real agent.
+
+**How it scores:**
+
+| Criterion | Where it comes from |
+|---|---|
+| The agent (30%) | A full task: find, reproduce, fix, verify, propose. The example tasks "fix a GitHub issue" and "watch a running system" |
+| neatlogs + Entire (25%) | neatlogs is Fixloop's input and its proof. Entire records how it was built, and `entire why` explains lines in the demo |
+| Demo (20%) | One failure, start to finish, with the before and after traces side by side |
+| Building in public (15%) | 2–3 short X posts from Jannet tagged #neatHack, drafted in #28 |
+| Usefulness (10%) | Every team shipping agents has this failure, and a fix that's proven beats one that's only plausible |
+
+**Stack (free only):** Python; Gemini on the free AI Studio tier; the neatlogs free plan (100k spans a month); the Entire CLI; a small target agent with tools that are dead copies (they record the call and return fake data). **To check at kickoff:** reading traces back from neatlogs (MCP or API) on the free plan. If that isn't possible, Fixloop takes the trace from the SDK hook while still sending everything to neatlogs.
+
+**Runner-up:** Rulebook, a research agent with sources (another of their example tasks), if Fixloop is vetoed.
+
+## Plan (IST)
+
+| When | Claude | Jannet (minutes, phone OK) |
 |---|---|---|
-| Oct 8 | Read the tracks and rules; pick a track and idea; post the pick and the rules summary in #28 (scheduled check-in) | Night: reply "ok" or change the pick |
-| Oct 9, night | — | Say **"go"** (the window opens at midnight). Check the free Gemini and neatlogs keys are in the environment (#28) |
-| Oct 10 | Public repo; the core agent and detector on recorded traces; tests; neatlogs instrumentation | Night: read the "how it works" note |
-| Oct 11 | UI or report; small labelled benchmark; demo video; submission text in #28 by **18:00 IST** | Night: watch the video, then submit before **23:59 IST**. The IonQ entry is due the same night (04:30 IST Oct 12) |
+| Oct 8, night | — | Web check-in ([link](https://neatlogs.com/hackathon/check-in)), join the [Discord](https://neatlogs.com/discord), reply "ok" to Fixloop in #28 |
+| Oct 10, before 12:30 | — | Say **"go"** in S5 |
+| Oct 10, 12:30 → night | Fresh build session; public repo; neatlogs tracing and Entire checkpoints checked; target agent and its failing cases; first X post drafted | Night: post the first #neatHack update |
+| Oct 11 | Fixloop's full loop; recovery run; before/after evidence; second post drafted | Night: post it; read the "how it works" note |
+| Oct 12 | Demo video, README evidence, cfo.ai model, submission text in #28 by 17:00 | 19:00–23:55: watch the video, post the submission quote on X. The Solana entry is due 17:29 the same day |
 
-## Demo and submission
-
-- Video recorded by Claude in a headless browser, narrated with a synthetic voice ([tools/demo-video](../tools/demo-video/)), under 3 minutes unless the rules say otherwise.
-- Submission text, the AI-use disclosure and the links are drafted in #28 so you can paste them as they are.
-- Free only: Gemini's free AI Studio tier, the neatlogs free plan and partner credits. No paid top-ups.
+Video: recorded by Claude in a headless browser, narrated with a synthetic voice ([tools/demo-video](../tools/demo-video/)), 3 minutes or less.

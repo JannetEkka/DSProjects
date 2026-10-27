@@ -26,6 +26,7 @@
     font-size: 10.12pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.16pt;
     color: #12294a; border-bottom: 0.88pt solid #c3cede;
     padding-bottom: 1.65pt; margin: 7.49pt 0 4.18pt;
+    break-after: avoid;
   }
   section:first-of-type h2 { margin-top: 1.65pt; }
   .summary { text-align: justify; }
@@ -66,7 +67,7 @@
 
 <header>
   <h1>JANNET AKANKSHA EKKA</h1>
-  <div class="tagline">Applied AI Engineer &nbsp;·&nbsp; LLM Agents · AI Evaluation · Agent Security</div>
+  <div class="tagline">Applied AI Engineer &nbsp;·&nbsp; LLM Agents · RAG · AI Evaluation · Agent Security</div>
   <div class="contact">
     <span>jannetekka96@gmail.com</span><span class="sep">|</span><span>+91 90788 02572</span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/">linkedin.com/in/jannet-akanksha-ekka</a></span><span class="sep">|</span><span><a href="https://github.com/JannetEkka">github.com/JannetEkka</a></span><span class="sep">|</span><span><a href="https://jannetekka.github.io/DSProjects/">jannetekka.github.io/DSProjects</a></span><span class="sep">|</span><span>Kolkata, India · remote or relocation</span>
   </div>
@@ -74,7 +75,7 @@
 
 <section>
   <h2>Professional Summary</h2>
-  <p class="summary">I build LLM agents and the tests that show whether they work. I spent four years at Deloitte leading QA automation and working directly with clients in US, UK and India hours, then finished Rank&nbsp;1 in an AI/ML postgrad at UT Austin McCombs. Since 2024 I have built a patent-pending AI trading agent on my own, directing AI coding agents like Claude Code and reviewing every merge myself. The lesson I trust most from it: measure an agent before you believe it. When I graded my six trading agents on independent data, all six called direction at a coin flip, so I rebuilt the system around that result.</p>
+  <p class="summary">I build LLM agents and the tests that show whether they work. I spent four years at Deloitte leading QA automation and working directly with clients in US, UK and India hours, then finished Rank&nbsp;1 in an AI/ML postgrad at UT Austin McCombs. Since 2024 I have built a patent-pending AI trading agent on my own, directing AI coding agents like Claude Code and reviewing every merge myself. Between 12 and 18 October 2026 I submitted four working hackathon entries, each on a different stack: a graph database, an open LLM running offline, a native Android app and an on-chain contract. The lesson I trust most: measure an agent before you believe it. When I graded my six trading agents on independent data, all six called direction at a coin flip, so I rebuilt the system around that result.</p>
 </section>
 
 <section>
@@ -82,7 +83,7 @@
   <table class="skills">
     <tr>
       <td class="k">GenAI &amp; Agents</td>
-      <td>Google ADK, Model Context Protocol (servers written from scratch), A2A SDK, Gemini (Vertex AI and AI Studio), Imagen, OpenServ SDK, multi-agent orchestration, tool calling, prompt engineering, structured output, RAG (chunking, BM25, reciprocal-rank fusion, cross-encoder reranking), Hugging Face</td>
+      <td>Google ADK, Model Context Protocol (servers written from scratch), A2A SDK, Gemini (Vertex AI and AI Studio), Apertus 1.5 on llama.cpp (offline), Imagen, OpenServ SDK, multi-agent orchestration, tool calling, prompt engineering, structured output, RAG (chunking, BM25, reciprocal-rank fusion, cross-encoder reranking), graph-backed agents on FalkorDB (Cypher tools, label propagation), Hugging Face</td>
     </tr>
     <tr>
       <td class="k">AI-Native Delivery</td>
@@ -90,19 +91,19 @@
     </tr>
     <tr>
       <td class="k">AI Evaluation</td>
-      <td>Eval harnesses (recall@k, MRR, paired bootstrap), counterfactual faithfulness tests, adversarial agent testing by tool-call interception, overfitting gates (CPCV, Deflated Sharpe, PBO, FDR), replay through production code, liveness checks on production logs, pytest, Selenium, test strategy</td>
+      <td>Eval harnesses (recall@k, MRR, macro AUC, paired bootstrap), backtests against a simple baseline, grounding checks on quotes, dates and amounts, counterfactual faithfulness tests, adversarial agent testing by tool-call interception, overfitting gates (CPCV, Deflated Sharpe, PBO, FDR), replay through production code, liveness checks on production logs, pytest, Selenium, test strategy</td>
     </tr>
     <tr>
       <td class="k">ML &amp; Quant</td>
-      <td>scikit-learn, TensorFlow, Keras, PyTorch, CatBoost, Optuna (TPE), contextual bandits, Kelly sizing, time-series, NLP, computer vision (ResNet, Fast R-CNN), NVIDIA cuDF / RAPIDS</td>
+      <td>scikit-learn, TensorFlow, Keras, PyTorch, CatBoost, Optuna (TPE), contextual bandits, Kelly sizing, time-series, NLP, computer vision (ResNet, Fast R-CNN, MRI CNNs), NVIDIA cuDF / RAPIDS</td>
     </tr>
     <tr>
       <td class="k">Cloud &amp; Infra</td>
-      <td>Oracle Cloud, Cloudflare Workers; GCP: Compute Engine, Cloud Run, Cloud Functions, BigQuery (+ vector search), AlloyDB &amp; pgvector, Firestore, Secret Manager, Vertex AI; AWS: S3, EC2, RDS, SageMaker, Textract, Comprehend; Docker, systemd, GitHub Actions</td>
+      <td>Oracle Cloud, Cloudflare Workers, Render; GCP: Compute Engine, Cloud Run, Cloud Functions, BigQuery (+ vector search), AlloyDB &amp; pgvector, Firestore, Secret Manager, Vertex AI; AWS: S3, EC2, RDS, SageMaker, Textract, Comprehend; Docker (including offline internal networks), systemd, GitHub Actions</td>
     </tr>
     <tr>
       <td class="k">Engineering</td>
-      <td><b>Python and SQL are the languages I take into a coding interview.</b> TypeScript and JavaScript I have shipped and read fluently, and I would be ramping in them rather than leading. FastAPI, Flask, Streamlit, Django, React, Next.js, Postgres, REST and WebSocket APIs</td>
+      <td><b>Python and SQL are the languages I take into a coding interview.</b> TypeScript and JavaScript I have shipped and read fluently, and I would be ramping in them rather than leading. Kotlin and Jetpack Compose for one shipped Android app. FastAPI, Flask, Streamlit, Django, React, Next.js, Postgres, REST and WebSocket APIs</td>
     </tr>
   </table>
 </section>
@@ -111,7 +112,7 @@
   <h2>Flagship Project</h2>
   <div class="entry flagship">
     <div class="row">
-      <div class="role">Smart Money Trading (SMT) &mdash; Explainable AI Trading Agent <span class="org">· Founder &amp; sole engineer</span></div>
+      <div class="role">Smart Money Trading (SMT): explainable AI trading agent <span class="org">· Founder &amp; sole engineer</span></div>
       <div class="meta">Jan 2024 – Present</div>
     </div>
     <div class="sub">Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026</div>
@@ -134,21 +135,47 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">Wiretrap &mdash; Adversarial Security Testing for AI Agents <span class="org">· Gen AI Academy APAC, Cohort 3</span></div>
+      <div class="role">Lore: a company brain for open-source projects <span class="org">· Graph Hacks, FalkorDB × WeMakeDevs</span></div>
+      <div class="meta">Oct 2026</div>
+    </div>
+    <div class="links"><span class="lbl">Live:</span> <a href="https://lore-gh5y.onrender.com/">lore-gh5y.onrender.com</a><span class="dot">·</span><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/lore">github.com/JannetEkka/lore</a><span class="dot">·</span><a href="https://youtu.be/V-Ifwi_jxhg">Demo video</a><span class="dot">·</span><a href="https://medium.com/@jannetaekka/i-built-a-company-brain-for-open-source-projects-on-falkordb-47f519f9ce08">Blog post</a></div>
+    <ul>
+      <li>Reads a project's GitHub history into a FalkorDB graph: who wrote and reviewed which pull requests, which files they changed, which issues they fixed. A Gemini agent answers &ldquo;who knows this part of the code?&rdquo; through <b>12 Cypher tools</b>, and every answer cites the PRs behind it.</li>
+      <li>Backtested on 300 real FalkorDB PRs: a real reviewer in its top three <b>90%</b> of the time, against 88% for &ldquo;the most frequent reviewer&rdquo;. On the single top pick that baseline wins, and the write-up says so.</li>
+      <li>Issue triage that drafts a reply without posting it, team detection by label propagation over who reviews whom, per-user memory graphs, GitHub sign-in and an MCP server. Built and deployed in four days on free tiers, demoed on FalkorDB's own GitHub org.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Klarbrief: official Swiss letters explained, every point checked <span class="org">· Hack Apertus, Track 2B</span></div>
+      <div class="meta">Oct 2026</div>
+    </div>
+    <div class="links"><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/klarbrief">github.com/JannetEkka/klarbrief</a></div>
+    <ul>
+      <li>Apertus 1.5 8B, Switzerland's open LLM, explains an official letter in the reader's language. Before any point is shown, a deterministic check finds its quoted words in the letter and verifies its date or CHF amount. Points that fail are listed apart, never shown as fact.</li>
+      <li>Runs fully offline: llama.cpp on an internal Docker network, a 4-core CPU, no GPU, no internet at runtime.</li>
+      <li>Measured on 48 explanations of 28 synthetic letters: 48/48 in the reader's language, 28 of 29 real deadlines shown, <b>0 wrong CHF amounts shown</b>. The model offered 7 wrong dates and the check stopped 6. 34 tests and a 5-page technical report.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Wiretrap: adversarial security testing for AI agents <span class="org">· Gen AI Academy APAC, Cohort 3</span></div>
       <div class="meta">2026</div>
     </div>
     <div class="links"><span class="lbl">Live:</span> <a href="https://wiretrap.onrender.com/">wiretrap.onrender.com</a><span class="dot">·</span><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/wiretrap">github.com/JannetEkka/wiretrap</a></div>
     <ul>
       <li>A security tester that checks which tools an agent actually called. Most scanners grade the agent's reply. This one reads the tool-call log.</li>
       <li>Every tool the agent declares is cloned as a dead copy with the same name and JSON Schema that records the call and returns fake data. Attacks run in separate Gemini conversations and a judge model reads the log.</li>
-      <li>Caught a Google codelab agent saying "I don't have access or authorization to modify configuration files" after it had already run <code>ls -la</code> through its shell tool. Text scanners pass that; Wiretrap flags it with the arguments.</li>
+      <li>Caught a Google codelab agent saying &ldquo;I don't have access or authorization to modify configuration files&rdquo; after it had already run <code>ls -la</code> through its shell tool. Text scanners pass that; Wiretrap flags it with the arguments.</li>
       <li>A run with nothing classified reports <b>INCONCLUSIVE</b>, never HARDENED. Approved fixes are re-run against the attacks that broke them, and the report says when one didn't hold. 8 attack categories, 9.4K lines of TypeScript.</li>
     </ul>
   </div>
 
   <div class="entry">
     <div class="row">
-      <div class="role">SmartDesk &mdash; Multi-Agent Assistant with Evaluated RAG <span class="org">· Gen AI Academy APAC hackathon, top 101 of 1,500+</span></div>
+      <div class="role">SmartDesk: multi-agent assistant with evaluated RAG <span class="org">· Gen AI Academy APAC hackathon, top 101 of 1,500+</span></div>
       <div class="meta">2026</div>
     </div>
     <div class="links"><a href="https://github.com/JannetEkka/smartdesk">github.com/JannetEkka/smartdesk</a><span class="dot">·</span><span class="lbl">Eval write-up:</span> <a href="https://github.com/JannetEkka/smartdesk/blob/main/evals/RESULTS.md">evals/RESULTS.md</a></div>
@@ -161,7 +188,18 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">Smart Money Tracker &mdash; Multi-Agent Blockchain Analytics <span class="org">· Winner, Best DeFi Application</span></div>
+      <div class="role">Two more October 2026 hackathon entries <span class="org">· Solana Mobile and Monad Metropolis</span></div>
+      <div class="meta">Oct 2026</div>
+    </div>
+    <ul>
+      <li><b>SMT World: Clock In</b> (<a href="https://github.com/JannetEkka/smt-solana-hack">repo</a>): a native Android app in Kotlin and Jetpack Compose, built in six days. Users call the market once a day against my trading agent; both calls land on Solana devnet in one signed memo through Mobile Wallet Adapter and are graded on real prices four hours later.</li>
+      <li><b>SMT Receipts</b> (<a href="https://github.com/JannetEkka/monad-hack">repo</a>): the agent's calls and the positions it actually holds are sealed on Monad testnet by a verified, ownerless contract, then graded against RedStone-signed prices net of a 12&nbsp;bp fee. A track record nobody can edit, me included.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
+      <div class="role">Smart Money Tracker: multi-agent blockchain analytics <span class="org">· Winner, Best DeFi Application</span></div>
       <div class="meta">2024</div>
     </div>
     <ul>
@@ -185,7 +223,7 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">JTech Solutions (pre-incorporation) <span class="org">— Founder &amp; AI Engineer</span></div>
+      <div class="role">JTech Solutions (pre-incorporation) <span class="org">· Founder &amp; AI Engineer</span></div>
       <div class="meta">Jan 2024 – Present · Kolkata</div>
     </div>
     <ul>
@@ -195,7 +233,7 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">Deloitte Consulting LLP <span class="org">— Test Automation Engineer (Analyst)</span></div>
+      <div class="role">Deloitte Consulting LLP <span class="org">· Test Automation Engineer (Analyst)</span></div>
       <div class="meta">Aug 2019 – Jan 2023 · Bangalore</div>
     </div>
     <ul>
@@ -210,7 +248,7 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">AutoKorrekt <span class="org">— Lead Frontend Developer (EdTech startup MVP)</span></div>
+      <div class="role">AutoKorrekt <span class="org">· Lead Frontend Developer (EdTech startup MVP)</span></div>
       <div class="meta">May 2024 – Jan 2025</div>
     </div>
     <ul>
