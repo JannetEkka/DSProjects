@@ -1,0 +1,27 @@
+{
+ "requests": 518,
+ "calls": {
+  "groq/openai/gpt-oss-120b": {
+   "calls": 28,
+   "input": 23178,
+   "output": 16734,
+   "purposes": {
+    "intent_classification_batch": 28
+   },
+   "cost_usd": 0.0160272
+  },
+  "gemini/gemini-3.5-flash": {
+   "calls": 2,
+   "input": 1623,
+   "output": 1127,
+   "purposes": {
+    "intent_classification_batch": 2
+   },
+   "cost_usd": 0.0033044
+  }
+ },
+ "cache_hits": {
+  "media": 11,
+  "intent": 550
+ }
+}
