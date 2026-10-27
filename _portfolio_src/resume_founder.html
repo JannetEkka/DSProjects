@@ -43,8 +43,12 @@
   .sub { font-size: 9.46pt; color: #444; font-style: italic; margin-top: 0.45pt; }
 
   ul { list-style: none; margin-top: 1.98pt; }
-  li { position: relative; padding-left: 10.45pt; margin-bottom: 1.76pt; }
-  li::before { content: "▪"; position: absolute; left: 0; top: -0.45pt; color: #1c3f6e; font-size: 8.36pt; }
+  /* No `position` here: a positioned <li> paints in a later phase than in-flow
+     blocks, so Chromium writes every bullet AFTER every heading in the PDF text
+     and ATS parsers read the bullets detached from their jobs. A negative-margin
+     inline-block marker gives the same hanging indent in document order. */
+  li { padding-left: 10.45pt; margin-bottom: 1.76pt; }
+  li::before { content: "▪"; display: inline-block; width: 10.45pt; margin-left: -10.45pt; color: #1c3f6e; font-size: 8.36pt; }
   .links { font-size: 9.01pt; margin-top: 1.32pt; padding-left: 0; color: #1c3f6e; }
   .links a { color: #1c3f6e; }
   .links .lbl { color: #666; font-style: italic; }
