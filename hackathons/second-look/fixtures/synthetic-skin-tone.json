@@ -1,0 +1,18 @@
+{
+  "_note": "Synthetic, in the shape of the YouCam Facial Color Tones Analyzer response. Replaced by a recorded response once the key is in.",
+  "status": 200,
+  "data": {
+    "task_status": "success",
+    "results": {
+      "color": {
+        "eye_color": "#3B2A22",
+        "eye_color_name": "Brown",
+        "lip_color": "#A0595A",
+        "eyebrow_color": "#2E2220",
+        "skin_color": "#B98A6A",
+        "hair_color": "#1E1A18",
+        "hair_color_name": "Black"
+      }
+    }
+  }
+}

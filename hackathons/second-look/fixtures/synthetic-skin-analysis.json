@@ -1,0 +1,23 @@
+{
+  "_note": "Synthetic, hand-written in the shape of the YouCam docs' format=json response. Used for tests and offline dev only; replaced by a recorded response once the key is in.",
+  "status": 200,
+  "data": {
+    "task_status": "success",
+    "results": {
+      "output": [
+        { "type": "moisture", "ui_score": 74, "raw_score": 62.1, "mask_urls": [] },
+        { "type": "oiliness", "ui_score": 61, "raw_score": 44.8, "mask_urls": [] },
+        { "type": "pore", "ui_score": 64, "raw_score": 51.3, "mask_urls": [] },
+        { "type": "texture", "ui_score": 68, "raw_score": 57.3, "mask_urls": [] },
+        { "type": "redness", "ui_score": 66, "raw_score": 52.0, "mask_urls": [] },
+        { "type": "acne", "ui_score": 79, "raw_score": 71.5, "mask_urls": [] },
+        { "type": "radiance", "ui_score": 70, "raw_score": 63.4, "mask_urls": [] },
+        { "type": "dark_circle_v2", "ui_score": 63, "raw_score": 55.2, "mask_urls": [] },
+        { "type": "age_spot", "ui_score": 84, "raw_score": 80.9, "mask_urls": [] },
+        { "type": "wrinkle", "ui_score": 88, "raw_score": 86.0, "mask_urls": [] },
+        { "type": "firmness", "ui_score": 86, "raw_score": 84.2, "mask_urls": [] },
+        { "type": "skin_type", "whole": { "type": "Combination" }, "t_zone": { "type": "Oily" }, "u_zone": { "type": "Normal" } }
+      ]
+    }
+  }
+}
