@@ -1,6 +1,10 @@
 # SQL Noir: text for the HackOS form
 
-Plain text with straight quotes, ready to paste. The description has to be 150–2000 characters.
+Plain text with straight quotes, ready to paste.
+
+Demo video (3:43, unlisted): https://youtu.be/oX4KvIMfIbE
+Repo: https://github.com/JannetEkka/sql-noir
+Deck: https://claude.ai/artifact/XG1T6QdJ2Q2EYVN6sztp7Z (share it or export a PDF before submitting) The description has to be 150–2000 characters.
 
 ## Description
 
