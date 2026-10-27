@@ -1,0 +1,68 @@
+{
+ "id": "elec-008",
+ "kind": "electricity_bill",
+ "language": "en",
+ "text": "SONARPUR VIDYUT VITARAN LIMITED\n(A fictional distribution company) · Customer care 1800-000-0000\nELECTRICITY BILL\nConsumer Name\tSunita Tirkey\tBill Date\t11-SEP-2026\nAddress\t170, Station Road, Gaya, Bihar - 823001\tConsumer No.\t6406638629\nCategory\tDomestic (LT)\tUnits Consumed\t190 kWh\nCharge\tAmount\nEnergy Charges (190 units)\tINR 1,162.80\nFixed Charges\tINR 90.00\nElectricity Duty\tINR 58.14\nArrears\tINR 1,346.43\nNET AMOUNT PAYABLE\tINR 2,657.37\nPay by Due Date: 26-SEP-2026\nAmount payable after due date: INR 2,710.52 (includes late payment surcharge of INR 53.15)\n\nIf the bill remains unpaid, supply is liable to be disconnected after 11-OCT-2026 under the applicable supply code, without further notice. Reconnection charges will apply.\n\nPay online, at any cash counter, or through authorised collection centres. Ignore if already paid.\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "bill_date",
+   "kind": "date",
+   "value": "2026-09-11",
+   "shown": "11-SEP-2026"
+  },
+  {
+   "name": "energy_charges",
+   "kind": "amount",
+   "value": "1162.80",
+   "shown": "INR 1,162.80"
+  },
+  {
+   "name": "fixed_charges",
+   "kind": "amount",
+   "value": "90.00",
+   "shown": "INR 90.00"
+  },
+  {
+   "name": "duty",
+   "kind": "amount",
+   "value": "58.14",
+   "shown": "INR 58.14"
+  },
+  {
+   "name": "arrears",
+   "kind": "amount",
+   "value": "1346.43",
+   "shown": "INR 1,346.43"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "2657.37",
+   "shown": "INR 2,657.37"
+  },
+  {
+   "name": "due_date",
+   "kind": "date",
+   "value": "2026-09-26",
+   "shown": "26-SEP-2026"
+  },
+  {
+   "name": "after_due",
+   "kind": "amount",
+   "value": "2710.52",
+   "shown": "INR 2,710.52"
+  },
+  {
+   "name": "late_fee",
+   "kind": "amount",
+   "value": "53.15",
+   "shown": "INR 53.15"
+  },
+  {
+   "name": "disconnection",
+   "kind": "date",
+   "value": "2026-10-11",
+   "shown": "11-OCT-2026"
+  }
+ ]
+}

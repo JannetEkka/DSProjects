@@ -1,0 +1,68 @@
+{
+ "id": "elec-012",
+ "kind": "electricity_bill",
+ "language": "en",
+ "text": "SONARPUR VIDYUT VITARAN LIMITED\n(A fictional distribution company) · Customer care 1800-000-0000\nELECTRICITY BILL\nConsumer Name\tBiswajit Tirkey\tBill Date\t22-09-2026\nAddress\t75, Station Road, Siliguri, West Bengal - 734001\tConsumer No.\t4470312068\nCategory\tDomestic (LT)\tUnits Consumed\t228 kWh\nCharge\tAmount\nEnergy Charges (228 units)\tRs. 1,605.12\nFixed Charges\tRs. 60.00\nElectricity Duty\tRs. 80.26\nArrears\tRs. 0.00\nNET AMOUNT PAYABLE\tRs. 1,745.38\nPay by Due Date: 06-10-2026\nAmount payable after due date: Rs. 1,780.29 (includes late payment surcharge of Rs. 34.91)\n\nIf the bill remains unpaid, supply is liable to be disconnected after 21-10-2026 under the applicable supply code, without further notice. Reconnection charges will apply.\n\nPay online, at any cash counter, or through authorised collection centres. Ignore if already paid.\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "bill_date",
+   "kind": "date",
+   "value": "2026-09-22",
+   "shown": "22-09-2026"
+  },
+  {
+   "name": "energy_charges",
+   "kind": "amount",
+   "value": "1605.12",
+   "shown": "Rs. 1,605.12"
+  },
+  {
+   "name": "fixed_charges",
+   "kind": "amount",
+   "value": "60.00",
+   "shown": "Rs. 60.00"
+  },
+  {
+   "name": "duty",
+   "kind": "amount",
+   "value": "80.26",
+   "shown": "Rs. 80.26"
+  },
+  {
+   "name": "arrears",
+   "kind": "amount",
+   "value": "0.00",
+   "shown": "Rs. 0.00"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "1745.38",
+   "shown": "Rs. 1,745.38"
+  },
+  {
+   "name": "due_date",
+   "kind": "date",
+   "value": "2026-10-06",
+   "shown": "06-10-2026"
+  },
+  {
+   "name": "after_due",
+   "kind": "amount",
+   "value": "1780.29",
+   "shown": "Rs. 1,780.29"
+  },
+  {
+   "name": "late_fee",
+   "kind": "amount",
+   "value": "34.91",
+   "shown": "Rs. 34.91"
+  },
+  {
+   "name": "disconnection",
+   "kind": "date",
+   "value": "2026-10-21",
+   "shown": "21-10-2026"
+  }
+ ]
+}

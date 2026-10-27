@@ -1,0 +1,68 @@
+{
+ "id": "elec-032",
+ "kind": "electricity_bill",
+ "language": "en",
+ "text": "SONARPUR VIDYUT VITARAN LIMITED\n(A fictional distribution company) · Customer care 1800-000-0000\nELECTRICITY BILL\nConsumer Name\tSunita Mondal\tBill Date\t10-AUG-2026\nAddress\t164, Netaji Pally, Dhanbad, Jharkhand - 826001\tConsumer No.\t3291002345\nCategory\tDomestic (LT)\tUnits Consumed\t361 kWh\nCharge\tAmount\nEnergy Charges (361 units)\tINR 1,938.57\nFixed Charges\tINR 90.00\nElectricity Duty\tINR 96.93\nArrears\tINR 0.00\nNET AMOUNT PAYABLE\tINR 2,125.50\nPay by Due Date: 25-AUG-2026\nAmount payable after due date: INR 2,168.01 (includes late payment surcharge of INR 42.51)\n\nIf the bill remains unpaid, supply is liable to be disconnected after 09-SEP-2026 under the applicable supply code, without further notice. Reconnection charges will apply.\n\nPay online, at any cash counter, or through authorised collection centres. Ignore if already paid.\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "bill_date",
+   "kind": "date",
+   "value": "2026-08-10",
+   "shown": "10-AUG-2026"
+  },
+  {
+   "name": "energy_charges",
+   "kind": "amount",
+   "value": "1938.57",
+   "shown": "INR 1,938.57"
+  },
+  {
+   "name": "fixed_charges",
+   "kind": "amount",
+   "value": "90.00",
+   "shown": "INR 90.00"
+  },
+  {
+   "name": "duty",
+   "kind": "amount",
+   "value": "96.93",
+   "shown": "INR 96.93"
+  },
+  {
+   "name": "arrears",
+   "kind": "amount",
+   "value": "0.00",
+   "shown": "INR 0.00"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "2125.50",
+   "shown": "INR 2,125.50"
+  },
+  {
+   "name": "due_date",
+   "kind": "date",
+   "value": "2026-08-25",
+   "shown": "25-AUG-2026"
+  },
+  {
+   "name": "after_due",
+   "kind": "amount",
+   "value": "2168.01",
+   "shown": "INR 2,168.01"
+  },
+  {
+   "name": "late_fee",
+   "kind": "amount",
+   "value": "42.51",
+   "shown": "INR 42.51"
+  },
+  {
+   "name": "disconnection",
+   "kind": "date",
+   "value": "2026-09-09",
+   "shown": "09-SEP-2026"
+  }
+ ]
+}

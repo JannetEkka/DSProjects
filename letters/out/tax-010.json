@@ -1,0 +1,44 @@
+{
+ "id": "tax-010",
+ "kind": "tax_notice",
+ "language": "en",
+ "text": "OFFICE OF THE TAX OFFICER, WARD 7 (FICTIONAL)\nSynthetic sample for testing · not issued by any government\nNOTICE OF DEMAND\n\nDate: 27/10/2026\n\nTo,\nSujata Mondal\n116, Gandhi Colony, Sonarpur, West Bengal - 700150\nTaxpayer ID: DVBTJ6853C\n\nAssessment Year: 2024-25\n\nOn processing your return of income for the above assessment year, the following sum has been determined as payable by you:\n\nTax payable\tINR 9,310.00\nInterest\tINR 279.00\nTotal sum payable\tINR 9,589.00\n\nYou are required to pay the above sum within 30 days of service of this notice, that is on or before 26/11/2026. If you disagree with this demand, you may submit your response with documents by 11/11/2026.\n\nIf the amount is not paid within the period specified, further interest will be charged and steps may be taken to recover it.\n\nTax Officer, Ward 7\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "notice_date",
+   "kind": "date",
+   "value": "2026-10-27",
+   "shown": "27/10/2026"
+  },
+  {
+   "name": "tax",
+   "kind": "amount",
+   "value": "9310.00",
+   "shown": "INR 9,310.00"
+  },
+  {
+   "name": "interest",
+   "kind": "amount",
+   "value": "279.00",
+   "shown": "INR 279.00"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "9589.00",
+   "shown": "INR 9,589.00"
+  },
+  {
+   "name": "pay_by",
+   "kind": "date",
+   "value": "2026-11-26",
+   "shown": "26/11/2026"
+  },
+  {
+   "name": "reply_by",
+   "kind": "date",
+   "value": "2026-11-11",
+   "shown": "11/11/2026"
+  }
+ ]
+}

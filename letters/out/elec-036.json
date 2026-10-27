@@ -1,0 +1,68 @@
+{
+ "id": "elec-036",
+ "kind": "electricity_bill",
+ "language": "en",
+ "text": "SONARPUR VIDYUT VITARAN LIMITED\n(A fictional distribution company) · Customer care 1800-000-0000\nELECTRICITY BILL\nConsumer Name\tBiswajit Paul\tBill Date\t03/09/2026\nAddress\t197, Station Road, Dhanbad, Jharkhand - 826001\tConsumer No.\t2065817949\nCategory\tDomestic (LT)\tUnits Consumed\t399 kWh\nCharge\tAmount\nEnergy Charges (399 units)\tINR 2,142.63\nFixed Charges\tINR 90.00\nElectricity Duty\tINR 107.13\nArrears\tINR 446.76\nNET AMOUNT PAYABLE\tINR 2,786.52\nPay by Due Date: 18/09/2026\nAmount payable after due date: INR 2,842.25 (includes late payment surcharge of INR 55.73)\n\nIf the bill remains unpaid, supply is liable to be disconnected after 03/10/2026 under the applicable supply code, without further notice. Reconnection charges will apply.\n\nPay online, at any cash counter, or through authorised collection centres. Ignore if already paid.\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "bill_date",
+   "kind": "date",
+   "value": "2026-09-03",
+   "shown": "03/09/2026"
+  },
+  {
+   "name": "energy_charges",
+   "kind": "amount",
+   "value": "2142.63",
+   "shown": "INR 2,142.63"
+  },
+  {
+   "name": "fixed_charges",
+   "kind": "amount",
+   "value": "90.00",
+   "shown": "INR 90.00"
+  },
+  {
+   "name": "duty",
+   "kind": "amount",
+   "value": "107.13",
+   "shown": "INR 107.13"
+  },
+  {
+   "name": "arrears",
+   "kind": "amount",
+   "value": "446.76",
+   "shown": "INR 446.76"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "2786.52",
+   "shown": "INR 2,786.52"
+  },
+  {
+   "name": "due_date",
+   "kind": "date",
+   "value": "2026-09-18",
+   "shown": "18/09/2026"
+  },
+  {
+   "name": "after_due",
+   "kind": "amount",
+   "value": "2842.25",
+   "shown": "INR 2,842.25"
+  },
+  {
+   "name": "late_fee",
+   "kind": "amount",
+   "value": "55.73",
+   "shown": "INR 55.73"
+  },
+  {
+   "name": "disconnection",
+   "kind": "date",
+   "value": "2026-10-03",
+   "shown": "03/10/2026"
+  }
+ ]
+}

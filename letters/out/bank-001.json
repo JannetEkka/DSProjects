@@ -1,0 +1,56 @@
+{
+ "id": "bank-001",
+ "kind": "bank_notice",
+ "language": "en",
+ "text": "PURBASHA GRAMIN BANK\n(A fictional bank) · Siliguri Branch\n\nDate: 15th October 2026\n\nTo,\nSujata Das\n74, Station Road, Siliguri, West Bengal - 734001\n\nSub: Reminder for overdue instalments in Loan Account No. 376583942701\n\nDear Customer,\n\nThis is to inform you that 2 EMI(s) of Rs. 3,250.00 each in your above loan account are overdue since 10th August 2026. The total overdue amount is Rs. 6,500.00, and penal interest of Rs. 260.00 has been levied as per the sanction terms.\n\nYou are requested to pay Rs. 6,760.00 on or before 22nd October 2026 to regularise the account.\n\nPlease note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 8th November 2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.\n\nIf you have already paid, please ignore this letter.\n\nYours faithfully,\nBranch Manager\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "letter_date",
+   "kind": "date",
+   "value": "2026-10-15",
+   "shown": "15th October 2026"
+  },
+  {
+   "name": "emi",
+   "kind": "amount",
+   "value": "3250.00",
+   "shown": "Rs. 3,250.00"
+  },
+  {
+   "name": "overdue_since",
+   "kind": "date",
+   "value": "2026-08-10",
+   "shown": "10th August 2026"
+  },
+  {
+   "name": "overdue",
+   "kind": "amount",
+   "value": "6500.00",
+   "shown": "Rs. 6,500.00"
+  },
+  {
+   "name": "penal",
+   "kind": "amount",
+   "value": "260.00",
+   "shown": "Rs. 260.00"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "6760.00",
+   "shown": "Rs. 6,760.00"
+  },
+  {
+   "name": "pay_by",
+   "kind": "date",
+   "value": "2026-10-22",
+   "shown": "22nd October 2026"
+  },
+  {
+   "name": "npa_date",
+   "kind": "date",
+   "value": "2026-11-08",
+   "shown": "8th November 2026"
+  }
+ ]
+}

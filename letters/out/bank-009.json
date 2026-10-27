@@ -1,0 +1,56 @@
+{
+ "id": "bank-009",
+ "kind": "bank_notice",
+ "language": "en",
+ "text": "PURBASHA GRAMIN BANK\n(A fictional bank) · Dhanbad Branch\n\nDate: 16th October 2026\n\nTo,\nDipankar Das\n167, Kali Mandir Lane, Dhanbad, Jharkhand - 826001\n\nSub: Reminder for overdue instalments in Loan Account No. 554650795154\n\nDear Customer,\n\nThis is to inform you that 1 EMI(s) of Rs. 6,120/- each in your above loan account are overdue since 12th September 2026. The total overdue amount is Rs. 6,120/-, and penal interest of Rs. 122/- has been levied as per the sanction terms.\n\nYou are requested to pay Rs. 6,242/- on or before 31st October 2026 to regularise the account.\n\nPlease note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 11th December 2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.\n\nIf you have already paid, please ignore this letter.\n\nYours faithfully,\nBranch Manager\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "letter_date",
+   "kind": "date",
+   "value": "2026-10-16",
+   "shown": "16th October 2026"
+  },
+  {
+   "name": "emi",
+   "kind": "amount",
+   "value": "6120.00",
+   "shown": "Rs. 6,120/-"
+  },
+  {
+   "name": "overdue_since",
+   "kind": "date",
+   "value": "2026-09-12",
+   "shown": "12th September 2026"
+  },
+  {
+   "name": "overdue",
+   "kind": "amount",
+   "value": "6120.00",
+   "shown": "Rs. 6,120/-"
+  },
+  {
+   "name": "penal",
+   "kind": "amount",
+   "value": "122.00",
+   "shown": "Rs. 122/-"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "6242.00",
+   "shown": "Rs. 6,242/-"
+  },
+  {
+   "name": "pay_by",
+   "kind": "date",
+   "value": "2026-10-31",
+   "shown": "31st October 2026"
+  },
+  {
+   "name": "npa_date",
+   "kind": "date",
+   "value": "2026-12-11",
+   "shown": "11th December 2026"
+  }
+ ]
+}

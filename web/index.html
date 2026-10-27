@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chithi · official letters, explained and checked</title>
+<meta name="description" content="Photograph an official Indian letter and get it explained in Bengali, Hindi or English. Every date and amount is checked against the letter before you see it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo">চিঠি</span><span class="name">Chithi</span></div>
+  <div class="langs" role="radiogroup" aria-label="Language">
+    <button data-lang="bn" class="on">বাংলা</button><button data-lang="hi">हिन्दी</button><button data-lang="en">English</button>
+  </div>
+</header>
+
+<main>
+  <section id="start">
+    <h1 data-t="title"></h1>
+    <p class="lede" data-t="lede"></p>
+    <div id="mode" class="mode" hidden></div>
+    <label class="camera">
+      <input id="photo" type="file" accept="image/*" capture="environment">
+      <span data-t="take"></span>
+    </label>
+    <p class="or" data-t="or"></p>
+    <div id="samples" class="samples"></div>
+  </section>
+
+  <section id="working" hidden>
+    <img id="workingPhoto" alt="">
+    <ol id="steps" class="steps"></ol>
+  </section>
+
+  <section id="result" hidden>
+    <div class="photo-wrap"><img id="resultPhoto" alt=""><svg id="overlay"></svg></div>
+    <p class="kind" id="kind"></p>
+    <p class="summary" id="summary"></p>
+
+    <h2 class="ok-h"><span class="dot ok"></span><span data-t="checked"></span></h2>
+    <div id="verified" class="cards"></div>
+
+    <div id="cyWrap">
+      <h2 class="cy-h"><span class="dot cy"></span><span data-t="checkYourself"></span></h2>
+      <p class="note" data-t="checkYourselfNote"></p>
+      <div id="checkYourself" class="cards"></div>
+    </div>
+
+    <div id="askBox" class="ask">
+      <h2 data-t="askTitle"></h2>
+      <div class="ask-row">
+        <input id="question" type="text" autocomplete="off">
+        <button id="mic" class="mic" aria-label="Speak"><svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V22h2v-3.08A7 7 0 0 0 19 12Z"/></svg></button>
+        <button id="askBtn" data-t="ask"></button>
+      </div>
+      <div id="answers"></div>
+    </div>
+
+    <details class="how">
+      <summary data-t="how"></summary>
+      <ol id="trace" class="trace"></ol>
+      <p class="cost" id="cost"></p>
+    </details>
+    <details class="how">
+      <summary data-t="readText"></summary>
+      <pre id="letterText"></pre>
+    </details>
+    <button id="again" class="again" data-t="again"></button>
+  </section>
+</main>
+
+<footer>
+  <p data-t="footer"></p>
+  <p class="small">Built for the Meta Global AI Developer Hackathon, 2026 · <a href="https://github.com/JannetEkka/chithi">code</a> · Sample letters are synthetic.</p>
+</footer>
+<script src="/static/app.js"></script>
+</body>
+</html>

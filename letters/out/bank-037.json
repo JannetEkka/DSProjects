@@ -1,0 +1,56 @@
+{
+ "id": "bank-037",
+ "kind": "bank_notice",
+ "language": "en",
+ "text": "PURBASHA GRAMIN BANK\n(A fictional bank) · Gaya Branch\n\nDate: 9th October 2026\n\nTo,\nSujata Singh\n19, Main Road, Gaya, Bihar - 823001\n\nSub: Reminder for overdue instalments in Loan Account No. 230991131243\n\nDear Customer,\n\nThis is to inform you that 2 EMI(s) of Rs. 12,450/- each in your above loan account are overdue since 8th August 2026. The total overdue amount is Rs. 24,900/-, and penal interest of Rs. 996/- has been levied as per the sanction terms.\n\nYou are requested to pay Rs. 25,896/- on or before 19th October 2026 to regularise the account.\n\nPlease note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 6th November 2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.\n\nIf you have already paid, please ignore this letter.\n\nYours faithfully,\nBranch Manager\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "letter_date",
+   "kind": "date",
+   "value": "2026-10-09",
+   "shown": "9th October 2026"
+  },
+  {
+   "name": "emi",
+   "kind": "amount",
+   "value": "12450.00",
+   "shown": "Rs. 12,450/-"
+  },
+  {
+   "name": "overdue_since",
+   "kind": "date",
+   "value": "2026-08-08",
+   "shown": "8th August 2026"
+  },
+  {
+   "name": "overdue",
+   "kind": "amount",
+   "value": "24900.00",
+   "shown": "Rs. 24,900/-"
+  },
+  {
+   "name": "penal",
+   "kind": "amount",
+   "value": "996.00",
+   "shown": "Rs. 996/-"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "25896.00",
+   "shown": "Rs. 25,896/-"
+  },
+  {
+   "name": "pay_by",
+   "kind": "date",
+   "value": "2026-10-19",
+   "shown": "19th October 2026"
+  },
+  {
+   "name": "npa_date",
+   "kind": "date",
+   "value": "2026-11-06",
+   "shown": "6th November 2026"
+  }
+ ]
+}

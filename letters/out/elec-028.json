@@ -1,0 +1,68 @@
+{
+ "id": "elec-028",
+ "kind": "electricity_bill",
+ "language": "en",
+ "text": "SONARPUR VIDYUT VITARAN LIMITED\n(A fictional distribution company) · Customer care 1800-000-0000\nELECTRICITY BILL\nConsumer Name\tAmit Kumari\tBill Date\t18-09-2026\nAddress\t6, Station Road, Ranchi, Jharkhand - 834001\tConsumer No.\t3549709526\nCategory\tDomestic (LT)\tUnits Consumed\t517 kWh\nCharge\tAmount\nEnergy Charges (517 units)\t₹ 3,164.04\nFixed Charges\t₹ 60.00\nElectricity Duty\t₹ 158.20\nArrears\t₹ 421.85\nNET AMOUNT PAYABLE\t₹ 3,804.09\nPay by Due Date: 03-10-2026\nAmount payable after due date: ₹ 3,880.17 (includes late payment surcharge of ₹ 76.08)\n\nIf the bill remains unpaid, supply is liable to be disconnected after 18-10-2026 under the applicable supply code, without further notice. Reconnection charges will apply.\n\nPay online, at any cash counter, or through authorised collection centres. Ignore if already paid.\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "bill_date",
+   "kind": "date",
+   "value": "2026-09-18",
+   "shown": "18-09-2026"
+  },
+  {
+   "name": "energy_charges",
+   "kind": "amount",
+   "value": "3164.04",
+   "shown": "₹ 3,164.04"
+  },
+  {
+   "name": "fixed_charges",
+   "kind": "amount",
+   "value": "60.00",
+   "shown": "₹ 60.00"
+  },
+  {
+   "name": "duty",
+   "kind": "amount",
+   "value": "158.20",
+   "shown": "₹ 158.20"
+  },
+  {
+   "name": "arrears",
+   "kind": "amount",
+   "value": "421.85",
+   "shown": "₹ 421.85"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "3804.09",
+   "shown": "₹ 3,804.09"
+  },
+  {
+   "name": "due_date",
+   "kind": "date",
+   "value": "2026-10-03",
+   "shown": "03-10-2026"
+  },
+  {
+   "name": "after_due",
+   "kind": "amount",
+   "value": "3880.17",
+   "shown": "₹ 3,880.17"
+  },
+  {
+   "name": "late_fee",
+   "kind": "amount",
+   "value": "76.08",
+   "shown": "₹ 76.08"
+  },
+  {
+   "name": "disconnection",
+   "kind": "date",
+   "value": "2026-10-18",
+   "shown": "18-10-2026"
+  }
+ ]
+}

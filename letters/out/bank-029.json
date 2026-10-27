@@ -1,0 +1,56 @@
+{
+ "id": "bank-029",
+ "kind": "bank_notice",
+ "language": "en",
+ "text": "PURBASHA GRAMIN BANK\n(A fictional bank) · Sonarpur Branch\n\nDate: 11th October 2026\n\nTo,\nAnjali Tirkey\n210, Kali Mandir Lane, Sonarpur, West Bengal - 700150\n\nSub: Reminder for overdue instalments in Loan Account No. 112200508490\n\nDear Customer,\n\nThis is to inform you that 2 EMI(s) of ₹ 12,450.00 each in your above loan account are overdue since 11th August 2026. The total overdue amount is ₹ 24,900.00, and penal interest of ₹ 996.00 has been levied as per the sanction terms.\n\nYou are requested to pay ₹ 25,896.00 on or before 26th October 2026 to regularise the account.\n\nPlease note that if the dues are not cleared, the account will be classified as a Non-Performing Asset (NPA) on 9th November 2026, which will affect your credit score, and the Bank may initiate recovery proceedings as per law.\n\nIf you have already paid, please ignore this letter.\n\nYours faithfully,\nBranch Manager\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "letter_date",
+   "kind": "date",
+   "value": "2026-10-11",
+   "shown": "11th October 2026"
+  },
+  {
+   "name": "emi",
+   "kind": "amount",
+   "value": "12450.00",
+   "shown": "₹ 12,450.00"
+  },
+  {
+   "name": "overdue_since",
+   "kind": "date",
+   "value": "2026-08-11",
+   "shown": "11th August 2026"
+  },
+  {
+   "name": "overdue",
+   "kind": "amount",
+   "value": "24900.00",
+   "shown": "₹ 24,900.00"
+  },
+  {
+   "name": "penal",
+   "kind": "amount",
+   "value": "996.00",
+   "shown": "₹ 996.00"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "25896.00",
+   "shown": "₹ 25,896.00"
+  },
+  {
+   "name": "pay_by",
+   "kind": "date",
+   "value": "2026-10-26",
+   "shown": "26th October 2026"
+  },
+  {
+   "name": "npa_date",
+   "kind": "date",
+   "value": "2026-11-09",
+   "shown": "9th November 2026"
+  }
+ ]
+}

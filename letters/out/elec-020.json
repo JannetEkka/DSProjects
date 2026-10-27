@@ -1,0 +1,68 @@
+{
+ "id": "elec-020",
+ "kind": "electricity_bill",
+ "language": "en",
+ "text": "SONARPUR VIDYUT VITARAN LIMITED\n(A fictional distribution company) · Customer care 1800-000-0000\nELECTRICITY BILL\nConsumer Name\tJoseph Singh\tBill Date\t19-09-2026\nAddress\t55, Gandhi Colony, Siliguri, West Bengal - 734001\tConsumer No.\t1735620897\nCategory\tDomestic (LT)\tUnits Consumed\t225 kWh\nCharge\tAmount\nEnergy Charges (225 units)\t₹ 1,208.25\nFixed Charges\t₹ 60.00\nElectricity Duty\t₹ 60.41\nArrears\t₹ 0.00\nNET AMOUNT PAYABLE\t₹ 1,328.66\nPay by Due Date: 04-10-2026\nAmount payable after due date: ₹ 1,355.23 (includes late payment surcharge of ₹ 26.57)\n\nIf the bill remains unpaid, supply is liable to be disconnected after 19-10-2026 under the applicable supply code, without further notice. Reconnection charges will apply.\n\nPay online, at any cash counter, or through authorised collection centres. Ignore if already paid.\n\nSYNTHETIC SAMPLE · made up for testing Chithi · not a real letter",
+ "facts": [
+  {
+   "name": "bill_date",
+   "kind": "date",
+   "value": "2026-09-19",
+   "shown": "19-09-2026"
+  },
+  {
+   "name": "energy_charges",
+   "kind": "amount",
+   "value": "1208.25",
+   "shown": "₹ 1,208.25"
+  },
+  {
+   "name": "fixed_charges",
+   "kind": "amount",
+   "value": "60.00",
+   "shown": "₹ 60.00"
+  },
+  {
+   "name": "duty",
+   "kind": "amount",
+   "value": "60.41",
+   "shown": "₹ 60.41"
+  },
+  {
+   "name": "arrears",
+   "kind": "amount",
+   "value": "0.00",
+   "shown": "₹ 0.00"
+  },
+  {
+   "name": "total",
+   "kind": "amount",
+   "value": "1328.66",
+   "shown": "₹ 1,328.66"
+  },
+  {
+   "name": "due_date",
+   "kind": "date",
+   "value": "2026-10-04",
+   "shown": "04-10-2026"
+  },
+  {
+   "name": "after_due",
+   "kind": "amount",
+   "value": "1355.23",
+   "shown": "₹ 1,355.23"
+  },
+  {
+   "name": "late_fee",
+   "kind": "amount",
+   "value": "26.57",
+   "shown": "₹ 26.57"
+  },
+  {
+   "name": "disconnection",
+   "kind": "date",
+   "value": "2026-10-19",
+   "shown": "19-10-2026"
+  }
+ ]
+}
