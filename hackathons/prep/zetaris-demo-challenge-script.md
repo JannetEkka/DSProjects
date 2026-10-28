@@ -87,5 +87,5 @@ With Zetaris, every answer in my game is checked against real data, and it even 
 ## After recording
 
 1. Put the clips on Google Drive with "anyone with the link" and tell Claude. Claude edits them, adds captions and names the file `SMARTIES_DDMMYY` with the date you'll upload.
-2. Upload the file to the [shared Dropbox folder from the rules page](https://www.dropbox.com/scl/fo/xvv3sj5bdk622i56k5j19/AKi8lHTh63XEx8896HTNTds?rlkey=402k4lda7feylyrwqnkfymfjt&st=e9pzur2i&dl=0), and add the one-line write-up wherever the organisers say it goes.
+2. Upload the file to the [shared Dropbox folder the organisers gave on 10-28](https://www.dropbox.com/scl/fo/xvv3sj5bdk622i56k5j19/AKi8lHTh63XEx8896HTNTds?rlkey=0wsmdx70l0spn1dlv4j062ctj&st=z3afr9ie&dl=0), and add the one-line write-up wherever the organisers say it goes.
 3. Set the Drive clips back to Restricted.
