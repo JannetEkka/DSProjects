@@ -17,7 +17,7 @@ Every account where Jannet's card was added, held or charged for a project or ha
 
 ## Signed up without a card
 
-Public AI (Hack Apertus) · Google AI Studio keys (free tier, no billing) · Firebase Spark · Cloudflare · FalkorDB Cloud free tier · YouCam API (1,000 units from a redeem code) · NVIDIA build.nvidia.com key · Kaggle · Santiment free plan. Planned: the APIMatic trial (no card).
+Public AI (Hack Apertus) · Google AI Studio keys (free tier, no billing) · Firebase Spark · Cloudflare · FalkorDB Cloud free tier · YouCam API (1,000 units from a redeem code) · NVIDIA build.nvidia.com key · Kaggle · Santiment free plan · JigJoy's $20 Claude credit for the NTP Novi Sad hackathon (build.jigjoy.ai/credits handed over the key with no card, 10-31). Planned: the APIMatic trial (no card).
 
 ## Skipped because they needed a card or our own money
 

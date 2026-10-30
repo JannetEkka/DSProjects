@@ -24,6 +24,14 @@ What this means when planning:
 - Docker runs through WSL 2. With 13.8 GB usable, a container stack that wants 8 GB leaves about 6 GB for Windows, an editor, a browser and screen recording. Cap WSL's memory and stop containers when they aren't in use.
 - Claude works in cloud sessions and cannot reach the laptop's `localhost`. Anything that must run locally is a step Jannet does, so say exactly what to run and what output to send back, and never ask for keys in chat.
 
+## Writing rule: always state the impact (Jannet, 10-31)
+
+This applies to every repo, project, hackathon entry, README, submission form, pitch, post and anything written in Jannet's voice. Say what changes for whom because of the work, not only what it does or how fast it ran. "297 seconds, 76 requests, 4 proposals" is a description; impact says what that makes possible, for whom, and compared with what.
+
+- Every impact claim rests on a measurement from our own run or a source we cite. Give the number, where it came from, and what it is compared with.
+- **Never invent a baseline** ("matching takes weeks today") **or an improvement** ("10× faster") that nothing measured. If there's no measured baseline, say so plainly and say how it could be measured.
+- A number with nothing to compare it to isn't an impact statement. Pair it with a sourced comparison, or with what it lets someone do that they couldn't before.
+
 ## Hackathon rules and status
 
 Decisions and Jannet's standing rules (no hackathon that needs our own money, and the rest) are in [hackathons/october-2026.md](../hackathons/october-2026.md). Progress for each entry is in its GitHub issue (label `hackathon`).

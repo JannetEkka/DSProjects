@@ -8,6 +8,8 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 
 **Rule: keys and accounts (operator, 10-21).** Never use an API key, token or account that is already in the cloud environment (`GEMINI_API_KEY`, `KAGGLE_API_TOKEN` and the like) for a new entry: each one belongs to another entry. Before an entry needs a key, **ask Jannet to create one for that entry**, with step-by-step instructions: where to click, what to name it, and the exact environment-variable name the session will read. Gemini keys come from AI Studio, in a project named after the entry. **No GCP.** If an entry needs a cloud, use Oracle Cloud. A new environment variable only reaches sessions started after it was added.
 
+**Rule: impact (Jannet, 10-31).** Every README, submission and pitch states the impact: what changes for whom, measured or sourced, compared with something real. Never invent a baseline or an improvement; when there's no baseline, say so. Details in [CLAUDE.md](../.claude/CLAUDE.md).
+
 **Decision key:** ✅ entering · ⚪ maybe (decide by the date shown) · ❓ not checked yet · ❌ skipping (reason given) · ⛔ already closed
 
 | Closes | Hackathon | Prize | Decision | Why |

@@ -86,6 +86,15 @@ it survives the first technical conversation.
 Do not explain the same point twice in different words. If a paragraph restates
 the one above it, delete it.
 
+## Impact, never assumed (Jannet, 10-31)
+
+Every README, form answer, pitch and post says what changes for whom because of
+the work, not only what it does. Back each impact claim with a measurement from
+our own run or a cited source, and say what it's compared with. Never invent a
+baseline or an improvement; if nothing measured one, say so and say how it could
+be measured. A bare number ("297 seconds") is not impact until it's compared
+with something real or tied to what someone can now do.
+
 ## Length
 
 An email to a founder is under 200 words. An X reply is one to three lines. A
@@ -100,3 +109,5 @@ whole paragraph, not trimming adjectives from every sentence.
 4. Read the first and last sentence together. If they say the same thing,
    cut the last one.
 5. Check the length ceiling for the format.
+6. Find the impact claim. Is it there, and does each number have a source and
+   a real comparison? If not, add it or cut the claim.
