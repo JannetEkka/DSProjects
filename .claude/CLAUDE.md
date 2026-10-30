@@ -27,3 +27,7 @@ What this means when planning:
 ## Hackathon rules and status
 
 Decisions and Jannet's standing rules (no hackathon that needs our own money, and the rest) are in [hackathons/october-2026.md](../hackathons/october-2026.md). Progress for each entry is in its GitHub issue (label `hackathon`).
+
+## Cards
+
+Jannet's card must never bring a surprise bill. [hackathons/cards.md](../hackathons/cards.md) lists every account where Jannet's card is on file, how each one could charge it, and the next check. Whenever a session learns that a sign-up, trial, credit claim or top-up needs a card, or that a card was added, held, charged or removed, update that file in the same session, before anything is spent, and tell Jannet it's recorded. Hooks back this up: at session start they show the accounts and any check due within 7 days, and they flag any message that mentions a card or billing.
