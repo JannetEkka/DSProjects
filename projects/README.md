@@ -45,7 +45,7 @@ Written 2026-11-01/02 from the repos as they stood then.
 | Location Intelligence Agent | [location-intelligence-agent.md](location-intelligence-agent.md) | Remote MCP (BigQuery, Maps) vs SmartDesk's stdio MCP |
 | SMT Chain Adapters | [smt-chain-adapters.md](smt-chain-adapters.md) | One brain, thin per-chain adapters, guardrails before signing |
 | Smart Money Tracker | [smart-money-tracker.md](smart-money-tracker.md) | ⚠️ no code available; fill the gaps before an interview |
-| AutoKorrekt | [autokorrekt.md](autokorrekt.md) | ⚠️ dates: the repo says 2024, not 2023 |
+| AutoKorrekt | [autokorrekt.md](autokorrekt.md) | Frontend of an AI marking platform; JWT auth and OCR validation flows |
 | MedTestAI | [medtestai.md](medtestai.md) | Workload Identity Federation in CI, no long-lived keys |
 | VerseCanvas | [versecanvas.md](versecanvas.md) | The "before" picture: credentials learned the hard way |
 | Asha Chatbot | [asha-chatbot.md](asha-chatbot.md) | Rasa, not an LLM: it never invents a job |
@@ -72,7 +72,7 @@ Written 2026-11-01/02 from the repos as they stood then.
 
 ## Things these write-ups found that need fixing outside interviews
 
-- **Résumé dates:** AutoKorrekt "May 2023 – Jan 2024" contradicts the public repo (commits Jun–Dec 2024). JTech reads "Jan | 2025", while SMT says Jan 2024.
+- **Résumé dates:** JTech read "Jan | 2025" while SMT says Jan 2024 (fixed to Jan 2024). AutoKorrekt is May 2023 – Jan 2024 (Jannet, 11-02); the repo's commit dates are later, so have the answer ready.
 - **Portfolio card corrections** (applied in the same update): MedTestAI, e-commerce, capstone, signal/SVHN, churn, USL, business analytics, applied statistics.
 - **A committed Firebase service-account key** in the private repo `smt-application`: rotate it, then remove it from history.
 - **SMT figures:** quote today's (≈87.5K lines of Python outside tests, 3,152 tests, 362 merged PRs, 673 findings), not the older 91K / 344 / 611.

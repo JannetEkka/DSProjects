@@ -611,7 +611,7 @@ footer a:hover{{color:var(--tx)}}
       <strong>only review before anything merges</strong>. Four years leading QA automation at
       <strong>Deloitte</strong> taught me how to tell when the output is wrong, which is the part most AI teams are still
       learning. I run a <strong>patent-pending AI trading agent</strong>, live 24/7 on a free-tier cloud stack.
-      <strong>Rank&nbsp;1</strong> in my AI/ML postgrad at UT Austin McCombs.
+      <strong>Rank&nbsp;1</strong> in the Post Graduate Program in AI/ML at UT Austin McCombs.
     </p>
     <div class="cta reveal">
       <a class="btn btn-p" href="#work">See the work
@@ -711,7 +711,7 @@ footer a:hover{{color:var(--tx)}}
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
-        <div class="org">AutoKorrekt — EdTech startup MVP</div><div class="when">May 2024 – Jan 2025</div>
+        <div class="org">AutoKorrekt — EdTech startup MVP</div><div class="when">May 2023 – Jan 2024</div>
         <p>Interactive PDF processing with coordinate-based text extraction, integrating AWS Textract OCR and Mistral models into an AI answer-evaluation workflow. Bilingual EN/DE interface scaling to 1,000+ concurrent submissions.</p>
       </div>
       <div class="tlrow reveal">
