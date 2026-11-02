@@ -152,14 +152,15 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">Klarbrief: official Swiss letters explained, every point checked <span class="org">· Hack Apertus, Track 2B</span></div>
-      <div class="meta">Oct 2026</div>
+      <div class="role">Klarbrief and Chithi: official letters explained, every point checked <span class="org">· Hack Apertus; Meta AI Developer Hackathon</span></div>
+      <div class="meta">Oct – Nov 2026</div>
     </div>
-    <div class="links"><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/klarbrief">github.com/JannetEkka/klarbrief</a></div>
+    <div class="links"><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/klarbrief">github.com/JannetEkka/klarbrief</a><span class="dot">·</span><span class="lbl">Chithi:</span> <a href="https://chithi-oprj.onrender.com">chithi-oprj.onrender.com</a></div>
     <ul>
       <li>Apertus 1.5 8B, Switzerland's open LLM, explains an official letter in the reader's language. Before any point is shown, a deterministic check finds its quoted words in the letter and verifies its date or CHF amount. Points that fail are listed apart, never shown as fact.</li>
       <li>Runs fully offline: llama.cpp on an internal Docker network, a 4-core CPU, no GPU, no internet at runtime.</li>
       <li>Measured on 48 explanations of 28 synthetic letters: 48/48 in the reader's language, 28 of 29 real deadlines shown, <b>0 wrong CHF amounts shown</b>. The model offered 7 wrong dates and the check stopped 6. 34 tests and a 5-page technical report.</li>
+      <li><b>Chithi</b> (new code, Meta hackathon): the same check for Indian bills and notices, from a phone photo, in Bengali, Hindi or English, on SAM 3.1, Muse Spark and Muse Voice Transcribe. Each value must also be in a second, separate reading of the photo, and the reader sees the piece of their photo where the letter says it. 28 live explanations, 16 from folded, shadowed photos: <b>0 of 114 dates and amounts shown wrong</b>; 53 of 53 planted errors held back.</li>
     </ul>
   </div>
 
