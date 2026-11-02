@@ -32,7 +32,17 @@ Pick a sample portrait, take a photo with the camera, or upload one.
 
 ## Consumer and eCommerce value
 
-For a shopper, every suggestion is something that suits her as she is: a lip shade matched to her own lips, a cut for her face shape, clothes in her colours. She sees each one on her real face before buying, which means fewer wrong-shade lipsticks and fewer returns. For a store, the same flow sits on top of its catalogue. The lip tint is a shade it can stock, and the outfit picks are its own products, ranked for this customer.
+For a shopper, every suggestion starts from her own colours and face shape: a lip shade made from her own lips, a cut for her face shape, clothes in her colours. She sees each one on her own photo before buying, with nothing about her face retouched. For a store, the same flow sits on top of its catalogue: the lip tint is a shade it can stock, and the outfit picks are its own products, ranked for this customer.
+
+**What I measured** (Nov 1, on YouCam's own sample photos):
+
+- **Lip depth.** With default settings, YouCam's makeup render made lips about 5 points darker (CIELAB lightness, L*). The calibrated render keeps her own lip depth within about 2 points across three lips: medium (L*≈40), deep and saturated (L*≈40) and light (L*≈63).
+- **No retouching.** Skin smoothing is set to 0 instead of the engine's default of 50. YouCam's hair-colour try-on brightened the cheek and background by 10 to 13 points (RGB, 0–255) as well as the hair, so it's left out.
+- **Fairness.** Reading undertone from hue alone labelled every deep skin tone in our cast "cool". The depth-adjusted reading doesn't, and a test checks it.
+- **Honest inputs.** YouCam's hair-colour read was wrong or empty on 4 of the 5 sample photos, so the user can correct it before the palette uses it.
+- **Cost.** A full portrait reading costs 44 API units, each layer of a look 1 or 2, and any repeat view 0, because results are cached.
+
+**What I haven't measured** is whether this lowers wrong-shade purchases or returns. There's no baseline yet. A store could measure it by comparing return rates for lip shades and outfits bought after a Beauty Within try-on against those bought without one.
 
 ## How I built it
 
