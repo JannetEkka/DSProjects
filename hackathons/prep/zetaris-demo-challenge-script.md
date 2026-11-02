@@ -38,9 +38,15 @@ The words in quotes are a guide, so say them your way. Record each scene as its 
    npm start
    ```
    Don't run `npm run validate:cases` yourself. Scene 3 needs the first case to be checked live, and the agent runs the validator in scene 6.
-5. **Check Cursor's agent works on the free plan:** open the Agent panel, pick a Grok model, and send a one-line test ("say hi"). If the free plan has no agent requests left, skip the agent part of scene 6 and run `npm run validate:cases` yourself instead. No paid plan.
-6. Open **http://localhost:3000** (the Zetaris console) and **sign in before you start recording**, so your email and password never appear. Open its SQL editor and type this query in, but don't run it yet:
+5. **Cursor's agent is the chat box in the middle of Cursor's main window** ("No agents yet" in the sidebar only means you haven't started one). Check, without sending anything yet:
+   - the chips above the box say **sql-noir**, **main** and **This PC**. "This PC" means the agent works on your laptop's copy in `D:\code\sql-noir`, where Zetaris is reachable. Don't click "Connect Your Repos" or "Connect GitHub": those are for cloud agents, which can't reach your Zetaris;
+   - the model at the bottom right of the box says **Grok 4.7 High** (SpaceXSI's Grok). Keep it;
+   - clear any old text in the box (Ctrl+A, then Delete).
+   If, when you send the prompt in scene 6, Cursor says you're out of free requests or need a paid plan, don't pay: run `npm run validate:cases` yourself instead.
+6. Open **http://localhost:3000** in Chrome. This is the **Zetaris console**, Zetaris's own web app that came with the Docker install. It's not SQL Noir (that's localhost:4321). It's where you signed in with your admin email on 10-21 and made the API key. **Sign in before you start recording** (paste the password from Notepad), so your email and password never appear. Then open the **SQL Editor** from its menu (Zetaris's docs call it that). Scene 2 runs these three queries there, one at a time:
    ```sql
+   SHOW LIGHTNING DATABASES
+   SHOW LIGHTNING TABLES TPCDS_DB
    SELECT r_reason_id, r_reason_desc FROM TPCDS_DB.reason
    ```
 7. Open **http://localhost:4321** (the game) in a second tab. Hide the bookmarks bar (Ctrl+Shift+B).
@@ -52,7 +58,7 @@ The words in quotes are a guide, so say them your way. Record each scene as its 
 **1. The problem (0:00–0:15).** The game's welcome screen ("New in town, detective?").
 > "This is SQL Noir, a detective game where you learn SQL by cracking cases. Most SQL practice tells you you're wrong, but not why. Here, every answer is checked against real data in Zetaris, so the game can't bluff."
 
-**2. Zetaris, live on my laptop (0:15–0:45).** Ubuntu terminal: run `docker compose ps`, then `docker stats --no-stream`. Switch to the Zetaris console: show the TPCDS_DB and NY_TAXI databases, then run the query you typed in the SQL editor.
+**2. Zetaris, live on my laptop (0:15–0:45).** Ubuntu terminal: run `docker compose ps`, then `docker stats --no-stream`. Switch to the Zetaris console's SQL Editor and run the three queries one at a time: `SHOW LIGHTNING DATABASES` (TPCDS_DB and NY_TAXI appear), `SHOW LIGHTNING TABLES TPCDS_DB`, then the reasons query.
 > "Zetaris runs right here, in Docker under Ubuntu: four containers, on a 16 GB laptop, with no cloud account. It comes with two sample databases, a retail benchmark and New York taxi data. This is the reasons table my first case is built on, in Zetaris's own SQL editor."
 
 **3. The game asks Zetaris first (0:45–1:15).** Switch to the game. Point at "Zetaris connected" in the header. Click **Take your first case**. While the spinner runs, point at the trace lines at the bottom. When "Damaged goods" opens, point at **The files** under the question.
@@ -68,11 +74,11 @@ SELECT r_reason_id, r_reason_desc FROM TPCDS_DB.reason WHERE lower(r_reason_desc
 Run it. When it asks why, type something like: *"I pick the id and the description, as the case asks. WHERE keeps only the reasons whose description contains damage, and lower() makes the match ignore capitals."* Click **Close the case**, and let the stamp land.
 > "I add the filter, and the rows match. I explain why my query proves it, Nemo, my partner on NVIDIA Nemotron, grades that, and the case is closed."
 
-**6. Cursor's agent writes a case, and Zetaris checks it (2:05–2:50).** In Cursor, open the Agent panel with a Grok model and paste this prompt:
+**6. Cursor's agent writes a case, and Zetaris checks it (2:05–2:50).** In Cursor's main window, click in the chat box (chips: sql-noir, main, This PC; model: Grok 4.7 High), paste this prompt and press the pink ↑ button:
 ```
 Add one new case to SEED_CASES in src/game/seed-cases.ts, on NY_TAXI.taxi_zones (its columns are listed in schemaText in src/game/engine.ts). Make it level 1, practising select and filter: a two-sentence noir story, a precise question, an answerSql that is one read-only SELECT on NY_TAXI.taxi_zones returning at most 25 rows and 6 columns, orderMatters false, two hints that don't give the answer away, databases ["NY_TAXI"], origin "seed", and a new id starting with "seed-". Follow the style of the existing cases. Then run npm run validate:cases, and if the new case fails, fix it and run it again until it passes.
 ```
-Let it work (Claude speeds this part up). If Cursor asks to run the command, click **Run**. Point at the PASS line for the new case and at "8/8 seed cases are ready to play". If its first try fails, keep it on camera: the validator's FAIL and the agent's fix are the best part.
+Let it work (Claude speeds this part up). The agent appears in the sidebar under sql-noir, shows its steps and edits `src/game/seed-cases.ts`. When it asks to run `npm run validate:cases`, click **Run** (or Allow). The game running in your other terminal won't show the new case until it restarts, and it doesn't need to. Point at the PASS line for the new case and at "8/8 seed cases are ready to play". If its first try fails, keep it on camera: the validator's FAIL and the agent's fix are the best part.
 > "Zetaris keeps my coding agent honest too. This is Cursor's agent, running Grok, adding a new case on the New York taxi data. It doesn't get a free pass: the validator runs its answer on Zetaris, like every case in the game. The first time I ran this validator, it failed two of my own cases, a tie and a join too heavy for my laptop. The agent's case passes, so it's ready to play."
 (If the agent's case failed first, say so: "It failed once, the agent fixed it, and now it passes.")
 
