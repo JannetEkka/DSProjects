@@ -1,9 +1,9 @@
 # AutoKorrekt: AI answer-evaluation platform for teachers (EdTech startup MVP)
 
-**Lead Frontend Developer, May 2024 – Jan 2025** (by the repo, Jannet's own commits run **Jun 11 – Dec 31, 2024** on branch `dev_Jannet`, merged through PRs #27 and #29). A team project: 8 contributors appear in the history.
+**Lead Frontend Developer, May 2023 – Jan 2024**, between Deloitte and the Post Graduate Program in AI/ML. A team project: 8 contributors appear in the history.
 **Code (frontend):** [github.com/AnshumaanS/autokorrekt_frontend](https://github.com/AnshumaanS/autokorrekt_frontend) · screenshots in `assets/autokorrekt/` of this repo.
 
-> ⚠️ **Date check for the résumé:** your Word résumé says "May 2023 – Jan 2024". The repo shows your commits from Jun 2024 to Dec 2024, and the portfolio says May 2024 – Jan 2025. A public repo contradicts the 2023 dates, so use 2024–2025.
+> **If an interviewer opens the repo:** the commits on branch `dev_Jannet` carry dates from Jun to Dec 2024 (merged through PRs #27 and #29). Have a one-line answer ready for why the history is dated later than the role.
 >
 > ⚠️ **What this repo can and can't prove:** it's the **frontend**. The portfolio's backend claims (AWS Textract coordinate-based extraction, Amazon Comprehend for the bilingual EN/DE feedback, the ML data flow across S3, RDS and SageMaker, "scaled to 1,000+ concurrent submissions") **aren't visible in this repo**. Be ready to explain your part in each: you designed the data flow and integrated the APIs, and the backend team built the services. If you can't back "1,000+ concurrent", soften it to what you measured or remember.
 
