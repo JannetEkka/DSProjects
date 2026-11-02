@@ -21,6 +21,14 @@ render() {  # render <source.html> <output.pdf>
 mkdir -p ../resumes
 render resume.html            ../Jannet_Ekka_Resume.pdf
 cp ../Jannet_Ekka_Resume.pdf  ../resumes/Jannet_Ekka_Resume_Applied_AI.pdf
-render resume_fde.html        ../resumes/Jannet_Ekka_Resume_FDE.pdf
+# FDE: since 2026-11-02 the source is Jannet's Word table layout, generated as .docx
+# (resume_fde.html is the older HTML version and is no longer rendered).
+if node -e "require('docx')" 2>/dev/null && command -v soffice >/dev/null; then
+  node build_resume_fde_docx.js ../resumes/Jannet_Ekka_Resume_FDE.docx >/dev/null
+  soffice --headless --convert-to pdf --outdir ../resumes ../resumes/Jannet_Ekka_Resume_FDE.docx >/dev/null 2>&1
+  printf '%-50s %s pages\n' ../resumes/Jannet_Ekka_Resume_FDE.pdf "$(pdfinfo ../resumes/Jannet_Ekka_Resume_FDE.pdf | awk '/^Pages/{print $2}')"
+else
+  echo "FDE résumé skipped: needs the docx npm package (npm install docx) and LibreOffice (soffice)" >&2
+fi
 render resume_ai_trainer.html ../resumes/Jannet_Ekka_Resume_AI_Trainer.pdf
 render resume_model_eval.html ../resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf

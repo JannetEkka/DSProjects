@@ -10,9 +10,11 @@ Applied AI engineer: LLM agents, AI evaluation and agent security. Founder of JT
 
 ## What I build
 
-**Smart Money Trading (SMT)** is an AI trading agent for crypto futures that has to prove why it traded. Written rules with replayed records open every trade; six AI advisors explain each decision and are graded on whether they were right; a reason is only shown if flipping that advisor's input changes the decision. I built it alone, directing AI coding agents and reviewing every merge: 91,000 lines of Python, 3,000+ tests and 611 measured findings. Patent pending in India (App. No. 202631090789).
+**Smart Money Trading (SMT)** is an AI trading agent for crypto futures that has to prove why it traded. Written rules with replayed records open every trade; six AI advisors explain each decision and are graded on whether they were right; a reason is only shown if flipping that advisor's input changes the decision. I built it alone, directing AI coding agents and reviewing every merge: about 88,000 lines of Python, 3,152 tests and 673 measured findings. It isn't profitable yet, and its own receipts on Monad show that. Patent pending in India (App. No. 202631090789).
 
 **Afterburn** ([live](https://jannetekka.github.io/afterburn)) checks Punjab's farm fields for burn scars in Sentinel-2 imagery, because the official fire count misses fires lit after the satellite passes, and settles a pay-for-not-burning pact on-chain with verdicts anyone can recheck. **Lore** ([live](https://lore-gh5y.onrender.com/)) turns an open-source project's GitHub history into a FalkorDB graph and answers who knows what, with the PRs behind every answer. **Recourse** ([live](https://jannetekka.github.io/recourse/)) seals each automated welfare-eligibility decision on Monad testnet under rules published first, and gives the family the records that decided it, explained in Telugu, Hindi or English. **Wiretrap** ([live](https://wiretrap.onrender.com/)) tests AI agents for security by reading the tool-call log instead of the reply. **SmartDesk** is a multi-agent assistant whose RAG evaluation harness stopped a reranker that only looked like a win.
+
+October–November 2026, each on a different sponsor's platform: **Spona** (12 concurrent agents that match researchers with companies, a critic checking every claim), **Footfall** (a Qloo + Nemotron taste agent with its own spend cap), **Proof of Fix** (GitLab issues close on production evidence: a fix that passed tests and AI review was caught at 32% → 9% failures, then proven at 0 of 875), **Aside** (a Fire TV companion: spoilers 6/16 → 0/16), **SQL Noir**, **Klarbrief**, **Beauty Within**, **SMT Receipts**, **SMT World: Clock In** and **Ghost Ledger**. [`projects/`](./projects/) has an interview write-up for every project: architecture, data and security, reliability, and what was measured.
 
 ## This repository
 
@@ -23,6 +25,7 @@ The site is generated: edit `_portfolio_src/` and rebuild (see [its README](./_p
 | `_portfolio_src/` | site source (`data.py`, `build.py`) and both résumé sources |
 | `certificates/` | every certificate file the site links |
 | `interview-prep/` | what I have built, a syllabus taught from my own code, and questions with answers |
+| `projects/` | one write-up per portfolio project for FDE interviews: why it's built that way, how data and access work, what breaks and what was measured |
 | `Automotive_Surveillance_System_Capstone/` | capstone: ResNet50 + Fast R-CNN over 16,185 images |
 | `Customer_Churn_Prediction_ET/` · `Semiconductor_Manufacturing_Prediction_FMT/` · `YouTube_AdView_Analytics_ML/` | classical ML |
 | `MultiModel_Botanical_Classification_CV/` · `Signal_Classification_Digit_Recognition_NNDL/` | computer vision and neural networks |

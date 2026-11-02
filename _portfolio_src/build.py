@@ -212,9 +212,9 @@ HTML = f'''<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jannet Akanksha Ekka — Forward-Deployed AI Engineer</title>
-<meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending multi-agent trading AI running 24/7 on Google Cloud, and 20+ shipped projects.">
+<meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending multi-agent trading AI running 24/7 on a free-tier Oracle Cloud VM, and 35+ shipped projects.">
 <meta property="og:title" content="Jannet Akanksha Ekka — Forward-Deployed AI Engineer">
-<meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live on Google Cloud.">
+<meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live, 24/7, at no infrastructure cost.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -400,7 +400,7 @@ section{{padding:104px 0}}
 .filter.is-on{{background:var(--tx);color:var(--bg);border-color:var(--tx);font-weight:600}}
 
 /* ---------- cards ---------- */
-.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));grid-auto-flow:row dense;gap:20px}}
 @media(max-width:520px){{.grid{{grid-template-columns:1fr}}}}
 .card{{position:relative;border:1px solid var(--line);border-radius:17px;background:var(--surf);
   overflow:hidden;transition:transform .42s var(--ease),border-color .3s,background .3s}}
@@ -633,8 +633,8 @@ footer a:hover{{color:var(--tx)}}
 <div class="statbar">
   <div class="shell">
     <div class="statgrid">
-      <div class="stat reveal"><div class="n" data-count="25">25</div><div class="l">Projects shipped</div></div>
-      <div class="stat reveal"><div class="n" data-count="91K">91K</div><div class="l">Lines shipped &amp; audited</div></div>
+      <div class="stat reveal"><div class="n" data-count="39">39</div><div class="l">Projects shipped</div></div>
+      <div class="stat reveal"><div class="n" data-count="88K">88K</div><div class="l">Lines shipped &amp; audited</div></div>
       <div class="stat reveal"><div class="n" data-count="4">4</div><div class="l">Years enterprise eng.</div></div>
       <div class="stat reveal"><div class="n" data-count="1">1</div><div class="l">Patent filed</div></div>
     </div>
@@ -680,7 +680,7 @@ footer a:hover{{color:var(--tx)}}
         <div class="abtxt reveal">
           <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
           <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks built to catch overfitting. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it: written rules with replayed records open trades, and the agents became advisors graded on every call.</p>
-          <p>The way I work has changed too. I don't hand-type a 91,000-line platform. I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The speed-up is real and so is the gate. I am the only one standing between a generated patch and a system trading live.</p>
+          <p>The way I work has changed too. I don't hand-type an 88,000-line platform. I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The speed-up is real and so is the gate. I am the only one standing between a generated patch and a system trading live.</p>
           <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on an <strong>Oracle Cloud</strong> free-tier VM (I moved it off GCP in two days when the billing account closed), and I read its logs the way I used to read defect reports, triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
           <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong>, covering Vertex AI, Gemini, ADK, MCP and AlloyDB. All of it is architected and operated from a single 16&nbsp;GB laptop; when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
@@ -707,7 +707,7 @@ footer a:hover{{color:var(--tx)}}
       <div class="tlrow reveal">
         <h4>Founder &amp; sole engineer</h4>
         <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">Jan 2024 – Present</div>
-        <p>Building SMT, an AI trading agent that has to prove why it traded, and <strong>SMT World</strong>, the product exchanges give their users on top of it. 91,000 lines of Python, 3,045 tests, 344 merged pull requests and 611 measured findings, written by AI coding agents I direct, with me as the <strong>only review before anything merges</strong>. Graded my own six AI agents on independent data, found all six at a coin flip, and rebuilt the system so written rules open trades and the agents are graded advisors. Tested 1,800 strategy variants (36 million simulated trades) at six exchanges&rsquo; fees. Audited 98 AI-written merges and found an order bug that had rejected 1,137 live orders over three months while every test passed. It places real orders 24/7 on WEEX&rsquo;s simulated account from an <strong>Oracle Cloud</strong> free-tier VM, moved off GCP in two days. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams. All <strong>while a full-time family carer</strong>.</p>
+        <p>Building SMT, an AI trading agent that has to prove why it traded, and <strong>SMT World</strong>, the product exchanges give their users on top of it. 88,000 lines of Python, 3,152 tests, 362 merged pull requests and 673 measured findings, written by AI coding agents I direct, with me as the <strong>only review before anything merges</strong>. Graded my own six AI agents on independent data, found all six at a coin flip, and rebuilt the system so written rules open trades and the agents are graded advisors. Tested 1,800 strategy variants (36 million simulated trades) at six exchanges&rsquo; fees. Audited 98 AI-written merges and found an order bug that had rejected 1,137 live orders over three months while every test passed. It places real orders 24/7 on WEEX&rsquo;s simulated account from an <strong>Oracle Cloud</strong> free-tier VM, moved off GCP in two days. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams. All <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>

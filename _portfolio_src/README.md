@@ -30,7 +30,7 @@ which projects lead.
 | PDF | source | for | length |
 |---|---|---|---|
 | `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (the site's nav button) | **exactly 2 pages** |
-| `resumes/Jannet_Ekka_Resume_FDE.pdf` | `resume_fde.html` | forward deployed engineer roles | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_FDE.docx` + `.pdf` | `build_resume_fde_docx.js` | forward deployed engineer roles, in Jannet's Word table layout (name in the page header, one bordered table, grey section bars) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_AI_Trainer.pdf` | `resume_ai_trainer.html` | AI trainer / LLM output-evaluation work | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf` | `resume_model_eval.html` | model evaluation, AI QA, red-teaming | **exactly 2 pages** |
 | `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
@@ -88,3 +88,10 @@ October hackathon entries (Lore, Klarbrief, SMT World: Clock In, SMT Receipts),
 and the eval and trainer variants add the RSNA label-quality check. Section
 headings now carry `break-after: avoid`, after a heading was left alone at the
 foot of page 1.
+
+2026-11-02: the FDE résumé moved to Jannet's own Word layout (her 10-31 edit
+of the HTML version, rebuilt as a generated `.docx` so it can be edited in Word
+and regenerated). `build_resume_fde_docx.js` writes the `.docx`; LibreOffice
+renders the PDF. On a box without Calibri, map Calibri and Calibri Light to
+Carlito in fontconfig first, or the page count is wrong. `resume_fde.html` is
+the older HTML version, kept for reference and no longer rendered.
