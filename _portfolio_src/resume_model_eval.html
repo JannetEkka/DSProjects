@@ -159,13 +159,14 @@
 
   <div class="entry">
     <div class="row">
-      <div class="role">Klarbrief: grounding checks on an open LLM <span class="org">· Hack Apertus, Track 2B</span></div>
-      <div class="meta">Oct 2026</div>
+      <div class="role">Klarbrief and Chithi: grounding checks on LLM explanations <span class="org">· Hack Apertus; Meta AI Developer Hackathon</span></div>
+      <div class="meta">Oct – Nov 2026</div>
     </div>
-    <div class="links"><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/klarbrief">github.com/JannetEkka/klarbrief</a></div>
+    <div class="links"><span class="lbl">Code:</span> <a href="https://github.com/JannetEkka/klarbrief">github.com/JannetEkka/klarbrief</a><span class="dot">·</span><span class="lbl">Chithi:</span> <a href="https://chithi-oprj.onrender.com">chithi-oprj.onrender.com</a></div>
     <ul>
       <li>Apertus 1.5 8B explains official Swiss letters in the reader's language, offline on a 4-core CPU. Before any point is shown, a deterministic check finds its quoted words in the letter and verifies its date or CHF amount.</li>
       <li>Measured on 48 explanations of 28 synthetic letters plus 8 held-out letters: 48/48 in the reader's language, 28 of 29 real deadlines shown, <b>0 wrong CHF amounts shown</b>; the check stopped 6 of the model's 7 wrong dates. No wrong date or amount shown on the held-out set. 34 tests, 5-page report.</li>
+      <li><b>Chithi</b> (Meta hackathon, SAM 3.1 + Muse Spark): photos of Indian letters explained in Bengali, Hindi or English, each value checked against the quote and a second reading. <b>0 of 114</b> shown wrong on 28 live runs (16 hard photos); 53/53 planted errors held back; a key-facts metric added after a demo run left out the deadline.</li>
     </ul>
   </div>
 

@@ -21,6 +21,7 @@ Written 2026-11-01/02 from the repos as they stood then.
 
 | Project | Hackathon | File | Lead with |
 |---|---|---|---|
+| Chithi | Meta Global AI Developer (Cerebral Valley), submitted 11-03 | [chithi.md](chithi.md) | A photo of an Indian letter explained in Bengali or Hindi; every date and amount checked against two readings: 0 wrong of 114 |
 | Beauty Within | YouCam (Perfect Corp), submitted 11-02 | [beauty-within.md](beauty-within.md) | Calibrated the vendor's lip render to within ~2 L*, and dropped a feature that brightened whole faces |
 | Spona | NTP Novi Sad (JigJoy × Mozaik) | [spona.md](spona.md) | 12 concurrent agents, every claim checked by a critic while the others work; 489 challenges in 5 min 48 s |
 | Footfall | Qloo + Nebius × NVIDIA | [footfall.md](footfall.md) | A hard spend cap and replay mode, so a public demo can't run up the card or die when a key expires |

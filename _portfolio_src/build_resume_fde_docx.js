@@ -104,6 +104,11 @@ build('Proof of Fix: issues close on production evidence, not on merge', 'GitLab
     ['A GitLab Duo flow reads production logs when a bug is filed and writes a proof contract into the issue; after deploy, the pipeline judges the shipped build on its own logs and closes the issue with a receipt, or keeps it open. All nine DevSecOps stages.'],
     ['Real run: a fix that passed the tests, the contract gate and Duo Code Review cut failures only ', ['from 32% to 9%', { b: true }], ", so the issue stayed open; the Duo Developer flow's second fix reached ", ['0 failures on 875 requests', { b: true }], '.'],
   ]);
+build('Chithi: official Indian letters explained, every number checked', 'Meta Global AI Developer Hackathon (Cerebral Valley)', 'Nov 2026',
+  [['Live', 'chithi-oprj.onrender.com', 'https://chithi-oprj.onrender.com'], ['Code', 'github.com/JannetEkka/chithi', GH + 'chithi'], [null, 'Demo video', 'https://youtu.be/wlRwfQghgOw']],
+  [
+    ['A phone photo of a bill or notice, explained in Bengali, Hindi or English: SAM 3.1 finds the page and its tables, Muse Spark reads it twice and explains it, Muse Voice Transcribe takes spoken questions. A check with no model requires every date and amount to be in the quote and in the second reading; 28 live explanations, ', ['0 of 114 values shown wrong', { b: true }], '.'],
+  ]);
 build('Spona: concurrent agents that match researchers with companies', 'NTP Novi Sad Hackathon (JigJoy × Mozaik)', 'Oct 2026',
   [['Live', 'jannetekka.github.io/spona', 'https://jannetekka.github.io/spona/'], ['Code', 'github.com/JannetEkka/spona', GH + 'spona']],
   [
@@ -130,19 +135,9 @@ build('Klarbrief: official Swiss letters explained offline', 'Hack Apertus, Trac
   [
     ["Apertus 1.5 8B explains an official letter in the reader's language, fully offline in llama.cpp on an internal Docker network on a 4-core CPU. Every point is checked against the letter before it is shown: on 48 explanations, ", ['0 wrong CHF amounts', { b: true }], " reached the reader and the check stopped 6 of the model's 7 wrong dates."],
   ]);
-build('Wiretrap: adversarial security testing for AI agents', 'Gen AI Academy APAC, Cohort 3', '2026',
-  [['Live', 'wiretrap.onrender.com', 'https://wiretrap.onrender.com/'], ['Code', 'github.com/JannetEkka/wiretrap', GH + 'wiretrap']],
-  [
-    ['Clones every tool an agent declares as an inert decoy, runs attacks and judges the tool-call log; it caught a Google codelab agent refusing a task after it had already run ls -la through its shell tool.'],
-  ]);
-build('SmartDesk: multi-agent assistant with evaluated RAG', 'Gen AI Academy APAC hackathon, top 101 of 1,500+', '2026',
-  [['Code', 'github.com/JannetEkka/smartdesk', GH + 'smartdesk']],
-  [
-    ['An ADK orchestrator over inbox, calendar and notes agents, with MCP servers I wrote; its retrieval eval stopped a reranker that took search from 29 ms to 2,382 ms for a gain inside the noise.'],
-  ]);
 rows.push(full(para([
   ['Also shipped, Oct–Nov 2026: ', { b: true }],
-  'SMT Receipts (Monad) · SMT World: Clock In (native Android, Solana Mobile) · SQL Noir (Zetaris + Nemotron) · Afterburn (Sentinel-2 burn scars) · Recourse (Web3 for Social Good, Round 2) · Beauty Within (YouCam) · Ghost Ledger (HackerRank Orchestrate). All at ',
+  'Wiretrap (adversarial testing for AI agents) · SmartDesk (multi-agent assistant, evaluated RAG) · SMT Receipts (Monad) · SMT World: Clock In (native Android, Solana Mobile) · SQL Noir (Zetaris + Nemotron) · Afterburn (Sentinel-2 burn scars) · Recourse (Web3 for Social Good, Round 2) · Beauty Within (YouCam) · Ghost Ledger (HackerRank Orchestrate). All at ',
   ['jannetekka.github.io/DSProjects', { link: 'https://jannetekka.github.io/DSProjects/' }],
 ])));
 
