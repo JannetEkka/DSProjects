@@ -1,10 +1,9 @@
 # Jannet Akanksha Ekka
 
-Applied AI engineer: LLM agents, AI evaluation and agent security. Founder of JTech Solutions (pre-incorporation), building Smart Money Trading (SMT). Kolkata, India, open to remote work.
+Forward deployed and applied AI engineer: LLM agents, AI evaluation and agent security. Smart Money Trading (SMT) is my side project. Kolkata, India, open to remote work.
 
 - **Portfolio:** [jannetekka.github.io/DSProjects](https://jannetekka.github.io/DSProjects/)
-- **Résumé (applied AI + AI evaluation):** [Jannet_Ekka_Resume.pdf](./Jannet_Ekka_Resume.pdf)
-- **Founder résumé (SMT, one page):** [Jannet_Ekka_Founder_Resume.pdf](./Jannet_Ekka_Founder_Resume.pdf)
+- **Résumé:** [Jannet_Ekka_Resume_FDE.pdf](./resumes/Jannet_Ekka_Resume_FDE.pdf)
 - **SMT World, live:** [smt-weex-trading-bot.jannet-ekka.workers.dev](https://smt-weex-trading-bot.jannet-ekka.workers.dev/)
 - **LinkedIn:** [jannet-akanksha-ekka](https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/)
 
@@ -22,7 +21,7 @@ The site is generated: edit `_portfolio_src/` and rebuild (see [its README](./_p
 
 | Folder | What it is |
 |---|---|
-| `_portfolio_src/` | site source (`data.py`, `build.py`) and both résumé sources |
+| `_portfolio_src/` | site source (`data.py`, `build.py`) and the résumé sources |
 | `certificates/` | every certificate file the site links |
 | `interview-prep/` | what I have built, a syllabus taught from my own code, and questions with answers |
 | `projects/` | one write-up per portfolio project for FDE interviews: why it's built that way, how data and access work, what breaks and what was measured |
