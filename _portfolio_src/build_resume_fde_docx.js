@@ -65,7 +65,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ["I put AI systems into other people's environments and keep them working there.", { b: true }],
-  " For about four years at Deloitte, I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), running demos and requirement sessions in US, UK and India hours and leading a 6-person QA team. Since 2024 I have built and run a live AI trading agent on my own; when its cloud billing closed, I moved it to a new stack in two days and it picked its open positions back up from committed state. Between Oct 12 and Nov 2, 2026 I built and submitted 13 working products to 14 hackathons, each on its sponsor's platform (GitLab Duo, Fire TV, NVIDIA Nemotron, Qloo, FalkorDB, Solana Mobile, Monad and others), each with its code, a working build and a demo. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML.",
+  " For about four years at Deloitte, I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), running demos and requirement sessions in US, UK and India hours and leading a 6-person QA team. Since 2024, alongside the Post Graduate Program and full-time family care, I have built and run a live AI trading agent on my own as a side project; when its cloud billing closed, I moved it to a new stack in two days and it picked its open positions back up from committed state. Between Oct 12 and Nov 2, 2026 I built and submitted 13 working products to 14 hackathons, each on its sponsor's platform (GitLab Duo, Fire TV, NVIDIA Nemotron, Qloo, FalkorDB, Solana Mobile, Monad and others), each with its code, a working build and a demo. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML.",
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -77,7 +77,7 @@ rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript. Kotlin a
 rows.push(skill('Testing', 'Test strategy, pytest (3,000+ tests on one system), Selenium, Katalon Studio, Jenkins, LLM evals (held-out sets, paired bootstrap, baselines), production log checks before a fix is called done'));
 
 rows.push(section('PRODUCTION SYSTEM'));
-rows.push(head(['Smart Money Trading (SMT) — Explainable AI Trading Agent · Founder & sole engineer | Jan 2024 – Present']));
+rows.push(head(['Smart Money Trading (SMT) — Explainable AI Trading Agent · Side project, sole engineer | Jan 2024 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026', { b: true, i: true }]]));
 rows.push(links([['Live', 'SMT World', 'https://smt-weex-trading-bot.jannet-ekka.workers.dev/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
 rows.push(bullets([
@@ -142,8 +142,6 @@ rows.push(full(para([
 ])));
 
 rows.push(section('PROFESSIONAL EXPERIENCE'));
-rows.push(head(['JTech Solutions (pre-incorporation) — Founder & AI Engineer | Jan 2024 – Present · Kolkata']));
-rows.push(bullets([['Building SMT and SMT World (above) as the company\'s first product, while a full-time family carer and alongside the PGP in AI/ML.']]));
 rows.push(head(['AutoKorrekt — Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers: OCR validation flows, JWT auth, bulk answer-sheet upload and per-student status, over a backend using ', ['AWS Textract', { b: true }], ', Amazon Comprehend, S3, RDS and SageMaker.']]));
 rows.push(head(['Deloitte Consulting LLP · Test Automation Engineer (Analyst) | Aug 2019 – Jan 2023 · Bangalore']));
