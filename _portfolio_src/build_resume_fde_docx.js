@@ -142,6 +142,8 @@ rows.push(full(para([
 ])));
 
 rows.push(section('PROFESSIONAL EXPERIENCE'));
+rows.push(head(['Internship Studio — Machine Learning Intern | Jul 2024 – Aug 2024']));
+rows.push(bullets([['Built a model predicting YouTube ad views from engagement metrics across about 15,000 videos. Compared five regressors; Random Forest did best (R² 0.25, against 0.02 for linear regression), and I packaged it with its expected input columns so new data can be scored.']]));
 rows.push(head(['AutoKorrekt — Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers: OCR validation flows, JWT auth, bulk answer-sheet upload and per-student status, over a backend using ', ['AWS Textract', { b: true }], ', Amazon Comprehend, S3, RDS and SageMaker.']]));
 rows.push(head(['Deloitte Consulting LLP · Test Automation Engineer (Analyst) | Aug 2019 – Jan 2023 · Bangalore']));
