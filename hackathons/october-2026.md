@@ -2,6 +2,8 @@
 
 Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, sorted by the date it **closes** (submission deadline, or the last day of the event). Checked against the official pages on 2026-10-05 where marked ✓; Solana Mobile, neatHack, Graph Hacks and HackWithUs re-checked 2026-10-06; Solana Mobile's dates re-read on its Align event page 2026-10-07. Ayiti, Nebius × NVIDIA, Qloo, Anna AI, JigJoy, Run and YouCam re-checked 2026-10-26 (Devpost's own pages block automated reads, so Nebius, Qloo and YouCam come from the organisers' announcements and Devpost's listing; confirm on each Rules tab). Meta, Airwallex and AI Genesis re-checked on their own pages 2026-10-26; Galuxium and PayPal are as read on 10-20 (Devpost blocks automated reads). Dates are as listed; confirm on the page before relying on one.
 
+**November's search** (cash prizes in any field, 11-08) is in [november-2026.md](november-2026.md).
+
 **New projects are fine** (operator, 2026-10-05) — "fits our existing work" is no longer a reason to skip. The filters left: our own money, students-only / in-person / region, and whether it can be built and submitted around the away days (Oct 8–10, 15–18).
 
 **Rule:** no hackathon that needs our own money — no funded trading account, gas we pay for, or paid credits. Free tiers and organiser-provided credits only. **Testnet and devnet wallets with free faucet tokens are fine** (operator, 10-06), and so is linking a wallet address to receive a prize; never a wallet that holds real funds. **Every account where Jannet's card is on file, and its next check, is in [cards.md](cards.md)** (10-29).
