@@ -12,6 +12,8 @@ Every event from [@onlyonealexia](https://x.com/onlyonealexia)'s October list, s
 
 **Rule: the submitted repo holds the project only (operator, 11-02).** Submission text, narration scripts, drafts, checklists and other working notes go in this repo under `hackathons/<entry>/`, never in the entry's own repo that judges see. The entry's repo keeps the code, a README, the licence, and the demo assets the rules ask for (video, screenshots).
 
+**Rule: discuss before building (Jannet, 11-08).** Every new entry starts with a **discussion session**, not code: read the rules and the whole site (FAQs included), propose 2–3 ideas checked against [lessons.md](lessons.md), and explain the architecture and flow in plain language until Jannet can explain them back. The session ends with a design brief at `hackathons/<entry>/design.md`, from [prep/design-brief-template.md](prep/design-brief-template.md), signed off by Jannet. **Only then** does a separate build session start, from the build prompt in that brief. UI is designed on a Claude Design canvas before any UI code, and demos get animation. Only Claude builds: skip hackathons whose rules make another coding agent do the building (Kiro, a sponsor's IDE).
+
 **Rule: impact (Jannet, 10-31).** Every README, submission and pitch states the impact: what changes for whom, measured or sourced, compared with something real. Never invent a baseline or an improvement; when there's no baseline, say so. Details in [CLAUDE.md](../.claude/CLAUDE.md).
 
 **Decision key:** ✅ entering · ⚪ maybe (decide by the date shown) · ❓ not checked yet · ❌ skipping (reason given) · ⛔ already closed

@@ -32,6 +32,10 @@ This applies to every repo, project, hackathon entry, README, submission form, p
 - **Never invent a baseline** ("matching takes weeks today") **or an improvement** ("10× faster") that nothing measured. If there's no measured baseline, say so plainly and say how it could be measured.
 - A number with nothing to compare it to isn't an impact statement. Pair it with a sourced comparison, or with what it lets someone do that they couldn't before.
 
+## Discuss before building (Jannet, 11-08)
+
+Jannet wants to understand everything we build. For every new hackathon entry, the first session is a **discussion session**: read the rules and the whole site, propose ideas against [hackathons/lessons.md](../hackathons/lessons.md), and explain the architecture and flow until Jannet can explain them back. It ends with a signed-off design brief (`hackathons/<entry>/design.md`, from [the template](../hackathons/prep/design-brief-template.md)). No build code before sign-off. A separate build session then starts from the brief's build prompt.
+
 ## Hackathon rules and status
 
 Decisions and Jannet's standing rules (no hackathon that needs our own money, and the rest) are in [hackathons/october-2026.md](../hackathons/october-2026.md). Progress for each entry is in its GitHub issue (label `hackathon`).
