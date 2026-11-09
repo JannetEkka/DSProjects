@@ -34,7 +34,7 @@ This applies to every repo, project, hackathon entry, README, submission form, p
 
 ## Discuss before building (Jannet, 11-08)
 
-Jannet wants to understand everything we build. For every new hackathon entry, the first session is a **discussion session**: read the rules and the whole site, propose ideas against [hackathons/lessons.md](../hackathons/lessons.md), and explain the architecture and flow until Jannet can explain them back. It ends with a signed-off design brief (`hackathons/<entry>/design.md`, from [the template](../hackathons/prep/design-brief-template.md)). No build code before sign-off. A separate build session then starts from the brief's build prompt.
+Jannet wants to understand everything we build. For every new hackathon entry, the first session is a **discussion session**: read the rules and the whole site, propose ideas against [hackathons/lessons.md](../hackathons/lessons.md) after **searching the web thoroughly for the same idea** (GitHub, app stores, Product Hunt, Devpost, the sponsor's marketplace; lessons 0: name the closest project with a link, and drop any idea that already exists), and explain the architecture and flow until Jannet can explain them back. It ends with a signed-off design brief (`hackathons/<entry>/design.md`, from [the template](../hackathons/prep/design-brief-template.md)). No build code before sign-off. A separate build session then starts from the brief's build prompt.
 
 ## Hackathon rules and status
 
