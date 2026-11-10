@@ -10,7 +10,7 @@ tier: community
 category: tools
 version: "0.1.0"
 requires_hermes: ">=0.23.1"
-platforms: [linux, macos, windows]
+platforms: [linux]   # tested on Linux (Hermes 0.23.1 from source); WSL counts as Linux
 docs_url: https://github.com/JannetEkka/lights-out
 image: "https://raw.githubusercontent.com/JannetEkka/lights-out/<sha>/docs/banner.png"
 capabilities:
