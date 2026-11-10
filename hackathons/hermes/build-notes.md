@@ -21,3 +21,19 @@ Build session: https://claude.ai/code/session_016VDQom3X84652goidUewwo. Brief: [
 **Finding 3: `ctx.dispatch_tool` skips plugin hooks.** It calls `registry.dispatch` directly, so `pre_tool_call`/`post_tool_call` don't fire for tools a slash command runs. The terminal tool's own guards (hardline, user deny rules, dangerous patterns) still run. Consequences for `/lights out`: the command records its own `deleted` lines from each delete's output. `aws ... terminate-instances` isn't on Hermes's dangerous list, so Hermes wouldn't prompt for it. **Proposed (needs Jannet's OK):** `/lights out` first lists what it will turn off and asks once with `ctx.ask_choice` ("Turn off N resources, $X/month? yes / no"); no answer, or an unattended run, means nothing is deleted.
 
 **Finding 4: where the receipt can appear.** Only `on_session_finalize` can show the user text (a returned string; CLI quit, `/new`, the end of a `-z`/`-q` one-shot on stderr, a gateway `/new` or `/reset`). `on_session_end` fires after every turn and can't show anything, so it's used only to keep the ledger flushed. The receipt is not shown when a TUI is closed, a Desktop chat is deleted or the gateway idle-expires a session; the next `on_session_start` notice covers those.
+
+## Steps 3–5 (2026-11-10)
+
+Plugin code is in the local repo `/home/user/lights-out` in this session (commits on `main`). It moves to `JannetEkka/lights-out` once the session can push there: attaching the repo was refused by the session's permission check, so Jannet needs to allow it.
+
+- 137 unit tests pass (46 matcher cases, real moto outputs as fixtures, ledger replay with damaged lines, keep parser, receipt states, the three failure tests).
+- `hermes plugins doctor --ci` and `hermes plugins validate --install-deps` pass on v0.23.1 (security scan safe; declared tools and hooks match registrations).
+- Integration test 8/8 (real Hermes + moto + Nemotron): no → nothing in moto; yes → the ledger ID is moto's ID; `/lights out` → moto empty; green receipt.
+
+**Finding 5: the CLI detaches on `/exit` in 0.23.1.** `hermes chat --cli` is a client of a local gateway; `/exit` detaches, and the gateway later finalizes the session where `on_session_finalize` text isn't delivered. So the receipt is also posted with `ctx.post_message` from `on_session_end` after any turn that changed the ledger. That is the demo moment in the brief ("Done ✅" and the receipt under it). `on_session_finalize` still returns it for `/new`, one-shot runs and gateway resets. (Divergence from the brief: `on_session_end` is used to show the receipt, not only as a fallback.)
+
+**Finding 6: aws-cli v1's `rds` commands ignore `AWS_ENDPOINT_URL`.** Its `update_endpoint_url` customisation pointed `rds` calls at `https://rds.amazonaws.com`. Three calls went to real AWS with the dummy key `testing` and were rejected (`InvalidClientTokenId`): no account exists behind that key, so nothing was created anywhere. Fix: the session's `aws` is a wrapper that always passes `--endpoint-url` for the local moto server and refuses to run if the endpoint isn't localhost. Debug logs confirmed rds, ec2, elbv2 and s3 all go to `127.0.0.1` after the fix.
+
+**Finding 7: models often use `--query ... --output text`.** The output then has no resource ID (an EIP printed only its IP). The plugin records an *unknown* (blocks "All clear") and immediately runs one read-only list call for that kind; it pairs the unknown with the untracked resource only when the counts match exactly. Tested in the smoke run: the EIP was paired one second after the create and `/lights out` released it.
+
+**Proposed change (needs Jannet's OK): `/lights out` asks once.** It lists everything it will delete with the $/month and asks with `ctx.ask_choice`; `/lights out yes` typed by a person is the same answer. No answer or an unattended run deletes nothing.
