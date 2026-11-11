@@ -149,3 +149,7 @@ def test_helpers():
     assert numbers_in_text("fell 11.4% to $36.98, then 2 percent") == [11.4, 36.98, 2.0]
     assert quote_in_headlines("apple CUT its fiscal first quarter revenue forecast.", list(HEADLINES.values()))
     assert not quote_in_headlines("Apple", list(HEADLINES.values()))
+    assert quote_in_headlines("Apple cut its fiscal first quarter revenue forecast... due to weaker demand in China",
+                              list(HEADLINES.values()))
+    assert not quote_in_headlines("Apple cut its fiscal first quarter revenue forecast... and raised its dividend",
+                                  list(HEADLINES.values()))

@@ -39,10 +39,13 @@ def _norm(s: str) -> str:
 
 
 def quote_in_headlines(quote: str, headline_texts: list[str]) -> bool:
-    q = _norm(quote).strip(". ")
-    if len(q) < 12:  # too short to be evidence
+    """Every part of the quote (parts are joined by an ellipsis) must be in a cited headline."""
+    heads = [_norm(h) for h in headline_texts]
+    parts = [_norm(p).strip(". ") for p in re.split(r"\.{3,}|…", quote)]
+    parts = [p for p in parts if p]
+    if not parts or max(len(p) for p in parts) < 12:  # too short to be evidence
         return False
-    return any(q in _norm(h) for h in headline_texts)
+    return all(any(p in h for h in heads) for p in parts)
 
 
 def numbers_in_text(text: str) -> list[float]:

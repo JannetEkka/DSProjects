@@ -250,16 +250,23 @@ def writer_input(week: dict) -> str:
     return "\n".join(lines)
 
 
-def checker_input(claim: dict, week: dict, by_id: dict) -> str:
+def checker_input(claim: dict, week: dict, by_id: dict, figures: dict | None) -> str:
+    """What the checker sees: the claim and its evidence, never the writer's reasoning.
+
+    For price figures the evidence is the sandbox's recomputation, not the raw
+    rows: in the first run the checker was given the rows and wrongly rejected
+    correct figures, because it was doing the arithmetic itself.
+    """
     lines = [f"Claim: {claim['text']}", "", "Evidence:"]
     for i in claim["headline_ids"]:
         if i in by_id:
             lines.append(f"{i}: {by_id[i]}")
-    if claim["kind"] == "price" or claim["numbers"]:
-        lines.append("Daily price rows (date, open, high, low, close). week_open is the first day's open, "
-                     "week_close the last day's close, the change is measured from week_open to week_close:")
-        lines += [f"{p['date']}, {p['open']:.2f}, {p['high']:.2f}, {p['low']:.2f}, {p['close']:.2f}"
-                  for p in week["prices"]]
+    if (claim["kind"] == "price" or claim["numbers"]) and figures:
+        lines.append("Price figures for the week, computed by code from the daily price rows (treat as exact; "
+                     "a figure in the claim may be rounded): "
+                     f"week opened at {figures['week_open']:.2f}, closed at {figures['week_close']:.2f}, "
+                     f"high {figures['week_high']:.2f}, low {figures['week_low']:.2f}, "
+                     f"change from open to close {figures['week_change_pct']:+.2f}%.")
     return "\n".join(lines)
 
 
@@ -288,7 +295,7 @@ def brief_for_week(week: dict, figures: dict | None, writer_model: str = WRITER_
         known = [i for i in claim["headline_ids"] if i in by_id]
         if not known and not (claim["kind"] == "price" and claim["numbers"]):
             return None, ["checker not asked: nothing valid is cited"]
-        verdict, _, errs = ask(CHECKER_MODEL, CHECKER_SYSTEM, checker_input(claim, week, by_id),
+        verdict, _, errs = ask(CHECKER_MODEL, CHECKER_SYSTEM, checker_input(claim, week, by_id, figures),
                                "check", V.parse_verdict, max_tokens=300)
         return verdict, errs
 
@@ -527,6 +534,20 @@ def stage_evidence() -> None:
 
 def stage_page() -> None:
     res = load_results()
+    # The page needs each week's news items (for the source marks) and the
+    # first run's totals (kept for the record).
+    res["headlines"] = {w["week"]: {h["id"]: {"text": h["text"], "date": h["date"]} for h in w["headlines"]}
+                        for w in data.weeks(data.load())}
+    try:
+        with open(os.path.join(RUNS, "first_run_results.json"), encoding="utf-8") as f:
+            first = json.load(f)
+        fs = first["briefs_summary"]
+        res["first_run"] = {
+            "claims_written": fs["claims_written"], "claims_removed": fs["claims_removed"],
+            "price_false_rejections": sum(1 for b in first["briefs"] for c in b["claims"]
+                                          if c["kind"] == "price" and c["reason"] in ("not_supported", "no_verdict"))}
+    except (OSError, ValueError, KeyError):
+        pass
     with open(os.path.join(HERE, "site", "template.html"), encoding="utf-8") as f:
         tpl = f.read()
     blob = json.dumps(res).replace("</", "<\\/")
