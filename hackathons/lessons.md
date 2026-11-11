@@ -10,6 +10,7 @@ Points marked *(our reading)* are inferred from what the winners did, since neit
 
 ## Choosing the idea
 
+0. **Search the web for the same idea before proposing it (Jannet, 11-09).** For every idea, search GitHub, app stores, Product Hunt, Devpost and the sponsor's own marketplace, and name the closest existing project with a link. If something already does our core thing, drop the idea and brainstorm another; a port of an existing tool to a new platform doesn't count as unique, **except** when the hackathon's goal is to fill its own marketplace: Jannet's call on 11-10 was that Hermes wants plugins it doesn't have, so a Hermes version of Lights Out is fine, as long as the README names the closest projects and says what Lights Out does differently. Checking only the sponsor's catalog is not enough: on 11-09 Lights Out (Hermes) had no match among 1,377 catalog plugins, but the web already had [agent-leftovers](https://github.com/ApahSaroj/agent-leftovers) (leftover cloud resources, cost so far, expiry tags, teardown commands), [cloud-costaware](https://github.com/ozkanpoyrazoglu/cloud-costaware) and [agent-cost-guard](https://github.com/ashishkaloge/agent-cost-guard) (approval with a price before `aws ec2 run-instances`) and [rentctl](https://github.com/Michael-Drake/rentctl) (leased servers that die with the session).
 1. **A problem anyone recognises, and a non-obvious use of the sponsor's tech.** All five JigJoy winners came from the open Freestyle track: hardware, traffic, meetings, building codes, political claims. None of the 11 entries on the fixed EINSTEIN brief placed. Qloo's rules asked for a non-obvious idea, and its winners were about elections, booking a whole trip, and a room you walk into, all far from Qloo's everyday use. *(our reading)*
 2. **Plan the measured comparison before building.** Run the same task with and without our system and report both numbers:
    - Roomful sends the same favourites to an LLM alone, and 0 of its 8 picks hold up.
@@ -35,3 +36,10 @@ Points marked *(our reading)* are inferred from what the winners did, since neit
 
 10. **The home page:** a headline of six words or fewer; the product itself on the first screen; a look that fits the subject (engineering paper for hardware, an editorial serif for meetings), not the default dark-navy-with-glow; one accent colour that means something; motion that shows the agents working. *(our reading, JigJoy and Qloo)*
 11. **Interviews and Q&A:** say what is implemented and what is proposed before giving an example, and rehearse one end-to-end walkthrough of the core policy.
+
+## Results read on 2026-11-09 (Jannet)
+
+- **Meta Global AI Developer Hackathon** (Chithi, [#40](https://github.com/JannetEkka/DSProjects/issues/40)): not a finalist, and no bonus prize.
+- **Open Agent Hackathon** (sql-noir, [#23](https://github.com/JannetEkka/DSProjects/issues/23)): not a finalist. A winner, TradeFlow, used review agents on a Dhaka Stock Exchange portfolio. Jannet's reading: SMT's agents could have entered the Tinkerer track, and Proof of Fix would have fitted this hackathon.
+- **Themes Jannet saw among winners across hackathons:** AR and connecting devices, proof of evidence, health and cancer, satellites and space, fine-tuning, making older tech better, women's safety, music. *(Jannet's reading)*
+
