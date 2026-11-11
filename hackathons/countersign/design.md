@@ -1,6 +1,6 @@
 # Design brief: Countersign (Mozilla Otari Hackathon: Devs Wilding Online)
 
-**Process (Jannet, 11-08):** a discussion session wrote this brief on 11-12 (https://claude.ai/code/session_016VDQoozJyWqR9nsww5zYBx). Jannet reads it, explains it back, and signs it off. Then a **separate build session** starts from the build prompt in section 10. Checked against [../lessons.md](../lessons.md). Working name: **Countersign** (a second model has to countersign every claim before it is shown); Jannet can change it.
+**Process (Jannet, 11-08):** a discussion session wrote this brief on 11-12 (https://claude.ai/code/session_016VDQoozJyWqR9nsww5zYBx). Jannet reads it, explains it back, and signs it off. Then a **separate build session** starts from the build prompt in section 10. Checked against [../lessons.md](../lessons.md). Name: **Countersign** (a second model has to countersign every claim before it is shown); Jannet approved it on 11-12. Jannet registered on DoraHacks and joined the Discord on 11-12.
 
 ## 0. The hackathon, in one screen
 
@@ -126,7 +126,7 @@ Skipped: MCP, and per-user budgets (open issue mozilla-ai/otari#3187 says hosted
 
 ## 6. Decisions settled now
 
-- **Repo and branch:** the side project lives in this repo, so the hackathon branch is `otari-hackathon` in `JannetEkka/DSProjects`, with new code under `Stock_Market_Sentiment_Analysis_NLP/countersign/`. Jannet to confirm.
+- **Repo and branch:** the side project lives in this repo, so the hackathon branch is `otari-hackathon` in `JannetEkka/DSProjects`, with new code under `Stock_Market_Sentiment_Analysis_NLP/countersign/`. Jannet asked on 11-12 whether a new public repo would be better. We stay here: the rules say "Start a new branch in your project", this repo's history shows the 2024 notebook the branch finishes, and it is already public. A separate repo can be split out after the deadline.
 - **Where it runs:** the build session tries to reach `api.otari.ai` from the cloud and asks for the key through the secure credential form. If the cloud can't reach it, Jannet runs one command in Ubuntu (WSL) and sends back the output. The key is never pasted in chat.
 - **Key:** on otari.ai, API keys → create one named `countersign`. Environment variable: `OTARI_API_KEY`.
 - **Budget:** cap the key at $1.50, leaving $0.50 spare.
@@ -164,8 +164,13 @@ Answer in your own words before sign-off:
 5. What happens if the $1.50 cap is hit halfway?
 6. What is built, and what is only planned?
 
+- **Jannet's answers (11-12):** right on who decides and the three conditions (2) and on the six features and where each shows up (4).
 - Gaps found and how they were fixed:
-- **Signed off:** (Jannet, date)
+  - (1) The two test sets are both from the same 349 headlines. The first is the rebuilt 2024 test split (about 53 rows), and it is the one that compares with 0.366. The second is all 349 rows, reported on its own because the 2024 models trained on 70% of them.
+  - (3) The writer doesn't do the arithmetic because a language model can state a wrong or invented number confidently. The sandbox runs real code on the price rows, so the figure doesn't depend on any model being right, and a claim whose number differs is removed.
+  - (5) A cap isn't a warning. Otari refuses every further request on that key. Our run stops, the page shows which weeks are missing, and nothing is marked complete.
+  - (6) Built: only the 2024 notebook and its data. Everything in sections 4 and 5 is planned until the build session makes it.
+- **Signed off:** Jannet, 11-12 ("u can start the build session yourself"), with the four gaps above explained back to her in chat.
 
 ## 10. The build prompt
 
