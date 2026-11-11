@@ -38,6 +38,7 @@ CHECKER_MODEL = "alibaba/qwen3-235b-a22b-instruct-2507"  # Qwen family: not the 
 FALLBACK_DRILL_POLICY = "countersign-fallback-drill"  # main model's provider answers 404
 
 TIMEOUT_S = 28
+STREAM_IDLE_S = 25  # longest silence allowed between two pieces of a streamed reply
 SANDBOX_PRICE_USD = 0.01  # what one /code/execute run cost on the account's usage page
 
 
@@ -91,11 +92,13 @@ class Otari:
                 with open(self.log_path, "a", encoding="utf-8") as f:
                     f.write(json.dumps(row) + "\n")
 
-    def _post(self, path: str, body: dict, purpose: str, retries: int = 2) -> requests.Response:
+    def _post(self, path: str, body: dict, purpose: str, retries: int = 2,
+              stream: bool = False) -> requests.Response:
         last: Exception | None = None
         for attempt in range(retries + 1):
             try:
-                r = self.session.post(BASE_URL + path, json=body, timeout=TIMEOUT_S)
+                r = self.session.post(BASE_URL + path, json=body, stream=stream,
+                                      timeout=(10, STREAM_IDLE_S) if stream else TIMEOUT_S)
             except requests.RequestException as e:  # timeout, reset
                 last = e
                 time.sleep(1.5 * (attempt + 1))
@@ -132,8 +135,14 @@ class Otari:
 
     # ---- the four things Countersign asks Otari for ---------------------
     def chat(self, model: str, system: str, user: str, purpose: str, max_tokens: int = 600,
-             guardrails: list[dict] | None = None, temperature: float = 0.0) -> Reply:
-        """One chat completion. `model` is a model id or a routing policy name."""
+             guardrails: list[dict] | None = None, temperature: float = 0.0,
+             stream: bool = False) -> Reply:
+        """One chat completion. `model` is a model id or a routing policy name.
+
+        stream=True is for the writer: a brief takes a little over 30 seconds
+        to generate, and the hosted gateway cuts a non-streamed request at 30
+        (HTTP 504). Streamed, the same reply arrives in pieces and completes.
+        """
         body: dict[str, Any] = {
             "model": model,
             "messages": [{"role": "system", "content": system},
@@ -143,13 +152,38 @@ class Otari:
         }
         if guardrails:
             body["guardrails"] = guardrails
-        r = self._post("/chat/completions", body, purpose)
-        data = r.json()
-        try:
-            text = data["choices"][0]["message"]["content"] or ""
-        except (KeyError, IndexError, TypeError):
-            text = ""
-        usage = data.get("usage") or {}
+        if stream:
+            body["stream"] = True
+            body["stream_options"] = {"include_usage": True}
+            r = self._post("/chat/completions", body, purpose, stream=True)
+            text, usage = "", {}
+            try:
+                for line in r.iter_lines():
+                    if not line.startswith(b"data:"):
+                        continue
+                    piece = line[5:].strip()
+                    if piece == b"[DONE]":
+                        break
+                    try:
+                        d = json.loads(piece)
+                    except ValueError:
+                        continue
+                    if d.get("usage"):
+                        usage = d["usage"]
+                    for c in d.get("choices") or []:
+                        text += (c.get("delta") or {}).get("content") or ""
+            except requests.RequestException as e:
+                self._log({"purpose": purpose, "path": "/chat/completions", "status": 0,
+                           "code": "stream_cut", "detail": str(e)[:200]})
+                raise OtariError(0, "stream_cut", str(e))
+        else:
+            r = self._post("/chat/completions", body, purpose)
+            data = r.json()
+            try:
+                text = data["choices"][0]["message"]["content"] or ""
+            except (KeyError, IndexError, TypeError):
+                text = ""
+            usage = data.get("usage") or {}
         try:
             cost = float(usage.get("cost_usd") or 0)
         except (TypeError, ValueError):
