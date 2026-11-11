@@ -23,7 +23,7 @@ Points marked *(our reading)* are inferred from what the winners did, since neit
 
 4. **Write the architecture down first**: how input interpretation, matching, evidence and decisions connect, and which parts are model judgment and which are fixed rules. The August Orchestrate winner's summary: "let the model describe, let deterministic code decide."
 5. **Settle open policy questions explicitly**, and turn ambitions like "a distinctive interface" into acceptance conditions before building them.
-6. **Keep the AI chat transcript raw and append-only** from the first prompt: real prompts, real responses, nothing cut or reordered. A curated log scored 3/10.
+6. **Keep the AI chat transcript raw and append-only** from the first prompt: real prompts, real responses, nothing cut or reordered. A curated log scored 3/10. **Only for hackathons that ask for the transcript** (HackerRank Orchestrate grades it). Don't add a build log to other entries or their repos (Jannet, 11-11).
 
 ## While building
 
