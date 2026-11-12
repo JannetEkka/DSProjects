@@ -1,139 +1,156 @@
 # Same model, same bugs, two formats
 
-**Subtitle:** What changes when Gemma 4 12B writes each action as a bash block instead of a tool call, measured on the competition's public tasks
-
-> DRAFT. Numbers marked [A] come from half A only (35 tasks) and are replaced when the other notebooks finish.
+**Subtitle:** Gemma 4 12B fixed as many bugs writing bash blocks as calling tools. What mattered was where the turn ends and whether the model still thinks.
 
 ## Abstract
 
-I ran one small agent loop on the competition's public bug-fix tasks twice per task: once with Gemma 4 12B calling tools through the server's tool-call interface, and once with the same model writing one fenced `bash` block per turn. The model file, server settings, prompt (apart from one line), budget and checker were the same. On 35 tasks [A] the tool-call arm fixed 2 and the text arm fixed 1 [A], so I can't claim either format fixes more bugs: with this loop and a 15-minute budget, both sit near zero. What the format did change is how the model spends its budget. Format errors were rare in both arms (12 of 1,186 turns and 1 of 298 [A]). In the text arm the model kept writing after its command in 70 of 298 turns [A], and those turns took 80% of its output tokens [A]. In the tool-call arm the model stopped producing thinking text: every first turn had some, and 587 of 690 turns from turn 16 onward had none [A]. A third arm that cuts the text reply after its first command block [RESULT B]. Code, per-task results and per-turn counts are in the attached notebooks.
+I ran one small agent loop on the competition's public bug-fix tasks, once with Gemma 4 12B calling tools through the server's tool-call interface and once with the same model writing one fenced `bash` block per turn. The model file, server settings, prompt (apart from one line), budget and checker were the same. On 68 tasks each format fixed 3. So the format, on its own, did not change how many bugs got fixed. It changed how the budget was spent. Format errors were rare in both arms (30 of 2,403 turns with tool calls, 4 of 637 with bash blocks). With bash blocks the model kept writing after its command in 141 of 637 turns, and those turns took 79% of its output tokens. With tool calls the model stopped producing thinking text: all 68 first turns had some, and 1,221 of 1,418 turns from turn 16 onward had none. A third arm, added after the pilot, keeps the bash-block format and cuts the reply as soon as the first block is complete. It fixed 11 of 68, against 3 for the uncut text arm (8 tasks to 0 where they disagree, exact sign test p = 0.008). That arm ran in separate notebooks on one seed, so I report it as a lead to confirm.
 
-| | Tool calls (`json`) | Bash blocks (`text`) |
-|---|---|---|
-| Tasks fixed | 2 of 35 [A] | 1 of 35 [A] |
-| Malformed turns | 12 of 1,186 [A] | 1 of 298 [A] |
-| Turns that ran to the output cap | 9 [A] | 70 [A] |
-| Turns with no thinking text | 697 of 1,186 [A] | 0 of 298 [A] |
+| 68 tasks, one run per arm | Tool calls (`json`) | Bash blocks (`text`) | Bash blocks, reply cut after first block (`text_stop`) |
+|---|---|---|---|
+| Tasks fixed | 3 | 3 | 11 |
+| Malformed turns | 30 of 2,403 | 4 of 637 | 7 of 1,380 |
+| Turns that ran to the output cap | 23 | 141 | 7 |
+| Turns with no thinking text | 1,442 of 2,403 | 2 of 637 | 40 of 1,380 |
 
-For someone building an agent on Gemma 4: the choice of action format did not show up as broken syntax. It showed up as where the turn ends and whether the model thinks first, and both need handling in the loop.
+For someone choosing how to build an agent on Gemma 4: the action format did not show up as broken syntax. It showed up as a turn that doesn't end (text) or a model that stops thinking (tool calls), and the loop has to handle whichever one it gets.
+
+![Tasks fixed per arm](figures/chart_arms_light.png)
 
 ## 1. Introduction
 
-The competition's harness (`swegemma`) gives the agent tools and reads the model's actions as tool calls. That is one of two common ways to build a coding agent. The other is to let the model write a shell command in plain text and pick it out with a pattern, as SWE-agent's later "mini" variant and CodeAct-style agents do [1, 2, 3].
+The competition's harness, `swegemma`, gives the agent tools and reads the model's actions as tool calls. The other common design lets the model write a shell command in plain text and picks it out with a pattern, as mini-SWE-agent and CodeAct-style agents do [1, 2, 3].
 
-There is a standing belief that small local models do better with text actions, because structured calls break. The closest test I found is a pair of blog posts by ai-muninn: Gemma 4 26B made more than 40 errors in OpenHands, which uses tool calls, and fixed a bug in 9 steps in SWE-agent, which uses text commands [4]. That was one task per framework, a different task in each, with the whole framework swapped. The author calls it "a feasibility test, not a full benchmark".
+A common belief is that local models do better with text actions, because structured calls break. The closest test I found is by ai-muninn: Gemma 4 26B made more than 40 tool-calling errors in OpenHands, which registers 11 tools, and fixed a bug in 9 steps in SWE-agent, which uses text commands [4]. That was one simple bug, with the whole framework swapped, and the author calls it a "feasibility test, not a full benchmark". The same author's later run of 116 of 300 on SWE-bench Lite credits a "backticks protocol instead of tool_calls" as one of three things that mattered [5].
 
-This paper changes only the format and counts. The question: with the same model, tasks, prompt and budget, does Gemma 4 fix more bugs when it writes its action as a `bash` block than as a tool call?
-
-The answer I can support is narrower than the one I set out for. On fix rate, the two arms are too close to zero to separate. On behaviour, they differ a lot, in two ways I did not expect, and neither is "the JSON was malformed".
+This paper changes only the format and counts. With the same model, tasks, prompt and budget, does Gemma 4 fix more bugs when it writes its action as a `bash` block than as a tool call?
 
 ## 2. Method
 
 ### 2.1 Tasks and checker
 
-The tasks are the competition's public ones (`tasks.jsonl`, 129 tasks from fastapi, rich, requests and httpx). I started from the 114 that dmitriigluzdov's `task_soundness.csv` marks as sound [5], and put them in a fixed order: sorted by the SHA-256 of the task id. The order was written into the notebook before any run, so no task was chosen by looking at results.
+The tasks are the competition's 129 public ones, from fastapi, rich, requests and httpx. I started from the 114 that dmitriigluzdov's `task_soundness.csv` marks as sound [6] and put them in a fixed order, sorted by the SHA-256 of the task id. The order was in the notebook before any run, so no task was picked by looking at results.
 
-Workspaces and grading are the host's. Each run gets a fresh workspace built by `swegemma`'s own setup functions (snapshot extraction, editable install, test configuration, baseline commit), using its subprocess sandbox as the starter notebook does. The patch is the workspace's `git diff` against the baseline with test files stripped by `swegemma`'s `strip_protected_files_from_patch`. A task counts as fixed only if `swegemma`'s `verify_task` says so: the patch applies in a clean workspace and the task's tests pass.
+Workspaces and grading are the host's. Each run gets a fresh workspace built by `swegemma`'s own setup functions, in its subprocess sandbox, as in the starter notebook. The patch is the workspace's `git diff` against the baseline, with test files stripped by `swegemma`'s `strip_protected_files_from_patch`. A task counts as fixed only if `swegemma`'s `verify_task` says so.
 
-Before a task is run, the same notebook checks the checker. `verify_task` must pass the task's reference patch and fail the empty patch. If not, the task is skipped and listed in `controls.csv`. This gate mattered: in half A it passed 35 of 57 tasks [A] (rich 18 of 23, fastapi 17 of 32, requests 0 of 2). These tasks are sound in [5], so the failures come from my environment, Kaggle's subprocess sandbox without the per-repository dependency repairs that [5] describes. A task whose reference patch fails cannot be scored, so it is left out.
+Before a task is run, the same notebook checks the checker on it: `verify_task` must pass the task's reference patch and fail the empty patch. If it doesn't, the task is skipped and listed in `controls.csv`. The gate passed 68 of 114 tasks: rich 39 of 44, fastapi 29 of 62, requests 0 of 7, httpx 0 of 1. Of the 46 dropped, 45 have a reference patch that doesn't pass in my environment (Kaggle's subprocess sandbox, without the per-repository dependency repairs that [6] describes) and 1 passes with the empty patch. A task that fails this check can't be scored, so it is left out. All four notebooks picked the same 68.
 
 ### 2.2 The loop
 
-The agent is one loop with one capability: run a shell command in the workspace. Reading, searching, editing and testing all go through it. The model can also say it is done.
+The agent has one capability: run a shell command in the workspace. Reading, searching, editing and testing all go through it. It can also say it is done.
 
-Each turn, the model's reply is read for an action. If there is one, the command runs and its exit code and output go back, cut to 4,000 characters. If there is none, the turn is counted as malformed and a fixed correction message goes back. If the reply holds more than one action, only the first runs and the model is told so. A run stops when the model submits, after 50 turns, or after 15 minutes.
+Each turn, the reply is read for an action. If there is one, the command runs, and its exit code and output go back, cut to 4,000 characters. If there is none, the turn counts as malformed and a fixed correction message goes back. If the reply holds several actions, only the first runs, and the model is told. A run stops when the model submits, after 50 turns, or after 15 minutes.
 
-The model decides one thing, the next action. Code decides what a usable action is, when a run stops, and the failure type of an unfixed run. The checker decides whether the bug is fixed.
+### 2.3 The arms
 
-### 2.3 The two arms
+- **`json`**: the request carries two tool definitions, `run_command(command)` and `submit()`. vLLM's `gemma4` tool-call parser turns the model's tool-call tokens into structured calls. A turn is usable if the first call names one of the two tools and its arguments parse into an object with a non-empty `command`. Gemma 4 emits its own tool-call tokens and the server converts them; I call the arm `json` because JSON is what the agent builder reads, as in the competition's harness.
+- **`text`**: no tools are sent. The model is told to write one fenced block that starts with ```` ```bash ````. A turn is usable if the reply contains such a block, and the first one is the action. A block holding only the word `submit` ends the run.
+- **`text_stop`** (added after the pilot, see 2.5): the `text` arm with the same prompt and one change in the code that reads the reply. The reply is streamed and the connection is closed as soon as the first complete `bash` block has arrived.
 
-- **`json`**: the request carries two tool definitions, `run_command(command)` and `submit()`. The server parses the model's tool-call tokens (vLLM with `tool_call_parser='gemma4'`) and returns structured calls. A turn is usable if the first call names one of the two tools and its arguments parse into an object with a non-empty `command`. Gemma 4 does not literally emit JSON; it emits its own tool-call tokens, which the server converts. I call the arm `json` because JSON is what the agent builder writes and reads, and it is the interface the competition's harness uses.
-- **`text`**: no tools are sent. The model is told to write one fenced block starting with ```` ```bash ````. A turn is usable if the reply contains such a block; the first one is the action. A block containing only the word `submit` ends the run.
-
-The system prompts differ in one line, the paragraph that says how to write an action. The notebook asserts this and saves the diff (`prompt_diff.txt`). The user message (bug report plus a three-level file listing), the correction message and the output format are produced by the same code for both arms. One difference comes with the format itself: in `json` the command output returns as a tool message, in `text` as a user message.
+The `json` and `text` system prompts differ in one line, the paragraph that says how to write an action. The notebook asserts this and saves the diff (`prompt_diff.txt`). The user message, the correction message and the format of command output come from the same code in every arm. One difference comes with the format: command output returns as a tool message in `json` and as a user message in the text arms.
 
 ### 2.4 Settings
 
-Model: `gemma-4-12b-it-qat-w4a16-ct`, one of the four the competition allows, untuned. Server: vLLM as configured in the host's starter notebook (context 32,768 tokens, `reasoning_parser='gemma4'`), on Kaggle's 4× L4. Sampling: temperature 0.2, top-p 0.95, thinking on with a 4,096-token budget, as in the host's sample submission. Output cap: 6,144 tokens per turn. Seed 0. Thinking text is not sent back in later turns, in either arm.
+Model: `gemma-4-12b-it-qat-w4a16-ct`, untuned, one of the four the competition allows. Server: vLLM as set up in the host's starter notebook (context 32,768 tokens, `tool_call_parser` and `reasoning_parser` both `gemma4`), on Kaggle's 4× L4. Sampling as in the host's sample submission: temperature 0.2, top-p 0.95, thinking on with a 4,096-token budget. Output cap 6,144 tokens per turn. Seed 0. Thinking text is not sent back in later turns, in any arm.
 
-Both arms of a task run at the same moment against the same server, with 20 runs in flight, so the two arms see the same load. Under that load the server produced about 20 output tokens per second per run [A].
+The `json` and `text` runs of a task start together against the same server, with 20 runs in flight, so the two arms see the same load. `text_stop` ran afterwards in notebooks of its own, also with 20 runs in flight. Per run, the server produced 20.6 output tokens per second in `json`, 21.2 in `text` and 22.9 in `text_stop`.
 
 ### 2.5 What changed after the pilot
 
-A 10-task pilot with 30 turns and 5 minutes fixed nothing in either arm and no run submitted, so it could not compare fix rates. It also showed the reference patch failing on 5 of its 10 tasks. Before the main run I raised the budget to 50 turns and 15 minutes for both arms and added the checker gate. I also added a third arm, described in section 3.4, because of what the pilot's text arm did. None of these changes was made after looking at main-run results.
+A 10-task pilot with 30 turns and 5 minutes fixed nothing in either arm. It showed the reference patch failing on 5 of its 10 tasks, and the text arm running to the output cap in 7 of 71 turns. Before the main run I raised the budget to 50 turns and 15 minutes for all arms, added the checker gate, and added the `text_stop` arm. Nothing was changed after seeing main-run results.
 
 ## 3. Results
 
-Main comparison: [N] tasks that passed the gate, one run per arm, [ROWS] rows, no harness errors [A].
+204 runs: 68 tasks in three arms. No harness errors, no missing rows.
 
-### 3.1 Bugs fixed
+### 3.1 Tool calls against bash blocks: no difference in bugs fixed
 
-`json` fixed 2 of 35 and `text` fixed 1 of 35 [A]. No task was fixed by both. On the 3 tasks where the arms disagree, an exact sign test gives p = 1.0 [A]. That is no evidence of a difference, and with fix rates this low the study could not have detected anything but a very large one.
+`json` fixed 3 of 68 and `text` fixed 3 of 68. One task was fixed by both, two only by `json`, two only by `text`, 63 by neither. An exact sign test on the four disagreements gives p = 1.0.
 
-[FIGURE: paired chart]
+![Paired outcomes, json and text](figures/chart_light.png)
 
-Why so low? This loop is deliberately bare: one tool, no file-edit helper, no code graph, no retrieval. Public work on the same tasks reports far more with the host's nine-tool agent and longer budgets [5, 6]. Only 1 of 70 runs submitted [A]; the rest ran out of time or turns.
+Both counts are low. This loop is bare on purpose: one tool, no edit helper, no code graph. With 3 fixes per arm, the comparison could only have detected a large difference, and it found none.
 
-### 3.2 Format errors are rare in both arms
+### 3.2 Format errors are rare in every arm
 
-Malformed turns: 12 of 1,186 in `json` and 1 of 298 in `text` [A]. Of the 12, 9 were replies that hit the output cap before any tool call and 3 were replies with no tool call [A]. No turn in either arm had an unknown tool name or arguments that failed to parse. No run was "stuck on format" (half or more of its turns malformed).
+Malformed turns: 30 of 2,403 in `json` (1.2%), 4 of 637 in `text`, 7 of 1,380 in `text_stop`. Of the 30 in `json`, 23 were replies that hit the output cap before any tool call and 7 were replies with no tool call. No turn had an unknown tool name or arguments that failed to parse. No run in any arm was "stuck on format" (half or more of its turns malformed).
 
-So the belief that structured calls break did not hold for this model and server. The server's parser turned Gemma 4's tool-call tokens into valid calls essentially every time.
+So the belief that structured calls break did not hold here. The setting differs from the reports behind that belief: two tools, where [4] and [5] describe failures with 10 or more registered, and the server's own `gemma4` parser with the host's settings.
 
-### 3.3 What the format changed: where the turn ends, and whether the model thinks
+### 3.3 What the format changed
 
-**Text: the turn does not end.** In 70 of 298 `text` turns the reply ran to the 6,144-token cap [A], against 9 of 1,186 in `json`. Those 70 turns took 430,080 of the arm's 538,940 output tokens (80%) [A], and they happened in 33 of 35 tasks [A]. In 81 turns the reply held more than one `bash` block [A]. Reading the pilot's transcripts (a reading of 7 cut-off turns, labelled as such): after its first command the model either wrote dozens more commands (46, 78 and 279 blocks in three replies) or wrote the command's output itself, such as a traceback or a grep listing that never happened, and carried on from it. A tool call ends the turn by construction. A code fence does not.
+**Bash blocks: the turn does not end.** In 141 of 637 `text` turns (22%) the reply ran to the 6,144-token cap, against 23 of 2,403 in `json`. Those 141 turns took 866,304 of the arm's 1,099,072 output tokens (79%), and they happened in 65 of 68 tasks. In 153 turns the reply held more than one `bash` block. In the 7 cut-off text turns of the pilot, whose transcripts I read (a reading, not a count), after its first command the model either wrote dozens more commands (46, 78 and 279 blocks in three replies) or wrote the command's output itself, a traceback or a grep listing that never happened, and carried on from it. A tool call ends the turn by construction. A code fence doesn't.
 
-The cost is time. Every `text` run hit the 15-minute limit [A], after a median of 7 turns [A].
+The cost is time: 65 of 68 `text` runs hit the 15-minute limit, after a median of 7.5 turns.
 
-**Tool calls: the thinking goes away.** Thinking was on in both arms with the same budget. In `text`, every turn had thinking text. In `json`, every first turn did, but 697 of 1,186 turns overall had none [A], and from turn 16 onward 587 of 690 had none [A]. The model fell into short replies (median 38 output tokens [A]) that call a tool straight away. It ran 584 `grep` and 316 `cat` commands [A] and hit the 50-turn limit in 15 of 35 runs [A], 20 of them [CHECK] without ever changing a file.
+**Tool calls: the thinking goes away.** Thinking was on in every arm with the same budget. In `text`, 635 of 637 turns had thinking text. In `json`, all 68 first turns did, but 1,442 of 2,403 turns overall had none, and from turn 16 onward 1,221 of 1,418 had none. The median `json` turn was 38 output tokens: a tool call and nothing else. The arm ran 1,277 `grep` and 518 `cat` commands, hit the 50-turn limit in 32 of 68 runs, and in 20 of those left no patch.
 
-I can't say from this data whether that is the model's habit after tool results or something in the chat template or reasoning parser. Either way it is what an agent builder gets from this model and the competition's server settings.
+I can't tell from this data whether that is the model's habit after tool results or an effect of the chat template or the reasoning parser. It is what an agent builder gets with the competition's server settings, and it matters because public work on these tasks reports 23 solved with thinking off against 48 to 51 with it on [7].
 
-The two arms end up failing differently. `json` took 4 times as many turns [A] and left a patch in 15 runs against 9 [A], but mostly searched without reasoning. `text` reasoned every turn and wasted most of its tokens after the action.
+Two tasks show both patterns. On `fastapi_14458`, `json` searched, edited, checked with Python and submitted at turn 21; `text` got 6 turns in 15 minutes because 4 of them ran to the cap, and its patch failed. On `fastapi_14786`, `json` ran 50 `cat` commands, the last 39 without thinking, and hit the turn limit with a patch that failed; `text` had a working patch by turn 6 despite two run-on turns of 513 and 262 seconds.
 
-### 3.4 Cutting the text reply after its first block
+### 3.4 Cutting the reply after the first block
 
-[SECTION FROM NOTEBOOK B: text_stop results]
+`text_stop` removes the run-on turns without touching the prompt. It fixed 11 of 68.
+
+| | `json` | `text` | `text_stop` |
+|---|---|---|---|
+| Tasks fixed | 3 | 3 | 11 |
+| Turns per task (median) | 45 | 7.5 | 19 |
+| Turns with no thinking text | 1,442 of 2,403 | 2 of 637 | 40 of 1,380 |
+| Turns that ran python or pytest | 79 | 26 | 98 |
+| Turns that changed the workspace | 74 | 31 | 99 |
+| Runs that left a patch | 25 | 18 | 34 |
+| By repository: rich (39 tasks) | 1 | 0 | 6 |
+| By repository: fastapi (29 tasks) | 2 | 3 | 5 |
+
+Against `text`: 8 tasks fixed only by `text_stop`, none only by `text`, exact sign test p = 0.008. Against `json`: 9 to 1, p = 0.021. These are two extra comparisons on an arm added after the pilot; multiplied by three for the three comparisons in this paper, they are 0.023 and 0.063.
+
+The arm gets about two and a half times the turns of `text` in the same 15 minutes and keeps thinking in 97% of them. `json` gets more turns still, without the thinking, and fixes no more than `text`. One reading is that the model needs both enough turns and thinking in them; this study doesn't separate the two.
 
 ## 4. Related work
 
-SWE-bench introduced the task form used here: a repository, an issue, and hidden tests that decide whether a patch resolves it [7]. SWE-agent showed that the interface given to the model changes results on those tasks [1], and its authors' later mini-SWE-agent uses plain bash blocks with no tool-calling interface [2]. CodeAct argued for code as the action format over JSON tool calls, across several models [3]. Tam et al. found that forcing structured output can reduce reasoning quality on other tasks [8]; the fading of thinking in my `json` arm points the same way, though I did not test their setting.
+SWE-bench defined the task form used here [8]. SWE-agent showed that the interface given to the model changes results on those tasks [1], mini-SWE-agent uses plain bash blocks with no tool-calling interface [2], and CodeAct argued for code as the action format over JSON tool calls [3]. Tam et al. found that restricting output format can reduce reasoning quality on other tasks [9], which is the direction the fading of thinking in my `json` arm points.
 
-On Gemma 4 and this competition: ai-muninn reports 116 of 300 on SWE-bench Lite for Gemma 4 26B [9] and the two-framework comparison described above [4]. dmitriigluzdov's notebook and dataset give per-task results for three model sizes, eight agent designs on 70 tasks, and the soundness list I started from [5]. zhukovoleksiy's walkthrough reports 23 tasks solved with thinking off against 48 to 51 with it on [6], which is why the fading of thinking in the tool-call arm matters. None of these changes only the action format.
+On Gemma 4 and this competition: ai-muninn's two posts are described in the introduction [4, 5]. dmitriigluzdov's notebook and dataset give per-task results for three model sizes, eight agent designs on 70 tasks, and the soundness list I started from [6]. zhukovoleksiy's walkthrough reports the effect of thinking and of rerun noise [7]. None of these changes only the action format, and I found no report of either the run-on turns or the fading of thinking.
 
 ## 5. Limitations
 
-- **Floor effect.** With 2 and 1 fixes [A], the fix-rate comparison has almost no power. The behavioural counts rest on hundreds of turns; the fix counts do not.
-- **One model, one seed.** Only the 12B model, seed 0. Public work measured the same submission scoring 0.12, 0.10 and 0.06 on reruns [6], so single fixes here are within noise.
-- **My loop is not the host's agent.** The `json` arm has two tools, where the host's sample agent has nine. Results say nothing about the leaderboard.
-- **Time is measured under load.** The 15-minute limit ran with 20 runs sharing the server. A faster server would give the `text` arm more turns, though the share of tokens wasted would not change.
-- **Tasks are not independent.** They come from four repositories, and [N] after the gate come from two or three.
-- **The gate removes tasks.** About 4 in 10 sound tasks failed my environment's reference-patch check. They are listed, with exit codes, in `controls.csv`.
-- **The output cap and the turn limit shape the result.** A lower cap would make run-on turns cheaper; a higher turn limit would let `json` search longer.
+- **One model, one seed.** Only the 12B model, seed 0. Public work measured one identical submission scoring 0.12, 0.10 and 0.06 on reruns [7]. A second seed is the first thing to add.
+- **`text_stop` was not run side by side.** It ran in separate notebooks after the other arms, with the same number of runs in flight, and its server was about 10% faster per run (22.9 against 21.2 tokens per second). That is small next to the difference in turns, but it is a difference.
+- **Low counts, bare loop.** The fix-rate claims rest on 3, 3 and 11 tasks. `json` has two tools where the host's sample agent has nine, so these results say nothing about the leaderboard.
+- **The budget shapes the result.** A lower output cap would make run-on turns cheaper, and a higher turn limit would let `json` search longer.
+- **Tasks are not independent, and the gate removed 46 of 114.** The 68 that remain come from two repositories.
 
 ## 6. What this means for building on Gemma 4
 
-Measured here, for the 12B model on the competition's server settings:
+Measured here for the 12B model with the competition's server settings:
 
-1. Don't choose text actions to avoid broken tool calls. Tool calls were malformed in about 1% of turns [A].
-2. If you use text actions, end the turn yourself. Without that, 80% of output tokens went to text after the action [A].
-3. If you use tool calls, check that the model is still thinking after the first few turns. Here it mostly was not, and public results say thinking roughly doubles the solve rate [6].
+1. Text actions are not needed to avoid broken tool calls. With two tools, 1.2% of tool-call turns were malformed, none through bad syntax.
+2. With text actions, end the turn in code. Without that, 79% of output tokens went to text after the action. With it, the same prompt fixed 11 tasks where the uncut version fixed 3.
+3. With tool calls, check that the model still thinks after the first turns. Here it mostly didn't.
 
-What I did not measure is whether fixing either problem raises the fix rate. Section 3.4 is a first look at the second.
+Not measured: whether restoring thinking in the tool-call arm closes the gap, and whether any of this holds for the other model sizes or for tuned models. The notebooks run any arm on any allowed model by changing one setting.
 
 ## Reproducing
 
-Notebooks (code, logs and outputs): [LINKS]. Each writes `results.csv` (one row per task, arm and seed), `turns.jsonl` (one row per turn: counts only, no task text), `controls.csv` and `prompt_diff.txt`. Task texts and transcripts are not published, as the competition's rules require.
+Four Kaggle notebooks hold the code, logs and outputs:
+
+- `json` and `text`, first half of the task order: https://www.kaggle.com/code/jannetakankshaekka/gemma4-action-format-study
+- `json` and `text`, second half: https://www.kaggle.com/code/jannetakankshaekka/gemma4-action-format-study-c
+- `text_stop`, first half: https://www.kaggle.com/code/jannetakankshaekka/gemma4-action-format-study-b
+- `text_stop`, second half: https://www.kaggle.com/code/jannetakankshaekka/gemma4-action-format-study-d
+
+Each writes `results.csv` (one row per task and arm), `turns.jsonl` (one row per turn, counts only), `controls.csv` and `prompt_diff.txt`, and prints its own tables. The numbers here are those files added up across the four notebooks. Task texts and transcripts are not published, as the rules require.
 
 ## References
 
-1. Yang et al., "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering", NeurIPS 2024. https://arxiv.org/abs/2405.15793
+1. Yang et al., "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering", 2024. https://arxiv.org/abs/2405.15793
 2. mini-SWE-agent. https://github.com/SWE-agent/mini-swe-agent
-3. Wang et al., "Executable Code Actions Elicit Better LLM Agents", ICML 2024. https://arxiv.org/abs/2402.01030
-4. ai-muninn, "SWE-bench with local models: the framework matters", Apr 13 2026. https://ai-muninn.com/en/blog/swe-bench-local-models-framework-matters
-5. dmitriigluzdov, "Gemma 4: task soundness, serving and evaluation" (notebook) and "Gemma 4 Task Soundness and Local Results" (dataset, CC BY 4.0). https://www.kaggle.com/code/dmitriigluzdov/gemma-4-task-soundness-serving-and-evaluation and https://www.kaggle.com/datasets/dmitriigluzdov/gemma-4-task-soundness-and-local-results
-6. zhukovoleksiy, "Gemma 4 | Walkthrough, Findings & Submission". https://www.kaggle.com/code/zhukovoleksiy/gemma-4-walkthrough-findings-submission
-7. Jimenez et al., "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?", ICLR 2024. https://arxiv.org/abs/2310.06770
-8. Tam et al., "Let Me Speak Freely? A Study on the Impact of Format Restrictions on Performance of Large Language Models", 2024. https://arxiv.org/abs/2408.02442
-9. ai-muninn, "SWE-bench Lite with Gemma 4 26B", Apr 17 2026. https://ai-muninn.com/en/blog/swe-bench-lite-gemma4-26b-38-percent
+3. Wang et al., "Executable Code Actions Elicit Better LLM Agents", 2024. https://arxiv.org/abs/2402.01030
+4. ai-muninn, "Gemma 4 Went from 40 Errors to a 9-Step Bug Fix, by Switching One Thing", 2026-04-13. https://ai-muninn.com/en/blog/swe-bench-local-models-framework-matters
+5. ai-muninn, "SWE-bench Lite 38.67% with a 26B Local Model", 2026-04-17. https://ai-muninn.com/en/blog/swe-bench-lite-gemma4-26b-38-percent
+6. dmitriigluzdov, "Gemma 4: Task Soundness, Serving and Evaluation" (notebook) and "Gemma 4 Task Soundness and Local Results" (dataset, CC BY 4.0). https://www.kaggle.com/code/dmitriigluzdov/gemma-4-task-soundness-serving-and-evaluation and https://www.kaggle.com/datasets/dmitriigluzdov/gemma-4-task-soundness-and-local-results
+7. zhukovoleksiy, "Gemma 4 | Walkthrough, Findings & Submission". https://www.kaggle.com/code/zhukovoleksiy/gemma-4-walkthrough-findings-submission
+8. Jimenez et al., "SWE-bench: Can Language Models Resolve Real-World GitHub Issues?", 2024. https://arxiv.org/abs/2310.06770
+9. Tam et al., "Let Me Speak Freely? A Study on the Impact of Format Restrictions on Performance of Large Language Models", 2024. https://arxiv.org/abs/2408.02442
