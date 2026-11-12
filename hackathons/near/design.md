@@ -157,8 +157,11 @@ Answer in your own words before sign-off:
 5. Why can a judge run it without any keys?
 6. What is built today, and what is only planned?
 
-- Jannet's answers and gaps fixed: *(to fill)*
-- **Signed off:** *(Jannet, date)*
+- **Jannet's answers (11-13):** right on what makes an event and who decides (1), and on the three conditions for a claim to stay (3). Questions 5 and 6 were not asked in chat; their answers are in sections 5 and 7.
+- Gaps found and how they were fixed:
+  - (2) We compare with ordinary days to rule out chance. Price and usage go up and down all the time, so some events would be followed by a big change even if news did nothing. Running the same sum on every ordinary day shows how big a change is normal. An event counts only if its change beats 95% of ordinary days, which is why about 5% would pass by luck, and why that 5% is printed next to the result.
+  - (4) Testnet is where the contract lives, not something it stores. It stores three things: the data's fingerprint, the run's counts, and each forecast with its due date. What it can't do: see mainnet data or check a forecast by itself. Someone runs `make settle`, and the contract records the result. It is a public notebook with timestamps, not a referee.
+- **Signed off:** Jannet, 11-13 ("u can start the build session yourself"), with the two gaps above explained back to her in chat. Repo: https://github.com/JannetEkka/aftershock. Name Aftershock accepted by creating the repo.
 
 ## 10. The build prompt
 
