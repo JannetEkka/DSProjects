@@ -22,13 +22,51 @@ export async function onRequestPost({ request, env }) {
   let body;
   try { body = await request.json(); } catch { return json({ error: "bad_request", message: "Send JSON." }, 400); }
   const text = typeof body.text === "string" ? body.text.trim() : "";
-  const sources = typeof body.sources === "string" ? body.sources.trim() : "";
+  let sources = typeof body.sources === "string" ? body.sources.trim() : "";
   if (!text || !sources) return json({ error: "bad_request", message: "Both the text and its sources are needed." }, 400);
   if (text.length > MAX_TEXT || sources.length > MAX_SOURCES)
     return json({ error: "too_long", message: `Limits: ${MAX_TEXT} characters of text, ${MAX_SOURCES} of sources.` }, 400);
   const list = sentences(text);
   if (!list.length) return json({ error: "bad_request", message: "No sentence found in the text." }, 400);
   if (list.length > MAX_SENTENCES) return json({ error: "too_long", message: `At most ${MAX_SENTENCES} sentences per check.` }, 400);
+
+  // Lines in the sources box that are just a link are read through Otari's web fetch
+  // (at most 3), so an answer from a research chat can be checked against the pages it cites.
+  const fetched = [];
+  const urls = [...new Set(sources.split(/\n+/).map(l => l.trim()).filter(l => /^https?:\/\/\S+$/.test(l)))].slice(0, 3);
+  for (const url of urls) {
+    // Through Otari's web fetch. It answers a bare 403 page to a request with no User-Agent
+    // (Cloudflare sends none by default), so one is set; if it still fails, the page is read directly.
+    let page = "", via = "otari", status = 0;
+    try {
+      const r = await fetch("https://api.otari.ai/api/v1/fetch", {
+        method: "POST",
+        headers: { Authorization: `Bearer ${env.OTARI_API_KEY}`, "Content-Type": "application/json", "User-Agent": "countersign/1.0" },
+        body: JSON.stringify({ url, max_chars: 6000 }),
+      });
+      status = r.status;
+      const d = await r.json().catch(() => ({}));
+      if (r.status === 200 && typeof d.text === "string") page = d.text;
+    } catch {}
+    if (!page) {
+      via = "direct";
+      try {
+        const r = await fetch(url, { headers: { "User-Agent": "countersign/1.0", Accept: "text/html,text/plain" }, redirect: "follow" });
+        status = r.status;
+        const type = r.headers.get("content-type") || "";
+        if (r.ok && /text|json|xml/.test(type)) {
+          const raw = (await r.text()).slice(0, 400000);
+          page = raw.replace(/<(script|style|nav|header|footer|noscript)[\s\S]*?<\/\1>/gi, " ").replace(/<[^>]+>/g, " ")
+            .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&#39;|&rsquo;/g, "'").replace(/&quot;/g, '"').replace(/\s+/g, " ").trim();
+        }
+      } catch {}
+    }
+    page = page.slice(0, 6000);
+    fetched.push({ url, ok: !!page, chars: page.length, via, ...(page ? {} : { status }) });
+    sources = sources.replace(url, page ? `[From ${url}]\n${page}` : "");
+  }
+  sources = sources.trim();
+  if (!sources) return json({ error: "no_sources", message: "None of the links could be read, so there is nothing to check against.", fetched }, 400);
 
   const guardUrl = new URL(request.url).origin;
   let cost = 0, budgetStop = null, keyRejected = false;
@@ -77,6 +115,6 @@ export async function onRequestPost({ request, env }) {
     return json({ error: "budget", message: "Otari refused the request: the key's spending cap is reached. Nothing was checked, so nothing is shown as confirmed.", detail: budgetStop }, 402);
   return json({
     checker: CHECKER, gateway: "api.otari.ai", cost_usd: Number(cost.toFixed(6)),
-    written: results.length, removed: results.filter(r => !r.keep).length, results,
+    fetched, written: results.length, removed: results.filter(r => !r.keep).length, results,
   });
 }

@@ -567,6 +567,21 @@ def stage_page() -> None:
     # first run's totals (kept for the record).
     res["headlines"] = {w["week"]: {h["id"]: {"text": h["text"], "date": h["date"]} for h in w["headlines"]}
                         for w in data.weeks(data.load())}
+    # Article links found by web search for some items (the dataset itself has none).
+    try:
+        with open(os.path.join(HERE, "article_links.json"), encoding="utf-8") as f:
+            links = json.load(f)
+        for wk in res["headlines"].values():
+            for hid, h in wk.items():
+                if isinstance(links.get(hid), dict) and str(links[hid].get("url", "")).startswith("https://"):
+                    h["link"], h["link_title"], h["link_found"] = links[hid]["url"], links[hid].get("title", ""), True
+    except (OSError, ValueError):
+        pass
+    try:
+        with open(os.path.join(RUNS, "benchmark.json"), encoding="utf-8") as f:
+            res["benchmark"] = json.load(f)
+    except (OSError, ValueError):
+        pass
     try:
         with open(os.path.join(RUNS, "first_run_results.json"), encoding="utf-8") as f:
             first = json.load(f)

@@ -22,7 +22,14 @@ All numbers are from the run in [`runs/results.json`](runs/results.json) (2026-1
 
 **The check.** Across all 18 weeks the writer model made 108 claims. The check removed 8 (7%): 5 because the checker model found the cited headlines did not support them, and 3 because the passage the checker quoted as support was not in the cited headline. Compared with the 2024 project, which showed every sentence its model wrote: a reader of these 18 briefs would have been shown those 8 claims as fact, and can now see which ones they were and why they failed.
 
-Two checks found nothing, and that is reported too: no claim cited a headline that did not exist, and none of the price figures differed from the sandbox's recomputation. We have no measurement of how many *wrong* claims the check let through; that would need a person to label all 108 claims, which has not been done.
+Two checks found nothing, and that is reported too: no claim cited a headline that did not exist, and none of the price figures differed from the sandbox's recomputation.
+
+**How good is the check itself?** Nobody has labelled the 108 claims, so the 18 briefs cannot say what the check misses. A public labelled set can. On [HaluEval](https://github.com/RUCAIBox/HaluEval)'s summarization data (60 news articles, fixed random sample, each with one faithful summary and one with a planted error; [`benchmark.py`](benchmark.py), result in [`runs/benchmark.json`](runs/benchmark.json)), the app's rule:
+
+- caught **41 of 60** summaries with a planted error (68%), and missed 19;
+- wrongly struck at least one sentence in **27 of 60** faithful summaries (42 of 223 faithful sentences, 19%).
+
+So the check is strict and imperfect: it catches about two planted errors in three and strikes about one good sentence in five. It tells a reader what to reread; it is not a final verdict. The rule was not adjusted after seeing this result.
 
 **Sentiment.** `openai/gpt-oss-120b`, with no training and one fixed prompt, scored on the same test rows the 2024 notebook used (split rebuilt with `random_state=42`, 70/15/15, stratified):
 
@@ -66,7 +73,7 @@ stock_news.csv (349 headlines + daily prices, 2019)
 
 ## The app: Check a brief
 
-[`functions/api/check.js`](functions/api/check.js) is a small endpoint behind the page's "Check a brief" tab. It splits the pasted text into sentences and, for each one: sends it through Otari with the blocking guardrail, asks the checker model (Qwen3 235B, via Otari) whether the sources support it, validates the reply, and then code decides ([`functions/_rules.js`](functions/_rules.js)). A sentence stays only if the checker quoted a supporting passage that really is in the sources and every figure in the sentence appears in the sources. If Otari refuses for budget, nothing is shown as confirmed. The key it uses is a Cloudflare secret with its own small cap in Otari, so the cap is the most the public page can spend. It does not use the sandbox: figures are matched against the source text, not recomputed.
+[`functions/api/check.js`](functions/api/check.js) is a small endpoint behind the page's "Check a brief" tab. It splits the pasted text into sentences and, for each one: sends it through Otari with the blocking guardrail, asks the checker model (Qwen3 235B, via Otari) whether the sources support it, validates the reply, and then code decides ([`functions/_rules.js`](functions/_rules.js)). A sentence stays only if the checker quoted a supporting passage that really is in the sources and every figure in the sentence appears in the sources. If Otari refuses for budget, nothing is shown as confirmed. The key it uses is a Cloudflare secret with its own small cap in Otari, so the cap is the most the public page can spend. The sources box also takes up to 3 links, which are read through Otari's web fetch, so an answer from a research chat can be checked against the pages it cites. It does not use the sandbox: figures are matched against the source text, not recomputed.
 
 ## Otari features used
 
@@ -99,6 +106,10 @@ jupyter nbconvert --to notebook --execute --inplace countersign.ipynb   # the no
 Model replies are cached in `runs/cache/`, so a rerun is free; delete the folder for a fresh, paid run (about $0.05). A damaged cache file is ignored and asked again. The run needs two routing policies in the Otari dashboard (`countersign-writer` and `countersign-fallback-drill`, both Fallback policies with the models named in [`otari.py`](otari.py)) and web access switched on for the workspace. The writer's reply is streamed, because the hosted gateway cuts a non-streamed request at 30 seconds and a brief takes slightly longer.
 
 If the budget cap is hit mid-run, Otari refuses every further request; the run stops, the remaining weeks are recorded as missing and the run is not marked complete.
+
+## Article links
+
+The 2024 dataset has no links, only summarised text. For the nine news items cited by the removed claims and the demo week, [`article_links.json`](article_links.json) records the likely original report, found by web search on 2026-11-12 and matched by date and subject. They are a reading aid; the check uses only the dataset's text.
 
 ## Data caveat
 
