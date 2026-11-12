@@ -29,7 +29,7 @@ which projects lead.
 
 | PDF | source | for | length |
 |---|---|---|---|
-| `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (the site's nav button) | **exactly 2 pages** |
+| `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (not linked from the site since 2026-11-03) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_FDE.docx` + `.pdf` | `build_resume_fde_docx.js` | forward deployed engineer roles, in Jannet's Word table layout (name in the page header, one bordered table, grey section bars) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_AI_Trainer.pdf` | `resume_ai_trainer.html` | AI trainer / LLM output-evaluation work | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf` | `resume_model_eval.html` | model evaluation, AI QA, red-teaming | **exactly 2 pages** |
@@ -95,3 +95,11 @@ and regenerated). `build_resume_fde_docx.js` writes the `.docx`; LibreOffice
 renders the PDF. On a box without Calibri, map Calibri and Calibri Light to
 Carlito in fontconfig first, or the page count is wrong. `resume_fde.html` is
 the older HTML version, kept for reference and no longer rendered.
+
+2026-11-03: job-hunting first, SMT as a side project (Jannet). The site's
+Résumé button, hero link and footer download only the FDE résumé
+(`resumes/Jannet_Ekka_Resume_FDE.pdf`). The Applied AI, AI trainer, model
+evaluation and founder résumés are kept but no longer linked; the founder one
+still carries the JTech framing and is for grant applications only. SMT is a
+side project everywhere on the site, and grants have their own section at the
+end of the page (nav: Grants), built from the `grants` flag in `data.py`.

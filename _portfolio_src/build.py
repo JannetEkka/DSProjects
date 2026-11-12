@@ -27,6 +27,12 @@ GRANT_CHIP = ('<a class="grant-chip" href="#backing">'
               '<span class="gdot"></span>Seeking grants &amp; partners</a>')
 
 
+def grants_list_html():
+    """Projects open to grants and partners, from the `grants` flag in data.py."""
+    items = [FLAGSHIP] + [p for p in PROJECTS if p.get("grants")]
+    return "".join(f'<li><strong>{p["title"]}</strong> &mdash; {p["sub"]}</li>' for p in items)
+
+
 def card_stats_html(stats):
     """Compact stat strip for a project card. Same shape as the flagship's."""
     if not stats:
@@ -63,7 +69,6 @@ def flagship_html(f):
         <div class="feature-head">
           <span class="pill pill-flag">Flagship</span>
           <span class="pill pill-patent">{f['badge']}</span>
-          {GRANT_CHIP if f.get('grants') else ''}
         </div>
         <h3 class="feature-title">{f['title']}</h3>
         <p class="feature-sub">{f['sub']}</p>
@@ -94,7 +99,6 @@ def card_html(p, i):
           {shots_html(p.get('shots'))}
           {tags_html(p['tags'])}
           {links_html(p['links'], small=True)}
-          {GRANT_CHIP if p.get('grants') else ''}
         </div>
       </article>'''
 
@@ -136,6 +140,7 @@ def connect_html():
         btn("telegram", "Telegram", CONTACT.get("telegram", "")),
         copy_btn("discord", "Discord: " + CONTACT.get("discord", ""), CONTACT.get("discord", "")),
         btn("whatsapp", "WhatsApp", CONTACT.get("whatsapp", "")),
+        btn("x", "@JTechSMT (SMT)", CONTACT.get("smt_twitter", "")),
     ]) + "</div>"
 
 
@@ -152,7 +157,6 @@ def contact_groups_html():
         btn("linkedin", "LinkedIn", CONTACT.get("linkedin", "")),
         btn("code", "GitHub", CONTACT.get("github", "")),
         btn("x", "@EkkaJanny96", CONTACT.get("twitter", "")),
-        btn("x", "@JTechSMT (SMT)", CONTACT.get("smt_twitter", "")),
     ])
     hire = "".join(btn("globe", lbl, url) for lbl, url in HIRE)
     return f'''
@@ -212,7 +216,7 @@ HTML = f'''<!DOCTYPE html>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jannet Akanksha Ekka — Forward-Deployed AI Engineer</title>
-<meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending multi-agent trading AI running 24/7 on a free-tier Oracle Cloud VM, and 35+ shipped projects.">
+<meta name="description" content="AI systems architect and operator. AI-native delivery, a patent-pending trading AI I run as a side project, and 35+ shipped projects.">
 <meta property="og:title" content="Jannet Akanksha Ekka — Forward-Deployed AI Engineer">
 <meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live, 24/7, at no infrastructure cost.">
 <meta property="og:type" content="website">
@@ -493,6 +497,9 @@ section{{padding:104px 0}}
 .cred-link:hover{{background:var(--tx);color:var(--bg);border-color:var(--tx)}}
 .cred-id{{font-size:11px;color:var(--dim);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}}
 
+/* ---------- grants list ---------- */
+.glist{{margin:14px 0 18px;padding-left:18px;color:var(--mut);font-size:14px;line-height:1.7}}
+.glist strong{{color:var(--tx)}}
 /* ---------- grants chip ---------- */
 .grant-chip{{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:600;
   color:var(--a3);border:1px solid rgba(251,191,36,.32);background:rgba(251,191,36,.08);
@@ -584,11 +591,10 @@ footer a:hover{{color:var(--tx)}}
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#credentials">Credentials</a>
-      <a href="#backing">Backing</a>
       <a href="#contact">Contact</a>
+      <a href="#backing">Grants</a>
 <span class="views" id="views" hidden><span class="veye" aria-hidden="true">&#9673;</span><b id="viewsn">—</b><span class="vlab">views</span></span>
-            <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer" class="navcta" title="Applied AI &amp; AI evaluation résumé (PDF)">Résumé</a>
-            <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer" class="navcta" title="Founder résumé — JTech Solutions / SMT (PDF)">Founder résumé</a>
+            <a href="resumes/Jannet_Ekka_Resume_FDE.pdf" download="Jannet_Ekka_Resume_FDE.pdf" class="navcta" title="Forward deployed engineer résumé (PDF)">Résumé</a>
     </div>
   </div>
 </nav>
@@ -597,7 +603,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="idrow reveal">
       <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
-      <div class="eyebrow"><b></b> Open to applied AI &amp; AI evaluation roles · remote</div>
+      <div class="eyebrow"><b></b> Open to forward deployed, applied AI &amp; AI evaluation roles · remote</div>
     </div>
     <h1 class="big reveal">
       I architect <span class="serif">agentic AI</span><br>
@@ -610,7 +616,7 @@ footer a:hover{{color:var(--tx)}}
       I ship production AI systems by directing <strong>AI coding agents</strong>, and I am the
       <strong>only review before anything merges</strong>. Four years leading QA automation at
       <strong>Deloitte</strong> taught me how to tell when the output is wrong, which is the part most AI teams are still
-      learning. I run a <strong>patent-pending AI trading agent</strong>, live 24/7 on a free-tier cloud stack.
+      learning. My side project, a <strong>patent-pending AI trading agent</strong>, runs live 24/7 on a free-tier cloud stack.
       <strong>Rank&nbsp;1</strong> in the Post Graduate Program in AI/ML at UT Austin McCombs.
     </p>
     <div class="cta reveal">
@@ -618,7 +624,7 @@ footer a:hover{{color:var(--tx)}}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-g" href="#contact">Get in touch</a>
     </div>
-    <p class="cvline reveal">Résumés (PDF): <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer">Applied AI &amp; AI evaluation</a> · <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">Founder — JTech Solutions / SMT</a></p>
+    <p class="cvline reveal"><a href="resumes/Jannet_Ekka_Resume_FDE.pdf" download="Jannet_Ekka_Resume_FDE.pdf">Download my résumé (PDF)</a></p>
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
       <span class="chip">🤖 AI-native delivery</span>
@@ -679,9 +685,9 @@ footer a:hover{{color:var(--tx)}}
         </div>
         <div class="abtxt reveal">
           <p>I spent four years at <strong>Deloitte</strong> leading a QA automation team — finding the ways enterprise systems fail before customers did. That work taught me something most ML curricula skip: <strong>a model that cannot tell you when it is wrong is not finished.</strong></p>
-          <p>So when I moved into AI, I built the way I used to test. My flagship system refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks built to catch overfitting. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it: written rules with replayed records open trades, and the agents became advisors graded on every call.</p>
+          <p>So when I moved into AI, I built the way I used to test. My side project, an AI trading agent, refuses to trade on a data feed it cannot verify, logs a plain-English reason for every decision, and gates every weekly model update behind statistical checks built to catch overfitting. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it: written rules with replayed records open trades, and the agents became advisors graded on every call.</p>
           <p>The way I work has changed too. I don't hand-type an 88,000-line platform. I <strong>specify it, then direct AI coding agents to implement it</strong>. <strong>Claude Code</strong> in a terminal is my build environment: it generates targeted hotfixes and structures the pull requests, and <strong>nothing merges until I have audited the diff myself</strong>. The speed-up is real and so is the gate. I am the only one standing between a generated patch and a system trading live.</p>
-          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on an <strong>Oracle Cloud</strong> free-tier VM (I moved it off GCP in two days when the billing account closed), and I read its logs the way I used to read defect reports, triaging execution errors and catching systemic drift before it costs anything. The no-silent-fallback rule I designed in has already surfaced four multi-week data-integrity bugs.</p>
+          <p>That makes <strong>operations</strong> the other half of the job. The platform runs 24/7 as a daemon on an <strong>Oracle Cloud</strong> free-tier VM (I moved it off GCP in two days when the billing account closed), and I read its logs the way I used to read defect reports, triaging execution errors and catching systemic drift before it costs anything. I added a no-silent-fallback rule after four multi-week data bugs ran unnoticed, and a later audit found 17 more silent failure paths.</p>
           <p>I completed my <strong>PGP in AI/ML at UT Austin McCombs &amp; Great Lakes at Rank 1</strong>, then <strong>Google Cloud's Gen AI Academy</strong>, covering Vertex AI, Gemini, ADK, MCP and AlloyDB. All of it is architected and operated from a single 16&nbsp;GB laptop; when it needed to go faster, a <strong>cuDF/RAPIDS rewrite</strong> cut the validation pipeline ~6&times; on an NVIDIA T4. I built the whole portfolio <strong>while a full-time family carer</strong>. Today I'm looking for teams building agentic systems that have to survive contact with the real world.</p>
         </div>
       </div>
@@ -705,19 +711,14 @@ footer a:hover{{color:var(--tx)}}
     </div>
     <div class="tl">
       <div class="tlrow reveal">
-        <h4>Founder &amp; sole engineer</h4>
-        <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">Jan 2024 – Present</div>
-        <p>Building SMT, an AI trading agent that has to prove why it traded, and <strong>SMT World</strong>, the product exchanges give their users on top of it. 88,000 lines of Python, 3,152 tests, 362 merged pull requests and 673 measured findings, written by AI coding agents I direct, with me as the <strong>only review before anything merges</strong>. Graded my own six AI agents on independent data, found all six at a coin flip, and rebuilt the system so written rules open trades and the agents are graded advisors. Tested 1,800 strategy variants (36 million simulated trades) at six exchanges&rsquo; fees. Audited 98 AI-written merges and found an order bug that had rejected 1,137 live orders over three months while every test passed. It places real orders 24/7 on WEEX&rsquo;s simulated account from an <strong>Oracle Cloud</strong> free-tier VM, moved off GCP in two days. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams. All <strong>while a full-time family carer</strong>.</p>
+        <h4>Machine Learning Intern</h4>
+        <div class="org">Internship Studio</div><div class="when">Jul 2024 – Aug 2024</div>
+        <p>Random Forest model predicting YouTube ad views across a 15,000+ video dataset, packaged for integration with business dashboards.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Lead Frontend Developer</h4>
         <div class="org">AutoKorrekt — EdTech startup MVP</div><div class="when">May 2023 – Jan 2024</div>
         <p>Interactive PDF processing with coordinate-based text extraction, integrating AWS Textract OCR and Mistral models into an AI answer-evaluation workflow. Bilingual EN/DE interface scaling to 1,000+ concurrent submissions.</p>
-      </div>
-      <div class="tlrow reveal">
-        <h4>Machine Learning Intern</h4>
-        <div class="org">Internship Studio</div><div class="when">Jul 2024 – Aug 2024</div>
-        <p>Random Forest model predicting YouTube ad views across a 15,000+ video dataset, packaged for integration with business dashboards.</p>
       </div>
       <div class="tlrow reveal">
         <h4>Test Automation Engineer (Analyst)</h4>
@@ -746,19 +747,30 @@ footer a:hover{{color:var(--tx)}}
   </div>
 </section>
 
+<section class="contact" id="contact">
+  <div class="shell">
+    <div class="reveal">
+      <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
+      <p>Open to forward deployed engineering, applied AI, agent evaluation and agent security roles, remote. The inbox is always open.</p>
+    </div>
+    <div class="cgroups">{contact_groups_html()}</div>
+  </div>
+</section>
+
 <section id="backing">
   <div class="shell">
     <div class="shead reveal">
-      <div class="skicker">Backing &amp; collaboration</div>
-      <h2 class="stitle">Actively seeking grants and partners.</h2>
-      <p class="ssub">SMT is patent-pending, running live 24/7, and looking for its first backer. If you fund early-stage AI, run a grant programme, or want to build on it &mdash; leave your details and I'll come back to you.</p>
+      <div class="skicker">Grants &amp; partners</div>
+      <h2 class="stitle">For grant programmes and partners.</h2>
+      <p class="ssub">My focus is a full-time role. SMT stays my side project, and its IP stays mine. If you run a grant programme, fund early-stage AI, or want to build on one of these projects, this is what support would go to.</p>
     </div>
     <div class="backing reveal">
       <div class="backing-in">
         <div>
-          <h3>Fund, partner, or just say hello.</h3>
-          <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
-          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest. The company on one page: <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">founder résumé (PDF)</a>.</p>
+          <h3>Open to grants and partners</h3>
+          <ul class="glist">{grants_list_html()}</ul>
+          <p class="bsub"><strong>What support would pay for:</strong> the full patent specification, due July 2027, and a US filing; hosting, market data and AI usage beyond free tiers; a front-end engineer for SMT World; and exchange pilots (a second exchange integration and a compliance review of the sign-in flow). Exchanges whose users could sign in through SMT World are the partners I'd most like to hear from.</p>
+          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest.</p>
           {connect_html()}
         </div>
         <div>
@@ -793,22 +805,12 @@ footer a:hover{{color:var(--tx)}}
   </div>
 </section>
 
-<section class="contact" id="contact">
-  <div class="shell">
-    <div class="reveal">
-      <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
-      <p>Open to applied AI engineering, agent evaluation and agent security roles, remote. The inbox is always open.</p>
-    </div>
-    <div class="cgroups">{contact_groups_html()}</div>
-  </div>
-</section>
-
 <footer>
   <div class="shell">
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
-      <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF)</a> ·
-      <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">Founder résumé (PDF)</a> ·
+      <a href="resumes/Jannet_Ekka_Resume_FDE.pdf" download="Jannet_Ekka_Resume_FDE.pdf">Résumé (PDF)</a> ·
+      <a href="#backing">Grants &amp; partners</a> ·
       <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
       <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>
