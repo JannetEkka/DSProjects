@@ -90,7 +90,7 @@ The three drills are forced on purpose and labelled as drills on the page. The g
 
 Not used: MCP, per-user budgets.
 
-Total spend on the key for everything above, including development reruns: **$0.16** of the $1.50 cap (1008 logged requests).
+Total spend on the main key for everything above, including development reruns and two test web searches (about $0.09 each): **$0.41** of the $1.50 cap. The public checker's own key has spent about $0.03 of its $0.30 cap.
 
 ## Run it
 
