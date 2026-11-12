@@ -7,7 +7,11 @@ here = Path(__file__).parent
 starter = json.loads(Path(sys.argv[1]).read_text())
 overrides = json.loads(sys.argv[3]) if len(sys.argv) > 3 else {}
 
-install_cell = ''.join(starter['cells'][2]['source'])  # the host's environment + wheelhouse cell, unchanged
+install_cell = ''.join(starter['cells'][2]['source'])  # the host's environment + wheelhouse cell
+_w = "WHEELHOUSE_DIR = Path('/kaggle/input/datasets/metric/gemma-4-developer-agent-wheelhouse')"
+assert _w in install_cell
+# only change: Kaggle mounts inputs under one of two layouts, so take whichever exists
+install_cell = install_cell.replace(_w, _w + "\nif not WHEELHOUSE_DIR.exists():\n    WHEELHOUSE_DIR = Path('/kaggle/input/gemma-4-developer-agent-wheelhouse')")
 
 cfg = {
     'model_name': 'gemma-4-12b-it-qat-w4a16-ct',
@@ -45,6 +49,9 @@ cfg_cell = (
     "    _c = _g.glob('/kaggle/input/**/task_soundness.csv', recursive=True)\n"
     "    assert _c, 'task_soundness.csv not found: attach dmitriigluzdov/gemma-4-task-soundness-and-local-results'\n"
     "    CFG['soundness_csv'] = _c[0]\n"
+    "if not os.path.exists(CFG['data_dir']):\n"
+    "    CFG['data_dir'] = '/kaggle/input/gemma-4-developer-agent'\n"
+    "assert os.path.exists(CFG['data_dir'] + '/tasks.jsonl'), sorted(_g.glob('/kaggle/input/*'))\n"
     'print(CFG)\n'
 )
 
@@ -71,7 +78,12 @@ MODEL_VLLM_EXTRA_ARGS = {
     ),
 }
 MODEL_PATH = Path(f"/kaggle/input/models/google/gemma-4/other/{CFG['model_name']}/2")
-assert MODEL_PATH.exists(), f'Model weights not found at {MODEL_PATH}'
+if not MODEL_PATH.exists():
+    import glob as _g2
+    _m = [p for p in _g2.glob(f"/kaggle/input/**/{CFG['model_name']}/**/config.json", recursive=True)]
+    assert _m, f'Model weights not found at {MODEL_PATH}'
+    MODEL_PATH = Path(_m[0]).parent
+print('Model path:', MODEL_PATH)
 
 gpu_count = torch.cuda.device_count() if torch.cuda.is_available() else 1
 tp_size = 4 if gpu_count >= 4 else (2 if gpu_count >= 2 else 1)
@@ -166,6 +178,7 @@ def md(src):
 cells = [
     md(intro),
     md('## 1. Environment (the host starter\'s cell, unchanged)'),
+    code("import glob\nprint(sorted(glob.glob('/kaggle/input/*')), sorted(glob.glob('/kaggle/input/*/*'))[:12])"),
     code(install_cell),
     md('## 2. Settings'),
     code('import json, time\n' + cfg_cell),
