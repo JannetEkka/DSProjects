@@ -4,7 +4,7 @@
 
 **Who it helps:** anyone who publishes or reads summaries that a model wrote from source text and cannot reread every source. In our run about 1 claim in 14 had no support in the news it cited; the 2024 version of this project showed all of them as fact.
 
-- **Use it:** https://countersign-6my.pages.dev → "Check a brief". Paste a model-written summary and the text it was written from; each sentence is checked live and the unsupported ones are struck, with the reason.
+- **Use it:** https://countersign-6my.pages.dev, the "Check a text" screen. Paste a model-written summary and the text it was written from; each sentence is checked live and the unsupported ones are struck, with the reason.
 - **See the work:** [`countersign.ipynb`](countersign.ipynb) has every figure and finding inline, built from the saved run.
 
 Live page: https://countersign-6my.pages.dev · Built for the Mozilla Otari hackathon (Devs Wilding Online) on branch `otari-hackathon`. Every model call goes through the hosted [Otari](https://otari.ai) gateway.
@@ -71,9 +71,9 @@ stock_news.csv (349 headlines + daily prices, 2019)
 
 **What went wrong in the first run.** The checker was first given the raw daily price rows. It removed 23 of 108 claims, and 17 of those were price claims whose figures were correct: the checker was doing the arithmetic itself and getting it wrong. The checker now gets the sandbox's figures as its evidence for price claims, so no model does arithmetic. The first run's output is kept in [`runs/first_run_results.json`](runs/first_run_results.json).
 
-## The app: Check a brief
+## The app: Check a text
 
-[`functions/api/check.js`](functions/api/check.js) is a small endpoint behind the page's "Check a brief" tab. It splits the pasted text into sentences and, for each one: sends it through Otari with the blocking guardrail, asks the checker model (Qwen3 235B, via Otari) whether the sources support it, validates the reply, and then code decides ([`functions/_rules.js`](functions/_rules.js)). A sentence stays only if the checker quoted a supporting passage that really is in the sources and every figure in the sentence appears in the sources. If Otari refuses for budget, nothing is shown as confirmed. The key it uses is a Cloudflare secret with its own small cap in Otari, so the cap is the most the public page can spend. The sources box also takes up to 3 links, which are read through Otari's web fetch, so an answer from a research chat can be checked against the pages it cites. It does not use the sandbox: figures are matched against the source text, not recomputed.
+[`functions/api/check.js`](functions/api/check.js) is a small endpoint behind the site's "Check a text" screen. It splits the pasted text into sentences and, for each one: sends it through Otari with the blocking guardrail, asks the checker model (Qwen3 235B, via Otari) whether the sources support it, validates the reply, and then code decides ([`functions/_rules.js`](functions/_rules.js)). A sentence stays only if the checker quoted a supporting passage that really is in the sources and every figure in the sentence appears in the sources. If Otari refuses for budget, nothing is shown as confirmed. The key it uses is a Cloudflare secret with its own small cap in Otari, so the cap is the most the public page can spend. The sources box also takes up to 3 links, which are read through Otari's web fetch, so an answer from a research chat can be checked against the pages it cites. It does not use the sandbox: figures are matched against the source text, not recomputed.
 
 ## Otari features used
 
