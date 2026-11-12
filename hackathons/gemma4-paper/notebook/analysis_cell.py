@@ -9,7 +9,11 @@ turns = pd.read_json(OUT_DIR / 'turns.jsonl', lines=True)
 res['resolved'] = res['resolved'].astype(str).str.lower().eq('true')
 summary = {'model': CFG['model_name'], 'budget': {k: CFG[k] for k in ('max_turns', 'time_limit_s', 'cmd_timeout_s', 'output_cut', 'max_tokens', 'thinking_budget', 'temperature', 'top_p', 'context_tokens')}}
 
-planned = {(t.instance_id, a, s) for t in RUN_TASKS for a in ARMS for s in CFG['seeds']}
+_ctrl = pd.read_csv(OUT_DIR / 'controls.csv', keep_default_na=False)
+_valid = set(_ctrl.loc[_ctrl['valid_here'].astype(str).str.lower().eq('true'), 'task_id'])
+summary['tasks'] = {'planned': len(RUN_TASKS), 'gate_tried': len(_ctrl), 'valid_here': len(_valid)}
+print(summary['tasks'])
+planned = {(t, a, s) for t in _valid for a in ARMS for s in CFG['seeds']}
 got = {(r.task_id, r.arm, r.seed) for r in res.itertuples()}
 missing = sorted(planned - got)
 dupes = int(res.duplicated(['task_id', 'arm', 'seed']).sum())
@@ -19,7 +23,7 @@ summary['rows'] = {'planned': len(planned), 'present': len(res), 'missing': len(
 # Tasks where either arm hit a harness error are left out of the comparison, and counted.
 bad = set(res.loc[res['harness_error'] != '', 'task_id'])
 complete = res.groupby(['task_id', 'seed'])['arm'].nunique().reset_index()
-complete = complete[complete['arm'] == 2]
+complete = complete[complete['arm'] == len(ARMS)]
 ok = res.merge(complete[['task_id', 'seed']], on=['task_id', 'seed'])
 ok = ok[~ok['task_id'].isin(bad)]
 print(f'Tasks with a harness error in either arm (left out): {len(bad)}')
@@ -41,21 +45,26 @@ for seed, grp in ok.groupby('seed'):
             'median_agent_seconds': float(g['agent_seconds'].median()), 'mean_agent_seconds': round(float(g['agent_seconds'].mean()), 1),
             'submitted': int((g['stop_reason'] == 'submit').sum()), 'hit_time_limit': int((g['stop_reason'] == 'time_limit').sum()),
             'hit_turn_limit': int((g['stop_reason'] == 'turn_limit').sum()),
+            'turns_cut_off_at_max_tokens': int((tt['finish_reason'] == 'length').sum()), 'turns_with_more_than_one_action': int((tt['actions_in_reply'] > 1).sum()),
+            'completion_tokens': int(tt['completion_tokens'].sum()), 'commands_run': int(g['commands_run'].sum()), 'tasks_with_a_patch': int((g['patch_chars'] > 0).sum()),
             'completion_tokens_per_turn': round(float(tt['completion_tokens'].mean()), 1) if len(tt) else None,
         })
     headline = pd.DataFrame(rows).set_index('arm')
     display(headline.T)
 
-    wide = grp.pivot(index='task_id', columns='arm', values='resolved')
-    both = int((wide['json'] & wide['text']).sum())
-    only_text = int((~wide['json'] & wide['text']).sum())
-    only_json = int((wide['json'] & ~wide['text']).sum())
-    neither = int((~wide['json'] & ~wide['text']).sum())
-    k, m = min(only_text, only_json), only_text + only_json
-    p = min(1.0, 2 * sum(math.comb(m, i) for i in range(k + 1)) / 2 ** m) if m else 1.0
-    print(f'Paired: both {both}, only text {only_text}, only json {only_json}, neither {neither}.')
-    print(f'Exact two-sided sign test on the {m} tasks where the arms disagree: p = {p:.3f}')
+    paired = None
+    if set(ARMS) >= {'json', 'text'}:
+        wide = grp.pivot(index='task_id', columns='arm', values='resolved')
+        both = int((wide['json'] & wide['text']).sum())
+        only_text = int((~wide['json'] & wide['text']).sum())
+        only_json = int((wide['json'] & ~wide['text']).sum())
+        neither = int((~wide['json'] & ~wide['text']).sum())
+        k, m = min(only_text, only_json), only_text + only_json
+        p = min(1.0, 2 * sum(math.comb(m, i) for i in range(k + 1)) / 2 ** m) if m else 1.0
+        print(f'Paired: both {both}, only text {only_text}, only json {only_json}, neither {neither}.')
+        print(f'Exact two-sided sign test on the {m} tasks where the arms disagree: p = {p:.3f}')
 
+        paired = {'both': both, 'only_text': only_text, 'only_json': only_json, 'neither': neither, 'sign_test_p': round(p, 4)}
     fail = grp[~grp['resolved']].groupby(['arm', 'failure_type']).size().unstack(0, fill_value=0)
     print('\nWhy unfixed tasks failed (fixed rules, in order):')
     display(fail)
@@ -67,10 +76,10 @@ for seed, grp in ok.groupby('seed'):
     display(by_repo)
     summary[f'seed_{seed}'] = {
         'headline': headline.reset_index().to_dict('records'),
-        'paired': {'both': both, 'only_text': only_text, 'only_json': only_json, 'neither': neither, 'sign_test_p': round(p, 4)},
+        'paired': paired,
         'failure_types': fail.to_dict(), 'malformed_reasons': reasons.to_dict(),
         'by_repo': {f'{r}|{a}': [int(v['sum']), int(v['count'])] for (r, a), v in grp.groupby(['repo', 'arm'])['resolved'].agg(['sum', 'count']).iterrows()},
-        'paired_by_task': {tid: {'json': bool(r['json']), 'text': bool(r['text'])} for tid, r in wide.iterrows()},
+        'fixed_by_task': {tid: {a: bool(v) for a, v in r.items()} for tid, r in grp.pivot(index='task_id', columns='arm', values='resolved').iterrows()},
     }
 
 (OUT_DIR / 'summary.json').write_text(json.dumps(summary, indent=1, default=str), encoding='utf-8')

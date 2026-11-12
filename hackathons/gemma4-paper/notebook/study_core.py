@@ -33,7 +33,9 @@ from swegemma.harness.verification import strip_protected_files_from_patch, veri
 from swegemma.models import load_tasks
 from swegemma.sandbox import SubprocessManager
 
-ARMS = ('json', 'text')
+ARMS = tuple(CFG.get('arms') or ('json', 'text'))
+# 'text_stop' is the text format with one change in the code that reads it: the reply is cut as soon as the first
+# complete ```bash block has arrived (added after the pilot; see the Writeup).
 OUT_DIR = Path(CFG['out_dir'])
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -103,7 +105,7 @@ def system_prompt(arm: str, repo: str) -> str:
         minutes=CFG['time_limit_s'] // 60,
         cmd_timeout=CFG['cmd_timeout_s'],
     )
-    return shared + '\n' + FORMAT_PARAGRAPH[arm]
+    return shared + '\n' + FORMAT_PARAGRAPH['json' if arm == 'json' else 'text']
 
 
 def user_prompt(task, tree: str) -> str:
@@ -198,7 +200,55 @@ def chat(messages, arm: str, seed: int, timeout: float):
     if arm == 'json':
         body['tools'] = TOOLS
         body['tool_choice'] = 'auto'
-    return _rq.post(CFG['base_url'] + '/chat/completions', json=body, timeout=timeout)
+    if arm != 'text_stop':
+        return _rq.post(CFG['base_url'] + '/chat/completions', json=body, timeout=timeout)
+    return _StreamedReply(body, timeout)
+
+
+class _StreamedReply:
+    """Same request as the text arm, read as a stream and closed once the first complete ```bash block has arrived.
+    Presents the same fields as a normal reply (status_code, text, json())."""
+
+    def __init__(self, body, timeout):
+        body = dict(body, stream=True, stream_options={'include_usage': True, 'continuous_usage_stats': True})
+        deadline = time.perf_counter() + timeout
+        content, reasoning, finish, usage, cut = '', '', None, {}, False
+        r = _rq.post(CFG['base_url'] + '/chat/completions', json=body, timeout=(10, 120), stream=True)
+        self.status_code = r.status_code
+        self.text = ''
+        if r.status_code != 200:
+            self.text = r.text
+            r.close()
+            return
+        try:
+            for line in r.iter_lines():
+                if time.perf_counter() > deadline:
+                    raise _rq.exceptions.Timeout('time limit reached while streaming')
+                if not line or not line.startswith(b'data:'):
+                    continue
+                payload = line[5:].strip()
+                if payload == b'[DONE]':
+                    break
+                chunk = json.loads(payload)
+                if chunk.get('usage'):
+                    usage = chunk['usage']
+                for ch in chunk.get('choices') or []:
+                    delta = ch.get('delta') or {}
+                    content += delta.get('content') or ''
+                    reasoning += delta.get('reasoning') or delta.get('reasoning_content') or ''
+                    if ch.get('finish_reason'):
+                        finish = ch['finish_reason']
+                if BASH_BLOCK.search(content):
+                    cut = finish is None
+                    break
+        finally:
+            r.close()
+        if cut:
+            finish = 'cut_after_first_block'
+        self._data = {'choices': [{'message': {'content': content, 'reasoning': reasoning, 'tool_calls': []}, 'finish_reason': finish or ''}], 'usage': usage}
+
+    def json(self):
+        return self._data
 
 
 def cut_output(text: str) -> str:
@@ -520,32 +570,29 @@ def planned_tasks():
     return [all_tasks[i] for i in ids]
 
 
-def run_controls(tasks, workers: int):
-    """Pilot check (a): the checker passes the reference patch and fails the empty patch."""
-    def one(task):
-        out = {'task_id': task.instance_id}
-        try:
-            ok_ref, code_ref, err_ref, s1 = check_patch(task, task.patch)
-            ok_empty, code_empty, err_empty, s2 = check_patch(task, '')
-            out.update(reference_resolved=ok_ref, empty_resolved=ok_empty, reference_exit=code_ref, empty_exit=code_empty,
-                       seconds=round(s1 + s2, 1), error=(err_ref if not ok_ref else '')[:200].replace('\n', ' '))
-        except Exception as e:
-            out.update(reference_resolved='', empty_resolved='', reference_exit='', empty_exit='', seconds='', error=f'{type(e).__name__}: {e}'[:200])
-        return out
-    with ThreadPoolExecutor(max_workers=workers) as pool:
-        rows = list(pool.map(one, tasks))
-    with open(OUT_DIR / 'controls.csv', 'w', newline='', encoding='utf-8') as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
-        w.writeheader()
-        w.writerows(rows)
-    return rows
+def shard(tasks):
+    """This notebook's share of the fixed order: every num_shards-th task starting at shard_index."""
+    return [t for k, t in enumerate(tasks) if k % CFG['num_shards'] == CFG['shard_index']]
+
+
+def control(task) -> dict:
+    """Gate: a task is run only if, in this environment, the checker passes the reference patch and fails the empty patch."""
+    out = {'task_id': task.instance_id, 'repo': task.repo}
+    try:
+        ok_ref, code_ref, err_ref, s1 = check_patch(task, task.patch)
+        ok_empty, code_empty, err_empty, s2 = check_patch(task, '')
+        out.update(reference_resolved=ok_ref, empty_resolved=ok_empty, reference_exit=code_ref, empty_exit=code_empty,
+                   seconds=round(s1 + s2, 1), valid_here=bool(ok_ref and not ok_empty), error=(err_ref if not ok_ref else '')[:200].replace('\n', ' '))
+    except Exception as e:
+        out.update(reference_resolved='', empty_resolved='', reference_exit='', empty_exit='', seconds='', valid_here=False, error=f'{type(e).__name__}: {e}'[:200])
+    return out
 
 
 def run_study(tasks, seeds, workers: int, deadline_s: float):
     """Run both arms of each task side by side, so the two arms of a task see the same server load.
     No new task is started after deadline_s; tasks not started are listed in not_run.csv."""
     t_start = time.perf_counter()
-    done, not_run = [], []
+    done, not_run, controls = [], [], []
     lock = threading.Lock()
 
     def pair(job):
@@ -554,20 +601,31 @@ def run_study(tasks, seeds, workers: int, deadline_s: float):
             with lock:
                 not_run.append({'task_id': task.instance_id, 'seed': seed, 'reason': 'not started: run deadline reached'})
             return
-        with ThreadPoolExecutor(max_workers=2) as two:
+        c = control(task)
+        with lock:
+            controls.append(c)
+        if not c['valid_here']:
+            print(f"[skip] {task.instance_id}: reference patch resolved={c['reference_resolved']}, empty patch resolved={c['empty_resolved']}", flush=True)
+            return
+        with ThreadPoolExecutor(max_workers=len(ARMS)) as two:
             rows = list(two.map(lambda arm: run_one(task, arm, seed), ARMS))
+            rows = [r for r in rows if r]
         with lock:
             done.extend(rows)
-            n = len(done) // 2
+            n = len(done) // len(ARMS)
             print(f'[{n}] {task.instance_id} s{seed}: ' + ' | '.join(
                 f"{r['arm']}: {'FIXED' if r['resolved'] else r['failure_type']} "
                 f"({r['turns']}t, {r['malformed_turns']} malformed, {r['agent_seconds']}s, {r['stop_reason']})" for r in rows), flush=True)
 
     jobs = [(t, s) for s in seeds for t in tasks]
-    with ThreadPoolExecutor(max_workers=max(1, workers // 2)) as pool:
+    with ThreadPoolExecutor(max_workers=max(1, workers // len(ARMS))) as pool:
         list(pool.map(pair, jobs))
     with open(OUT_DIR / 'not_run.csv', 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=['task_id', 'seed', 'reason'])
         w.writeheader()
         w.writerows(not_run)
+    with open(OUT_DIR / 'controls.csv', 'w', newline='', encoding='utf-8') as f:
+        w = csv.DictWriter(f, fieldnames=['task_id', 'repo', 'reference_resolved', 'empty_resolved', 'reference_exit', 'empty_exit', 'seconds', 'valid_here', 'error'])
+        w.writeheader()
+        w.writerows(controls)
     return done, not_run

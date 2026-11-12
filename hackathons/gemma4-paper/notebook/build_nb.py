@@ -30,7 +30,9 @@ cfg = {
     'n_tasks': 10,
     'workers': 6,
     'run_deadline_s': 3 * 3600,
-    'control_tasks': 10,
+    'arms': ['json', 'text'],
+    'num_shards': 1,
+    'shard_index': 0,
     'save_transcripts': False,
 }
 cfg.update(overrides)
@@ -46,25 +48,16 @@ cfg_cell = (
     'print(CFG)\n'
 )
 
-plan_cell = '''# Task list (fixed rule, independent of results), prompt check, and the checker controls.
+plan_cell = '''# Task list (fixed rule, independent of results) and the prompt check.
 ALL_VALID = planned_tasks()
-RUN_TASKS = ALL_VALID[: CFG['n_tasks']]
-print(f"Valid public tasks: {len(ALL_VALID)}. Planned for this run: {len(RUN_TASKS)} (first by sha256 of the task id).")
+RUN_TASKS = shard(ALL_VALID)[: CFG['n_tasks']]
+print(f"Tasks marked sound in task_soundness.csv: {len(ALL_VALID)}. Planned for this notebook: {len(RUN_TASKS)} (shard {CFG['shard_index']} of {CFG['num_shards']} of the order by sha256 of the task id).")
 print('Planned task ids:', [t.instance_id for t in RUN_TASKS])
 
 PROMPT_CHECK = prompt_check()
 print('Check (c), prompts differ only in the format paragraph:', PROMPT_CHECK)
 print((OUT_DIR / 'prompt_diff.txt').read_text())
 assert PROMPT_CHECK['identical_outside_format_paragraph']
-
-# Check (a) runs in the background while the model server loads.
-import threading as _th
-CONTROL_ROWS = []
-def _controls():
-    CONTROL_ROWS.extend(run_controls(RUN_TASKS[: CFG['control_tasks']], workers=3))
-_control_thread = _th.Thread(target=_controls, daemon=True)
-if CFG['control_tasks'] > 0:
-    _control_thread.start()
 '''
 
 server_cell = '''# Model server: same settings as the host's starter notebook (no LoRA adapters are used in this study).
@@ -130,17 +123,16 @@ DONE, NOT_RUN = run_study(RUN_TASKS, CFG['seeds'], workers=CFG['workers'], deadl
 print(f'Run finished in {(time.perf_counter() - _t) / 60:.1f} min. Rows: {len(DONE)}. Tasks not started: {len(NOT_RUN)}.')
 '''
 
-checks_cell = '''# Pilot checks (design brief, section 5).
-if CFG['control_tasks'] > 0:
-    _control_thread.join()
-    import pandas as pd
-    _c = pd.DataFrame(CONTROL_ROWS)
-    display(_c)
-    _ref = int((_c['reference_resolved'] == True).sum()); _emp = int((_c['empty_resolved'] == False).sum())
-    print(f'Check (a): checker passes the reference patch on {_ref} of {len(_c)} tasks and fails the empty patch on {_emp} of {len(_c)}.')
+checks_cell = '''# Checks (design brief, section 5).
+import pandas as pd
+_c = pd.read_csv(OUT_DIR / 'controls.csv', keep_default_na=False)
+display(_c)
+_v = _c['valid_here'].astype(str).str.lower().eq('true')
+print(f'Check (a): of {len(_c)} tasks tried, the checker passes the reference patch and fails the empty patch on {int(_v.sum())}. Only those were run.')
+display(_c.assign(valid=_v).groupby('repo')['valid'].agg(['sum', 'count']))
 _r = pd.read_csv(OUT_DIR / 'results.csv', keep_default_na=False)
 _u = _r.pivot_table(index='task_id', columns='arm', values='usable_turns', aggfunc='min')
-print(f"Check (b): tasks where each arm produced at least one usable action: json {(int((_u['json'] > 0).sum()))} of {len(_u)}, text {int((_u['text'] > 0).sum())} of {len(_u)}.")
+print('Check (b): tasks where the arm produced at least one usable action:', {a: f"{int((_u[a] > 0).sum())} of {len(_u)}" for a in _u.columns})
 print('Check (c):', PROMPT_CHECK)
 print('Harness errors:', int((_r['harness_error'] != '').sum()))
 if (OUT_DIR / 'harness_errors.log').exists():
