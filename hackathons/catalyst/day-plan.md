@@ -16,11 +16,11 @@ The problem is unknown until 09:00, so **nothing is built before then**. This pl
 - [x] Registered on Unstop, confirmed with MnM, verified on Hack2skill (11-13)
 - [x] Joined the Telegram channel (11-13)
 - [x] Gemini key from AI Studio in the environment as `GEMINI_API_KEY_CATALYST` (11-13). It reaches sessions started after it was added, so Sunday's session will have it.
-- [ ] Adaption builder credits ($500, "pending within 24h" on the confirmation page): note whether claiming them asks for a card. If it does, record it in `cards.md` first, or skip them.
+- [x] Adaption builder credits ($500): the organisers send them; no card asked (Jannet, 11-13)
 - [ ] NEAR submitted by Saturday evening (it closes Sun 05:29), then sleep.
 
 ## Sunday, step by step
-1. **09:00** Read the challenge on Telegram/Unstop. Open a **new** Claude session in this repo and paste the first prompt below with the full challenge text.
+1. **09:00** Read the challenge on Telegram/Unstop. Paste the first prompt below, with the full challenge text, into the **Catalyst session** started on 11-13 (https://claude.ai/code/session_016VDQokY747vy9HHhek4fY3), which has already done the prep. If that session isn't available, open a new one in this repo.
 2. **09:30–10:00 Discuss (30 min, hard stop).** The session proposes 2 ideas checked against `hackathons/lessons.md`: a quick web check for the same idea (lesson 0), a problem people recognise (1), a with-vs-without number we can measure today (2), a result a judge sees in 10 seconds (3). Jannet picks one, then the session explains the architecture in 5 bullets and Jannet says it back.
 3. **10:00** Jannet creates an empty **public** GitHub repo for it and gives the session the name.
 4. **10:00–12:30 Build the core path end to end** (input → model → checked output), then **deploy by 12:30**, even if rough.
