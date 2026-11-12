@@ -1,0 +1,5 @@
+--- system_prompt[json]
++++ system_prompt[text]
+@@ -14 +14 @@
+-Use the provided tools. To run a shell command, call the tool `run_command` with one string argument `command`. To finish, call the tool `submit` with no arguments. Make exactly one tool call per turn.
++Write one fenced code block that starts with ```bash and ends with ```, with the shell command inside it. To finish, write a ```bash block that contains only the word submit. Write exactly one such block per turn.
