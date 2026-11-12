@@ -50,4 +50,4 @@ Copy this file to `hackathons/<entry>/design.md` and fill it in during the discu
 - **Signed off:** Jannet, date.
 
 ## 10. The build prompt
-- The exact first message for the build session: the architecture, the responsibilities (model vs rules), the acceptance conditions, and "keep the chat log raw from this message on". Written here so it can be reviewed before it's sent.
+- The exact first message for the build session: the architecture, the responsibilities (model vs rules), the acceptance conditions, and, only if the hackathon grades the transcript (HackerRank), "keep the chat log raw from this message on". Written here so it can be reviewed before it's sent.
