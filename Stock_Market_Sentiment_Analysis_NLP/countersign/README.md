@@ -7,6 +7,8 @@
 - **Use it:** https://countersign-6my.pages.dev, the "Check a text" screen. Paste a model-written summary and the text it was written from; each sentence is checked live and the unsupported ones are struck, with the reason.
 - **See the work:** [`countersign.ipynb`](countersign.ipynb) has every figure and finding inline, built from the saved run.
 
+Demo video (4 min): https://www.youtube.com/watch?v=_qOCC5WpPpk
+
 Live page: https://countersign-6my.pages.dev · Built for the Mozilla Otari hackathon (Devs Wilding Online) on branch `otari-hackathon`. Every model call goes through the hosted [Otari](https://otari.ai) gateway.
 
 ## The side project this finishes
