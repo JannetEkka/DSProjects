@@ -2,6 +2,11 @@
 
 **Every claim checked before you read.** A weekly market brief about Apple where a claim is shown only if a second model, a calculation and a guardrail could all confirm it, and where everything that was removed stays visible with the reason.
 
+**Who it helps:** anyone who publishes or reads summaries that a model wrote from source text and cannot reread every source. In our run about 1 claim in 14 had no support in the news it cited; the 2024 version of this project showed all of them as fact.
+
+- **Use it:** https://countersign-6my.pages.dev → "Check a brief". Paste a model-written summary and the text it was written from; each sentence is checked live and the unsupported ones are struck, with the reason.
+- **See the work:** [`countersign.ipynb`](countersign.ipynb) has every figure and finding inline, built from the saved run.
+
 Live page: https://countersign-6my.pages.dev · Built for the Mozilla Otari hackathon (Devs Wilding Online) on branch `otari-hackathon`. Every model call goes through the hosted [Otari](https://otari.ai) gateway.
 
 ## The side project this finishes
@@ -36,9 +41,9 @@ What this lets someone do: get a better sentiment label than the 2024 pipeline g
 - 53 rows is a small test set; one headline moves weighted F1 by roughly 0.02. The all-349 score (0.413) is lower than the 53-row score, so part of the gap over 2024 is likely luck of the split.
 - The labels (-1/0/+1; 170 neutral, 99 negative, 80 positive) are the course's. How they were made is not documented, and they may be the ceiling.
 - 2019 news may be in the model's training text. These labels are not.
-- The prompt was reworded once, before any score was computed: the first wording said the news was "about Apple", and the model declined about 90 items that were about other companies. No prompt was tuned against the labels.
+- The classifier's instruction was written once and not adjusted to raise the score. Rewording an instruction while watching F1 on these 53 rows would fit it to these answers and overstate the result. It was reworded one time, before any score was computed: the first wording said the news was "about Apple", and the model declined about 90 items that were about other companies.
 
-**On news no model has memorised.** The same pipeline ran on 12 Apple headlines fetched through Otari on 2026-11-11: 7 claims written, 1 removed.
+**On news no model has memorised.** The same pipeline ran on 12 Apple headlines and 5 days of prices fetched through Otari on 2026-11-12: 8 claims written, 1 removed, price figures recomputed in the sandbox.
 
 ## How it works
 
@@ -59,14 +64,18 @@ stock_news.csv (349 headlines + daily prices, 2019)
 
 **What went wrong in the first run.** The checker was first given the raw daily price rows. It removed 23 of 108 claims, and 17 of those were price claims whose figures were correct: the checker was doing the arithmetic itself and getting it wrong. The checker now gets the sandbox's figures as its evidence for price claims, so no model does arithmetic. The first run's output is kept in [`runs/first_run_results.json`](runs/first_run_results.json).
 
+## The app: Check a brief
+
+[`functions/api/check.js`](functions/api/check.js) is a small endpoint behind the page's "Check a brief" tab. It splits the pasted text into sentences and, for each one: sends it through Otari with the blocking guardrail, asks the checker model (Qwen3 235B, via Otari) whether the sources support it, validates the reply, and then code decides ([`functions/_rules.js`](functions/_rules.js)). A sentence stays only if the checker quoted a supporting passage that really is in the sources and every figure in the sentence appears in the sources. If Otari refuses for budget, nothing is shown as confirmed. The key it uses is a Cloudflare secret with its own small cap in Otari, so the cap is the most the public page can spend. It does not use the sandbox: figures are matched against the source text, not recomputed.
+
 ## Otari features used
 
 | Feature | Where it is used | What it did in this run |
 |---|---|---|
 | Multiple models, distinct roles | classifier and writer vs checker | 852 calls to gpt-oss-120b, 148 to Qwen3 235B |
 | Routing and fallbacks | briefs are requested from the policy `countersign-writer` (gpt-oss-120b, then Mistral Small 3.2) | drill policy `countersign-fallback-drill`: its main model's provider answers "does not exist", Otari tried 2 candidates and gpt-oss-120b wrote the brief (`Otari-Fallback: true`) |
-| Code execution | `POST /code/execute` recomputes the price figures, no model involved | 1 run covered all 18 weeks; every price claim was compared with it |
-| Web fetch | `POST /fetch` reads Yahoo Finance's Apple feed for the live week | 12 current headlines through the same pipeline |
+| Code execution | `POST /code/execute` recomputes the price figures, no model involved | 2 runs: all 18 weeks of 2019, and the live week; every price claim was compared with the output |
+| Web fetch | `POST /fetch` reads Yahoo Finance's Apple news feed and daily prices for the live week | 12 current headlines and 5 price rows through the same pipeline |
 | Budgets and spending limits | the key is capped at $1.50; a refusal stops the run and lists the missing weeks | drill: Otari refused week 6 (`budget_exceeded`), 13 weeks marked missing, run marked incomplete |
 | Guardrails | each brief's final text is sent with a blocking guardrail, profile `no-investment-advice` | 18 briefs passed; the drill sentence got 403 `guardrail_violation` and the model was never called |
 
@@ -74,7 +83,7 @@ The three drills are forced on purpose and labelled as drills on the page. The g
 
 Not used: MCP, per-user budgets.
 
-Total spend on the key for everything above, including development reruns: **$0.11** of the $1.50 cap (1008 logged requests).
+Total spend on the key for everything above, including development reruns: **$0.16** of the $1.50 cap (1008 logged requests).
 
 ## Run it
 
@@ -84,6 +93,7 @@ export OTARI_API_KEY=...        # an otari.ai key; cap it in the dashboard
 python -m pytest tests          # decision rule and reply validation, no network
 python pipeline.py page         # rebuild site/index.html from the saved run, no cost
 python pipeline.py all          # sentiment, briefs, drills, live week, page
+jupyter nbconvert --to notebook --execute --inplace countersign.ipynb   # the notebook, no cost
 ```
 
 Model replies are cached in `runs/cache/`, so a rerun is free; delete the folder for a fresh, paid run (about $0.05). A damaged cache file is ignored and asked again. The run needs two routing policies in the Otari dashboard (`countersign-writer` and `countersign-fallback-drill`, both Fallback policies with the models named in [`otari.py`](otari.py)) and web access switched on for the workspace. The writer's reply is streamed, because the hosted gateway cuts a non-streamed request at 30 seconds and a brief takes slightly longer.

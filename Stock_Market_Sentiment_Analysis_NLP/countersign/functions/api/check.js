@@ -31,7 +31,7 @@ export async function onRequestPost({ request, env }) {
   if (list.length > MAX_SENTENCES) return json({ error: "too_long", message: `At most ${MAX_SENTENCES} sentences per check.` }, 400);
 
   const guardUrl = new URL(request.url).origin;
-  let cost = 0, budgetStop = null;
+  let cost = 0, budgetStop = null, keyRejected = false;
 
   async function checkOne(sentence) {
     // The guardrail sees the sentence alone, through Otari, before the checker model runs.
@@ -51,6 +51,7 @@ export async function onRequestPost({ request, env }) {
     // 1. guardrail, on the sentence only (a tiny call; a block means the model never ran)
     const g = await ask([{ role: "system", content: "Reply with the single word ok." }, { role: "user", content: sentence }], true);
     if (g.status === 403 && g.code === "budget_exceeded") { budgetStop = String(g.detail); return { sentence, keep: null }; }
+    if (g.status === 401) { keyRejected = true; return { sentence, keep: null }; }
     if (g.status === 403) adviceHit = findAdvice(sentence) || "advice";
     else if (g.status !== 200) return { sentence, ...decide(sentence, sources, null, null), note: `guardrail call failed (${g.status})` };
     else cost += Number(g.data.usage?.cost_usd || 0);
@@ -70,6 +71,8 @@ export async function onRequestPost({ request, env }) {
   }
 
   const results = await Promise.all(list.map(checkOne));
+  if (keyRejected)
+    return json({ error: "key_rejected", message: "Otari rejected the stored key. Nothing was checked, so nothing is shown as confirmed." }, 502);
   if (budgetStop)
     return json({ error: "budget", message: "Otari refused the request: the key's spending cap is reached. Nothing was checked, so nothing is shown as confirmed.", detail: budgetStop }, 402);
   return json({
