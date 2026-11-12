@@ -463,9 +463,30 @@ def parse_feed(xml: str, limit: int = 12) -> list[dict]:
     return items
 
 
+LIVE_PRICES = "https://query1.finance.yahoo.com/v8/finance/chart/AAPL?range=5d&interval=1d"
+
+
+def parse_prices(text: str) -> list[dict]:
+    """Yahoo's chart JSON -> daily rows. Any missing or odd field drops that day."""
+    try:
+        res = json.loads(text)["chart"]["result"][0]
+        q = res["indicators"]["quote"][0]
+        rows = []
+        for i, ts in enumerate(res["timestamp"]):
+            vals = [q[k][i] for k in ("open", "high", "low", "close")]
+            if all(isinstance(v, (int, float)) and v > 0 for v in vals):
+                rows.append({"date": time.strftime("%Y-%m-%d", time.gmtime(ts)),
+                             "open": float(vals[0]), "high": float(vals[1]),
+                             "low": float(vals[2]), "close": float(vals[3])})
+        return rows
+    except (ValueError, KeyError, IndexError, TypeError):
+        return []
+
+
 def stage_live() -> None:
     res = load_results()
-    live: dict = {"feed": LIVE_FEED, "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
+    live: dict = {"feed": LIVE_FEED, "price_source": LIVE_PRICES,
+                  "fetched_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())}
     try:
         page = otari.fetch(LIVE_FEED, "fetch live headlines", max_chars=40000)
         items = parse_feed(page.get("text") or "")
@@ -475,20 +496,28 @@ def stage_live() -> None:
         save_results(res)
         print("live: fetch failed:", e)
         return
+    try:
+        prices = parse_prices(otari.fetch(LIVE_PRICES, "fetch live prices", max_chars=20000).get("text") or "")
+    except OtariError as e:
+        prices = []
+        live["price_error"] = str(e)
     week = {"week": time.strftime("%Y-%m-%d", time.gmtime()),
             "headlines": [{"id": f"L{i + 1:02d}", "date": (it["published"] or "")[5:16], "text": it["text"]}
                           for i, it in enumerate(items)],
-            "prices": []}
+            "prices": prices}
+    figures, note = recompute([week], "recompute live week")
     live["fetch_tool"] = page.get("fetch_tool")
+    live["prices"] = prices
+    live["sandbox"] = note
     live["headlines"] = [{"id": f"L{i + 1:02d}", **it} for i, it in enumerate(items)]
     try:
-        brief = brief_for_week(week, None, purpose="write live")
+        brief = brief_for_week(week, (figures or {}).get(week["week"]), purpose="write live")
         live.update(status=brief["status"], brief=brief, summary=summarise([brief]))
     except BudgetRefused as e:
         live.update(status="stopped_by_budget", error=e.detail)
     res["live"] = live
     save_results(res)
-    print("live:", live.get("status"), live.get("summary", {}))
+    print("live:", live.get("status"), live.get("summary", {}), "| price rows:", len(prices), "| sandbox:", note)
 
 
 # ---- 6. what Otari did, for the page -------------------------------------
