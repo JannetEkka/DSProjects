@@ -1,6 +1,6 @@
 # Same model, same bugs, two formats
 
-**Subtitle:** Gemma 4 12B fixed as many bugs writing bash blocks as calling tools. What mattered was where the turn ends and whether the model still thinks.
+**Subtitle (140 characters max on Kaggle):** Gemma 4 12B fixed 3 of 68 bugs with tool calls and 3 with bash blocks. Cutting the text reply after its first command fixed 11.
 
 ## Abstract
 
