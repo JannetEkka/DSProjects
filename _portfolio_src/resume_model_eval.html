@@ -183,6 +183,18 @@
 
   <div class="entry">
     <div class="row">
+      <div class="role">More evaluation in November 2026 <span class="org">· Hermes Agent plugin · Kaggle Gemma 4 paper · Mozilla Otari</span></div>
+      <div class="meta">Nov 2026</div>
+    </div>
+    <ul>
+      <li><b>Lights Out</b> (<a href="https://github.com/JannetEkka/lights-out">repo</a>), a Hermes Agent plugin that Nous Research merged into the official Hermes plugin catalog. Measured on 10 tasks × 3 arms against a local AWS emulator: 0 billable creates ran without a person&rsquo;s approval, against 13 and 14 without the plugin. The clean-up-prompt arm left 1 resource where the agent alone left 14, and the write-up credits the prompt for that.</li>
+      <li><b>Gemma 4 paper</b> (Kaggle, <a href="https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/writeups/same-model-same-bugs-two-formats">write-up</a>): does Gemma 4 fix more bugs writing bash commands than JSON tool calls, with nothing else changed? 68 tasks per arm: 3 against 3 (sign test p = 1.0). The format changed where turns ended: cutting the reply after the first command fixed 11.</li>
+      <li><b>Countersign</b> (Mozilla Otari, <a href="https://countersign-6my.pages.dev">app</a>): a claim checker scored on a public labelled set, HaluEval: 41 of 60 planted errors caught, 19% of faithful sentences wrongly struck. The rule was not tuned after seeing the result.</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="row">
       <div class="role">More evaluation in October 2026 <span class="org">· Kaggle RSNA Knee · Monad Metropolis</span></div>
       <div class="meta">Oct 2026</div>
     </div>

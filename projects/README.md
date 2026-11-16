@@ -9,7 +9,7 @@ One file per project on the portfolio. Each one answers the four things a forwar
 
 Every file also has **"What the history shows"** (real decisions, in order) and **"Weak spots to own before they ask"**. Read those two first: they're what an interviewer finds if they open the repo. Each file ends with its sources.
 
-Written 2026-11-01/02 from the repos as they stood then.
+Written 2026-11-01/02 from the repos as they stood then; November builds added 2026-11-16.
 
 ## Production system
 
@@ -21,9 +21,15 @@ Written 2026-11-01/02 from the repos as they stood then.
 
 | Project | Hackathon | File | Lead with |
 |---|---|---|---|
+| Lights Out | Nous Research Hermes Agent Plugin, submitted 11-12, in the official Hermes catalog | [lights-out.md](lights-out.md) | 0 billable creates without a person's yes, against 13 and 14 without the plugin; and I say the clean-up prompt alone also worked |
+| Aftershock | NEAR Hackathon, Investment Thesis, submitted 11-15 | [aftershock.md](aftershock.md) | An event study: news moved NEAR's usage no more often than ordinary days (13.5% vs 16.5%) |
+| Orbit | Catalyst Solo AI (one day), top 8.2%, 33rd of 391, not placed | [orbit.md](orbit.md) | Fixed rules make every care decision; Gemini only words it and is thrown out if it adds a number |
+| Pitch In | PayPal AI, submitted 11-11 | [pitch-in.md](pitch-in.md) | Money moves only by code rules; a live sandbox run reconciled with PayPal at 0 mismatches |
+| Countersign | Mozilla Otari, submitted 11-12 | [countersign.md](countersign.md) | Finished my 2024 project: a check that caught 41 of 60 planted errors, and its 19% false strikes stated |
+| Same model, same bugs, two formats | Kaggle Gemma 4 Paper Track, submitted 11-13 | [gemma4-paper.md](gemma4-paper.md) | A controlled experiment: the action format didn't change bugs fixed (3 vs 3); where the turn ends did (11) |
 | Chithi | Meta Global AI Developer (Cerebral Valley), submitted 11-03 | [chithi.md](chithi.md) | A photo of an Indian letter explained in Bengali or Hindi; every date and amount checked against two readings: 0 wrong of 114 |
 | Beauty Within | YouCam (Perfect Corp), submitted 11-02 | [beauty-within.md](beauty-within.md) | Calibrated the vendor's lip render to within ~2 L*, and dropped a feature that brightened whole faces |
-| Spona | NTP Novi Sad (JigJoy × Mozaik) | [spona.md](spona.md) | 12 concurrent agents, every claim checked by a critic while the others work; 489 challenges in 5 min 48 s |
+| Spona | NTP Novi Sad (JigJoy × Mozaik), not placed | [spona.md](spona.md) | 12 concurrent agents, every claim checked by a critic while the others work; 489 challenges in 5 min 48 s |
 | Footfall | Qloo + Nebius × NVIDIA | [footfall.md](footfall.md) | A hard spend cap and replay mode, so a public demo can't run up the card or die when a key expires |
 | SQL Noir | Open Agent (Zetaris), Track 02 | [sql-noir.md](sql-noir.md) | No verdict from the model: every answer is a result-set comparison on live data |
 | Proof of Fix | GitLab Duo | [proof-of-fix.md](proof-of-fix.md) | A fix that passed tests and AI review was caught by production (32% → 9%), then proven (0 of 875) |

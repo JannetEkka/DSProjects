@@ -478,7 +478,109 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:1">
+      <article class="card reveal wide" data-cat="ml" style="--i:1">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Aftershock</h3>
+            
+          </div>
+          <p class="card-sub">Did the News Move the Chain? An Event Study on NEAR</p>
+          <p class="card-meta">2026 · NEAR Hackathon, Investment Thesis track · submitted Nov 15</p>
+          <p class="card-desc"><strong>For someone deciding whether to hold NEAR for years, headlines are the usual evidence. Aftershock tests them.</strong> It finds every spike of news about NEAR (GDELT), checks whether the chain&rsquo;s own daily records (NearBlocks, DefiLlama) moved afterwards, and compares that with ordinary days. Of 74 news events, 8 moved the price (10.8%, against 5.1% of ordinary days) and 10 moved usage (13.5%, against 16.5% of ordinary days). So usage did not follow the headlines, and the thesis is written from that.<br><br>Two models from different families write and examine every claim, and code recomputes each number: 14 of 20 claims were kept. Asked for a thesis with no data, the same models got 1 of 20 numbers right. The whole run rebuilds byte for byte from a clean clone with no keys and no network, and four dated forecasts sit in a NEAR testnet contract to be settled later. Limits are stated on the page: 49 of the 74 spikes were market-wide price coverage, not NEAR news.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">74</span><span class="clab">news events tested</span></div><div class="cstat"><span class="cnum">13.5% vs 16.5%</span><span class="clab">usage moved: events vs ordinary days</span></div><div class="cstat"><span class="cnum">14 of 20</span><span class="clab">claims kept after the check</span></div><div class="cstat"><span class="cnum">26</span><span class="clab">unit tests</span></div></div>
+          
+          <div class="tags"><span class="tag">Event Study</span><span class="tag">Time Series</span><span class="tag">Python</span><span class="tag">NVIDIA Nemotron</span><span class="tag">NEAR testnet (Rust)</span><span class="tag">GDELT</span><span class="tag">DefiLlama</span><span class="tag">GitHub Pages</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://jannetekka.github.io/aftershock/" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live page</a><a class="lnk sm code" href="https://github.com/JannetEkka/aftershock" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:2">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Lights Out</h3>
+            
+          </div>
+          <p class="card-sub">A Hermes Agent Plugin: Ask Before Spending, Receipt After</p>
+          <p class="card-meta">2026 · Nous Research Hermes Agent Plugin Hackathon · submitted Nov 12 · in the official Hermes plugin catalog</p>
+          <p class="card-desc">An agent that can run the AWS CLI can leave servers running and billing after it says &ldquo;Done&rdquo;. Lights Out sends every billable create to Hermes&rsquo;s own approval prompt with its price, records the delete command for each resource, and prints a receipt of what is still running and its monthly cost. One command turns everything off, except what was kept on purpose until a date. Measured on 10 tasks × 3 arms against a local AWS emulator: without the plugin the agent ran 13 and 14 billable creates no person approved; with it, 0. A clean-up prompt alone also cleaned up well, and the README says so. Nous Research merged it into the official Hermes plugin catalog.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">0 vs 13–14</span><span class="clab">creates no person approved: with vs without</span></div><div class="cstat"><span class="cnum">140</span><span class="clab">unit tests</span></div><div class="cstat"><span class="cnum">8 / 8</span><span class="clab">integration checks</span></div></div>
+          
+          <div class="tags"><span class="tag">Hermes Agent</span><span class="tag">Plugins</span><span class="tag">Agent Safety</span><span class="tag">AWS CLI</span><span class="tag">moto</span><span class="tag">Python</span><span class="tag">NVIDIA Nemotron</span></div>
+          <div class="lnks"><a class="lnk sm code" href="https://github.com/JannetEkka/lights-out" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a><a class="lnk sm doc" href="https://github.com/NousResearch/hermes-agent/pull/153822" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Catalog PR</a><a class="lnk sm doc" href="https://x.com/EkkaJanny96/status/2120602670750912581" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Demo on X</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:3">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Same Model, Same Bugs, Two Formats</h3>
+            
+          </div>
+          <p class="card-sub">A Paper on Gemma 4 Coding Agents</p>
+          <p class="card-meta">2026 · Kaggle Gemma 4 Developer Agent, Paper Track · submitted Nov 13</p>
+          <p class="card-desc">Does a small local model fix more bugs writing shell commands as plain text than as JSON tool calls? I ran Gemma 4 12B on the competition&rsquo;s 68 public bug-fix tasks with only the action format changed: same model file, prompt, budget and checker, on Kaggle&rsquo;s free GPUs. Each format fixed 3. The format changed how the budget was spent: text turns often ran to the output cap, and tool-call turns often had no thinking. Cutting the reply after the first command fixed 11. One run per arm, and the write-up says so.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">68</span><span class="clab">tasks per arm</span></div><div class="cstat"><span class="cnum">3 vs 3</span><span class="clab">fixed: tool calls vs bash</span></div><div class="cstat"><span class="cnum">11</span><span class="clab">fixed when the reply was cut</span></div></div>
+          
+          <div class="tags"><span class="tag">Gemma 4</span><span class="tag">Agent Evaluation</span><span class="tag">Experiment Design</span><span class="tag">Kaggle GPUs</span><span class="tag">Research Writing</span></div>
+          <div class="lnks"><a class="lnk sm doc" href="https://www.kaggle.com/competitions/gemma-4-developer-agent-paper/writeups/same-model-same-bugs-two-formats" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Paper</a><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/main/hackathons/gemma4-paper" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Data and code</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal" data-cat="genai" style="--i:4">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Orbit</h3>
+            
+          </div>
+          <p class="card-sub">Elder Care and Medication, Built in One Day</p>
+          <p class="card-meta">2026 · Catalyst: Solo AI Hackathon (MnM × Hack2skill) · top 8.2% (33rd of 391 scored entries), not placed</p>
+          <p class="card-desc">A one-day solo build on a challenge revealed at 09:00. For a parent who can no longer use a phone: one big button by the bed that speaks at dose time, and a shared care circle where every dose has a named person who gives it. A dose not marked after 30 minutes counts as missed and the giver is reminded; after 60, the whole family is told. Refill warnings, checkup reminders and a two-second Help button that emails everyone. Fixed rules make every decision; Gemini only words the evening update, and any number not in the record sends it back to a template. Automated code score 96.64, against the winner&rsquo;s 97.21.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">96.64</span><span class="clab">code score (winner 97.21)</span></div><div class="cstat"><span class="cnum">106</span><span class="clab">tests, 92% coverage</span></div><div class="cstat"><span class="cnum">0</span><span class="clab">axe-core violations on 18 page states</span></div></div>
+          
+          <div class="tags"><span class="tag">FastAPI</span><span class="tag">Postgres</span><span class="tag">Gemini</span><span class="tag">Accessibility (WCAG AA)</span><span class="tag">GitHub Actions</span><span class="tag">Render</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://orbit-care.onrender.com" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live demo</a><a class="lnk sm code" href="https://github.com/JannetEkka/orbit-care" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal" data-cat="agents" style="--i:5">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Pitch In</h3>
+            
+          </div>
+          <p class="card-sub">Neighbourhood Fixes Paid Only When the Fix Holds</p>
+          <p class="card-meta">2026 · PayPal AI Hackathon · submitted Nov 11</p>
+          <p class="card-desc">Neighbours pledge small amounts for a local fix (a blocked drain, a littered path). PayPal holds the money without charging it. Gemini checks the before and after photos against a checklist, and plain code decides whether money moves: no payout above what was captured, no paying twice, no automatic payment for a photo carrying instructions to the checker. Part of the payment waits a week until a neighbour shows the fix held. In a live sandbox run, two funders&rsquo; holds were captured pro rata, the doer was paid, a failed recheck refunded the held-back share, and reconciling with PayPal found 0 mismatches. How often the AI wrongly approves a fix is not measured yet, and the README says so.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">0</span><span class="clab">mismatches against PayPal</span></div><div class="cstat"><span class="cnum">29</span><span class="clab">tests on the money rules</span></div><div class="cstat"><span class="cnum">6</span><span class="clab">PayPal APIs</span></div></div>
+          
+          <div class="tags"><span class="tag">PayPal Orders + Payouts</span><span class="tag">PayPal Agent Toolkit</span><span class="tag">Gemini</span><span class="tag">TypeScript</span><span class="tag">AG Grid</span><span class="tag">Bryntum</span><span class="tag">Render</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://pitch-in.onrender.com" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live demo</a><a class="lnk sm code" href="https://github.com/JannetEkka/pitch-in" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a><a class="lnk sm doc" href="https://youtu.be/Rs58qvqHsJo" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Demo video</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal" data-cat="genai" style="--i:6">
+        <div class="card-spot" aria-hidden="true"></div>
+        <div class="card-body">
+          <div class="card-top">
+            <h3 class="card-title">Countersign</h3>
+            
+          </div>
+          <p class="card-sub">Every Claim in a Model-Written Brief, Checked</p>
+          <p class="card-meta">2026 · Mozilla Otari Hackathon (DoraHacks) · submitted Nov 12</p>
+          <p class="card-desc">Finishes my 2024 stock-sentiment project. A weekly market brief about Apple shows a claim only if a second model from another family, a sandbox recomputation and a guardrail all confirm it; removed claims stay visible with the reason. 8 of 108 claims were removed. On HaluEval&rsquo;s labelled summaries the check caught 41 of 60 planted errors and wrongly struck 19% of faithful sentences, so it says what to reread, not a final verdict. Zero-shot gpt-oss-120b raised sentiment F1 from the 2024 notebook&rsquo;s 0.366 to 0.491 on the same 53 test rows (0.413 on all 349). Every call goes through the Otari gateway: routing and fallbacks, code execution, web fetch, a spending cap and a guardrail.</p>
+          <div class="cstats"><div class="cstat"><span class="cnum">8 of 108</span><span class="clab">claims removed, with reasons</span></div><div class="cstat"><span class="cnum">41 of 60</span><span class="clab">planted errors caught (HaluEval)</span></div><div class="cstat"><span class="cnum">0.366 → 0.491</span><span class="clab">sentiment F1, same test rows</span></div></div>
+          
+          <div class="tags"><span class="tag">Mozilla Otari</span><span class="tag">Open-weight models</span><span class="tag">Grounding checks</span><span class="tag">Python</span><span class="tag">Cloudflare Pages</span></div>
+          <div class="lnks"><a class="lnk sm live" href="https://countersign-6my.pages.dev" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></span>Live app</a><a class="lnk sm code" href="https://github.com/JannetEkka/DSProjects/tree/otari-hackathon/Stock_Market_Sentiment_Analysis_NLP/countersign" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg></span>Code</a><a class="lnk sm doc" href="https://www.youtube.com/watch?v=_qOCC5WpPpk" target="_blank" rel="noopener noreferrer"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-4 0v-3h4"/><path d="M18 14h-8M15 18h-5M10 6h8v4h-8z"/></svg></span>Demo video</a></div>
+          
+        </div>
+      </article>
+      <article class="card reveal wide" data-cat="agents" style="--i:7">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -486,7 +588,7 @@ footer a:hover{color:var(--tx)}
             
           </div>
           <p class="card-sub">Concurrent Agents That Match Researchers with Companies</p>
-          <p class="card-meta">2026 · NTP Novi Sad Hackathon (JigJoy × Mozaik), Track 02 EINSTEIN · submitted Oct 31</p>
+          <p class="card-meta">2026 · NTP Novi Sad Hackathon (JigJoy × Mozaik), Track 02 EINSTEIN · not placed</p>
           <p class="card-desc"><strong>The University of Novi Sad has thousands of researchers and NTP Novi Sad hundreds of companies, yet they rarely work together.</strong> Spona is 12 agents on Mozaik, JigJoy&rsquo;s runtime for concurrent agents. They read the whole EINSTEIN dataset (1,047 researchers, 10,779 papers, 489 company challenges, about 7M tokens in English and Serbian) and give every challenge an outcome with its reason: a written proposal, a close match, no close match at the university, or not a research problem.<br><br>Every claim about a person or a company cites the record it came from. A critic agent checks those claims while the other agents are still working: rules first (the quote must be in the source, a paper must be listed as that person&rsquo;s, never matched on a name alone), then a model. Fit belongs to the pair. Title, seniority and publication counts are not inputs, and a test checks that.<br><br>In the recorded run every one of the 489 challenges got an outcome in 5 min 48 s, with up to 19 agent loops running at once. The critic sent back 33 claims that went beyond their sources, and the run found 64 research challenges that no researcher&rsquo;s own work covers, listed by sector. The whole run cost about $1.52 of Claude credit plus the Gemini free tier. The data is synthetic, so whether these pairs would actually meet is not measured yet.</p>
           <div class="cstats"><div class="cstat"><span class="cnum">489</span><span class="clab">challenges, each with an outcome</span></div><div class="cstat"><span class="cnum">19</span><span class="clab">agent loops at once</span></div><div class="cstat"><span class="cnum">33</span><span class="clab">claims the critic sent back</span></div><div class="cstat"><span class="cnum">$1.52</span><span class="clab">for the whole run</span></div></div>
           
@@ -495,7 +597,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:2">
+      <article class="card reveal" data-cat="cv" style="--i:8">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -512,7 +614,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:3">
+      <article class="card reveal wide" data-cat="agents" style="--i:9">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -520,7 +622,7 @@ footer a:hover{color:var(--tx)}
             
           </div>
           <p class="card-sub">A Taste Agent for Small Local Shops</p>
-          <p class="card-meta">2026 · Qloo Agentic Hackathon + Nebius × NVIDIA Global AI Hackathon · submitted Oct 29</p>
+          <p class="card-meta">2026 · Qloo Agentic Hackathon + Nebius × NVIDIA Global AI Hackathon · Qloo: not placed</p>
           <p class="card-desc"><strong>Chains research their audience before they pick a playlist or a product line. The café on the corner guesses.</strong> Footfall asks Qloo which places within a walk of the shop the locals go to, uses those places as the signal for what the street listens to, reads and buys, and compares that with the wider area and with the shop itself. An NVIDIA Nemotron agent on Nebius Token Factory makes its own extra Qloo calls and writes a plan: a playlist, things to stock or add to the menu, and one weekend event.<br><br>Every suggestion cites the Qloo results behind it, and a checker deletes anything Qloo didn&rsquo;t return. Qloo silently ignores invalid parameters, so the client refuses any parameter its documentation doesn&rsquo;t list for that type, and the undocumented one it uses was probed live first.<br><br>A run takes 20&ndash;30 s and costs about $0.013. The LLM account has a card on file and the demo is public, so the app enforces its own cap: each run reserves its worst case in a ledger before the first call, and the whole demo stops at $15. All testing and runs so far have used $0.45. When the hackathon&rsquo;s Qloo key expires, the demo shops replay saved answers and Nemotron keeps running live. No shop owner has used it yet.</p>
           <div class="cstats"><div class="cstat"><span class="cnum">$0.013</span><span class="clab">per run, 20–30 s</span></div><div class="cstat"><span class="cnum">$0.45</span><span class="clab">total LLM spend, $15 cap</span></div><div class="cstat"><span class="cnum">~18</span><span class="clab">Qloo calls per run</span></div><div class="cstat"><span class="cnum">55</span><span class="clab">tests</span></div></div>
           
@@ -529,7 +631,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:4">
+      <article class="card reveal" data-cat="agents" style="--i:10">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -546,7 +648,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:5">
+      <article class="card reveal wide" data-cat="agents" style="--i:11">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -563,7 +665,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:6">
+      <article class="card reveal" data-cat="genai" style="--i:12">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -580,7 +682,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="genai" style="--i:7">
+      <article class="card reveal wide" data-cat="genai" style="--i:13">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -597,7 +699,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:8">
+      <article class="card reveal" data-cat="agents" style="--i:14">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -614,7 +716,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="cv" style="--i:9">
+      <article class="card reveal wide" data-cat="cv" style="--i:15">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -631,7 +733,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:10">
+      <article class="card reveal" data-cat="agents" style="--i:16">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -648,7 +750,7 @@ footer a:hover{color:var(--tx)}
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal wide" data-cat="genai" style="--i:11">
+      <article class="card reveal wide" data-cat="genai" style="--i:17">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -656,7 +758,7 @@ footer a:hover{color:var(--tx)}
             
           </div>
           <p class="card-sub">Receipts for Welfare Algorithms</p>
-          <p class="card-meta">2026 · Web3 for Social Good (SMU × GSR Foundation × University of Málaga) · submitted Oct 21</p>
+          <p class="card-meta">2026 · Web3 for Social Good (SMU × GSR Foundation × University of Málaga) · Round 2, not a finalist</p>
           <p class="card-desc"><strong>When an algorithm cuts a family off its rations, which record did it?</strong> In Telangana, a matching system removes families from subsidised food when it finds a &ldquo;match&rdquo; across government databases. Al Jazeera reported in 2024 that it tagged Bismillah Bee&rsquo;s late husband, a rickshaw puller, as a car owner, and her family lost its rations. Nobody could tell her which record did it.<br><br>Recourse makes the agency publish the hash of its matching rules on Monad testnet before it uses them. The contract refuses any batch decided under rules that weren&rsquo;t public in an earlier block. Every decision gets a receipt naming the records that decided it, with their match scores and the threshold. A record is listed only if removing it changes the outcome. One Merkle root per batch goes on-chain, so nothing personal does, and anyone can check a receipt against it in the browser.<br><br>Gemini explains each receipt in Telugu, Hindi or English and drafts the appeal letter. A guard checks every number and record ID in the text against the receipt and throws out any draft that invents one. A legal-aid worker files the appeal on-chain for the family, and the agency&rsquo;s answer is sealed too. An appeal left unanswered shows as overdue.<br><br>The demo agency and its 1,005 households are synthetic, so the truth is known: the second rule version refused 209 families, 127 of them wrongly. The transactions are real. Recourse can&rsquo;t prove the agency ran its rules on every household, only which rules it said it ran and what it decided.</p>
           <div class="cstats"><div class="cstat"><span class="cnum">2,010</span><span class="clab">decisions sealed on Monad testnet</span></div><div class="cstat"><span class="cnum">127</span><span class="clab">families wrongly refused by rules v2</span></div><div class="cstat"><span class="cnum">16</span><span class="clab">appeals on the record, 11 reversed</span></div><div class="cstat"><span class="cnum">3</span><span class="clab">languages, every number checked</span></div></div>
           
@@ -665,7 +767,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:12">
+      <article class="card reveal" data-cat="agents" style="--i:18">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -682,7 +784,7 @@ footer a:hover{color:var(--tx)}
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:13">
+      <article class="card reveal wide" data-cat="agents" style="--i:19">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -690,8 +792,8 @@ footer a:hover{color:var(--tx)}
             
           </div>
           <p class="card-sub">Who Knows What in an Open-Source Project</p>
-          <p class="card-meta">2026 · Graph Hacks (FalkorDB × WeMakeDevs) · submitted Oct 18</p>
-          <p class="card-desc"><strong>Who knows this part of the code, and who should look at this issue?</strong> Lore reads an open-source project&rsquo;s public GitHub history into a FalkorDB graph: who wrote and reviewed which PRs, which files each one changed, which issues it fixed. A Gemini agent answers from that graph with twelve Cypher tools, and every answer cites the PRs behind it.<br><br>While it works, an <em>Under the hood</em> panel shows each tool it picks and each Cypher query it runs, then draws the evidence as a graph. Triage finds related issues and an active reviewer for a new issue and drafts a reply without posting it. Teams runs label propagation over who reviews whom. Signed in with GitHub, each person gets a memory graph of their own, and anyone can add a public repo.<br><br>Backtested on 300 real FalkorDB PRs: Lore had a real reviewer in its top three 90% of the time, against 88% for &ldquo;the most frequent reviewer&rdquo;. On the single top pick that baseline wins overall, and the write-up says so.<br><br>A port to the Anna app store rebuilds the same graph and scores in plain JavaScript, so it runs on the user&rsquo;s own model quota with no server of mine (in App Review).<br><br><em>The live demo runs on free tiers, so the first load can take up to a minute.</em></p>
+          <p class="card-meta">2026 · Graph Hacks (FalkorDB × WeMakeDevs) · submitted Oct 18 · ported to Anna, in App Review</p>
+          <p class="card-desc"><strong>Who knows this part of the code, and who should look at this issue?</strong> Lore reads an open-source project&rsquo;s public GitHub history into a FalkorDB graph: who wrote and reviewed which PRs, which files each one changed, which issues it fixed. A Gemini agent answers from that graph with twelve Cypher tools, and every answer cites the PRs behind it.<br><br>While it works, an <em>Under the hood</em> panel shows each tool it picks and each Cypher query it runs, then draws the evidence as a graph. Triage finds related issues and an active reviewer for a new issue and drafts a reply without posting it. Teams runs label propagation over who reviews whom. Signed in with GitHub, each person gets a memory graph of their own, and anyone can add a public repo.<br><br>Backtested on 300 real FalkorDB PRs: Lore had a real reviewer in its top three 90% of the time, against 88% for &ldquo;the most frequent reviewer&rdquo;. On the single top pick that baseline wins overall, and the write-up says so.<br><br>A port to the Anna app store rebuilds the same graph and scores in plain JavaScript, so it runs on the user&rsquo;s own model quota with no server of mine. Anna&rsquo;s App Review called the concept &ldquo;fantastic&rdquo; and asked for one fix: say plainly when GitHub&rsquo;s rate limit leaves the data partial. Version 0.1.1 does that and is back in review.<br><br><em>The live demo runs on free tiers, so the first load can take up to a minute.</em></p>
           <div class="cstats"><div class="cstat"><span class="cnum">1,357</span><span class="clab">FalkorDB PRs in the graph</span></div><div class="cstat"><span class="cnum">90%</span><span class="clab">real reviewer in the top 3</span></div><div class="cstat"><span class="cnum">12</span><span class="clab">Cypher tools for the agent</span></div><div class="cstat"><span class="cnum">₹0</span><span class="clab">to host, all free tiers</span></div></div>
           
           <div class="tags"><span class="tag">FalkorDB</span><span class="tag">Cypher</span><span class="tag">Graph Algorithms</span><span class="tag">AI Agents</span><span class="tag">Gemini API</span><span class="tag">MCP</span><span class="tag">FastAPI</span><span class="tag">GitHub Actions</span><span class="tag">Docker on Render</span><span class="tag">FalkorDB Cloud</span></div>
@@ -699,7 +801,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:14">
+      <article class="card reveal" data-cat="cv" style="--i:20">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -716,7 +818,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:15">
+      <article class="card reveal wide" data-cat="agents" style="--i:21">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -733,7 +835,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:16">
+      <article class="card reveal" data-cat="genai" style="--i:22">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -750,7 +852,7 @@ footer a:hover{color:var(--tx)}
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal wide" data-cat="agents" style="--i:17">
+      <article class="card reveal wide" data-cat="agents" style="--i:23">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -767,7 +869,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:18">
+      <article class="card reveal" data-cat="agents" style="--i:24">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -784,7 +886,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal wide" data-cat="genai" style="--i:19">
+      <article class="card reveal wide" data-cat="genai" style="--i:25">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -801,7 +903,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:20">
+      <article class="card reveal" data-cat="agents" style="--i:26">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -818,7 +920,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="agents" style="--i:21">
+      <article class="card reveal" data-cat="agents" style="--i:27">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -835,7 +937,7 @@ footer a:hover{color:var(--tx)}
           <a class="grant-chip" href="#backing"><span class="gdot"></span>Seeking grants &amp; partners</a>
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:22">
+      <article class="card reveal" data-cat="genai" style="--i:28">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -852,7 +954,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:23">
+      <article class="card reveal" data-cat="genai" style="--i:29">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -869,7 +971,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="genai" style="--i:24">
+      <article class="card reveal" data-cat="genai" style="--i:30">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -886,7 +988,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:25">
+      <article class="card reveal" data-cat="cv" style="--i:31">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -903,7 +1005,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:26">
+      <article class="card reveal" data-cat="cv" style="--i:32">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -920,7 +1022,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="cv" style="--i:27">
+      <article class="card reveal" data-cat="cv" style="--i:33">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -937,7 +1039,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:28">
+      <article class="card reveal" data-cat="ml" style="--i:34">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -954,7 +1056,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:29">
+      <article class="card reveal" data-cat="ml" style="--i:35">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -971,7 +1073,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:30">
+      <article class="card reveal" data-cat="ml" style="--i:36">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -988,7 +1090,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:31">
+      <article class="card reveal" data-cat="ml" style="--i:37">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1005,7 +1107,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:32">
+      <article class="card reveal" data-cat="ml" style="--i:38">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1022,7 +1124,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="ml" style="--i:33">
+      <article class="card reveal" data-cat="ml" style="--i:39">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1039,7 +1141,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:34">
+      <article class="card reveal" data-cat="analytics" style="--i:40">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1056,7 +1158,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:35">
+      <article class="card reveal" data-cat="analytics" style="--i:41">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1073,7 +1175,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:36">
+      <article class="card reveal" data-cat="analytics" style="--i:42">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1090,7 +1192,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="analytics" style="--i:37">
+      <article class="card reveal" data-cat="analytics" style="--i:43">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
@@ -1107,7 +1209,7 @@ footer a:hover{color:var(--tx)}
           
         </div>
       </article>
-      <article class="card reveal" data-cat="automation" style="--i:38">
+      <article class="card reveal" data-cat="automation" style="--i:44">
         <div class="card-spot" aria-hidden="true"></div>
         <div class="card-body">
           <div class="card-top">
