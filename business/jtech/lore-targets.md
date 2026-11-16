@@ -4,7 +4,9 @@
 
 **How each one gets used:** Lore's Report job ([lore PR #1](https://github.com/JannetEkka/lore/pull/1)) runs on the project and lists who wrote and reviewed what, and which areas rest on one person. Claude picks the two clearest findings and writes the message; Jannet sends it where the project talks (GitHub Discussions if it has them, else the chat linked in its README). We log each send and reply below.
 
-**Status key:** `report` = in the first Report run · `next` = later runs, 10 at a time.
+**First run done (11-16):** [lore Actions run](https://github.com/JannetEkka/lore/actions/runs/43882177521), 10 projects, report in the job summary and the `lore-report` artifact. Message drafts are given in chat, not kept in this public repo, because they name maintainers.
+
+**Status key:** `report` = report done in the first run · `next` = later runs, 10 at a time.
 
 | # | Project | Merged PRs (6 mo) | People | Stars | Where to write | Why it's on the list | Status |
 |---|---|---|---|---|---|---|---|
