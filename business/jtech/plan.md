@@ -246,10 +246,16 @@ Jannet may have her own idea; the checks are the same. No domain is bought until
 | Patent agent: Form 3 by Jan 26 | Jannet | Dec 31 |
 | Count the results and decide what's next | Jannet + Claude | Dec 16 |
 
+## Also decided or learned on 11-16
+
+- **Jannet is moving back to Bangalore** and wants a founder residency there to work on the startup and get help selling. Options are being researched in this session.
+- **YC:** Jannet's reading of the latest batch is that every accepted founder already had paying customers. YC's FAQ still says many companies are funded at the idea stage, but for a solo founder we plan on showing users or revenue first.
+- **AI persona short videos** (an animal, artist or musician character, not trading): a separate idea, to get its own discussion before anything is built. Separately, short videos of Jannet showing what the apps do are a way to find users.
+
 ## Waiting on Jannet
 
 1. **Products:** Lore first and SMT as an exchange pilot? Or a different pair? (Part 1.)
-2. **Paid build work:** does Jannet also want to take fixed-price AI build jobs for clients abroad under the company name, to bring money in sooner? It's the fastest cash, and it competes for the same hours as finding users. If yes, how many days a week. (Not in the plan above until she says.)
+2. ~~Paid build work~~ **Decided (Jannet, 11-16): yes, 3–4 days a week** of paid build work for clients; the rest of the week goes to finding users for Lore and the SMT pilot. Where the clients come from is in the next discussion.
 3. **Outreach:** OK for Claude to draft, and Jannet to send, the WEEX and Bitunix emails this week?
 4. **Name:** keep "JTech Solutions", or choose another (part 3)? Any names she already likes?
 5. **Incorporation:** agree to wait for a trigger, and to get two CA quotes in the meantime?
