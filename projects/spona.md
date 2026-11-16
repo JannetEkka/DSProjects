@@ -1,6 +1,6 @@
 # Spona: concurrent agents that match researchers with companies
 
-**NTP Novi Sad Hackathon 2026 (JigJoy × Mozaik), Track 02 EINSTEIN.** Kickoff Oct 30, built Oct 30–31, 2026, submitted Oct 31 online as team SmarTies. Winners Nov 7.
+**NTP Novi Sad Hackathon 2026 (JigJoy × Mozaik), Track 02 EINSTEIN.** Kickoff Oct 30, built Oct 30–31, 2026, submitted Oct 31 online as team SmarTies. Winners Nov 7: **Spona did not place** (tracker, 11-08).
 **Live:** [jannetekka.github.io/spona](https://jannetekka.github.io/spona/) (the recorded run as an app: Replay, Matchmaker, Proposals, Critic, Gaps) · **Code:** [github.com/JannetEkka/spona](https://github.com/JannetEkka/spona) · showcase run [`runs/2026-10-31-full/`](https://github.com/JannetEkka/spona/tree/main/runs/2026-10-31-full)
 
 ## The 30-second version

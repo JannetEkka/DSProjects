@@ -114,6 +114,11 @@ build('Spona: concurrent agents that match researchers with companies', 'NTP Nov
   [
     ['12 agents on one Mozaik runtime read 1,047 researchers, 10,779 papers and 489 company challenges (~7M tokens) and gave every challenge an outcome in ', ['5 min 48 s', { b: true }], ', up to 19 loops at once, for $1.52. A critic checks every claim against its source while the others work; it sent back 33.'],
   ]);
+build('Lights Out: a Hermes Agent plugin that asks before spending', 'Nous Research Hermes Agent Plugin Hackathon', 'Nov 2026',
+  [['Code', 'github.com/JannetEkka/lights-out', GH + 'lights-out'], [null, 'In the official Hermes plugin catalog (PR #153822)', 'https://github.com/NousResearch/hermes-agent/pull/153822']],
+  [
+    ["Every billable AWS create goes to Hermes's own approval prompt with its price; a ledger records each delete command and a receipt shows what is still billing. Measured on 10 tasks × 3 arms: ", ['0 creates ran without a person\'s yes', { b: true }], ', against 13 and 14 without it. Merged into the official catalog by Nous Research.'],
+  ]);
 build('Footfall: a taste agent for small local shops', 'Qloo Agentic + Nebius × NVIDIA hackathons', 'Oct 2026',
   [['Live', 'footfall-zz9v.onrender.com', 'https://footfall-zz9v.onrender.com'], ['Code', 'github.com/JannetEkka/footfall', GH + 'footfall'], [null, 'Demo video', 'https://youtu.be/Smw3hQl3CB0']],
   [
@@ -130,14 +135,9 @@ build('Lore: a company brain for open-source projects', 'Graph Hacks, FalkorDB �
   [
     ['1,357 of the sponsor\'s own PRs in a FalkorDB graph; a Gemini agent answers "who knows this code?" through 12 Cypher tools and cites the PRs behind every answer. Backtested on 300 real PRs: a real reviewer in the top three ', ['90%', { b: true }], ' of the time, against 88% for the obvious baseline.'],
   ]);
-build('Klarbrief: official Swiss letters explained offline', 'Hack Apertus, Track 2B', 'Oct 2026',
-  [['Code', 'github.com/JannetEkka/klarbrief', GH + 'klarbrief']],
-  [
-    ["Apertus 1.5 8B explains an official letter in the reader's language, fully offline in llama.cpp on an internal Docker network on a 4-core CPU. Every point is checked against the letter before it is shown: on 48 explanations, ", ['0 wrong CHF amounts', { b: true }], " reached the reader and the check stopped 6 of the model's 7 wrong dates."],
-  ]);
 rows.push(full(para([
   ['Also shipped, Oct–Nov 2026: ', { b: true }],
-  'Wiretrap (adversarial testing for AI agents) · SmartDesk (multi-agent assistant, evaluated RAG) · SMT Receipts (Monad) · SMT World: Clock In (native Android, Solana Mobile) · SQL Noir (Zetaris + Nemotron) · Afterburn (Sentinel-2 burn scars) · Recourse (Web3 for Social Good, Round 2) · Beauty Within (YouCam) · Ghost Ledger (HackerRank Orchestrate). All at ',
+  'Klarbrief (Hack Apertus: Swiss letters explained offline on a 4-core CPU, 0 wrong CHF amounts on 48) · Aftershock (NEAR, an event study of news against chain usage) · Countersign (Mozilla Otari, a claim checker: 41 of 60 planted errors caught) · Pitch In (PayPal, 0 mismatches against PayPal in a live sandbox run) · Orbit (Catalyst, one-day solo build, top 8.2%) · a Kaggle paper on Gemma 4 coding agents · Wiretrap (adversarial testing for AI agents) · SmartDesk (multi-agent assistant, evaluated RAG) · SMT Receipts (Monad) · SMT World: Clock In (native Android, Solana Mobile) · SQL Noir (Zetaris + Nemotron) · Afterburn (Sentinel-2 burn scars) · Recourse (Web3 for Social Good, Round 2) · Beauty Within (YouCam) · Ghost Ledger (HackerRank Orchestrate). All at ',
   ['jannetekka.github.io/DSProjects', { link: 'https://jannetekka.github.io/DSProjects/' }],
 ])));
 
