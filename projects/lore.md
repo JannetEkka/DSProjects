@@ -1,6 +1,6 @@
 # Lore: who knows what in an open-source project
 
-**Graph Hacks (FalkorDB × WeMakeDevs), Oct 15–18, 2026.** Submitted Oct 18 to all three tracks (Company Brain · Agents That Act on Connected Data · Agent Memory and Coordination). Ported to the Anna app store as **Lore for Anna** on Oct 27 (in App Review).
+**Graph Hacks (FalkorDB × WeMakeDevs), Oct 15–18, 2026.** Submitted Oct 18 to all three tracks (Company Brain · Agents That Act on Connected Data · Agent Memory and Coordination). Ported to the Anna app store as **Lore for Anna** on Oct 27. Anna's App Review called the concept "fantastic" (Jannet, 11-16) but returned v0.1.0 with one fix; v0.1.1 went back into review on Nov 13.
 **Live:** [lore-gh5y.onrender.com](https://lore-gh5y.onrender.com) · **Code:** [github.com/JannetEkka/lore](https://github.com/JannetEkka/lore) · demo [youtu.be/V-Ifwi_jxhg](https://youtu.be/V-Ifwi_jxhg) · [blog post](https://medium.com/@jannetaekka/i-built-a-company-brain-for-open-source-projects-on-falkordb-47f519f9ce08) · Anna port [github.com/JannetEkka/anna-lore](https://github.com/JannetEkka/anna-lore)
 
 ## The 30-second version
@@ -98,6 +98,7 @@ A newcomer or maintainer asks "who knows the query planner?" or "who should look
 - **Why port Lore and not Wiretrap:** it works on any public repo for any developer, needs no keys of ours, and "nothing in it reads as attack tooling to a reviewer" (DSProjects#46).
 - **What changed:** FalkorDB + Cypher became the same graph and scores in plain JS (`bundle/lore.js`). Gemini on our key became `anna.llm.complete` on the user's Anna model with a JSON tool-call loop. The FastAPI server is gone (a static bundle that Anna hosts). Snapshots became `anna.storage`.
 - **Tested:** 11/11 engine tests on a real falkordb-py snapshot, 9/9 Chromium smoke tests with a mock Anna SDK, then a real-model run in `anna-app dev`. That found a bug: grouped citations like `[repo#1, repo#2]` weren't linked (fixed in anna-lore PR #1). Jannet loaded `pallets/flask` inside Anna's sandbox (207 people, 195 PRs, 50 issues) and Triage worked.
+- **App Review (Nov 13):** the reviewers' one fix: when GitHub's rate limit leaves the data partial, Knowledge risk still stated "only @x knows it well" as fact. Reproduced on falkordb-py: a load stopped after 14 of 34 PRs lists two areas as known by one person; with 30 read, it lists none. v0.1.1 adds a "Based on partial data" banner to every result view, badges on rows, and a check that quotes any model sentence still stating an absence as fact. 18 engine tests and 24 Chromium checks pass; a real rate-limited load inside Anna isn't tested yet (anna-lore PR #2, DSProjects#46).
 - **Status:** app 733 `pending_review` since Oct 27; BUIDL submitted on DoraHacks Oct 29. Grants need 200 qualified monthly users, which is a distribution problem, not a build problem.
 
 ## What the history shows (real decisions)
