@@ -25,7 +25,7 @@ From the write-ups in `projects/` (measured results are the ones those files rec
 | Product | Readiness | Who it's for | Evidence of demand | Verdict |
 |---|---|---|---|---|
 | **Lore** (+ Lore for Anna) | Live on Render free tier; Anna port v0.1.1 in App Review (11-13). Backtest: a real reviewer in the top 3 **90%** of the time vs 88% for the frequent-reviewer baseline, on 300 FalkorDB PRs | Open-source maintainers, new contributors, team leads choosing dependencies | Anna's developer team called the concept "fantastic" and the Experts and Knowledge-risk features "incredibly useful" ([#46](https://github.com/JannetEkka/DSProjects/issues/46)) and asked to talk about growth. A paid competitor (CodeScene) sells knowledge-risk features, which says companies pay for this kind of answer | **Take to market (first)** |
-| **SMT** (+ SMT World) | Runs 24/7 on WEEX's simulated account on ₹0 infrastructure; 3,152 tests; patent pending (IN 202631090789). **Not profitable**: SMT Receipts shows both graded records net negative after fees (11-01) | Crypto exchanges (business customer); their retail traders (end users) | WEEX gave a $10K simulated account, an affiliate manager and an API change after our feedback; a Bitunix partnerships contact approached us; 16VC asked for follow-up details on 10-19; about 10 students joined as early users after a builder night (all from `16VC_APPLICATION.md`) | **Take to market (second), as a pilot with an exchange, not to retail** |
+| **SMT** (+ SMT World) | Runs 24/7 on WEEX's simulated account on ₹0 infrastructure; 3,152 tests; patent pending (IN 202631090789). **Not profitable**: SMT Receipts shows both graded records net negative after fees (11-01) | Crypto exchanges (business customer); their retail traders (end users) | WEEX gave a $10K simulated account, an affiliate manager and an API change after our feedback; a Bitunix partnerships contact approached us; 16VC reviewed the application but didn't accept it (11-16); about 10 students joined as early users after a builder night (all from `16VC_APPLICATION.md`) | **Take to market (second), as a pilot with an exchange, not to retail** |
 | Lights Out (Hermes plugin) | Merged into the Hermes plugin catalog by Nous (11-12, [#93](https://github.com/JannetEkka/DSProjects/issues/93)) | Hermes users who let the agent touch a cloud account | Accepted into the catalog; no install numbers yet | Keep listed, watch installs; not a business on its own |
 | Chithi / Klarbrief | Chithi live (Render); Klarbrief runs offline. Chithi: 114 dates and amounts shown, 0 wrong, on synthetic letters | People who can't read official letters (India: Bengali/Hindi; Switzerland: DE/FR/IT) | None from users. Not a finalist at Meta (11-09); not placed at Hack Apertus | Park. The space is crowded (below) and consumers rarely pay for it |
 | Wiretrap | Live (Render) | Teams shipping AI agents | One demonstrated case ("Said No, Did Yes"); no users | Park. Crowded, and big security vendors have been buying the leaders |
@@ -136,9 +136,13 @@ Claude can't send messages, sign up or post for Jannet. Every send is Jannet's; 
 - Benefits that matter to us: eligibility for the **Startup India Seed Fund** (below), lower patent fees and expedited examination for a recognised startup, self-certification for some labour and environmental laws, and the tax-holiday application (80-IAC), which needs a separate approval.
 - **The patent:** Jannet filed SMT's provisional as a natural person, which already pays the lowest fee tier, so recognition doesn't lower her fees today. Whether the company should own the patent (an assignment from Jannet to the company) is a question for a patent agent and the CA. The dates don't move: **Form 3 by Jan 26, 2027; complete specification by Jul 26, 2027** (`EXPENSES.md` budgets ₹25–60K for a patent agent to draft it; that's an earlier estimate, not a quote).
 
+### Why Jannet wants a company (11-16)
+
+Not for the Buildathon. In her words, she's tired of not showing proof of two years of building, and wanted to bill under a business and get users. What counts as proof to a customer or investor is users, invoices and payments, and a public record of the work; a company registration alone doesn't show any of those. A free **Udyam (MSME) registration** gives a sole proprietor a government certificate with a business name at ₹0 on [udyamregistration.gov.in](https://udyamregistration.gov.in) (Aadhaar and PAN, no uploads, per [TaxGuru](https://taxguru.in/corporate-law/pros-cons-udyam-registration-freelancer-proprietor-small-entity.html) and others); confirm with the CA that it fits.
+
 ### Recommendation
 
-1. **Now: stay an individual.** Use the name as a brand on the website and in emails. Nothing stops Jannet selling a pilot, invoicing a foreign client or entering the Buildathon without a company (the Buildathon's FAQ welcomes "aspiring entrepreneurs" and solo founders; it says nothing about incorporation).
+1. **Now: stay an individual.** Optionally take the free Udyam certificate. Use the name as a brand on the website and in emails. Nothing stops Jannet selling a pilot, invoicing a foreign client or entering the Buildathon without a company (the Buildathon's FAQ welcomes "aspiring entrepreneurs" and solo founders; it says nothing about incorporation).
 2. **Incorporate a Private Limited company when the first of these happens:**
    - a customer needs to contract with a company;
    - a grant, program or prize needs one (Seed Fund, NVIDIA Inception, most cloud credit tiers, a Buildathon payout if its terms require it);
@@ -195,7 +199,7 @@ Jannet may have her own idea; the checks are the same. No domain is bought until
 
 **Free tiers already carry us:** Render, Cloudflare, Firebase Spark, Oracle Always Free, AI Studio keys and NVIDIA build keys run everything today at ₹0. Credits matter only when a paying customer needs more.
 
-**Angels and pre-seed: what they'd need to see, and when.** Investors and accelerators ask about traction: who uses it, who pays, how fast that grows. Today we can show engineering depth and honest evaluation, which is the founder half of the story. The product half is what the 30-day plan builds: named users, repeat use, a paid pilot, a reason the next 100 users will come. **We don't approach angels before we have at least one of those.** The exceptions already in motion: 16VC (applied; they asked follow-up questions on 10-19) and the Buildathon's investor showcases. No funding is promised by anyone.
+**Angels and pre-seed: what they'd need to see, and when.** Investors and accelerators ask about traction: who uses it, who pays, how fast that grows. Today we can show engineering depth and honest evaluation, which is the founder half of the story. The product half is what the 30-day plan builds: named users, repeat use, a paid pilot, a reason the next 100 users will come. **We don't approach angels before we have at least one of those.** The exception in motion is the Buildathon's investor showcases. **16VC did not accept SMT** (Jannet, 11-16), which fits this rule: come back to accelerators with users. No funding is promised by anyone.
 
 ---
 
@@ -249,9 +253,8 @@ Jannet may have her own idea; the checks are the same. No domain is bought until
 3. **Outreach:** OK for Claude to draft, and Jannet to send, the WEEX and Bitunix emails this week?
 4. **Name:** keep "JTech Solutions", or choose another (part 3)? Any names she already likes?
 5. **Incorporation:** agree to wait for a trigger, and to get two CA quotes in the meantime?
-6. **Buildathon:** if shortlisted, enter with a new product built on SMT, or something else? Its own discussion session is planned in [#121](https://github.com/JannetEkka/DSProjects/issues/121). Deploying on Google Cloud may need a card: ask the organisers first, and record any card in `cards.md` before it's added.
-7. **16VC:** any reply since the 10-19 follow-up?
-8. **Patent ownership:** a question for a patent agent and the CA, before the Jul 2027 deadline.
+6. **Buildathon:** handled in its own new session (Jannet, 11-16), on Jannet's new Google account ([#121](https://github.com/JannetEkka/DSProjects/issues/121)). Deploying on Google Cloud may need a card: ask the organisers first, and record any card in `cards.md` before it's added.
+7. **Patent ownership:** a question for a patent agent and the CA, before the Jul 2027 deadline.
 
 ## Sources
 
