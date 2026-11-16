@@ -116,7 +116,7 @@ build('Portfolio models', 'UT Austin McCombs PGP in AI/ML and Great Learning', '
 build('Lore: backtesting an agent against the obvious baseline', 'Graph Hacks, FalkorDB × WeMakeDevs', 'Oct 2026',
   [['Live', 'lore-gh5y.onrender.com', 'https://lore-gh5y.onrender.com/'], ['Code', 'github.com/JannetEkka/lore', GH + 'lore']],
   [
-    ['A Gemini agent answers "who should review this?" from a graph of 1,357 pull requests. Backtested on 300 real PRs: a real reviewer in its top three ', ['90%', { b: true }], ' of the time, against 88% for "the most frequent reviewer". On the single top pick the baseline wins, and the write-up says so. Ported to the Anna app store in Oct; v0.1.1 is in review after the reviewers\' notes.'],
+    ['A Gemini agent answers "who should review this?" from a graph of 1,357 pull requests. Backtested on 300 real PRs: a real reviewer in its top three ', ['90%', { b: true }], ' of the time, against 88% for "the most frequent reviewer". On the single top pick the baseline wins, and the write-up says so. Ported to the Anna app store; Anna\'s review called the concept "fantastic" and asked for one fix, now resubmitted.'],
   ]);
 build('SmartDesk: a measured comparison that kept the baseline', 'Google Cloud Gen AI Academy APAC, top 101 of 1,500+', '2026',
   [['Code', 'github.com/JannetEkka/smartdesk', GH + 'smartdesk']],
@@ -135,7 +135,7 @@ build('Spona: matching researchers with companies', 'NTP Novi Sad Hackathon (Jig
   ]);
 rows.push(full(para([
   ['Also in Nov 2026: ', { b: true }],
-  'Catalyst Solo AI Hackathon (one-day solo build, 3,021 registered): Orbit, an elder-care medication app, ranked 17th, automated code score 96.64/100 · Chithi (Meta): 0 of 114 dates and amounts shown wrong on 28 live runs · Pitch In (PayPal AI), Countersign (Mozilla Otari) and Beauty Within (YouCam): submitted, results pending. All at ',
+  'Catalyst Solo AI Hackathon (one-day solo build): Orbit, an elder-care medication app, top 8.2% (33rd of 391 scored entries; 96.64 against the winner\'s 97.21), not placed · Chithi (Meta): 0 of 114 dates and amounts shown wrong on 28 live runs · Pitch In (PayPal AI), Countersign (Mozilla Otari) and Beauty Within (YouCam): submitted, results pending. All at ',
   ['jannetekka.github.io/DSProjects', { link: 'https://jannetekka.github.io/DSProjects/' }],
 ])));
 
