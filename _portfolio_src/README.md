@@ -31,6 +31,7 @@ which projects lead.
 |---|---|---|---|
 | `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (the site's nav button) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_FDE.docx` + `.pdf` | `build_resume_fde_docx.js` | forward deployed engineer roles, in Jannet's Word table layout (name in the page header, one bordered table, grey section bars) | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_Data_Science.docx` + `.pdf` | `build_resume_data_science_docx.js` | data scientist roles at insurers and other tabular-data teams (first sent to Ominimo via JigJoy, 11-16): modelling and evaluation first, then data engineering, then agents; same Word layout as FDE | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_AI_Trainer.pdf` | `resume_ai_trainer.html` | AI trainer / LLM output-evaluation work | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf` | `resume_model_eval.html` | model evaluation, AI QA, red-teaming | **exactly 2 pages** |
 | `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
@@ -95,3 +96,15 @@ and regenerated). `build_resume_fde_docx.js` writes the `.docx`; LibreOffice
 renders the PDF. On a box without Calibri, map Calibri and Calibri Light to
 Carlito in fontconfig first, or the page count is wrong. `resume_fde.html` is
 the older HTML version, kept for reference and no longer rendered.
+
+2026-11-16: added the Data Scientist variant, for Ominimo (car-insurance
+insurtech, offices in Belgrade, Novi Sad and Budapest), which asked JigJoy
+hackathon participants for CVs. Built like the FDE one: `build_resume_data_science_docx.js`
+writes the `.docx`, LibreOffice renders the PDF, so the two never disagree. It
+leads with tabular modelling and evaluation (SMT's statistical gate, the
+portfolio churn and loan-default models, the semiconductor leak found on review),
+adds November 2026 (Aftershock, Lights Out, Catalyst, the submitted entries)
+and says plainly that dbt, Trino and Databricks are not used yet. The `LOCATION`
+constant at the top of the content sets the header's location line.
+Fontconfig: alias both Calibri and Calibri Light to Carlito
+(`~/.config/fontconfig/fonts.conf`) before rendering.

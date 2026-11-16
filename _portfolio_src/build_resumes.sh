@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Renders the four job-application résumés to PDF and prints each page count.
+# Renders the five job-application résumés to PDF and prints each page count.
 # Run from anywhere: bash _portfolio_src/build_resumes.sh
 # The founder résumé is not built here; see README.md.
 set -euo pipefail
@@ -29,6 +29,14 @@ if node -e "require('docx')" 2>/dev/null && command -v soffice >/dev/null; then
   printf '%-50s %s pages\n' ../resumes/Jannet_Ekka_Resume_FDE.pdf "$(pdfinfo ../resumes/Jannet_Ekka_Resume_FDE.pdf | awk '/^Pages/{print $2}')"
 else
   echo "FDE résumé skipped: needs the docx npm package (npm install docx) and LibreOffice (soffice)" >&2
+fi
+# Data Scientist (insurtech data roles, 2026-11-16): same Word layout as FDE, generated as .docx.
+if node -e "require('docx')" 2>/dev/null && command -v soffice >/dev/null; then
+  node build_resume_data_science_docx.js ../resumes/Jannet_Ekka_Resume_Data_Science.docx >/dev/null
+  soffice --headless --convert-to pdf --outdir ../resumes ../resumes/Jannet_Ekka_Resume_Data_Science.docx >/dev/null 2>&1
+  printf '%-50s %s pages\n' ../resumes/Jannet_Ekka_Resume_Data_Science.pdf "$(pdfinfo ../resumes/Jannet_Ekka_Resume_Data_Science.pdf | awk '/^Pages/{print $2}')"
+else
+  echo "Data Science résumé skipped: needs the docx npm package and LibreOffice (soffice)" >&2
 fi
 render resume_ai_trainer.html ../resumes/Jannet_Ekka_Resume_AI_Trainer.pdf
 render resume_model_eval.html ../resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf
