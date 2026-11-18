@@ -15,7 +15,7 @@ Every account where Jannet's card was added, held or charged for a project or ha
 
 ## Signed up without a card
 
-Public AI (Hack Apertus) · Brevo free plan (Orbit's reminder emails for Catalyst, 300 a day; Jannet, 11-15: no card asked) · Adaption builder credits (Catalyst organisers, no card asked, unused) · Google AI Studio keys (free tier, no billing) · Firebase Spark · Cloudflare · FalkorDB Cloud free tier · YouCam API (1,000 units from a redeem code) · NVIDIA build.nvidia.com key · Kaggle · Santiment free plan · GitHub and Render (Jannet checked Billing on 11-09: no card on file on either, so GitHub Actions past the free minutes and Render's paid instances can't bill) · JigJoy's $20 Claude credit for the NTP Novi Sad hackathon (build.jigjoy.ai/credits handed over the key with no card, 10-31). Planned: the APIMatic trial (no card).
+Public AI (Hack Apertus) · Brevo free plan (Orbit's reminder emails for Catalyst, 300 a day; Jannet, 11-15: no card asked) · Adaption builder credits (Catalyst organisers, no card asked, 1,500 credits unused on 11-18; see [credits.md](credits.md)) · Google AI Studio keys (free tier, no billing) · Firebase Spark · Cloudflare · FalkorDB Cloud free tier · YouCam API (1,000 units from a redeem code) · NVIDIA build.nvidia.com key · Kaggle · Santiment free plan · GitHub and Render (Jannet checked Billing on 11-09: no card on file on either, so GitHub Actions past the free minutes and Render's paid instances can't bill) · JigJoy's $20 Claude credit for the NTP Novi Sad hackathon (build.jigjoy.ai/credits handed over the key with no card, 10-31). Planned: the APIMatic trial (no card).
 
 ## Skipped because they needed a card or our own money
 
