@@ -31,4 +31,4 @@ Free credits and free allowances already in our accounts, so an upcoming entry u
 
 - **.CV** at ola.cv (code in the 11-17 email), no expiry stated in the email. Meant for a personal page, `FirstNameLastName.cv`.
 - **.XYZ** at gen.xyz (code in the 11-17 email), **expired 17 Nov, 23:59** (the email's words); try it once in case the window is still open.
-- Both are free for the first year only (1-year term; .cv lists at about $10 a year, .xyz at about $15). Both checkouts asked for a card; Jannet chose to go ahead on 11-18 (`jannetekka.cv` and `smtworld.xyz`), and both are recorded in [cards.md](cards.md) with auto-renew to be turned off.
+- Both are free for the first year only (1-year term; .cv lists at about $10 a year, .xyz at about $15). Claimed 11-18: `jannetekka.cv` (no card asked) and `smtworld.xyz` (gen.xyz asked for a card; recorded in [cards.md](cards.md), auto-renew to be turned off).
