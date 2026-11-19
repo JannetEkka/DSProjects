@@ -2,7 +2,7 @@
 
 Applied AI engineer: LLM agents, AI evaluation and agent security. Founder of JTech Solutions (pre-incorporation), building Smart Money Trading (SMT). Kolkata, India, open to remote work.
 
-- **Portfolio:** [jannetekka.github.io/DSProjects](https://jannetekka.github.io/DSProjects/)
+- **Portfolio:** [jannetekka.cv](https://jannetekka.cv/) (backup copy: [jannetekka.github.io/DSProjects](https://jannetekka.github.io/DSProjects/))
 - **Résumé (applied AI + AI evaluation):** [Jannet_Ekka_Resume.pdf](./Jannet_Ekka_Resume.pdf)
 - **Founder résumé (SMT, one page):** [Jannet_Ekka_Founder_Resume.pdf](./Jannet_Ekka_Founder_Resume.pdf)
 - **SMT World, live:** [smt-weex-trading-bot.jannet-ekka.workers.dev](https://smt-weex-trading-bot.jannet-ekka.workers.dev/)

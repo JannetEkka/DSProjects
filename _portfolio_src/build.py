@@ -216,6 +216,8 @@ HTML = f'''<!DOCTYPE html>
 <meta property="og:title" content="Jannet Akanksha Ekka — Forward-Deployed AI Engineer">
 <meta property="og:description" content="I architect and operate agentic AI systems, and build them AI-native. Patent-pending multi-agent trading AI running live, 24/7, at no infrastructure cost.">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://jannetekka.cv/">
+<link rel="canonical" href="https://jannetekka.cv/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -766,7 +768,7 @@ footer a:hover{{color:var(--tx)}}
             <input type="hidden" name="access_key" value="{CONTACT.get('web3forms_key','')}">
             <input type="hidden" name="subject" value="Grant / collaboration enquiry from your portfolio">
             <input type="hidden" name="to" value="{CONTACT.get('grants_email', CONTACT['email'])}">
-            <input type="hidden" name="from_name" value="Portfolio — jannetekka.github.io">
+            <input type="hidden" name="from_name" value="Portfolio — jannetekka.cv">
             <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
             <div class="field">
               <label for="f-name">Name <span class="req">*</span></label>

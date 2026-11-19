@@ -106,7 +106,7 @@ build('Aftershock: does news move real usage? An event study', 'NEAR Hackathon, 
     ['Tested 74 news spikes against ordinary days: 8 moved the price (10.8%, against 5.1% of ordinary days), 10 moved usage (13.5%, against 16.5%). ', ['Usage did not follow the headlines', { b: true }], ', and the published thesis says so. Every claim is recomputed and checked by a second model: 14 of 20 kept. Asked alone, the model got 1 of 20 numbers right.'],
   ]);
 build('Portfolio models', 'UT Austin McCombs PGP in AI/ML and Great Learning', '2024 – 2025',
-  [['Code', 'jannetekka.github.io/DSProjects', 'https://jannetekka.github.io/DSProjects/']],
+  [['Code', 'jannetekka.cv', 'https://jannetekka.cv/']],
   [
     [['Customer churn (telecom retention):', { b: true }], ' Decision Tree, Random Forest, AdaBoost and gradient boosting, tuned with grid search; Random Forest best at 81.48% test accuracy. Churners are the minority, so for a retention budget I would report recall on churners and lift over random targeting, and the write-up says so.'],
     [['NBFC loan default (credit risk, Great Learning hackathon):', { b: true }], ' a default classifier on lender data, a TensorFlow network with early stopping. Today I would benchmark gradient-boosted trees first, since they usually win on tabular credit data.'],
@@ -136,7 +136,7 @@ build('Spona: matching researchers with companies', 'NTP Novi Sad Hackathon (Jig
 rows.push(full(para([
   ['Also in Nov 2026: ', { b: true }],
   'Catalyst Solo AI Hackathon (one-day solo build): Orbit, an elder-care medication app, top 8.2% (33rd of 391 scored entries; 96.64 against the winner\'s 97.21), not placed · Chithi (Meta): 0 of 114 dates and amounts shown wrong on 28 live runs · Pitch In (PayPal AI), Countersign (Mozilla Otari) and Beauty Within (YouCam): submitted, results pending. All at ',
-  ['jannetekka.github.io/DSProjects', { link: 'https://jannetekka.github.io/DSProjects/' }],
+  ['jannetekka.cv', { link: 'https://jannetekka.cv/' }],
 ])));
 
 rows.push(section('PROFESSIONAL EXPERIENCE'));
@@ -172,7 +172,7 @@ const header = new Header({ children: [
     'jannetekka96@gmail.com | +91 90788 02572 | ',
     ['LinkedIn', { link: 'https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/' }], ' | ',
     ['GitHub', { link: 'https://github.com/JannetEkka' }], ' | ',
-    ['Portfolio', { link: 'https://jannetekka.github.io/DSProjects/' }], ' | ' + LOCATION,
+    ['Portfolio', { link: 'https://jannetekka.cv/' }], ' | ' + LOCATION,
   ], { size: 21 }) }),
 ]});
 

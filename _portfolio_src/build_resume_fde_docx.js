@@ -138,7 +138,7 @@ build('Lore: a company brain for open-source projects', 'Graph Hacks, FalkorDB �
 rows.push(full(para([
   ['Also shipped, Oct–Nov 2026: ', { b: true }],
   'Klarbrief (Hack Apertus: Swiss letters explained offline on a 4-core CPU, 0 wrong CHF amounts on 48) · Aftershock (NEAR, an event study of news against chain usage) · Countersign (Mozilla Otari, a claim checker: 41 of 60 planted errors caught) · Pitch In (PayPal, 0 mismatches against PayPal in a live sandbox run) · Orbit (Catalyst, one-day solo build, top 8.2%) · a Kaggle paper on Gemma 4 coding agents · Wiretrap (adversarial testing for AI agents) · SmartDesk (multi-agent assistant, evaluated RAG) · SMT Receipts (Monad) · SMT World: Clock In (native Android, Solana Mobile) · SQL Noir (Zetaris + Nemotron) · Afterburn (Sentinel-2 burn scars) · Recourse (Web3 for Social Good, Round 2) · Beauty Within (YouCam) · Ghost Ledger (HackerRank Orchestrate). All at ',
-  ['jannetekka.github.io/DSProjects', { link: 'https://jannetekka.github.io/DSProjects/' }],
+  ['jannetekka.cv', { link: 'https://jannetekka.cv/' }],
 ])));
 
 rows.push(section('PROFESSIONAL EXPERIENCE'));
@@ -179,7 +179,7 @@ const header = new Header({ children: [
     'jannetekka96@gmail.com | +91 90788 02572 | ',
     ['LinkedIn', { link: 'https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/' }], ' | ',
     ['GitHub', { link: 'https://github.com/JannetEkka' }], ' | ',
-    ['Portfolio', { link: 'https://jannetekka.github.io/DSProjects/' }], ' | Kolkata, India',
+    ['Portfolio', { link: 'https://jannetekka.cv/' }], ' | Kolkata, India',
   ], { size: 21 }) }),
 ]});
 
