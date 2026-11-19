@@ -34,11 +34,21 @@ This applies to every repo, project, hackathon entry, README, submission form, p
 
 ## Discuss before building (Jannet, 11-08)
 
-Jannet wants to understand everything we build. For every new hackathon entry, the first session is a **discussion session**: read the rules and the whole site, propose ideas against [hackathons/lessons.md](../hackathons/lessons.md) after **searching the web thoroughly for the same idea** (GitHub, app stores, Product Hunt, Devpost, the sponsor's marketplace; lessons 0: name the closest project with a link, and drop any idea that already exists), and explain the architecture and flow until Jannet can explain them back. It ends with a signed-off design brief (`hackathons/<entry>/design.md`, from [the template](../hackathons/prep/design-brief-template.md)). No build code before sign-off. A separate build session then starts from the brief's build prompt.
+Jannet wants to understand everything we build. For every new hackathon entry, the first session is a **discussion session**: read the rules and the whole site, propose ideas against [hackathons/lessons.md](../hackathons/lessons.md) after **searching the web thoroughly for the same idea** (GitHub, app stores, Product Hunt, Devpost, the sponsor's marketplace; lessons 0: name the closest project with a link, and drop any idea that already exists), and explain the architecture and flow until Jannet can explain them back. It ends with a signed-off design brief (`hackathons/<entry>/design.md`, from [the template](../hackathons/prep/design-brief-template.md)). No build code before sign-off.
+
+**Points and framing come first (Jannet, 11-19, after IEEE and GitLab didn't place):** the brief's **0a** lists every point and prize the rules offer, from bonus points to marketplace prizes, and we take each one unless Jannet signs off a reason not to. Its **1a** names one person and a sourced cost, the real project or data the demo runs on, the cheat the system refuses on screen, and one end-to-end number. The brief can't be signed off with either section empty, and its **8a** points check is done before every submission. See [lessons 21–25](../hackathons/lessons.md). A separate build session then starts from the brief's build prompt.
 
 ## Hackathon rules and status
 
 Decisions and Jannet's standing rules (no hackathon that needs our own money, and the rest) are in [hackathons/october-2026.md](../hackathons/october-2026.md). Progress for each entry is in its GitHub issue (label `hackathon`).
+
+## Google Cloud (Jannet, 11-19)
+
+The old no-GCP rule is gone. If an entry needs Google Cloud or its rules reward it (for example GitLab's +0.2 for deploying on Cloud Run, see lessons 21), tell Jannet at the start and she creates a project for that entry. A billing account needs a card: add its row to [hackathons/cards.md](../hackathons/cards.md) first and set a budget alert.
+
+## Credits
+
+Before an entry signs up for a new model API, host or tool, check [hackathons/credits.md](../hackathons/credits.md): free credits we already hold (Adaption Labs 1,500 unused, about $148 on Meta's API, the JigJoy Claude credit and others). Use them first, and update the balance there when you check it.
 
 ## Cards
 
