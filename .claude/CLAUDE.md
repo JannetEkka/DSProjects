@@ -40,6 +40,10 @@ Jannet wants to understand everything we build. For every new hackathon entry, t
 
 Decisions and Jannet's standing rules (no hackathon that needs our own money, and the rest) are in [hackathons/october-2026.md](../hackathons/october-2026.md). Progress for each entry is in its GitHub issue (label `hackathon`).
 
+## Google Cloud (Jannet, 11-19)
+
+The old no-GCP rule is gone. If an entry needs Google Cloud or its rules reward it (for example GitLab's +0.2 for deploying on Cloud Run, see lessons 21), tell Jannet at the start and she creates a project for that entry. A billing account needs a card: add its row to [hackathons/cards.md](../hackathons/cards.md) first and set a budget alert.
+
 ## Credits
 
 Before an entry signs up for a new model API, host or tool, check [hackathons/credits.md](../hackathons/credits.md): free credits we already hold (Adaption Labs 1,500 unused, about $148 on Meta's API, the JigJoy Claude credit and others). Use them first, and update the balance there when you check it.
