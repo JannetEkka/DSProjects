@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Renders the five job-application résumés to PDF and prints each page count.
+# Renders the main résumé and the job-application variants to PDF and prints each page count.
 # Run from anywhere: bash _portfolio_src/build_resumes.sh
 # The founder résumé is not built here; see README.md.
 set -euo pipefail
@@ -19,8 +19,19 @@ render() {  # render <source.html> <output.pdf>
 }
 
 mkdir -p ../resumes
-render resume.html            ../Jannet_Ekka_Resume.pdf
-cp ../Jannet_Ekka_Resume.pdf  ../resumes/Jannet_Ekka_Resume_Applied_AI.pdf
+# The résumé the portfolio links (since 2026-11-19): one generic version in Jannet's Word layout,
+# for forward deployed, applied AI/ML and data roles. Its PDF is ../Jannet_Ekka_Resume.pdf, the
+# address older links already use. The role variants below are kept but no longer linked.
+if node -e "require('docx')" 2>/dev/null && command -v soffice >/dev/null; then
+  node build_resume_docx.js ../resumes/Jannet_Ekka_Resume.docx >/dev/null
+  soffice --headless --convert-to pdf --outdir ../resumes ../resumes/Jannet_Ekka_Resume.docx >/dev/null 2>&1
+  mv ../resumes/Jannet_Ekka_Resume.pdf ../Jannet_Ekka_Resume.pdf
+  printf '%-50s %s pages\n' ../Jannet_Ekka_Resume.pdf "$(pdfinfo ../Jannet_Ekka_Resume.pdf | awk '/^Pages/{print $2}')"
+else
+  echo "Main résumé NOT built: needs the docx npm package (npm install docx) and LibreOffice (soffice)" >&2
+  exit 1
+fi
+render resume.html            ../resumes/Jannet_Ekka_Resume_Applied_AI.pdf
 # FDE: since 2026-11-02 the source is Jannet's Word table layout, generated as .docx
 # (resume_fde.html is the older HTML version and is no longer rendered).
 if node -e "require('docx')" 2>/dev/null && command -v soffice >/dev/null; then

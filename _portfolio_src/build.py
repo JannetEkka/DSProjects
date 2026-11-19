@@ -589,8 +589,7 @@ footer a:hover{{color:var(--tx)}}
       <a href="#backing">Backing</a>
       <a href="#contact">Contact</a>
 <span class="views" id="views" hidden><span class="veye" aria-hidden="true">&#9673;</span><b id="viewsn">—</b><span class="vlab">views</span></span>
-            <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer" class="navcta" title="Applied AI &amp; AI evaluation résumé (PDF)">Résumé</a>
-            <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer" class="navcta" title="Founder résumé — JTech Solutions / SMT (PDF)">Founder résumé</a>
+            <a href="Jannet_Ekka_Resume.pdf" download="Jannet_Ekka_Resume.pdf" class="navcta" title="Download my résumé (PDF): forward deployed, applied AI/ML and data roles">Resume</a>
     </div>
   </div>
 </nav>
@@ -620,7 +619,7 @@ footer a:hover{{color:var(--tx)}}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       <a class="btn btn-g" href="#contact">Get in touch</a>
     </div>
-    <p class="cvline reveal">Résumés (PDF): <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer">Applied AI &amp; AI evaluation</a> · <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">Founder — JTech Solutions / SMT</a></p>
+    <p class="cvline reveal">Résumé for forward deployed, applied AI/ML and data roles: <a href="Jannet_Ekka_Resume.pdf" download="Jannet_Ekka_Resume.pdf">download the PDF</a></p>
     <div class="chips reveal">
       <span class="chip">⚙️ Patent pending</span>
       <span class="chip">🤖 AI-native delivery</span>
@@ -760,7 +759,7 @@ footer a:hover{{color:var(--tx)}}
         <div>
           <h3>Fund, partner, or just say hello.</h3>
           <p class="bsub">I'm looking for <strong>grants and early-stage funding</strong> for Smart Money Trading, and I'm open to collaboration on any of the projects here. Tell me who you are and I'll follow up personally.</p>
-          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest. The company on one page: <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">founder résumé (PDF)</a>.</p>
+          <p class="bsub">For grants and funding specifically, Telegram, Discord or <strong>{CONTACT.get('grants_email','')}</strong> reach me fastest.</p>
           {connect_html()}
         </div>
         <div>
@@ -809,8 +808,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <span>© 2026 Jannet Akanksha Ekka · Kolkata, India</span>
     <span>
-      <a href="Jannet_Ekka_Resume.pdf" target="_blank" rel="noopener noreferrer">Résumé (PDF)</a> ·
-      <a href="Jannet_Ekka_Founder_Resume.pdf" target="_blank" rel="noopener noreferrer">Founder résumé (PDF)</a> ·
+      <a href="Jannet_Ekka_Resume.pdf" download="Jannet_Ekka_Resume.pdf">Résumé (PDF)</a> ·
       <a href="https://www.credly.com/users/jannet-akanksha-ekka/badges" target="_blank" rel="noopener noreferrer">Credly</a> ·
       <a href="https://www.skills.google/public_profiles/2a91b2f0-31d3-467e-ba45-3ba1888a908e" target="_blank" rel="noopener noreferrer">Google Skills</a>
     </span>

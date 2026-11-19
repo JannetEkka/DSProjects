@@ -34,14 +34,17 @@ approach as the site. Four are role variants for job applications; they share
 contact, experience and education, and differ in tagline, summary, skills and
 which projects lead.
 
+**Since 2026-11-19 the site links one résumé** (Jannet: "keep only about jobs, one generic résumé in the Word format I made, for FDE or AI/ML/data roles"). The nav button reads "Resume" and downloads `Jannet_Ekka_Resume.pdf`. The founder résumé and the role variants below are no longer linked from the site; their files stay in the repo.
+
 | PDF | source | for | length |
 |---|---|---|---|
-| `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (the site's nav button) | **exactly 2 pages** |
+| **`Jannet_Ekka_Resume.pdf` (repo root) + `resumes/Jannet_Ekka_Resume.docx`** | `build_resume_docx.js` | **the one the site links**: forward deployed, applied AI/ML and data roles, in Jannet's Word table layout; LibreOffice renders the PDF | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (was the site's nav button until 11-19) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_FDE.docx` + `.pdf` | `build_resume_fde_docx.js` | forward deployed engineer roles, in Jannet's Word table layout (name in the page header, one bordered table, grey section bars) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Data_Science.docx` + `.pdf` | `build_resume_data_science_docx.js` | data scientist roles at insurers and other tabular-data teams (first sent to Ominimo via JigJoy, 11-16): modelling and evaluation first, then data engineering, then agents; same Word layout as FDE | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_AI_Trainer.pdf` | `resume_ai_trainer.html` | AI trainer / LLM output-evaluation work | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf` | `resume_model_eval.html` | model evaluation, AI QA, red-teaming | **exactly 2 pages** |
-| `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
+| `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors (not linked from the site since 11-19) | **exactly 1 page** |
 
 The four role variants carry the same `<style>` block. A change to one fact
 (a new project, a new number) usually belongs in all four.
