@@ -4,7 +4,7 @@ Applied AI engineer: LLM agents, AI evaluation and agent security. Founder of JT
 
 - **Portfolio:** [jannetekka.cv](https://jannetekka.cv/) (backup copy: [jannetekka.github.io/DSProjects](https://jannetekka.github.io/DSProjects/))
 - **Résumé (forward deployed, applied AI/ML and data roles):** [Jannet_Ekka_Resume.pdf](./Jannet_Ekka_Resume.pdf)
-- **SMT World, live:** [smt-weex-trading-bot.jannet-ekka.workers.dev](https://smt-weex-trading-bot.jannet-ekka.workers.dev/)
+- **SMT World, live:** [smtworld.xyz](https://smtworld.xyz/) (backup: [smt-weex-trading-bot.jannet-ekka.workers.dev](https://smt-weex-trading-bot.jannet-ekka.workers.dev/))
 - **LinkedIn:** [jannet-akanksha-ekka](https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/)
 
 ## What I build

@@ -84,7 +84,7 @@ rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript; Kotlin f
 rows.push(section('PRODUCTION SYSTEM'));
 rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2024 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026. Shortlisted for the Google AI Startup Buildathon India 2026', { b: true, i: true }]]));
-rows.push(links([['Live', 'SMT World', 'https://smt-weex-trading-bot.jannet-ekka.workers.dev/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
+rows.push(links([['Live', 'SMT World', 'https://smtworld.xyz/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
 rows.push(bullets([
   ["Runs 24/7 and places real orders on WEEX's exchange-granted simulated account (about $10K). Built alone by specifying the work and directing AI coding agents: ", ['about 88,000 lines of Python, 3,152 tests, 362 merged pull requests', { b: true }], ', each reviewed by me before merge.'],
   ['Graded my own six AI agents on independent market data: ', ['all six called direction at a coin flip', { b: true }], '. So written rules now open every trade, the agents are advisors graded on every call, and every explanation passes a counterfactual test.'],
