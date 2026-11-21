@@ -136,8 +136,8 @@ Updated 11-21 from the full page (Overview, Schedule, Prizes, Rules).
 **Hosting, storage and services:**
 - **Bifrost:** built from source with `DYNAMIC=1` (the default image is static and cannot load Go plugins, per [building-dynamic-binary](https://docs.getbifrost.ai/plugins/building-dynamic-binary.md)). The plugin is compiled with the same Go version, libc and architecture in one Dockerfile. Both run locally or in the cloud session. Free.
 - **Ledger storage:** in memory, per conversation, with a TTL. No database: the conversation history arrives with every chat request, so rules can be rebuilt from it, and a restart loses nothing that matters.
-- **Gemini:** the agent model and the extractor model, through Bifrost's native `gemini/` provider, on a free AI Studio key. A cheap Flash-Lite model is used for extraction.
-- **Tavily:** the official MCP server (`npx -y tavily-mcp@latest` over stdio, or the remote `https://mcp.tavily.com/mcp/`), on the hackathon credits. The suite needs about 30 × 3 × 2 = 180 extracts, far under 8,000 credits.
+- **Gemini:** the agent model and the extractor model, through Gemini's OpenAI-compatible endpoint as a Bifrost custom provider (11-21: the session's credential proxy injects keys only as `Authorization: Bearer`, which that endpoint accepts), on a free AI Studio key. A cheap Flash-Lite model is used for extraction.
+- **Tavily:** the official MCP server (`npx -y tavily-mcp@latest` over stdio, or the remote `https://mcp.tavily.com/mcp/`), on the free plan (1,000 credits a month; the GEEKROOM2 coupon was used up on 11-21). The suite needs about 30 × 3 × 2 = 180 extracts, far under 8,000 credits.
 - **Decoy MCP server:** a small local process. Free.
 - **Demo page:** a static replay on GitHub Pages, built from recorded runs, so it never needs a live key and never sleeps (lessons 18).
 
@@ -217,6 +217,24 @@ Updated 11-21 from the full page (Overview, Schedule, Prizes, Rules).
 - Walk table 0a row by row and mark each point earned, with the link that proves it (repo path, live replay URL, deck link, Discord, form field).
 - The submission text, deck and video open with Meera and the AgentDojo number, show the hidden-line cheat being refused, and give our own measured numbers, all inside the first 3 minutes.
 
+**Points check, 11-21 20:45 IST (Claude, before Jannet submits):**
+
+| 0a row | Status | Proof |
+|---|---|---|
+| Innovation | ready | README "The problem" (no gateway plugin takes rules from the user's refusals; closest projects linked) |
+| Technical execution | ready | CI builds Bifrost + plugin from source and checks a block; `bench/measure.sh` reproduces |
+| Problem and impact | ready | README results: hijacked-agent test 24/24 ran without, 0/24 with, 12/12 requested still ran; a13 run where the agent lied |
+| Use of AI | ready | README "How AI is used" |
+| User experience | ready | replay page (phone width, dark mode, axe clean), quoted block messages |
+| Scalability | ready | median 69 µs per decision; any app behind the gateway; limits listed |
+| Tavily checkbox | Jannet ticks it | sponsors slide, README "What each technology contributes" |
+| Demo | ready | `docs/demo.mp4` (151 s) and the replay page once Pages is on |
+| AI explanation, Claude Code named | ready | README + form field |
+| Discord | **Jannet** | join before submitting |
+| Tavily $65 credits | not available | GEEKROOM2 failed: "maximum number of redemptions" (cards.md) |
+| Certificate | on submission | |
+| Upstream PR to maximhq/bifrost | not opened | Jannet decides; not by default |
+
 ### 8b. Scope (Jannet, 11-21: no cuts)
 
 Jannet's call on 11-21: **build the full scope**, with 30 tasks, 3 runs each, the animated replay page, the deck and the video. The build session works in this order, so whatever has been finished is always submittable: (1) the plugin loads and blocks, with tests; (2) the suite and the measured table; (3) the README; (4) the deck; (5) the replay page; (6) the video. **Jannet submits the form by 23:00 IST at the latest**, with whatever is finished then, and the repo keeps improving until 23:59.
@@ -233,9 +251,11 @@ Answer in your own words before signing off (sections 0a and 1a were added on 11
 7. What will we say if Gemini turns out to resist most injections even without the plugin?
 8. What is implemented, and what is only proposed (multi-user sessions, other languages, the dashboard UI)?
 
-**Gaps found and how they were fixed:** *(filled in during sign-off)*
+**Jannet's answers (11-21, in her words, shortened):** (1) the agent does the task, reading pages through Tavily, connected to Bifrost; the extractor reads only the user's messages and turns "don't email anyone" into a small rule; the validator throws out any rule whose quoted words aren't in the message; the matcher checks each tool call before it runs and blocks it with the user's words if a refusal still covers it. (2) Code decides because an LLM can hallucinate and make up reasons. (3) Not sure. (4) Priya gets her email because that refusal was lifted; the boss gets none.
 
-**Signed off:** *(Jannet, date)*
+**Gaps found and how they were fixed:** (2) the main reason is that the attack works on the model: a page that can talk the agent into emailing could also talk a model-based guard into allowing it, and code never reads the page. (3) Bifrost is the gateway every model and tool call passes through, where the plugin lives; Tavily is the agent's way to read the web, and where the attack arrives. Both explained in chat on 11-21.
+
+**Signed off:** Jannet, 11-21 ("of course build here"). Built in the discussion session, not a fresh one, because of the same-day deadline (Jannet's call).
 
 ## 10. The build prompt
 
