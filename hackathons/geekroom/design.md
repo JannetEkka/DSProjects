@@ -5,36 +5,44 @@
 ## 0. The hackathon, in one screen
 
 - **Link:** https://hackculture.io/hackathons/ai-global-hackathon (renders only in a browser). The six problem statements are PDFs linked from the Themes tab; we read all six on 11-16.
-- **Deadline:** *(11-20: still unconfirmed; the build starts today, see 8b)* the PDFs say build window **Nov 1–15, 2026**, judging **Nov 29, 2026**. Jannet (11-16): the deadline was extended and about 5 days are left, so roughly **Nov 21**. **The exact closing time and timezone are not confirmed yet**; Jannet pastes the Rules section. Until then we plan to be ready to submit by the night of **Nov 20 IST**.
+- **Deadline (Rules section, pasted by Jannet 11-21):** prototype submission closes **21 Nov 2026, 11:59 PM** (the page shows times in the viewer's zone, so IST for Jannet; its countdown read 11 h 47 min when she copied it). Registration closes at the same time. **Judging round: 28 Nov 2026**, 07:00–23:59; track timings go to selected teams.
 - **Team:** 1–4 people, online, global. We enter solo.
 - **What the rules force:**
-  - "All submissions must meaningfully integrate both Tavily and Bifrost by Maxim AI. The project must demonstrate how each technology contributes to the solution." (PS06's "Mandatory technology integration" box; every PDF's footer says "Integrate Bifrost + Tavily".)
-  - A public GitHub repo with a detailed README and a pitch deck; a live demo is optional *(HackList; confirm in the Rules section)*. Joining the official Discord is required *(HackList)*.
+  - **Bifrost, Tavily, or both** (Schedule tab, 11-21): "You can build a project using Bifrost by Maxim AI, Tavily, or both technologies together." This replaces PS06's "must integrate both" box. **A merged project selects the Bifrost challenge as its primary problem statement and ticks the optional Tavily integration checkbox.** Our form: primary theme "Open-Source Bifrost Gateway", Tavily box ticked, and the deck "clearly demonstrate[s] how each contributes".
+  - **Submission (Rules 7 and the Schedule tab):** a working project or demo; a public GitHub repo with a detailed README "covering your project, installation steps, implementation, and technologies used"; a project description; the problem; technologies and tools; "how AI is used in the solution"; a pitch deck that explains "the problem, your solution, technical architecture, and working prototype"; a demo video "if required" (a deployed app isn't mandatory, but a live demo or video is welcome). One final project per team.
+  - **Rule 2:** the use of AI tools "should be clearly mentioned". The README and form say the entry was built with Claude Code.
+  - **Rule 1:** the core project must be built during the hackathon. Said No is new code; Wiretrap is only the idea it comes from, and AgentDojo's attack goals are third-party data under MIT (Rule 6).
+  - **Rule 3:** joining the Discord (https://discord.gg/STHG8YQdd) is required.
   - **PS04, "Build a Feature the Open-Source Gateway Is Missing" (contributor track)**, mandatory requirements, quoted:
     - "Real operator problem: Identify a meaningful limitation or missing capability and solve it end to end."
     - "Public extension points: Build using supported interfaces such as plugins, logging APIs, routing rules, or the MCP gateway."
     - "Reproducible integration: Demonstrate the feature working with a standard Bifrost installation and provide clear setup instructions."
     - "Contribution quality: Include appropriate tests, documentation, and a repository prepared for a potential upstream pull request."
     - Guidance: "check existing functionality before selecting a contribution."
-- **How it's judged:** not in the PDFs. To fill in from the Rules section (criteria and weights).
-- **Money:** none of our own. Bifrost is open source (Apache 2.0) and runs on our own machine. Tavily's free plan needs no card ([Tavily FAQ](https://docs.tavily.com/faq/faq)), and the organisers give 8,000 credits with code `GEEKROOM2` (redeem at app.tavily.com before Nov 28). Whether redeeming asks for a card is unconfirmed: **if a card form appears, Jannet stops and a session adds a row to [../cards.md](../cards.md) first.** Gemini through a new AI Studio project on the free tier, with no billing linked. Prize: $1,000 cash (split not confirmed).
+- **How it's judged (Rule 10, no weights given):** Innovation · Technical execution · Problem and potential impact · Use of AI · User experience · Scalability and potential.
+- **Money:** none of our own. Bifrost is open source (Apache 2.0) and runs on our own machine. Tavily's free plan needs no card ([Tavily FAQ](https://docs.tavily.com/faq/faq)), and the organisers give 8,000 credits with code `GEEKROOM2` (redeem at app.tavily.com before Nov 28). Whether redeeming asks for a card is unconfirmed: **if a card form appears, Jannet stops and a session adds a row to [../cards.md](../cards.md) first.** Gemini through a new AI Studio project on the free tier, with no billing linked. Prizes (Prizes tab): a $1,000 cash pool (split not stated); $65 of Tavily credits for every participant; $50 Omnidimension voice-AI credits for 100 winners; a certificate for everyone.
 
 ### 0a. Every point on the table (lessons 21)
 
-Drafted 11-20 from the six problem-statement PDFs and HackList. **The Rules section isn't read yet**, so this table is incomplete: when Jannet pastes it, every prize, bonus and requirement it lists gets a row here before submitting.
+Updated 11-21 from the full page (Overview, Schedule, Prizes, Rules).
 
 | Source (quote it) | Points or prize | What it takes from us | Taking it? | If not, why (Jannet decides) |
 |---|---|---|---|---|
-| HackList: "$11,500" pool, of which $1,000 cash | $1,000 cash (split unconfirmed) | a winning entry | yes | |
-| PS06 box: "All submissions must meaningfully integrate both Tavily and Bifrost" | eligibility | Tavily (MCP through Bifrost) and Bifrost (the plugin) both doing real work, each one's role named in the README and deck | yes | |
-| PS04: "Contribution quality: Include appropriate tests, documentation, and a repository prepared for a potential upstream pull request" | PS04 criterion | `go test` in CI, docs, a layout like Bifrost's `plugins/` folder | yes | |
-| PS04: "Reproducible integration: … a standard Bifrost installation and … clear setup instructions" | PS04 criterion | a `DYNAMIC=1` build from Bifrost's documented steps, `docker compose up` | yes | |
-| HackList: "a pitch deck" and "a public GitHub repo with a detailed README" | required deliverables | both | yes | |
-| HackList: "a live demo is optional" | judges' first impression (our reading) | the static replay page on GitHub Pages | yes | |
-| HackList: "Joining the official Discord is required" | eligibility | Jannet joins | yes | |
-| Tavily credits (8,000 with GEEKROOM2) and Omnidimension credits | credits, not cash | redeem before Nov 28 | yes (Tavily) | Omnidimension: not used by this entry |
-| Opening the upstream PR to maximhq/bifrost for real | not a listed prize; PS04 only asks for a repo "prepared for" one | a PR on a public repo in Jannet's name | **Jannet decides** | outward-facing, so not by default |
-| *(Rules section: judging criteria, any track or bonus prizes, social-post or video asks)* | unknown | | | |
+| Prizes: "$1,000 cash … Compete for a share of the $1,000 cash prize pool" | cash, split not stated | a winning entry, judged on the six criteria below | yes | |
+| Rule 10: Innovation | criterion | the user's own "no" as the policy; nothing else does this (section 1) | yes | |
+| Rule 10: Technical execution | criterion | the plugin, tests in CI, the suite reproducible with one command | yes | |
+| Rule 10: Problem and potential impact | criterion | Meera and AgentDojo's numbers (1a); our measured with-vs-without table | yes | |
+| Rule 10: Use of AI | criterion | the model turns sentences into rules; Gemini is the agent; the README's "how AI is used" section says which parts are model and which are code | yes | |
+| Rule 10: User experience | criterion | the replay page (headline, side-by-side, red link to the quote), a 5-command setup, readable block messages | yes | |
+| Rule 10: Scalability and potential | criterion | works for every app behind a gateway with no code change; added latency measured; the upstream-PR shape | yes | |
+| Schedule: "use the optional Tavily integration checkbox" | shows both technologies | tick it; the deck has a slide on what each one does | yes | |
+| Schedule: "welcome to share a live demo or demonstration video" | judges' first impression | the replay page on GitHub Pages **and** a video of 3 minutes or less | yes | |
+| Rule 7: "Explanation of how AI is used"; Rule 2: AI tools "clearly mentioned" | required | a README section and a form field; name Claude Code | yes | |
+| Rule 3: Discord required | eligibility | Jannet joins | yes | |
+| Prizes: "$65 credits … Tavily credits are for all participants" | credits | redeem GEEKROOM2 before Nov 28 | yes | |
+| Prizes: Omnidimension "$50 credits, 100 winners" | credits | nothing extra | n/a | they go to winners |
+| Certificates for all participants | certificate | a submission | yes | |
+| Opening the upstream PR to maximhq/bifrost for real | not a listed prize; PS04 asks only for a repo "prepared for" one | a PR on a public repo in Jannet's name | **Jannet decides** | outward-facing, so not by default |
 
 ### 0b. Which track, and where the field is
 
@@ -209,13 +217,9 @@ Drafted 11-20 from the six problem-statement PDFs and HackList. **The Rules sect
 - Walk table 0a row by row and mark each point earned, with the link that proves it (repo path, live replay URL, deck link, Discord, form field).
 - The submission text, deck and video open with Meera and the AgentDojo number, show the hidden-line cheat being refused, and give our own measured numbers, all inside the first 3 minutes.
 
-### 8b. Scope for the time left (added 11-20)
+### 8b. Scope (Jannet, 11-21: no cuts)
 
-The build starts on Nov 20 with a deadline of about Nov 21 (time unconfirmed). If the confirmed closing time leaves less than about 36 hours, the build session cuts in this order, and the README says what was cut:
-1. Keep: the plugin with its tests, the Tavily MCP and decoy wiring, the README with the measured table, and the deck. These are the deliverables and PS04's criteria.
-2. Cut first: 3 runs per task down to 1 (say so in the table), then the suite from 30 tasks to 15 (9 attack, 3 allowed, 3 lifted).
-3. Cut next: the animated replay page becomes a static page with the side-by-side transcripts and the table; the Claude Design canvas step is skipped.
-4. Video: only if the Rules section asks for one.
+Jannet's call on 11-21: **build the full scope**, with 30 tasks, 3 runs each, the animated replay page, the deck and the video. The build session works in this order, so whatever has been finished is always submittable: (1) the plugin loads and blocks, with tests; (2) the suite and the measured table; (3) the README; (4) the deck; (5) the replay page; (6) the video. **Jannet submits the form by 23:00 IST at the latest**, with whatever is finished then, and the repo keeps improving until 23:59.
 
 ## 9. Jannet's check
 
