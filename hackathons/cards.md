@@ -14,6 +14,15 @@ Every account where Jannet's card was added, held or charged for a project or ha
 | Oracle Cloud (Free Tier) | SMT's bot box, an Always Free VM since 10-03 | 10-02, an identity check at sign-up (a hold, not a charge) | Only if the account is upgraded to Pay As You Go | Never upgrade the account | none | on file |
 | Google Cloud billing account | SMT, SMT World and Wiretrap's old hosting | 08-03, when the free trial was upgraded to redeem the Gen AI APAC $100 coupon | It can't any more: the billing account was closed and billing disabled on all three projects on 10-02. It charged the card once before that | Closed | none (optional: remove the card from the Google payments profile if nothing else uses it) | closed |
 
+## Would need a card (not signed up; from the JTech plan, 11-16)
+
+Found while writing [business/jtech/plan.md](../business/jtech/plan.md). Nothing was signed up and no card was added. If Jannet goes ahead with any of these, add a row to the table above first.
+
+- **Google Cloud for the Google AI Startup Buildathon** ([#121](https://github.com/JannetEkka/DSProjects/issues/121)): the rules say deploy on Google Cloud, which normally needs a billing account; the site lists credits only as a prize. Ask the organisers whether access is given at the event.
+- **Google for Startups Cloud Program:** asks for a Google Cloud billing ID.
+- **AWS Activate Founders:** needs an AWS account on the Paid Tier plan.
+- **A company domain:** the registrar may ask for a card when the name is chosen.
+
 ## Signed up without a card
 
 Public AI (Hack Apertus) · Brevo free plan (Orbit's reminder emails for Catalyst, 300 a day; Jannet, 11-15: no card asked) · Adaption builder credits (Catalyst organisers, no card asked, 1,500 credits unused on 11-18; see [credits.md](credits.md)) · Google AI Studio keys (free tier, no billing) · Firebase Spark · Cloudflare · FalkorDB Cloud free tier · YouCam API (1,000 units from a redeem code) · NVIDIA build.nvidia.com key · ola.cv (`jannetekka.cv`, the free Catalyst .CV domain; Jannet, 11-18: no card asked) · Kaggle · Santiment free plan · GitHub and Render (Jannet checked Billing on 11-09: no card on file on either, so GitHub Actions past the free minutes and Render's paid instances can't bill) · JigJoy's $20 Claude credit for the NTP Novi Sad hackathon (build.jigjoy.ai/credits handed over the key with no card, 10-31). Planned: the APIMatic trial (no card).
