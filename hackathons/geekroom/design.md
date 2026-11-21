@@ -217,6 +217,24 @@ Updated 11-21 from the full page (Overview, Schedule, Prizes, Rules).
 - Walk table 0a row by row and mark each point earned, with the link that proves it (repo path, live replay URL, deck link, Discord, form field).
 - The submission text, deck and video open with Meera and the AgentDojo number, show the hidden-line cheat being refused, and give our own measured numbers, all inside the first 3 minutes.
 
+**Points check, 11-21 20:45 IST (Claude, before Jannet submits):**
+
+| 0a row | Status | Proof |
+|---|---|---|
+| Innovation | ready | README "The problem" (no gateway plugin takes rules from the user's refusals; closest projects linked) |
+| Technical execution | ready | CI builds Bifrost + plugin from source and checks a block; `bench/measure.sh` reproduces |
+| Problem and impact | ready | README results: hijacked-agent test 24/24 ran without, 0/24 with, 12/12 requested still ran; a13 run where the agent lied |
+| Use of AI | ready | README "How AI is used" |
+| User experience | ready | replay page (phone width, dark mode, axe clean), quoted block messages |
+| Scalability | ready | median 69 µs per decision; any app behind the gateway; limits listed |
+| Tavily checkbox | Jannet ticks it | sponsors slide, README "What each technology contributes" |
+| Demo | ready | `docs/demo.mp4` (151 s) and the replay page once Pages is on |
+| AI explanation, Claude Code named | ready | README + form field |
+| Discord | **Jannet** | join before submitting |
+| Tavily $65 credits | not available | GEEKROOM2 failed: "maximum number of redemptions" (cards.md) |
+| Certificate | on submission | |
+| Upstream PR to maximhq/bifrost | not opened | Jannet decides; not by default |
+
 ### 8b. Scope (Jannet, 11-21: no cuts)
 
 Jannet's call on 11-21: **build the full scope**, with 30 tasks, 3 runs each, the animated replay page, the deck and the video. The build session works in this order, so whatever has been finished is always submittable: (1) the plugin loads and blocks, with tests; (2) the suite and the measured table; (3) the README; (4) the deck; (5) the replay page; (6) the video. **Jannet submits the form by 23:00 IST at the latest**, with whatever is finished then, and the repo keeps improving until 23:59.
