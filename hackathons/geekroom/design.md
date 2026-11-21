@@ -136,8 +136,8 @@ Updated 11-21 from the full page (Overview, Schedule, Prizes, Rules).
 **Hosting, storage and services:**
 - **Bifrost:** built from source with `DYNAMIC=1` (the default image is static and cannot load Go plugins, per [building-dynamic-binary](https://docs.getbifrost.ai/plugins/building-dynamic-binary.md)). The plugin is compiled with the same Go version, libc and architecture in one Dockerfile. Both run locally or in the cloud session. Free.
 - **Ledger storage:** in memory, per conversation, with a TTL. No database: the conversation history arrives with every chat request, so rules can be rebuilt from it, and a restart loses nothing that matters.
-- **Gemini:** the agent model and the extractor model, through Bifrost's native `gemini/` provider, on a free AI Studio key. A cheap Flash-Lite model is used for extraction.
-- **Tavily:** the official MCP server (`npx -y tavily-mcp@latest` over stdio, or the remote `https://mcp.tavily.com/mcp/`), on the hackathon credits. The suite needs about 30 × 3 × 2 = 180 extracts, far under 8,000 credits.
+- **Gemini:** the agent model and the extractor model, through Gemini's OpenAI-compatible endpoint as a Bifrost custom provider (11-21: the session's credential proxy injects keys only as `Authorization: Bearer`, which that endpoint accepts), on a free AI Studio key. A cheap Flash-Lite model is used for extraction.
+- **Tavily:** the official MCP server (`npx -y tavily-mcp@latest` over stdio, or the remote `https://mcp.tavily.com/mcp/`), on the free plan (1,000 credits a month; the GEEKROOM2 coupon was used up on 11-21). The suite needs about 30 × 3 × 2 = 180 extracts, far under 8,000 credits.
 - **Decoy MCP server:** a small local process. Free.
 - **Demo page:** a static replay on GitHub Pages, built from recorded runs, so it never needs a live key and never sleeps (lessons 18).
 
@@ -233,9 +233,11 @@ Answer in your own words before signing off (sections 0a and 1a were added on 11
 7. What will we say if Gemini turns out to resist most injections even without the plugin?
 8. What is implemented, and what is only proposed (multi-user sessions, other languages, the dashboard UI)?
 
-**Gaps found and how they were fixed:** *(filled in during sign-off)*
+**Jannet's answers (11-21, in her words, shortened):** (1) the agent does the task, reading pages through Tavily, connected to Bifrost; the extractor reads only the user's messages and turns "don't email anyone" into a small rule; the validator throws out any rule whose quoted words aren't in the message; the matcher checks each tool call before it runs and blocks it with the user's words if a refusal still covers it. (2) Code decides because an LLM can hallucinate and make up reasons. (3) Not sure. (4) Priya gets her email because that refusal was lifted; the boss gets none.
 
-**Signed off:** *(Jannet, date)*
+**Gaps found and how they were fixed:** (2) the main reason is that the attack works on the model: a page that can talk the agent into emailing could also talk a model-based guard into allowing it, and code never reads the page. (3) Bifrost is the gateway every model and tool call passes through, where the plugin lives; Tavily is the agent's way to read the web, and where the attack arrives. Both explained in chat on 11-21.
+
+**Signed off:** Jannet, 11-21 ("of course build here"). Built in the discussion session, not a fresh one, because of the same-day deadline (Jannet's call).
 
 ## 10. The build prompt
 
