@@ -24,6 +24,15 @@ What this means when planning:
 - Docker runs through WSL 2. With 13.8 GB usable, a container stack that wants 8 GB leaves about 6 GB for Windows, an editor, a browser and screen recording. Cap WSL's memory and stop containers when they aren't in use.
 - Claude works in cloud sessions and cannot reach the laptop's `localhost`. Anything that must run locally is a step Jannet does, so say exactly what to run and what output to send back, and never ask for keys in chat.
 
+## Current focus and how to talk to Jannet (Jannet, 11-24)
+
+- **Short and to the point.** Lists, no long explanations. Long replies are hard to follow and tiring to read.
+- **Read before asking.** Before asking Jannet anything, check merged PRs, the docs and earlier sessions (`list_sessions`, `list_events`). If she already answered it somewhere, record it and don't ask again.
+- **Focus for now:** SMT pitch practice, fixing SMT, and FDE job applications (one general résumé; apply to every FDE role). Hackathons are secondary.
+- **No money for a second patent filing or for incorporating JTech Solutions.** Don't plan around either until Jannet says so.
+- **No scheduled tasks run** (Jannet deleted them all on 11-23). Make one only when it's needed.
+- **SMT environments:** smtworld.xyz is production and shows only what works; the Oracle box is dev. Details live in the SMT repo.
+
 ## Writing rule: always state the impact (Jannet, 10-31)
 
 This applies to every repo, project, hackathon entry, README, submission form, pitch, post and anything written in Jannet's voice. Say what changes for whom because of the work, not only what it does or how fast it ran. "297 seconds, 76 requests, 4 proposals" is a description; impact says what that makes possible, for whom, and compared with what.
