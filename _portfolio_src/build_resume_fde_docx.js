@@ -65,7 +65,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ["I put AI systems into other people's environments and keep them working there.", { b: true }],
-  " For about four years at Deloitte, I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), running demos and requirement sessions in US, UK and India hours and leading a 6-person QA team. Since 2024 I have built and run a live AI trading agent on my own; when its cloud billing closed, I moved it to a new stack in two days and it picked its open positions back up from committed state. Between Oct 12 and Nov 2, 2026 I built and submitted 13 working products to 14 hackathons, each on its sponsor's platform (GitLab Duo, Fire TV, NVIDIA Nemotron, Qloo, FalkorDB, Solana Mobile, Monad and others), each with its code, a working build and a demo. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML.",
+  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), running demos and requirement sessions in US, UK and India hours and leading a 6-person QA team. Since 2024 I have built and run a live AI agent system on my own, 24/7 on free infrastructure. When its cloud billing closed, I moved it to a new stack in two days and it picked its open positions back up from committed state. Between Oct 12 and Nov 15, 2026 I shipped more than 18 working builds to hackathons, each on the sponsor's own platform (GitLab Duo, Fire TV, NVIDIA Nemotron, Meta's models, Qloo, FalkorDB, PayPal, Solana Mobile and others), each with code, a live build and a demo. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML.",
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -74,14 +74,14 @@ rows.push(skill('AI & Agents', 'Gemini (Vertex AI, AI Studio), Claude, NVIDIA Ne
 rows.push(skill('Integrations', 'GitHub API and sign-in, GitLab CI and Flows API, Gmail and Calendar via MCP, BigQuery and Maps MCP, Qloo, YouCam, Zetaris, Solana Mobile Wallet Adapter, EVM contracts with RedStone oracles and Envio, Fire TV (Vega OS), AWS Textract'));
 rows.push(skill('Deployment', 'Oracle Cloud (free VM, systemd), Cloudflare Workers, Pages and KV, Render, GitHub Actions; GCP: Cloud Run, Compute Engine, Vertex AI, BigQuery, AlloyDB & pgvector, Firestore, Workload Identity Federation; AWS: S3, EC2, RDS; Docker, including offline networks'));
 rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript. Kotlin and Jetpack Compose for one shipped Android app. FastAPI, Flask, Streamlit, Django, React, Next.js, Postgres, DuckDB, Solidity'));
-rows.push(skill('Testing', 'Test strategy, pytest (3,000+ tests on one system), Selenium, Katalon Studio, Jenkins, LLM evals (held-out sets, paired bootstrap, baselines), production log checks before a fix is called done'));
+rows.push(skill('Testing', 'Test strategy, pytest (over 3,150 tests on one system), Selenium, Katalon Studio, Jenkins, LLM evals (held-out sets, paired bootstrap, baselines), production log checks before a fix is called done'));
 
 rows.push(section('PRODUCTION SYSTEM'));
 rows.push(head(['Smart Money Trading (SMT) — Explainable AI Trading Agent · Founder & sole engineer | Jan 2024 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026', { b: true, i: true }]]));
-rows.push(links([['Live', 'SMT World', 'https://smt-weex-trading-bot.jannet-ekka.workers.dev/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
+rows.push(links([['Live', 'smtworld.xyz', 'https://smtworld.xyz'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
 rows.push(bullets([
-  ["Runs 24/7 and places real orders on WEEX's exchange-granted simulated account (about $10K). Built alone by specifying the work and directing AI coding agents: ", ['about 88,000 lines of Python, 3,152 tests, 362 merged pull requests', { b: true }], ', each reviewed by me before merge.'],
+  ["Runs 24/7 and places real orders on WEEX's exchange-granted simulated account (about $10K). Built alone by specifying the work and directing AI coding agents: ", ['over 87,000 lines of Python, over 3,150 tests and over 360 merged pull requests', { b: true }], ', each reviewed by me before merge. Not profitable yet; the records say so, and what I measure is whether it runs and whether each decision can be explained.'],
   ['When the GCP billing account closed, I ', ['moved the live system to a zero-cost stack in two days', { b: true }], ": an Oracle free-tier VM under systemd, Cloudflare Workers and GitHub Actions. It re-adopted its three open positions from committed state."],
   ['Audited 98 AI-written merges line by line and found two failures the green test suite missed: an order-format bug that had ', ['rejected 1,137 live orders over three months', { b: true }], ', and a memory freeze that kept the daemon down 60% of the time for ten days. A fix now counts as done only when the production log shows it.'],
   ['Any substituted default must log a warning and a liveness flag, a rule written after four multi-week data bugs ran silently; the September audit found and logged 17 more silent failure paths.'],
@@ -184,7 +184,7 @@ const header = new Header({ children: [
 ]});
 
 const doc = new Document({
-  creator: 'Jannet Ekka', title: 'Jannet Akanksha Ekka - Resume (Forward Deployed Engineer)',
+  creator: 'Jannet Ekka', title: 'Jannet Akanksha Ekka - Resume (Forward Deployed Engineer, general)',
   styles: { default: { document: { run: { font: FONT, size: SZ } } } },
   numbering: { config: [
     { reference: 'diamond', levels: [{ level: 0, format: LevelFormat.BULLET, text: '❖', alignment: AlignmentType.LEFT,
