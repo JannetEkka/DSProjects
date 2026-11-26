@@ -79,7 +79,7 @@ rows.push(skill('ML & AI Stack', 'scikit-learn, imbalanced-learn, Hugging Face, 
 rows.push(skill('Languages', 'Python and SQL every day. TypeScript and JavaScript shipped in several projects'));
 
 rows.push(section('QUANT MODELLING IN PRODUCTION'));
-rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2024 – Present']));
+rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2025 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026', { b: true, i: true }]]));
 rows.push(links([['Live', 'SMT World', 'https://smt-weex-trading-bot.jannet-ekka.workers.dev/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac']]));
 rows.push(bullets([
@@ -148,7 +148,7 @@ rows.push(bullets([
 ]));
 rows.push(head(['AutoKorrekt · Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers, over AWS Textract, Amazon Comprehend, S3, RDS and SageMaker.']]));
-rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2024 – Present · Kolkata']));
+rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2025 – Present · Kolkata']));
 rows.push(bullets([['Building SMT (above) as the first product, while a full-time family carer and alongside the PGP in AI/ML.']]));
 
 rows.push(section('EDUCATION'));

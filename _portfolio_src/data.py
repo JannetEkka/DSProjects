@@ -124,7 +124,7 @@ GH = "https://github.com/JannetEkka/"
 FLAGSHIP = dict(
     slug="smt", grants=True, cat="agents", title="Smart Money Trading (SMT)",
     sub="Explainable AI Trading Agent",
-    meta="Jan 2024 – Present · Founder &amp; sole engineer · JTech Solutions (pre-incorporation)",
+    meta="Jan 2025 – Present · Founder &amp; sole engineer · JTech Solutions (pre-incorporation)",
     badge="Patent pending · IN 202631090789",
     desc="An AI trading agent for 8 crypto perpetual-futures pairs that has to prove why it traded. Written rules with replayed records open every trade. Six AI advisors explain each decision and are graded on whether they were right; one earns a veto only after 30 proven warnings. Before a reason reaches a user, the system flips that advisor&rsquo;s input and re-runs the decision, and drops the reason if nothing changes. The learning loop retunes only through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. It places real orders 24/7 on WEEX&rsquo;s exchange-granted simulated account from a free-tier Oracle Cloud VM, and <em>SMT World</em>, a Three.js/WebGL ocean on Cloudflare Workers, lets anyone watch it trade and ask it why. It is not profitable yet, and its own receipts on Monad show that.",
     stats=[("88K","lines of Python"),("3,152","tests"),("673","findings recorded"),("362","PRs merged")],

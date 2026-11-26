@@ -1,6 +1,6 @@
 # Smart Money Trading (SMT): an explainable AI trading agent, run in production on ₹0
 
-**Founder and sole engineer, Jan 2024 – present** (JTech Solutions, pre-incorporation). Patent pending: Indian provisional application No. 202631090789 (filed 2026-07-26). Runs 24/7 and places real orders on WEEX's exchange-granted **simulated** account (~$10K, sandbox funds, not income).
+**Founder and sole engineer, Jan 2025 – present** (JTech Solutions, pre-incorporation). Patent pending: Indian provisional application No. 202631090789 (filed 2026-07-26). Runs 24/7 and places real orders on WEEX's exchange-granted **simulated** account (~$10K, sandbox funds, not income).
 **Live:** SMT World [smt-weex-trading-bot.jannet-ekka.workers.dev](https://smt-weex-trading-bot.jannet-ekka.workers.dev/) · **Code:** core repo `JannetEkka/smt-weex-trading-bot` (private); public explanatory layer [github.com/JannetEkka/smt-apac](https://github.com/JannetEkka/smt-apac) · [WEEX feature](https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641)
 
 **Measured today (2026-11-01, from the repo):** ~87,500 lines of Python outside tests (~140,000 with tests), **3,152 test functions**, **362 merged pull requests** (GitHub search), **673 findings** in `docs/FINDINGS.md`. The résumé's "91,000 lines / 3,000+ tests / 344 PRs / 611 findings" are older snapshots, so quote today's numbers or say "over".
@@ -98,7 +98,7 @@ What I'd lead with in an FDE interview isn't the trading. It's production operat
 - Free data and free models only; WEEX and Binance API availability (Binance returns HTTP 451 in some regions).
 
 ## What the history shows (real decisions)
-- **Jan 2024 → mid-2026:** v6.0 → v6.1 port (the ADX chop filter was lost in the port and found in an audit, F-183: tuned on 8 pairs, read by nothing).
+- **Jan 2025 → mid-2026:** v6.0 → v6.1 port (the ADX chop filter was lost in the port and found in an audit, F-183: tuned on 8 pairs, read by nothing).
 - **WEEX AI Wars I:** #1 on the preliminary leaderboard of 230+ teams, then one of 37 finalists in live trading. Lost the final, and said so in public (the origin of SMT Receipts).
 - **Aug–Sep 2026:** derived exits, risk-constant sizing, per-pair parameters → the September audit (98 merges, two missed defects) → the rule "a fix is done when the log says so".
 - **Sep 28 posture:** "stop loving previous designs. The design is a suspect." Setups author trades; personas are frozen as graded advisors; a 30-paper-close ladder to go live.
