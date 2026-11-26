@@ -27,6 +27,10 @@ Found while writing [business/jtech/plan.md](../business/jtech/plan.md). Nothing
 
 Public AI (Hack Apertus) · Brevo free plan (Orbit's reminder emails for Catalyst, 300 a day; Jannet, 11-15: no card asked) · Adaption builder credits (Catalyst organisers, no card asked, 1,500 credits unused on 11-18; see [credits.md](credits.md)) · Google AI Studio keys (free tier, no billing) · Firebase Spark · Cloudflare · FalkorDB Cloud free tier · YouCam API (1,000 units from a redeem code) · NVIDIA build.nvidia.com key · ola.cv (`jannetekka.cv`, the free Catalyst .CV domain; Jannet, 11-18: no card asked) · Kaggle · Santiment free plan · GitHub and Render (Jannet checked Billing on 11-09: no card on file on either, so GitHub Actions past the free minutes and Render's paid instances can't bill) · JigJoy's $20 Claude credit for the NTP Novi Sad hackathon (build.jigjoy.ai/credits handed over the key with no card, 10-31). Tavily free plan (Said No, Geek Room; 11-21: key `geekroom` on the Researcher plan, 1,000 credits a month, no card asked, pay-as-you-go limit not set; the GEEKROOM2 coupon failed with "maximum number of redemptions"). Planned: the APIMatic trial (no card).
 
+## Waiting on free credits
+
+OpenServ SERV console (SERV Hackathon 02, [#110](https://github.com/JannetEkka/DSProjects/issues/110)), 11-12: the account is free, but calls are paid from credits that only an organisation owner can buy, by adding a card under Billing (with optional auto top-up). The only free credit is the hackathon's $5 for pre-registered builders, or credits the organisers grant on request. **Never add a card or buy credits here.** If the balance after sign-up is $0 and no credits are granted, the entry moves to the list below.
+
 ## Skipped because they needed a card or our own money
 
 OpenCV AI Competition (an AWS account with a card on file) · Render Workflows · Arc Microgrants (mainnet gas) · the Web3 for Social Good final (flights and a visa).
