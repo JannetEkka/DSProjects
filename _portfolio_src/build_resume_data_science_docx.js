@@ -68,7 +68,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ['I build predictive models on tabular data and then try to break them before anyone relies on them.', { b: true }],
-  ' Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09/5). Since January 2025 I have built and run a live trading system alone: when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around rules and a statistical gate that every model change must pass. Before that, four years at Deloitte leading test automation for Fortune 500 clients. I work in Python and SQL, from raw public data to a pipeline someone else can rerun. The questions an insurer\'s data team asks (who will claim, who will leave, did the change help) are the ones I have practised: default and churn models, tests against the obvious baseline, and comparisons with confidence intervals.',
+  ' Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since January 2025 I have built and run a live trading system alone: when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around rules and a statistical gate that every model change must pass. Before that, four years at Deloitte leading test automation for Fortune 500 clients. I work in Python and SQL, from raw public data to a pipeline someone else can rerun. The questions an insurer\'s data team asks (who will claim, who will leave, did the change help) are the ones I have practised: default and churn models, tests against the obvious baseline, and comparisons with confidence intervals.',
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -81,7 +81,7 @@ rows.push(skill('Languages', 'Python and SQL every day. TypeScript and JavaScrip
 rows.push(section('QUANT MODELLING IN PRODUCTION'));
 rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2025 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026', { b: true, i: true }]]));
-rows.push(links([['Live', 'SMT World', 'https://smt-weex-trading-bot.jannet-ekka.workers.dev/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac']]));
+rows.push(links([['Live', 'SMT World', 'https://smtworld.xyz/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac']]));
 rows.push(bullets([
   ["Runs 24/7 and places real orders on WEEX's exchange-granted simulated account (about $10K). Built alone, directing AI coding agents: ", ['about 88,000 lines of Python and 3,152 tests', { b: true }], '.'],
   ['Graded my own six AI agents on independent market data: ', ['all six called direction at a coin flip', { b: true }], '. So written rules now open every trade, and the agents became advisors graded on every call.'],
@@ -106,7 +106,7 @@ build('Aftershock: does news move real usage? An event study', 'NEAR Hackathon, 
     ['Tested 74 news spikes against ordinary days: 8 moved the price (10.8%, against 5.1% of ordinary days), 10 moved usage (13.5%, against 16.5%). ', ['Usage did not follow the headlines', { b: true }], ', and the published thesis says so. Every claim is recomputed and checked by a second model: 14 of 20 kept. Asked alone, the model got 1 of 20 numbers right.'],
   ]);
 build('Portfolio models', 'UT Austin McCombs PGP in AI/ML and Great Learning', '2024 – 2025',
-  [['Code', 'jannetekka.github.io/DSProjects', 'https://jannetekka.github.io/DSProjects/']],
+  [['Code', 'jannetekka.cv', 'https://jannetekka.cv/']],
   [
     [['Customer churn (telecom retention):', { b: true }], ' Decision Tree, Random Forest, AdaBoost and gradient boosting, tuned with grid search; Random Forest best at 81.48% test accuracy. Churners are the minority, so for a retention budget I would report recall on churners and lift over random targeting, and the write-up says so.'],
     [['NBFC loan default (credit risk, Great Learning hackathon):', { b: true }], ' a default classifier on lender data, a TensorFlow network with early stopping. Today I would benchmark gradient-boosted trees first, since they usually win on tabular credit data.'],
@@ -136,7 +136,7 @@ build('Spona: matching researchers with companies', 'NTP Novi Sad Hackathon (Jig
 rows.push(full(para([
   ['Also in Nov 2026: ', { b: true }],
   'Catalyst Solo AI Hackathon (one-day solo build): Orbit, an elder-care medication app, top 8.2% (33rd of 391 scored entries; 96.64 against the winner\'s 97.21), not placed · Chithi (Meta): 0 of 114 dates and amounts shown wrong on 28 live runs · Pitch In (PayPal AI), Countersign (Mozilla Otari) and Beauty Within (YouCam): submitted, results pending. All at ',
-  ['jannetekka.github.io/DSProjects', { link: 'https://jannetekka.github.io/DSProjects/' }],
+  ['jannetekka.cv', { link: 'https://jannetekka.cv/' }],
 ])));
 
 rows.push(section('PROFESSIONAL EXPERIENCE'));
@@ -153,7 +153,7 @@ rows.push(bullets([['Building SMT (above) as the first product, while a full-tim
 
 rows.push(section('EDUCATION'));
 rows.push(sub([['Post Graduate Program (PGP) in AI/ML | UT Austin McCombs / Great Lakes Executive Learning (Feb 2024 – Mar 2025)', { b: true, i: true }]]));
-rows.push(sub(['RANK 1 / COHORT TOPPER (Specialization in Deep Learning, NLP, and Data Modeling): GPA 4.09/5']));
+rows.push(sub(['RANK 1 / COHORT TOPPER (Specialization in Deep Learning, NLP, and Data Modeling): GPA 4.09']));
 rows.push(sub([['Bachelor of Technology (B.Tech), Information Technology | Graduated 2019', { b: true, i: true }]]));
 rows.push(sub(['Kalinga Institute of Industrial Technology University, Bhubaneswar: CGPA 7.17/10']));
 
@@ -172,7 +172,7 @@ const header = new Header({ children: [
     'jannetekka96@gmail.com | +91 90788 02572 | ',
     ['LinkedIn', { link: 'https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/' }], ' | ',
     ['GitHub', { link: 'https://github.com/JannetEkka' }], ' | ',
-    ['Portfolio', { link: 'https://jannetekka.github.io/DSProjects/' }], ' | ' + LOCATION,
+    ['Portfolio', { link: 'https://jannetekka.cv/' }], ' | ' + LOCATION,
   ], { size: 21 }) }),
 ]});
 

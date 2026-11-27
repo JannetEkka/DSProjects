@@ -8,61 +8,61 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: "Calibri", "Carlito", "Helvetica Neue", Arial, sans-serif;
-    font-size: 10.12pt;
+    font-size: 7.69pt;
     line-height: 1.3;
     color: #1a1a1a;
     -webkit-font-smoothing: antialiased;
   }
   a { color: #1c3f6e; text-decoration: none; }
 
-  header { border-bottom: 2.42pt solid #1c3f6e; padding-bottom: 4.40pt; margin-bottom: 5.50pt; }
-  h1 { font-size: 20.90pt; font-weight: 700; letter-spacing: 0.76pt; color: #12294a; line-height: 1.02; }
-  .tagline { font-size: 10.34pt; font-weight: 600; color: #1c3f6e; margin-top: 1.10pt; }
-  .contact { font-size: 9.35pt; color: #333; margin-top: 3.30pt; }
+  header { border-bottom: 1.84pt solid #1c3f6e; padding-bottom: 3.34pt; margin-bottom: 4.18pt; }
+  h1 { font-size: 15.88pt; font-weight: 700; letter-spacing: 0.58pt; color: #12294a; line-height: 1.02; }
+  .tagline { font-size: 7.86pt; font-weight: 600; color: #1c3f6e; margin-top: 0.84pt; }
+  .contact { font-size: 7.11pt; color: #333; margin-top: 2.51pt; display: flex; flex-wrap: wrap; }
   .contact span { white-space: nowrap; }
-  .sep { color: #9aa8bb; padding: 0 3.85pt; }
+  .sep { color: #9aa8bb; padding: 0 2.93pt; }
 
   h2 {
-    font-size: 10.12pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.16pt;
-    color: #12294a; border-bottom: 0.88pt solid #c3cede;
-    padding-bottom: 1.65pt; margin: 7.49pt 0 4.18pt;
+    font-size: 7.69pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.88pt;
+    color: #12294a; border-bottom: 0.67pt solid #c3cede;
+    padding-bottom: 1.25pt; margin: 5.69pt 0 3.18pt;
     break-after: avoid;
   }
-  section:first-of-type h2 { margin-top: 1.65pt; }
+  section:first-of-type h2 { margin-top: 1.25pt; }
   .summary { text-align: justify; }
 
   table.skills { width: 100%; border-collapse: collapse; }
-  table.skills td { vertical-align: top; padding: 1.55pt 0; }
-  table.skills td.k { width: 98.99pt; font-weight: 700; color: #1c3f6e; padding-right: 6.59pt; }
+  table.skills td { vertical-align: top; padding: 1.18pt 0; }
+  table.skills td.k { width: 75.23pt; font-weight: 700; color: #1c3f6e; padding-right: 5.01pt; }
 
-  .entry { margin-bottom: 5.50pt; break-inside: avoid; }
+  .entry { margin-bottom: 4.18pt; break-inside: avoid; }
   .entry:last-child { margin-bottom: 0; }
-  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 11.00pt; }
-  .role { font-weight: 700; color: #12294a; font-size: 10.78pt; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8.36pt; }
+  .role { font-weight: 700; color: #12294a; font-size: 8.19pt; }
   .role .org { font-weight: 600; color: #333; }
-  .meta { font-size: 9.13pt; color: #555; font-style: italic; white-space: nowrap; flex-shrink: 0; }
-  .sub { font-size: 9.46pt; color: #444; font-style: italic; margin-top: 0.45pt; }
+  .meta { font-size: 6.94pt; color: #555; font-style: italic; white-space: nowrap; flex-shrink: 0; }
+  .sub { font-size: 7.19pt; color: #444; font-style: italic; margin-top: 0.34pt; }
 
-  ul { list-style: none; margin-top: 1.98pt; }
+  ul { list-style: none; margin-top: 1.50pt; }
   /* No `position` here: a positioned <li> paints in a later phase than in-flow
      blocks, so Chromium writes every bullet AFTER every heading in the PDF text
      and ATS parsers read the bullets detached from their jobs. A negative-margin
      inline-block marker gives the same hanging indent in document order. */
-  li { padding-left: 10.45pt; margin-bottom: 1.76pt; }
-  li::before { content: "▪"; display: inline-block; width: 10.45pt; margin-left: -10.45pt; color: #1c3f6e; font-size: 8.36pt; }
-  .links { font-size: 9.01pt; margin-top: 1.32pt; padding-left: 0; color: #1c3f6e; }
+  li { padding-left: 7.94pt; margin-bottom: 1.34pt; }
+  li::before { content: "▪"; display: inline-block; width: 7.94pt; margin-left: -7.94pt; color: #1c3f6e; font-size: 6.35pt; }
+  .links { font-size: 6.85pt; margin-top: 1.00pt; padding-left: 0; color: #1c3f6e; }
   .links a { color: #1c3f6e; }
   .links .lbl { color: #666; font-style: italic; }
-  .links .dot { color: #9aa8bb; padding: 0 3.30pt; }
-  .tech { font-size: 9.24pt; color: #444; padding-left: 9.90pt; margin-top: 1.32pt; }
+  .links .dot { color: #9aa8bb; padding: 0 2.51pt; }
+  .tech { font-size: 7.02pt; color: #444; padding-left: 7.52pt; margin-top: 1.00pt; }
   .tech b { color: #1c3f6e; font-weight: 700; }
 
   b, strong { font-weight: 700; color: #0d1f38; }
 
-  .flagship { border-left: 2.64pt solid #1c3f6e; padding: 0.56pt 0 0.56pt 7.70pt; background: #f6f8fb; }
-  .flagship .row { padding-right: 4.40pt; }
+  .flagship { border-left: 2.01pt solid #1c3f6e; padding: 0.43pt 0 0.43pt 5.85pt; background: #f6f8fb; }
+  .flagship .row { padding-right: 3.34pt; }
 
-  .twocol { column-count: 2; column-gap: 16.50pt; }
+  .twocol { column-count: 2; column-gap: 12.54pt; }
   .twocol li { break-inside: avoid; }
   code { font-family: "DejaVu Sans Mono", "Courier New", monospace; font-size: 0.9em; }
 </style>
@@ -73,7 +73,7 @@
   <h1>JANNET AKANKSHA EKKA</h1>
   <div class="tagline">Applied AI Engineer &nbsp;·&nbsp; LLM Agents · RAG · AI Evaluation · Agent Security</div>
   <div class="contact">
-    <span>jannetekka96@gmail.com</span><span class="sep">|</span><span>+91 90788 02572</span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/">linkedin.com/in/jannet-akanksha-ekka</a></span><span class="sep">|</span><span><a href="https://github.com/JannetEkka">github.com/JannetEkka</a></span><span class="sep">|</span><span><a href="https://jannetekka.github.io/DSProjects/">jannetekka.github.io/DSProjects</a></span><span class="sep">|</span><span>Kolkata, India · remote or relocation</span>
+    <span>jannetekka96@gmail.com</span><span class="sep">|</span><span>+91 90788 02572</span><span class="sep">|</span><span><a href="https://www.linkedin.com/in/jannet-akanksha-ekka-a18692122/">linkedin.com/in/jannet-akanksha-ekka</a></span><span class="sep">|</span><span><a href="https://github.com/JannetEkka">github.com/JannetEkka</a></span><span class="sep">|</span><span><a href="https://jannetekka.cv/">jannetekka.cv</a></span><span class="sep">|</span><span>Kolkata, India · remote or relocation</span>
   </div>
 </header>
 
@@ -120,7 +120,7 @@
       <div class="meta">Jan 2025 – Present</div>
     </div>
     <div class="sub">Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026</div>
-    <div class="links"><span class="lbl">Live:</span> <a href="https://smt-weex-trading-bot.jannet-ekka.workers.dev/">smt-weex-trading-bot.jannet-ekka.workers.dev</a><span class="dot">·</span><span class="lbl">Public layer:</span> <a href="https://github.com/JannetEkka/smt-apac">github.com/JannetEkka/smt-apac</a><span class="dot">·</span><a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641">WEEX feature</a></div>
+    <div class="links"><span class="lbl">Live:</span> <a href="https://smtworld.xyz/">smtworld.xyz</a><span class="dot">·</span><span class="lbl">Public layer:</span> <a href="https://github.com/JannetEkka/smt-apac">github.com/JannetEkka/smt-apac</a><span class="dot">·</span><a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641">WEEX feature</a></div>
     <ul>
       <li>Built it alone by specifying the work and directing AI coding agents; nothing merges without my review. <b>87,000 lines of Python, 3,100+ tests, 368 merged pull requests</b>, and a register of <b>680 measured findings</b> that decides what ships.</li>
       <li>Graded my own multi-agent committee (six persona agents and a learned Judge) on independent market data. <b>All six called direction at a coin flip.</b> Rebuilt on that result: written rules with replayed records open every trade, and the agents became advisors graded on every call, earning a veto only after 30 proven warnings.</li>
@@ -231,7 +231,7 @@
       <div class="meta">2024 – 2025</div>
     </div>
     <ul>
-      <li>ResNet50 vehicle classification with Fast R-CNN detection over 16,185 images and 196 classes; churn prediction at 81.5%; semiconductor yield from 591 sensor signals; financial-news sentiment with Mistral-7B; SQL analytics. All at <a href="https://jannetekka.github.io/DSProjects/">jannetekka.github.io/DSProjects</a>.</li>
+      <li>ResNet50 vehicle classification with Fast R-CNN detection over 16,185 images and 196 classes; churn prediction at 81.5%; semiconductor yield from 591 sensor signals; financial-news sentiment with Mistral-7B; SQL analytics. All at <a href="https://jannetekka.cv/">jannetekka.cv</a>.</li>
     </ul>
   </div>
 </section>
@@ -282,7 +282,7 @@
       <div class="role">Post Graduate Program in AI &amp; Machine Learning <span class="org">· UT Austin McCombs &amp; Great Lakes</span></div>
       <div class="meta">Mar 2025</div>
     </div>
-    <div class="sub">Rank 1 in batch · GPA 4.09/5</div>
+    <div class="sub">Rank 1 in batch · GPA 4.09</div>
   </div>
   <div class="entry">
     <div class="row">

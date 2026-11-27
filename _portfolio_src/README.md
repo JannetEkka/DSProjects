@@ -20,6 +20,13 @@
 
 No dependencies — plain Python 3, standard library only.
 
+## Where the site is served (since 2026-11-19)
+
+- **https://jannetekka.cv/** is the main address: **Cloudflare Pages**, built from `main`. Pages runs `bash _portfolio_src/build_pages.sh` (build command) and publishes `_site` (output directory). The script copies only what the site links to (`index.html`, `assets/`, `certificates/`, `resumes/`, the two root PDFs and the photo), because the repo also holds files over Pages' 25 MiB per-file limit. It fails the deploy if `index.html` links a local file it didn't copy, so if the page starts linking a new local folder, add it to `SITE_FILES` in the script.
+- **https://jannetekka.github.io/DSProjects/** is the backup and QA copy: GitHub Pages, from the same `main`. Never set a custom domain in the repo's Settings → Pages (and never add a `CNAME` file): GitHub would then redirect the github.io address to jannetekka.cv, and the backup would stop being independent.
+- The domain is registered at ola.cv (free first year, expires 18 Nov 2027, auto-renew off); its nameservers point to Cloudflare, where its DNS and the `www` → apex redirect live.
+- The page carries `<link rel="canonical" href="https://jannetekka.cv/">`, so search engines treat jannetekka.cv as the main copy.
+
 ## The résumés
 
 Five résumés, all generated from HTML in this folder, the same build-and-verify
@@ -27,14 +34,17 @@ approach as the site. Four are role variants for job applications; they share
 contact, experience and education, and differ in tagline, summary, skills and
 which projects lead.
 
+**Since 2026-11-19 the site links one résumé** (Jannet: "keep only about jobs, one generic résumé in the Word format I made, for FDE or AI/ML/data roles"). The nav button reads "Resume" and downloads `Jannet_Ekka_Resume.pdf`. The founder résumé and the role variants below are no longer linked from the site; their files stay in the repo.
+
 | PDF | source | for | length |
 |---|---|---|---|
-| `Jannet_Ekka_Resume.pdf` (repo root) and `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (the site's nav button) | **exactly 2 pages** |
+| **`Jannet_Ekka_Resume.pdf` (repo root) + `resumes/Jannet_Ekka_Resume.docx`** | `build_resume_docx.js` | **the one the site links**: forward deployed, applied AI/ML and data roles, in Jannet's Word table layout; LibreOffice renders the PDF | **exactly 2 pages** |
+| `resumes/Jannet_Ekka_Resume_Applied_AI.pdf` | `resume.html` | applied AI engineer roles (was the site's nav button until 11-19) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_FDE.docx` + `.pdf` | `build_resume_fde_docx.js` | forward deployed engineer roles, in Jannet's Word table layout (name in the page header, one bordered table, grey section bars) | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Data_Science.docx` + `.pdf` | `build_resume_data_science_docx.js` | data scientist roles at insurers and other tabular-data teams (first sent to Ominimo via JigJoy, 11-16): modelling and evaluation first, then data engineering, then agents; same Word layout as FDE | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_AI_Trainer.pdf` | `resume_ai_trainer.html` | AI trainer / LLM output-evaluation work | **exactly 2 pages** |
 | `resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf` | `resume_model_eval.html` | model evaluation, AI QA, red-teaming | **exactly 2 pages** |
-| `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors | **exactly 1 page** |
+| `Jannet_Ekka_Founder_Resume.pdf` (repo root) | `resume_founder.html` | grants, accelerators, investors (not linked from the site since 11-19) | **exactly 1 page** |
 
 The four role variants carry the same `<style>` block. A change to one fact
 (a new project, a new number) usually belongs in all four.
@@ -108,3 +118,19 @@ and says plainly that dbt, Trino and Databricks are not used yet. The `LOCATION`
 constant at the top of the content sets the header's location line.
 Fontconfig: alias both Calibri and Calibri Light to Carlito
 (`~/.config/fontconfig/fonts.conf`) before rendering.
+
+2026-11-19: the portfolio link became `jannetekka.cv`, and `resume.html` jumped
+from 2 pages to 3, although the text got shorter. **Third trap: Chrome shrinks
+the whole page to fit anything too wide.** The contact line had no break
+points (the `<span>`s touch, and each is `nowrap`), so it was wider than the
+page (955 px against 711), and Chrome printed everything at about 74% of the
+sizes in the file. The "10.1pt" body above was really printing at about 7.5pt.
+A shorter contact line meant less shrinking, bigger text and a third page.
+Fixed in `resume.html`: `.contact` is now `display: flex; flex-wrap: wrap`, and
+every `pt` value was scaled by 0.76, the largest factor that fits 2 pages
+(body 7.69pt, about 2% larger than the earlier PDF). `resume_ai_trainer.html`
+and `resume_model_eval.html` still overflow the same way (794 and 861 px) and
+are shrunk by Chrome, but print at the right page counts; give them the same
+fix when they're next edited. To check for overflow, load the page at 711 px
+wide with print media and compare `document.documentElement.scrollWidth` to
+711.

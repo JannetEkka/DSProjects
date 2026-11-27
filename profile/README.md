@@ -26,4 +26,4 @@ Python, SQL, FastAPI, Google ADK, MCP, Gemini, Claude Code, pytest, Docker, Clou
 
 ### Find me
 
-[Portfolio](https://jannetekka.github.io/DSProjects) · [LinkedIn](https://linkedin.com/in/jannet-akanksha-ekka)
+[Portfolio](https://jannetekka.cv) · [LinkedIn](https://linkedin.com/in/jannet-akanksha-ekka)

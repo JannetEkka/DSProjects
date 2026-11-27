@@ -6,7 +6,7 @@
 C = "certificates/"
 CREDENTIALS = [
  dict(title="Post Graduate Program in AI &amp; Machine Learning", issuer="Texas McCombs School of Business &amp; Great Lakes",
-      date="Mar 2025", note="GPA 4.09/5 · Rank 1 in batch", kind="degree",
+      date="Mar 2025", note="GPA 4.09 · Rank 1 in batch", kind="degree",
       files=[("Certificate", C+"pgp%20great%20lakes%20cert.pdf"),
              ("Grade book", C+"UTA%20transcript.pdf"),
              ("Verify", "https://www.mygreatlearning.com/certificate/SPXKJOPH")]),
@@ -124,12 +124,12 @@ GH = "https://github.com/JannetEkka/"
 FLAGSHIP = dict(
     slug="smt", grants=True, cat="agents", title="Smart Money Trading (SMT)",
     sub="Explainable AI Trading Agent",
-    meta="Jan 2025 – Present · Founder &amp; sole engineer · JTech Solutions (pre-incorporation)",
+    meta="Jan 2025 – Present · Founder &amp; sole engineer · JTech Solutions (pre-incorporation) · shortlisted, Google AI Startup Buildathon India 2026",
     badge="Patent pending · IN 202631090789",
     desc="An AI trading agent for 8 crypto perpetual-futures pairs that has to prove why it traded. Written rules with replayed records open every trade. Six AI advisors explain each decision and are graded on whether they were right; one earns a veto only after 30 proven warnings. Before a reason reaches a user, the system flips that advisor&rsquo;s input and re-runs the decision, and drops the reason if nothing changes. The learning loop retunes only through a CPCV + Deflated-Sharpe + PBO + FDR overfitting gate. It places real orders 24/7 on WEEX&rsquo;s exchange-granted simulated account from a free-tier Oracle Cloud VM, and <em>SMT World</em>, a Three.js/WebGL ocean on Cloudflare Workers, lets anyone watch it trade and ask it why. It is not profitable yet, and its own receipts on Monad show that.",
     stats=[("88K","lines of Python"),("3,152","tests"),("673","findings recorded"),("362","PRs merged")],
     tags=["Multi-Agent Systems","Explainable AI","AI Evaluation","AI-Native Development","Oracle Cloud + systemd","Cloudflare Workers","Gemini (AI Studio)","Optuna","NVIDIA cuDF / RAPIDS","BigQuery","Three.js / WebGL"],
-    links=[("Live site","https://smt-weex-trading-bot.jannet-ekka.workers.dev/","live"),
+    links=[("Live site","https://smtworld.xyz/","live"),
            ("Code","https://github.com/JannetEkka/smt-apac","code"),
            ("Press","https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641","doc")],
     note="Core repo private — the linked repo is the public explanatory layer.",
@@ -221,7 +221,7 @@ PROJECTS = [
    links=[("Code",GH+"sql-noir","code"),("Demo video","https://youtu.be/oX4KvIMfIbE","doc")]),
 
  dict(slug="proofoffix", wide=True, cat="agents", title="Proof of Fix", sub="Issues Close on Production Evidence, Not on a Merge",
-   meta="2026 · GitLab AI Hackathon (Duo Agent Platform) · submitted Oct 27",
+   meta="2026 · GitLab AI Hackathon (Duo Agent Platform) · submitted Oct 27, not placed",
    desc="<strong>&ldquo;Closed&rdquo; usually means a merge request merged. Nobody checks that users stopped hitting the bug</strong>, and with agents writing and merging fixes that gap gets wider. In Proof of Fix, a GitLab Duo flow reads production logs when a bug is filed and writes a proof contract into the issue: the failure that must stop and the log event the fix must start. After the deploy, the pipeline judges the build that shipped on its own logs. The issue closes with a receipt, or stays open with the lines that show the bug is still there, and a second Duo flow works out what the fix missed.<br><br>The real run on GitLab: triage found the rounding bug on two routes. The first fix covered one, and it passed the tests, the contract gate and Duo Code Review. Production disagreed: failures fell from 32% to 9% of requests, so the issue stayed open. The Duo Developer flow wrote the second fix from that evidence, and after its deploy production showed 0 failures on 875 requests. The issue closed itself.<br><br>The pipeline covers all nine DevSecOps stages, with SAST, secret and container scanning, and a rollback that fires only if the new build is worse than the old one.",
    stats=[("32% → 9%","not proven, issue stayed open"),("0 / 875","failures after the real fix"),("9","DevSecOps stages"),("38","tests")],
    tags=["GitLab Duo Agent Platform","GitLab CI/CD","OpenTelemetry","GitLab Observability","Python","FastAPI","Render"],
@@ -230,7 +230,7 @@ PROJECTS = [
           ("Demo video","https://youtu.be/tec52HoWT5A","doc")]),
 
  dict(slug="klarbrief", cat="genai", title="Klarbrief", sub="Official Swiss Letters, Explained Offline",
-   meta="2026 · Hack Apertus, Track 2B · submitted Oct 14",
+   meta="2026 · Hack Apertus, Track 2B · submitted Oct 14, not placed",
    desc="27% of Swiss residents don&rsquo;t hold a Swiss passport, and official letters arrive in German, French or Italian. Klarbrief has Apertus 1.5 8B, Switzerland&rsquo;s open LLM, explain a letter in the reader&rsquo;s language. Every point must quote the letter, and plain code checks the quote and its date or CHF amount before the point is shown. It runs offline in llama.cpp on a 4-core CPU, so a letter never leaves the machine. On 48 explanations the model offered 7 wrong deadline dates and the check stopped 6. No wrong CHF amount reached the reader.",
    stats=[("6 of 7","wrong dates stopped"),("0","wrong CHF amounts shown"),("48 / 48","in the reader's language"),("4-core","CPU, no internet")],
    tags=["Apertus 1.5","llama.cpp","Air-gapped Docker","LLM output checks","Python"],
@@ -253,7 +253,7 @@ PROJECTS = [
    links=[("Code","https://github.com/JannetEkka/DSProjects/tree/main/hackathons/hackerrank-orchestrate-oct26","code")]),
 
  dict(slug="afterburn", wide=True, cat="cv", title="Afterburn", sub="Farm-Fire Verification from Satellite Burn Scars",
-   meta="2026 · IEEE ClimateChain Global Hackathon · submitted Oct 21",
+   meta="2026 · IEEE ClimateChain Global Hackathon · submitted Oct 21, not placed",
    desc="<strong>Punjab&rsquo;s farm-fire count fell 90% since 2021. Burnt area fell a third.</strong> Farmers now light stubble after the 1:30 pm satellite pass, so the official count misses most fires. Afterburn reads the burn scar in Sentinel-2 imagery instead, which stays for days whatever hour the fire was lit.<br><br>On this season&rsquo;s data for 80 × 52 km of Amritsar, Tarn Taran and Kapurthala it mapped 23,963 ha of scars. Between the Oct 13 and Oct 18 passes, only 2.9% of the scars it found had a VIIRS fire detection nearby. Inside VIIRS fire footprints it finds 3.4× more burnt land than on random harvested land. A positive-unlabeled model did worse, so a dozen published thresholds make the verdicts.<br><br>The verdicts settle a pay-for-not-burning pact on Monad testnet, built on a J-PAL trial in 171 Punjab villages: a quarter paid at sign-up, the rest after a clean season, and a village bonus only if every enrolled field stays clean. Each verdict goes on-chain with the hash of its evidence, and a recheck script rebuilds it from public scenes. All 24 demo verdicts match.",
    stats=[("23,963 ha","burn scars mapped this season"),("3.4×","lift against VIIRS fire footprints"),("24 / 24","verdicts recheck from public data"),("98","transactions on Monad testnet")],
    tags=["Sentinel-2","Remote Sensing","NASA FIRMS","rasterio","Positive-Unlabeled Learning","Solidity","Monad testnet","Hardhat","Leaflet","Gemini API"],
