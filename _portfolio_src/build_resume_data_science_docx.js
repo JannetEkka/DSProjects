@@ -68,7 +68,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ['I build predictive models on tabular data and then try to break them before anyone relies on them.', { b: true }],
-  ' Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since January 2025 I have built and run a live trading system alone: when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around rules and a statistical gate that every model change must pass. Before that, four years at Deloitte leading test automation for Fortune 500 clients. I work in Python and SQL, from raw public data to a pipeline someone else can rerun. The questions an insurer\'s data team asks (who will claim, who will leave, did the change help) are the ones I have practised: default and churn models, tests against the obvious baseline, and comparisons with confidence intervals.',
+  ' Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since May 2025 I have built and run a live trading system alone: when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around rules and a statistical gate that every model change must pass. Before that, four years at Deloitte leading test automation for Fortune 500 clients. I work in Python and SQL, from raw public data to a pipeline someone else can rerun. The questions an insurer\'s data team asks (who will claim, who will leave, did the change help) are the ones I have practised: default and churn models, tests against the obvious baseline, and comparisons with confidence intervals.',
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -79,7 +79,7 @@ rows.push(skill('ML & AI Stack', 'scikit-learn, imbalanced-learn, Hugging Face, 
 rows.push(skill('Languages', 'Python and SQL every day. TypeScript and JavaScript shipped in several projects'));
 
 rows.push(section('QUANT MODELLING IN PRODUCTION'));
-rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2025 – Present']));
+rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | May 2025 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026', { b: true, i: true }]]));
 rows.push(links([['Live', 'SMT World', 'https://smtworld.xyz/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac']]));
 rows.push(bullets([
@@ -148,7 +148,7 @@ rows.push(bullets([
 ]));
 rows.push(head(['AutoKorrekt · Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers, over AWS Textract, Amazon Comprehend, S3, RDS and SageMaker.']]));
-rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2025 – Present · Kolkata']));
+rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | May 2025 – Present · Kolkata']));
 rows.push(bullets([['Building SMT (above) as the first product, while a full-time family carer and alongside the PGP in AI/ML.']]));
 
 rows.push(section('EDUCATION'));

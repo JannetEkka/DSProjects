@@ -72,7 +72,7 @@ const ROLES = {
   htc: {
     summary: [
       ['I build GenAI and agentic systems end to end, from prompt and retrieval design to deployment and monitoring, and I measure them against the obvious baseline before I trust them.', { b: true }],
-      " About four years at Deloitte as the engineer on calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise) in US, UK and India hours, leading a 6-person QA team; then AWS work (Textract, Comprehend, S3, RDS, SageMaker) on an EdTech MVP. Rank 1 in the UT Austin McCombs PGP in AI/ML (GPA 4.09). Since January 2025 I have built and run a live AI trading system alone: 87,000 lines of Python, 3,100+ tests, deployed and monitored 24/7. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Oct 12 to Nov 15, 2026: 19 working products and a paper for 21 hackathons. Happy to relocate anywhere.",
+      " About four years at Deloitte as the engineer on calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise) in US, UK and India hours, leading a 6-person QA team; then AWS work (Textract, Comprehend, S3, RDS, SageMaker) on an EdTech MVP. Rank 1 in the UT Austin McCombs PGP in AI/ML (GPA 4.09). Since May 2025 I have built and run a live AI trading system alone: 87,000 lines of Python, 3,100+ tests, deployed and monitored 24/7. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Oct 12 to Nov 15, 2026: 19 working products and a paper for 21 hackathons. Happy to relocate anywhere.",
     ],
     skills: [
       ['Prompt & Agents', 'Prompt design and chaining, structured output, tool calling, context-window budgeting, multi-step agent loops with memory; Google ADK, MCP servers written from scratch, multi-agent orchestration; Gemini, Claude, NVIDIA Nemotron, Meta Muse; guardrails that check every number a model writes against its source'],
@@ -86,7 +86,7 @@ const ROLES = {
   freecharge: {
     summary: [
       ['I design and ship agentic AI systems, including multi-agent workflows, MCP tool servers and human-in-the-loop checks, and I evaluate every model against a baseline before it goes live.', { b: true }],
-      " Rank 1 in the UT Austin McCombs PGP in AI/ML (GPA 4.09; deep learning, NLP). Since January 2025 I have built and run a live AI trading system alone: 87,000 lines of Python, 3,100+ tests. Its six AI agents became advisors graded on every call, a human-approval gate decides what ships, and a model change goes live only through a statistical gate. Before that, about four years at Deloitte leading a 6-person QA team for Fortune 500 clients. Oct 12 to Nov 15, 2026: 19 working products and a paper for 21 hackathons, including multimodal ones (phone photos of letters, face images). Happy to relocate to Gurugram.",
+      " Rank 1 in the UT Austin McCombs PGP in AI/ML (GPA 4.09; deep learning, NLP). Since May 2025 I have built and run a live AI trading system alone: 87,000 lines of Python, 3,100+ tests. Its six AI agents became advisors graded on every call, a human-approval gate decides what ships, and a model change goes live only through a statistical gate. Before that, about four years at Deloitte leading a 6-person QA team for Fortune 500 clients. Oct 12 to Nov 15, 2026: 19 working products and a paper for 21 hackathons, including multimodal ones (phone photos of letters, face images). Happy to relocate to Gurugram.",
     ],
     skills: [
       ['Agentic Systems', 'Multi-agent orchestration (12 concurrent agents with a critic, six graded advisor agents), Google ADK, MCP servers and clients written from scratch, A2A SDK, tool calling, agent memory; secure tool access: billable actions routed to a human approval prompt'],
@@ -106,7 +106,7 @@ rows.push(section('PROFESSIONAL SUMMARY'));
 if (R) rows.push(full(para(R.summary, { align: AlignmentType.JUSTIFIED })));
 else rows.push(full(para([
   ['I build AI and ML systems, test them against the obvious baseline, and keep them working where other people use them.', { b: true }],
-  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), in US, UK and India hours, and led a 6-person QA team. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since January 2025 I have built and run a live AI trading system alone; when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Between Oct 12 and Nov 15, 2026 I built and submitted 19 working products and a paper to 21 hackathons, each on its sponsor's platform (GitLab Duo, Meta, NVIDIA Nemotron, Fire TV, FalkorDB, Mozaik and others). Python and SQL every day.",
+  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), in US, UK and India hours, and led a 6-person QA team. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since May 2025 I have built and run a live AI trading system alone; when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Between Oct 12 and Nov 15, 2026 I built and submitted 19 working products and a paper to 21 hackathons, each on its sponsor's platform (GitLab Duo, Meta, NVIDIA Nemotron, Fire TV, FalkorDB, Mozaik and others). Python and SQL every day.",
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -122,7 +122,7 @@ rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript; Kotlin f
 }
 
 rows.push(section('PRODUCTION SYSTEM'));
-rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2025 – Present']));
+rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | May 2025 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026. Shortlisted for the Google AI Startup Buildathon India 2026', { b: true, i: true }]]));
 rows.push(links([['Live', 'SMT World', 'https://smtworld.xyz/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
 rows.push(bullets([
@@ -197,7 +197,7 @@ rows.push(bullets([
 ]));
 rows.push(head(['AutoKorrekt · Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers: OCR validation flows, JWT auth, bulk answer-sheet upload, over a backend using ', ['AWS Textract', { b: true }], ', Amazon Comprehend, S3, RDS and SageMaker.']]));
-rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2025 – Present · Kolkata']));
+rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | May 2025 – Present · Kolkata']));
 rows.push(bullets([['Building SMT (above) as the first product, while a full-time family carer and alongside the PGP in AI/ML.']]));
 
 rows.push(section('EDUCATION'));

@@ -6,7 +6,7 @@ The habit I brought from QA is to measure first. When I graded my trading bot's 
 
 ### What I'm working on
 
-**Smart Money Trading (SMT)** is an explainable AI trading agent. I've built it alone since January 2025: I direct AI coding agents and review every merge myself. It has 87,000 lines of Python and 3,100+ tests, it runs 24/7 on free tiers, and it's patent pending in India. Public layer: [smt-apac](https://github.com/JannetEkka/smt-apac).
+**Smart Money Trading (SMT)** is an explainable AI trading agent. I've built it alone since May 2025: I direct AI coding agents and review every merge myself. It has 87,000 lines of Python and 3,100+ tests, it runs 24/7 on free tiers, and it's patent pending in India. Public layer: [smt-apac](https://github.com/JannetEkka/smt-apac).
 
 ### Things I've built, and what I measured
 
