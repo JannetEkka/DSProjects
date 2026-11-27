@@ -1,6 +1,6 @@
 # Beauty Within: hair, clothes and one lip tint chosen from your own colours
 
-**YouCam API Skin AI & eCommerce VTO hackathon (Perfect Corp).** Idea picked Oct 27; built Oct 27 and Nov 1–2, 2026; **submitted Nov 2, with the Women in Tech prize opted in**. **Result (11-27): not placed.** The five winners were Kroma, Idala, Parasol, Bloom and WorthIt (links in [hackathons/october-2026.md](../hackathons/october-2026.md)).
+**YouCam API Skin AI & eCommerce VTO hackathon (Perfect Corp).** Idea picked Oct 27; built Oct 27 and Nov 1–2, 2026; **submitted Nov 2, with the Women in Tech prize opted in**. **Result (11-27): not placed.** The five winners were Kroma, Idala, Parasol, Bloom and WorthIt (links in [hackathons/october-2026.md](../hackathons/october-2026.md)). What they did differently: [lessons 26–31](../hackathons/lessons.md).
 **Live:** [beauty-within.pages.dev](https://beauty-within.pages.dev) · **Code:** [github.com/JannetEkka/beauty-within](https://github.com/JannetEkka/beauty-within) (MIT) · video 2:10 [youtu.be/ATzI4K94w44](https://youtu.be/ATzI4K94w44)
 
 ## The 30-second version
