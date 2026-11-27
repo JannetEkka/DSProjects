@@ -31,6 +31,7 @@ Read the overview, rules, FAQ, resources tab and any sponsor or track pages, and
 - The other 2–3 ideas we considered, and why we didn't pick them.
 
 ### 1a. The framing (lessons 22–24; fill in before section 2)
+**Hard gate (Jannet, 11-27, after YouCam; lessons 26–28):** no build starts and the brief can't be signed off until every line below is filled in with a name, a number and its source. "Everyone", "users" or "women" isn't a person, and a value statement isn't a cost. When the track names a purchase or eCommerce, also write the step where the person buys or acts, and what they see when the system refuses to answer.
 - **One named person and what the problem costs them**, with a sourced number: "Ana loses $19 a month; 0.2% of people like her ever appeal (source)". The person can be a composite; the number can't be invented.
 - **Real project, real data, real users.** Which real open-source project, public dataset or real incident the demo runs on. A demo app we write for the entry is the last resort, and the brief says why.
 - **The cheat it refuses.** The one attack, fake claim or prompt injection the demo throws at the system on screen, and how it's refused. Plus any falsification test (placebo, random controls, a blind answer key committed in advance).
@@ -73,7 +74,7 @@ Read the overview, rules, FAQ, resources tab and any sponsor or track pages, and
 ## 9. Jannet's check
 - Questions Jannet answers in her own words before sign-off. For example: what does each part do; why is this a rule and not a model call; what's implemented vs only proposed; walk through one case end to end (lessons 11).
 - Gaps found and how they were fixed.
-- **Signed off:** Jannet, date.
+- **Signed off:** Jannet, date. (Not valid while any line of 1a is empty or generic.)
 
 ## 10. The build prompt
 - The exact first message for the build session: the architecture, the responsibilities (model vs rules), the acceptance conditions, and, only if the hackathon grades the transcript (HackerRank), "keep the chat log raw from this message on". Written here so it can be reviewed before it's sent.
