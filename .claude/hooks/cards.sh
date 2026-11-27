@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Card hooks. The ledger is hackathons/cards.md; its table is what this reads.
 #   cards.sh session  SessionStart: the accounts marked "on file" or "unknown",
-#                     and any next check due within 7 days (IST).
+#                     and any next check due today or tomorrow, or overdue (IST).
 #   cards.sh prompt   UserPromptSubmit: a message that mentions a card or
 #                     billing reminds Claude to update the ledger.
 ledger="${CLAUDE_PROJECT_DIR:-.}/hackathons/cards.md"
@@ -10,7 +10,7 @@ ledger="${CLAUDE_PROJECT_DIR:-.}/hackathons/cards.md"
 case "$1" in
 session)
   today=$(TZ=Asia/Kolkata date +%F)
-  soon=$(TZ=Asia/Kolkata date -d '+7 days' +%F)
+  soon=$(TZ=Asia/Kolkata date -d '+1 day' +%F)
   # Columns: | Account | Used for | Card since | How | Guard | Next check | Status |
   rows=$(awk -F'|' '/^\| / && $2 !~ /^ *(Account|-+) *$/ {
       for (i = 2; i <= 8; i++) gsub(/^ +| +$/, "", $i)
@@ -35,7 +35,7 @@ session)
       systemMessage: ("Card check: " + ($b | rtrimstr("\n") | gsub("\n"; " · ")) + ". Details in hackathons/cards.md."),
       hookSpecificOutput: {
         hookEventName: "SessionStart",
-        additionalContext: ($c + "\nCard checks due within 7 days. Mention them in your first reply; Jannet does the check and you record the result in the ledger:\n" + $d)
+        additionalContext: ($c + "\nCard checks due today or tomorrow, or overdue. Mention them in your first reply; Jannet does the check and you record the result in the ledger:\n" + $d)
       }
     }'
   else

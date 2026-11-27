@@ -68,7 +68,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ['I build predictive models on tabular data and then try to break them before anyone relies on them.', { b: true }],
-  ' Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09/5). Since 2024 I have built and run a live trading system alone: when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around rules and a statistical gate that every model change must pass. Before that, four years at Deloitte leading test automation for Fortune 500 clients. I work in Python and SQL, from raw public data to a pipeline someone else can rerun. The questions an insurer\'s data team asks (who will claim, who will leave, did the change help) are the ones I have practised: default and churn models, tests against the obvious baseline, and comparisons with confidence intervals.',
+  ' Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09/5). Since January 2025 I have built and run a live trading system alone: when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around rules and a statistical gate that every model change must pass. Before that, four years at Deloitte leading test automation for Fortune 500 clients. I work in Python and SQL, from raw public data to a pipeline someone else can rerun. The questions an insurer\'s data team asks (who will claim, who will leave, did the change help) are the ones I have practised: default and churn models, tests against the obvious baseline, and comparisons with confidence intervals.',
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));

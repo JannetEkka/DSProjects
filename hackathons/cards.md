@@ -4,7 +4,7 @@ Every account where Jannet's card was added, held or charged for a project or ha
 
 **Rule (Jannet, 10-29):** when a sign-up, trial, credit claim or top-up asks for a card, add a row here in the same session, before anything is spent. When the card comes off, set Status to `removed` and keep the row.
 
-**Hooks** (`.claude/hooks/cards.sh`): at the start of each session it shows the accounts marked `on file` or `unknown` and any **Next check** due within 7 days; when a message mentions a card or billing, it reminds Claude to update this file. The hook reads the table below, so keep its columns, start **Next check** with a `YYYY-MM-DD` date (or write `none`), and use one of these statuses: `on file`, `unknown`, `removed`, `closed`.
+**Hooks** (`.claude/hooks/cards.sh`): at the start of each session it shows the accounts marked `on file` or `unknown` and any **Next check** due today or tomorrow (so a check shows up the day before it is due), or overdue; when a message mentions a card or billing, it reminds Claude to update this file. The hook reads the table below, so keep its columns, start **Next check** with a `YYYY-MM-DD` date (or write `none`), and use one of these statuses: `on file`, `unknown`, `removed`, `closed`.
 
 | Account | Used for | Card since | How it can charge | Guard | Next check | Status |
 |---|---|---|---|---|---|---|
