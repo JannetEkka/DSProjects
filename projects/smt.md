@@ -1,6 +1,6 @@
 # Smart Money Trading (SMT): an explainable AI trading agent, run in production on ₹0
 
-**Founder and sole engineer, Jan 2025 – present** (JTech Solutions, pre-incorporation). Patent pending: Indian provisional application No. 202631090789 (filed 2026-07-26). Runs 24/7 and places real orders on WEEX's exchange-granted **simulated** account (~$10K, sandbox funds, not income).
+**Founder and sole engineer, May 2025 – present** (JTech Solutions, pre-incorporation). Patent pending: Indian provisional application No. 202631090789 (filed 2026-07-26). Runs 24/7 and places real orders on WEEX's exchange-granted **simulated** account (~$10K, sandbox funds, not income).
 **Live:** SMT World [smtworld.xyz](https://smtworld.xyz/) (backup: [smt-weex-trading-bot.jannet-ekka.workers.dev](https://smt-weex-trading-bot.jannet-ekka.workers.dev/)) · **Code:** core repo `JannetEkka/smt-weex-trading-bot` (private); public explanatory layer [github.com/JannetEkka/smt-apac](https://github.com/JannetEkka/smt-apac) · [WEEX feature](https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641)
 
 **Measured today (2026-11-01, from the repo):** ~87,500 lines of Python outside tests (~140,000 with tests), **3,152 test functions**, **362 merged pull requests** (GitHub search), **673 findings** in `docs/FINDINGS.md`. The résumé's "91,000 lines / 3,000+ tests / 344 PRs / 611 findings" are older snapshots, so quote today's numbers or say "over".

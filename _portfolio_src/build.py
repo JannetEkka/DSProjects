@@ -598,7 +598,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="idrow reveal">
       <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
-      <div class="eyebrow"><b></b> Open to applied AI &amp; AI evaluation roles · remote</div>
+      <div class="eyebrow"><b></b> Open to applied AI &amp; FDE roles · relocating anywhere or remote</div>
     </div>
     <h1 class="big reveal">
       I architect <span class="serif">agentic AI</span><br>
@@ -707,7 +707,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="tl">
       <div class="tlrow reveal">
         <h4>Founder &amp; sole engineer</h4>
-        <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">Jan 2025 – Present</div>
+        <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">May 2025 – Present</div>
         <p>Building SMT, an AI trading agent that has to prove why it traded, and <strong>SMT World</strong>, the product exchanges give their users on top of it. 88,000 lines of Python, 3,152 tests, 362 merged pull requests and 673 measured findings, written by AI coding agents I direct, with me as the <strong>only review before anything merges</strong>. Graded my own six AI agents on independent data, found all six at a coin flip, and rebuilt the system so written rules open trades and the agents are graded advisors. Tested 1,800 strategy variants (36 million simulated trades) at six exchanges&rsquo; fees. Audited 98 AI-written merges and found an order bug that had rejected 1,137 live orders over three months while every test passed. It places real orders 24/7 on WEEX&rsquo;s simulated account from an <strong>Oracle Cloud</strong> free-tier VM, moved off GCP in two days. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams. All <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">
@@ -798,7 +798,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="reveal">
       <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
-      <p>Open to applied AI engineering, agent evaluation and agent security roles, remote. The inbox is always open.</p>
+      <p>Open to applied AI engineering, agent evaluation and forward deployed roles. Happy to relocate anywhere in the world, or work remote. The inbox is always open.</p>
     </div>
     <div class="cgroups">{contact_groups_html()}</div>
   </div>

@@ -63,17 +63,55 @@ const GH = 'https://github.com/JannetEkka/';
 
 
 // Where Jannet will work from.
-const LOCATION = 'Kolkata, India · remote or relocation';
+const LOCATION = 'Kolkata, India · will relocate anywhere';
+
+// Role-tailored variants (ROLE=htc | freecharge): only the summary and the skills rows change.
+// Every fact is the same as the generic resume; nothing is added that isn't true.
+const ROLE = process.env.ROLE || '';
+const ROLES = {
+  htc: {
+    summary: [
+      ['I build GenAI and agentic systems end to end, from prompt and retrieval design to deployment and monitoring, and I measure them against the obvious baseline before I trust them.', { b: true }],
+      " About four years at Deloitte as the engineer on calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise) in US, UK and India hours, leading a 6-person QA team; then AWS work (Textract, Comprehend, S3, RDS, SageMaker) on an EdTech MVP. Rank 1 in the UT Austin McCombs PGP in AI/ML (GPA 4.09). Since May 2025 I have built and run a live AI trading system alone: 87,000 lines of Python, 3,100+ tests, deployed and monitored 24/7. When I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Oct 12 to Nov 15, 2026: 19 working products and a paper for 21 hackathons. Happy to relocate anywhere.",
+    ],
+    skills: [
+      ['Prompt & Agents', 'Prompt design and chaining, structured output, tool calling, context-window budgeting, multi-step agent loops with memory; Google ADK, MCP servers written from scratch, multi-agent orchestration; Gemini, Claude, NVIDIA Nemotron, Meta Muse; guardrails that check every number a model writes against its source'],
+      ['RAG & Evaluation', 'Chunking, BM25 + embeddings with reciprocal-rank fusion, cross-encoder reranking, BigQuery vector search, AlloyDB & pgvector, FalkorDB graph retrieval; eval sets built before tuning: recall@k, MRR, paired bootstrap CIs, held-out and forward tests, leakage checks'],
+      ['ML & Data Science', 'scikit-learn, XGBoost, CatBoost, Optuna, TensorFlow, PyTorch, Hugging Face; feature engineering, model training and experiment tracking; CPCV, Deflated Sharpe, PBO and FDR gates before any model ships; SQL, BigQuery, Postgres, Firestore, pandas'],
+      ['Cloud & Deployment', 'AWS: S3, EC2, RDS, SageMaker, Textract, Comprehend; GCP: Cloud Run, Compute Engine, Vertex AI, BigQuery; Oracle Cloud, Cloudflare Workers; Docker, GitHub Actions CI/CD, systemd, production log monitoring. Not used yet: Terraform, Scalr, Bedrock'],
+      ['Engineering', 'Python, SQL, TypeScript; FastAPI, Flask, React, Next.js; REST APIs and webhooks; pytest (3,100+ tests on one system), code review of every merge, secrets kept out of repos'],
+      ['Stakeholders', 'Demos, working sessions and requirement calls with client teams across US, UK and India hours; READMEs, technical reports and demo videos written for the people who use the system'],
+    ],
+  },
+  freecharge: {
+    summary: [
+      ['I design and ship agentic AI systems, including multi-agent workflows, MCP tool servers and human-in-the-loop checks, and I evaluate every model against a baseline before it goes live.', { b: true }],
+      " Rank 1 in the UT Austin McCombs PGP in AI/ML (GPA 4.09; deep learning, NLP). Since May 2025 I have built and run a live AI trading system alone: 87,000 lines of Python, 3,100+ tests. Its six AI agents became advisors graded on every call, a human-approval gate decides what ships, and a model change goes live only through a statistical gate. Before that, about four years at Deloitte leading a 6-person QA team for Fortune 500 clients. Oct 12 to Nov 15, 2026: 19 working products and a paper for 21 hackathons, including multimodal ones (phone photos of letters, face images). Happy to relocate to Gurugram.",
+    ],
+    skills: [
+      ['Agentic Systems', 'Multi-agent orchestration (12 concurrent agents with a critic, six graded advisor agents), Google ADK, MCP servers and clients written from scratch, A2A SDK, tool calling, agent memory; secure tool access: billable actions routed to a human approval prompt'],
+      ['Human-in-the-Loop', 'Approval gates before costly or risky actions, feedback-weighted memory that raises confidence when a hint helped, advisors that earn a veto only after 30 proven warnings, counterfactual tests on every explanation'],
+      ['ML & Deep Learning', 'PyTorch, TensorFlow, Keras, Hugging Face, scikit-learn, XGBoost, CatBoost, Optuna; CNNs (ResNet50, Fast R-CNN, MRI CNNs), NLP with Mistral-7B; representation learning, supervised, unsupervised and generative models; macro AUC, recall@k, MRR, paired bootstrap'],
+      ['Multimodal Pipelines', 'Phone photos to structured data (SAM 3.1, Muse Spark, OCR), image analysis APIs with colour measurement in CIELAB, embeddings for retrieval over text and structured data, audio transcription (Muse Voice)'],
+      ['MLOps / LLMOps', 'Versioned eval sets, reproducible snapshots that rebuild byte for byte, shadow deployment before promotion, production log monitoring and liveness flags, Docker, GitHub Actions CI/CD; GCP Vertex AI and Cloud Run, AWS SageMaker, Oracle Cloud'],
+      ['Engineering', 'Python, SQL, TypeScript; FastAPI, React, Next.js; pytest (3,100+ tests on one system), review of every merge, architecture write-ups and technical reports'],
+    ],
+  },
+};
+const R = ROLES[ROLE];
 
 // --- content ----------------------------------------------------------------------------
 const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
-rows.push(full(para([
+if (R) rows.push(full(para(R.summary, { align: AlignmentType.JUSTIFIED })));
+else rows.push(full(para([
   ['I build AI and ML systems, test them against the obvious baseline, and keep them working where other people use them.', { b: true }],
-  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), in US, UK and India hours, and led a 6-person QA team. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since January 2025 I have built and run a live AI trading system alone; when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Between Oct 12 and Nov 15, 2026 I built and submitted 19 working products and a paper to 21 hackathons, each on its sponsor's platform (GitLab Duo, Meta, NVIDIA Nemotron, Fire TV, FalkorDB, Mozaik and others). Python and SQL every day.",
+  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), in US, UK and India hours, and led a 6-person QA team. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since May 2025 I have built and run a live AI trading system alone; when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Between Oct 12 and Nov 15, 2026 I built and submitted 19 working products and a paper to 21 hackathons, each on its sponsor's platform (GitLab Duo, Meta, NVIDIA Nemotron, Fire TV, FalkorDB, Mozaik and others). Python and SQL every day.",
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
+if (R) R.skills.forEach(([l, t]) => rows.push(skill(l, t)));
+else {
 rows.push(skill('Client Delivery', 'Demos, working sessions and requirement calls with client teams across US, UK and India hours; scoping a build to a fixed deadline; defect triage with client engineers; weekend on-call; READMEs, technical reports and demo videos for the people who use the system'));
 rows.push(skill('AI & Agents', 'Gemini (Vertex AI, AI Studio), Claude, NVIDIA Nemotron, Meta Muse, Google ADK, GitLab Duo flows, Mozaik concurrent agents, MCP (servers written from scratch), tool calling, structured output, RAG with measured retrieval, FalkorDB graph agents (Cypher), llama.cpp'));
 rows.push(skill('ML & Evaluation', 'scikit-learn, XGBoost, CatBoost, Random Forest and boosting, SMOTE, Optuna, TensorFlow, PyTorch, Hugging Face; held-out and forward tests, paired bootstrap confidence intervals, ROC-AUC, recall@k and MRR, event studies against base rates, CPCV, Deflated Sharpe, PBO, FDR control, leakage checks'));
@@ -81,8 +119,10 @@ rows.push(skill('Data', 'SQL (window functions, joins), BigQuery, DuckDB, Postgr
 rows.push(skill('Deployment', 'Oracle Cloud (free VM, systemd), Cloudflare Workers, Pages and KV, Render, GitHub Actions; GCP: Cloud Run, Compute Engine, Vertex AI, BigQuery, AlloyDB & pgvector; AWS: S3, EC2, RDS; Docker, including offline networks'));
 rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript; Kotlin for one shipped Android app. FastAPI, Flask, Streamlit, React, Next.js, Solidity. Test strategy, pytest (3,100+ tests on one system), Selenium, Jenkins'));
 
+}
+
 rows.push(section('PRODUCTION SYSTEM'));
-rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2025 – Present']));
+rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | May 2025 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026. Shortlisted for the Google AI Startup Buildathon India 2026', { b: true, i: true }]]));
 rows.push(links([['Live', 'SMT World', 'https://smtworld.xyz/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
 rows.push(bullets([
@@ -157,7 +197,7 @@ rows.push(bullets([
 ]));
 rows.push(head(['AutoKorrekt · Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers: OCR validation flows, JWT auth, bulk answer-sheet upload, over a backend using ', ['AWS Textract', { b: true }], ', Amazon Comprehend, S3, RDS and SageMaker.']]));
-rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2025 – Present · Kolkata']));
+rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | May 2025 – Present · Kolkata']));
 rows.push(bullets([['Building SMT (above) as the first product, while a full-time family carer and alongside the PGP in AI/ML.']]));
 
 rows.push(section('EDUCATION'));
