@@ -333,7 +333,7 @@ PROJECTS = [
           ("assets/autokorrekt/students.png","Per-student evaluation pipeline &amp; bulk answer-sheet upload")],
    links=[]),
 
- dict(slug="smtracker", cat="agents", title="Smart Money Tracker", sub="Multi-Agent Blockchain Analytics", meta="2024 · Winner — Best DeFi Application",
+ dict(slug="smtracker", cat="agents", title="Smart Money Tracker", sub="Multi-Agent Blockchain Analytics", meta="Mar 2025 · Winner — Best DeFi Application",
    award="OpenServ × Hack2skill",
    desc="Multi-agent whale tracking across Ethereum, BNB Smart Chain and Polygon using the OpenServ SDK, with Alchemy webhooks driving sub-second transaction monitoring. Confidence-scored detection of accumulation, distribution and coordinated movements, with automated exchange-wallet exclusion.",
    tags=["OpenServ SDK","Alchemy","Moralis","Cloud Run","pgvector"],
