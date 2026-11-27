@@ -598,7 +598,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="idrow reveal">
       <div class="avatar"><img src="profile%20pic.png" alt="Jannet Akanksha Ekka" width="96" height="96"></div>
-      <div class="eyebrow"><b></b> Open to applied AI &amp; AI evaluation roles · remote</div>
+      <div class="eyebrow"><b></b> Open to applied AI &amp; FDE roles · relocating anywhere or remote</div>
     </div>
     <h1 class="big reveal">
       I architect <span class="serif">agentic AI</span><br>
@@ -798,7 +798,7 @@ footer a:hover{{color:var(--tx)}}
   <div class="shell">
     <div class="reveal">
       <h2>Let's build something<br><span class="serif">that actually ships.</span></h2>
-      <p>Open to applied AI engineering, agent evaluation and agent security roles, remote. The inbox is always open.</p>
+      <p>Open to applied AI engineering, agent evaluation and forward deployed roles. Happy to relocate anywhere in the world, or work remote. The inbox is always open.</p>
     </div>
     <div class="cgroups">{contact_groups_html()}</div>
   </div>

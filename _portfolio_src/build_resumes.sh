@@ -51,3 +51,11 @@ else
 fi
 render resume_ai_trainer.html ../resumes/Jannet_Ekka_Resume_AI_Trainer.pdf
 render resume_model_eval.html ../resumes/Jannet_Ekka_Resume_Model_Evaluation.pdf
+# Role-tailored versions of the generic Word resume (11-27): only summary and skills change.
+if node -e "require('docx')" 2>/dev/null && command -v soffice >/dev/null; then
+  for pair in htc:AI_Engineer freecharge:Lead_AI_ML; do
+    ROLE=${pair%%:*} node build_resume_docx.js "../resumes/Jannet_Ekka_Resume_${pair#*:}.docx" >/dev/null
+    soffice --headless --convert-to pdf --outdir ../resumes "../resumes/Jannet_Ekka_Resume_${pair#*:}.docx" >/dev/null 2>&1
+    printf '%-50s %s pages\n' "../resumes/Jannet_Ekka_Resume_${pair#*:}.pdf" "$(pdfinfo "../resumes/Jannet_Ekka_Resume_${pair#*:}.pdf" | awk '/^Pages/{print $2}')"
+  done
+fi

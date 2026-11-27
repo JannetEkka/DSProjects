@@ -63,7 +63,7 @@ const GH = 'https://github.com/JannetEkka/';
 
 // --- content ----------------------------------------------------------------------------
 // Where Jannet will work from. Set from her answer before sending (remote only, or relocation).
-const LOCATION = 'Kolkata, India · remote or relocation';
+const LOCATION = 'Kolkata, India · will relocate anywhere';
 const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
