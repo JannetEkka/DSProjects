@@ -15,6 +15,7 @@ Free credits and free allowances already in our accounts, so an upcoming entry u
 | **Otari (otari.ai)** | gateway credit | **$2.00** welcome credit (11-12); the hackathon's $20 never appeared | Otari hackathon (Countersign) | no card | Countersign | Open Agentic Web Challenge (row 47 of november-2026.md) gives Otari credits too. Never click Add funds or any top-up |
 | **Public AI** | gateway credit | $2 (October) | Hack Apertus (Klarbrief) | no card | Klarbrief | Probably used up; check |
 | ⚠️ **Nebius Token Factory** | Builder credit | $25 + $1 trial, Footfall capped at $15 | Nebius × NVIDIA (#53) | **card on file, auto-charges** | Footfall until judging ends Dec 16 | **Don't use for new entries.** Shut down on Dec 16 (a reminder is scheduled) |
+| Superlinked SIE Serverless | inference credit | **not claimed yet**: $20 free on sign-up, plus a $500 launch-credit application in the console (superlinked.com/serverless, read 11-27) | Superlinked (Infer-a-thon) | page says no card | Infer-a-thon (Bakaya), from Dec 5 | Keys must be US-region. If the console asks for a card, stop and add a row to cards.md first |
 | Cursor | hackathon credit | not claimed (10-22) | Open Agent hackathon | not known | nothing | Probably expired with that hackathon; check before relying on it |
 
 ## Free allowances (no balance to spend down)
