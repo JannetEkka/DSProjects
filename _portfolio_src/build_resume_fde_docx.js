@@ -65,7 +65,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ["I put AI systems into other people's environments and keep them working there.", { b: true }],
-  " For about four years at Deloitte, I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), running demos and requirement sessions in US, UK and India hours and leading a 6-person QA team. Since 2024 I have built and run a live AI trading agent on my own; when its cloud billing closed, I moved it to a new stack in two days and it picked its open positions back up from committed state. Between Oct 12 and Nov 2, 2026 I built and submitted 13 working products to 14 hackathons, each on its sponsor's platform (GitLab Duo, Fire TV, NVIDIA Nemotron, Qloo, FalkorDB, Solana Mobile, Monad and others), each with its code, a working build and a demo. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML.",
+  " For about four years at Deloitte, I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), running demos and requirement sessions in US, UK and India hours and leading a 6-person QA team. Since January 2025 I have built and run a live AI trading agent on my own; when its cloud billing closed, I moved it to a new stack in two days and it picked its open positions back up from committed state. Between Oct 12 and Nov 2, 2026 I built and submitted 13 working products to 14 hackathons, each on its sponsor's platform (GitLab Duo, Fire TV, NVIDIA Nemotron, Qloo, FalkorDB, Solana Mobile, Monad and others), each with its code, a working build and a demo. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML.",
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -74,7 +74,7 @@ rows.push(skill('AI & Agents', 'Gemini (Vertex AI, AI Studio), Claude, NVIDIA Ne
 rows.push(skill('Integrations', 'GitHub API and sign-in, GitLab CI and Flows API, Gmail and Calendar via MCP, BigQuery and Maps MCP, Qloo, YouCam, Zetaris, Solana Mobile Wallet Adapter, EVM contracts with RedStone oracles and Envio, Fire TV (Vega OS), AWS Textract'));
 rows.push(skill('Deployment', 'Oracle Cloud (free VM, systemd), Cloudflare Workers, Pages and KV, Render, GitHub Actions; GCP: Cloud Run, Compute Engine, Vertex AI, BigQuery, AlloyDB & pgvector, Firestore, Workload Identity Federation; AWS: S3, EC2, RDS; Docker, including offline networks'));
 rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript. Kotlin and Jetpack Compose for one shipped Android app. FastAPI, Flask, Streamlit, Django, React, Next.js, Postgres, DuckDB, Solidity'));
-rows.push(skill('Testing', 'Test strategy, pytest (3,000+ tests on one system), Selenium, Katalon Studio, Jenkins, LLM evals (held-out sets, paired bootstrap, baselines), production log checks before a fix is called done'));
+rows.push(skill('Testing', 'Test strategy, pytest (3,100+ tests on one system), Selenium, Katalon Studio, Jenkins, LLM evals (held-out sets, paired bootstrap, baselines), production log checks before a fix is called done'));
 
 rows.push(section('PRODUCTION SYSTEM'));
 rows.push(head(['Smart Money Trading (SMT) — Explainable AI Trading Agent · Founder & sole engineer | Jan 2025 – Present']));

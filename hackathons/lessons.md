@@ -84,3 +84,28 @@ Neither entry placed: Afterburn ([#20](https://github.com/JannetEkka/DSProjects/
 
     Afterburn and Proof of Fix had honest measurements (Afterburn's 3.4× lift against VIIRS; Proof of Fix's partial fix caught in production), but no live "try to break it" moment.
 25. **Check where the sponsor's theme is strongest before picking a track.** 3 of IEEE's 4 winners were in **Carbon Markets & Emissions Transparency**, on Ethereum Sepolia with verified contract source: two on EU CBAM steel certificates, one on forest carbon credits. Afterburn was in Climate Data & Environmental Monitoring, on Monad testnet. The closest winner to Afterburn, **ProofOfForest**, used the same idea (Sentinel-2 evidence for a payment) but framed it as carbon credits that can be retired only once, and added the falsification tests in lesson 24. Read the rules and FAQ for which track or chain the judges care about, and when in doubt use the chain they know.
+
+## YouCam Skin AI & eCommerce VTO (results read 2026-11-27)
+
+Beauty Within ([#56](https://github.com/JannetEkka/DSProjects/issues/56)) didn't place. There were five winners: 1st **Kroma** (team of 4), 2nd **Idala** (solo), 3rd **Parasol** (solo), Women in Tech **Bloom** (team of 2), Rising Star **WorthIt** (3 students). Devpost blocks automated reads, so Jannet pasted all five pages on 11-27. No scores were published, so everything here is *(our reading)*.
+
+Our engineering wasn't what set us apart. We measured the vendor's faults too: lips rendered about 5 L* too dark, hair colour brightening the whole face, deep skin labelled "cool". And we used 7 YouCam pieces, against Bloom's 6 and Parasol's 5. The differences were elsewhere.
+
+26. **Pick a person the API helps in a way nothing else can, and back the need with sourced numbers.** Four of the five winners named a group with a hard problem:
+    - Kroma: colour-blind people, about 300 million, "cannot see the colour of their own face". The skin-tone reading stands in for a missing sense.
+    - Bloom: women about to lose their hair to chemotherapy. On average hair loss started 18 days after treatment began, and 84% used a wig (a survey of 1,478 patients in PLOS ONE).
+    - Parasol: people with albinism, with UN and IARC figures on skin cancer.
+    - WorthIt: anyone deciding whether a skincare product actually works.
+
+    Ours was "every woman is already beautiful": a value that applies to everyone, with no named person and no number for what the problem costs. This is lesson 23 again. It was written on 11-19, after we had submitted.
+27. **Close the shopping loop when the track says eCommerce.**
+    - Parasol checks out through a real Shopify cart, with test payments.
+    - Bloom links every wig to the retailer's product page and prints a decision sheet for the wig fitter.
+    - WorthIt has a bag with ₹ shipping maths, and "Bought it? Test it" starts the product trial.
+    - Kroma answers "Should I buy this?" from a photo taken in the shop, including "you already own one you can't tell apart".
+
+    Beauty Within showed a look from YouCam's catalogue and stopped there, with no path to buying anything.
+28. **Make the refusal the main screen, and show it working.** Kroma has a refuse screen for when the light is bad. WorthIt says "too early" on most mornings and names the earliest honest day. Parasol shows "YouCam read type V; with albinism Parasol uses type I" on screen. Our honest findings (hair colour dropped, the lip calibration) were in the README and the narration, but nothing on screen refused anything. This is lesson 24 again.
+29. **Turn a measured API fault into a feature, and say what it changed.** Idala proved that Nail Transfer doesn't control which tip lands on which finger, then built a pipeline that makes six calls per try-on. Kroma found that the lighting pass moved a garment's colour by ΔE 20.2, so lighting runs on faces only, and REST and MCP disagreed on eye colour by ΔE 6.4, so REST owns every measurement. Kroma also used the sponsor's MCP servers. We found faults of the same kind and mostly removed features.
+30. **Map the judging criteria in the write-up itself.** Bloom had a section, "Why Bloom fits this challenge", that took the four equally weighted criteria one by one and linked to the rules. It also quoted the brief ("right before a purchase…"), as Parasol did.
+31. **Winners had more time or a head start.** Bloom's page was started about 45 days before the results. Idala built on an existing app and said what was new. We built over 3 days (Oct 27 and Nov 1–2). Two solo builders still placed 2nd and 3rd, so solo isn't the problem: depth on one person's problem is.
