@@ -691,7 +691,7 @@ footer a:hover{{color:var(--tx)}}
         <div class="award"><span class="em">📈</span><div><h5>WEEX AI Wars I — #1 preliminary leaderboard</h5><p>Top of 230+ teams, then one of 37 finalists in the $880K live AI trading competition. <a href="https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641" target="_blank" rel="noopener noreferrer">Coverage</a></p></div></div>
         <div class="award"><span class="em">🏆</span><div><h5>Winner — Best DeFi Application</h5><p>OpenServ × Hack2skill. Runner-up for Best Website Application.</p></div></div>
         <div class="award"><span class="em">☁️</span><div><h5>Top 101 of 1,500+ teams</h5><p>Google Cloud Gen AI Academy APAC 2026, Cohort 1 hackathon, with SmartDesk — advanced to prototype refinement.</p></div></div>
-        <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09/5.</p></div></div>
+        <div class="award"><span class="em">🥇</span><div><h5>Rank 1 in batch</h5><p>PGP in AI/ML, UT Austin McCombs &amp; Great Lakes — GPA 4.09.</p></div></div>
         <div class="award"><span class="em">📜</span><div><h5>12 credentials, all verifiable</h5><p>Google Cloud Gen AI Academy (2025 &amp; APAC 2026 Cohorts 1–3) · Gen AI Exchange · Agentic AI Day · Asha AI Hackathon · CPSAT. <a href="#credentials">See them all</a></p></div></div>
       </div>
     </div>
@@ -707,7 +707,7 @@ footer a:hover{{color:var(--tx)}}
     <div class="tl">
       <div class="tlrow reveal">
         <h4>Founder &amp; sole engineer</h4>
-        <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">Jan 2024 – Present</div>
+        <div class="org">JTech Solutions (pre-incorporation) · Smart Money Trading (SMT) · patent pending</div><div class="when">Jan 2025 – Present</div>
         <p>Building SMT, an AI trading agent that has to prove why it traded, and <strong>SMT World</strong>, the product exchanges give their users on top of it. 88,000 lines of Python, 3,152 tests, 362 merged pull requests and 673 measured findings, written by AI coding agents I direct, with me as the <strong>only review before anything merges</strong>. Graded my own six AI agents on independent data, found all six at a coin flip, and rebuilt the system so written rules open trades and the agents are graded advisors. Tested 1,800 strategy variants (36 million simulated trades) at six exchanges&rsquo; fees. Audited 98 AI-written merges and found an order bug that had rejected 1,137 live orders over three months while every test passed. It places real orders 24/7 on WEEX&rsquo;s simulated account from an <strong>Oracle Cloud</strong> free-tier VM, moved off GCP in two days. Began at the OpenServ × Hack2skill hackathon, where the predecessor build <strong>won Best DeFi Application</strong>; later <strong>#1 on the WEEX AI Wars I preliminary leaderboard</strong> of 230+ teams. All <strong>while a full-time family carer</strong>.</p>
       </div>
       <div class="tlrow reveal">

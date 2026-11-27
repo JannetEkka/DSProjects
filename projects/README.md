@@ -28,7 +28,7 @@ Written 2026-11-01/02 from the repos as they stood then; November builds added 2
 | Countersign | Mozilla Otari, submitted 11-12 | [countersign.md](countersign.md) | Finished my 2024 project: a check that caught 41 of 60 planted errors, and its 19% false strikes stated |
 | Same model, same bugs, two formats | Kaggle Gemma 4 Paper Track, submitted 11-13 | [gemma4-paper.md](gemma4-paper.md) | A controlled experiment: the action format didn't change bugs fixed (3 vs 3); where the turn ends did (11) |
 | Chithi | Meta Global AI Developer (Cerebral Valley), submitted 11-03 | [chithi.md](chithi.md) | A photo of an Indian letter explained in Bengali or Hindi; every date and amount checked against two readings: 0 wrong of 114 |
-| Beauty Within | YouCam (Perfect Corp), submitted 11-02 | [beauty-within.md](beauty-within.md) | Calibrated the vendor's lip render to within ~2 L*, and dropped a feature that brightened whole faces |
+| Beauty Within | YouCam (Perfect Corp), submitted 11-02, not placed | [beauty-within.md](beauty-within.md) | Calibrated the vendor's lip render to within ~2 L*, and dropped a feature that brightened whole faces |
 | Spona | NTP Novi Sad (JigJoy × Mozaik), not placed | [spona.md](spona.md) | 12 concurrent agents, every claim checked by a critic while the others work; 489 challenges in 5 min 48 s |
 | Footfall | Qloo + Nebius × NVIDIA | [footfall.md](footfall.md) | A hard spend cap and replay mode, so a public demo can't run up the card or die when a key expires |
 | SQL Noir | Open Agent (Zetaris), Track 02 | [sql-noir.md](sql-noir.md) | No verdict from the model: every answer is a result-set comparison on live data |
@@ -79,7 +79,7 @@ Written 2026-11-01/02 from the repos as they stood then; November builds added 2
 
 ## Things these write-ups found that need fixing outside interviews
 
-- **Résumé dates:** JTech read "Jan | 2025" while SMT says Jan 2024 (fixed to Jan 2024). AutoKorrekt is May 2023 – Jan 2024 (Jannet, 11-02); the repo's commit dates are later, so have the answer ready.
+- **Résumé dates:** JTech read "Jan | 2025" while SMT said Jan 2024; Jannet confirmed 11-26 that SMT began in 2025 (OpenServ hackathon, March 2025), so both now read Jan 2025. AutoKorrekt is May 2023 – Jan 2024 (Jannet, 11-02); the repo's commit dates are later, so have the answer ready.
 - **Portfolio card corrections** (applied in the same update): MedTestAI, e-commerce, capstone, signal/SVHN, churn, USL, business analytics, applied statistics.
 - **A committed Firebase service-account key** in the private repo `smt-application`: rotate it, then remove it from history.
 - **SMT figures:** quote today's (≈87.5K lines of Python outside tests, 3,152 tests, 362 merged PRs, 673 findings), not the older 91K / 344 / 611.

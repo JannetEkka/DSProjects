@@ -70,7 +70,7 @@ const rows = [];
 rows.push(section('PROFESSIONAL SUMMARY'));
 rows.push(full(para([
   ['I build AI and ML systems, test them against the obvious baseline, and keep them working where other people use them.', { b: true }],
-  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), in US, UK and India hours, and led a 6-person QA team. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09/5). Since 2024 I have built and run a live AI trading system alone; when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Between Oct 12 and Nov 15, 2026 I built and submitted 19 working products and a paper to 21 hackathons, each on its sponsor's platform (GitLab Duo, Meta, NVIDIA Nemotron, Fire TV, FalkorDB, Mozaik and others). Python and SQL every day.",
+  " For about four years at Deloitte I was the engineer on the calls with Fortune 500 client teams (AT&T, Hewlett Packard Enterprise), in US, UK and India hours, and led a 6-person QA team. Rank 1 in the UT Austin McCombs Post Graduate Program in AI/ML (GPA 4.09). Since January 2025 I have built and run a live AI trading system alone; when I graded its six AI agents on independent data, all six called direction at a coin flip, so I rebuilt it around written rules and a statistical gate every model change must pass. Between Oct 12 and Nov 15, 2026 I built and submitted 19 working products and a paper to 21 hackathons, each on its sponsor's platform (GitLab Duo, Meta, NVIDIA Nemotron, Fire TV, FalkorDB, Mozaik and others). Python and SQL every day.",
 ], { align: AlignmentType.JUSTIFIED })));
 
 rows.push(section('TECHNICAL SKILLS'));
@@ -79,14 +79,14 @@ rows.push(skill('AI & Agents', 'Gemini (Vertex AI, AI Studio), Claude, NVIDIA Ne
 rows.push(skill('ML & Evaluation', 'scikit-learn, XGBoost, CatBoost, Random Forest and boosting, SMOTE, Optuna, TensorFlow, PyTorch, Hugging Face; held-out and forward tests, paired bootstrap confidence intervals, ROC-AUC, recall@k and MRR, event studies against base rates, CPCV, Deflated Sharpe, PBO, FDR control, leakage checks'));
 rows.push(skill('Data', 'SQL (window functions, joins), BigQuery, DuckDB, Postgres, Firestore, pandas; pipelines over public APIs that rebuild byte for byte from a snapshot; GitHub Actions schedules. Not used yet: dbt, Trino, Databricks'));
 rows.push(skill('Deployment', 'Oracle Cloud (free VM, systemd), Cloudflare Workers, Pages and KV, Render, GitHub Actions; GCP: Cloud Run, Compute Engine, Vertex AI, BigQuery, AlloyDB & pgvector; AWS: S3, EC2, RDS; Docker, including offline networks'));
-rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript; Kotlin for one shipped Android app. FastAPI, Flask, Streamlit, React, Next.js, Solidity. Test strategy, pytest (3,000+ tests on one system), Selenium, Jenkins'));
+rows.push(skill('Engineering', 'Python, SQL, TypeScript and JavaScript; Kotlin for one shipped Android app. FastAPI, Flask, Streamlit, React, Next.js, Solidity. Test strategy, pytest (3,100+ tests on one system), Selenium, Jenkins'));
 
 rows.push(section('PRODUCTION SYSTEM'));
-rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2024 – Present']));
+rows.push(head(['Smart Money Trading (SMT): an explainable AI trading agent · Founder & sole engineer | Jan 2025 – Present']));
 rows.push(sub([['Patent pending: Indian provisional application No. 202631090789, filed myself in July 2026. Shortlisted for the Google AI Startup Buildathon India 2026', { b: true, i: true }]]));
 rows.push(links([['Live', 'SMT World', 'https://smtworld.xyz/'], ['Public layer', 'github.com/JannetEkka/smt-apac', GH + 'smt-apac'], [null, 'WEEX feature', 'https://www.weex.com/news/detail/how-smart-money-tracker-survived-live-ai-trading-at-weex-ai-hackathon-343641']]));
 rows.push(bullets([
-  ["Runs 24/7 and places real orders on WEEX's exchange-granted simulated account (about $10K). Built alone by specifying the work and directing AI coding agents: ", ['about 88,000 lines of Python, 3,152 tests, 362 merged pull requests', { b: true }], ', each reviewed by me before merge.'],
+  ["Runs 24/7 and places real orders on WEEX's exchange-granted simulated account (about $10K). Built alone by specifying the work and directing AI coding agents: ", ['87,000 lines of Python, 3,100+ tests, 368 merged pull requests', { b: true }], ', each reviewed by me before merge.'],
   ['Graded my own six AI agents on independent market data: ', ['all six called direction at a coin flip', { b: true }], '. So written rules now open every trade, the agents are advisors graded on every call, and every explanation passes a counterfactual test.'],
   ['A model change reaches the live system only through a CPCV + Deflated Sharpe + PBO + FDR gate. A forecaster that scored ', ['AUC 0.723', { b: true }], ' on a BTC forward test over 27 non-overlapping windows is still held in shadow because it has not passed.'],
   ['When the GCP billing account closed, I ', ['moved the live system to a zero-cost stack in two days', { b: true }], ': an Oracle free-tier VM under systemd, Cloudflare Workers and GitHub Actions. It re-adopted its three open positions from committed state.'],
@@ -157,12 +157,12 @@ rows.push(bullets([
 ]));
 rows.push(head(['AutoKorrekt · Lead Frontend Developer (EdTech startup MVP) | May 2023 – Jan 2024']));
 rows.push(bullets([['Led the Next.js frontend of an AI answer-evaluation platform for teachers: OCR validation flows, JWT auth, bulk answer-sheet upload, over a backend using ', ['AWS Textract', { b: true }], ', Amazon Comprehend, S3, RDS and SageMaker.']]));
-rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2024 – Present · Kolkata']));
+rows.push(head(['JTech Solutions (pre-incorporation) · Founder & AI Engineer | Jan 2025 – Present · Kolkata']));
 rows.push(bullets([['Building SMT (above) as the first product, while a full-time family carer and alongside the PGP in AI/ML.']]));
 
 rows.push(section('EDUCATION'));
 rows.push(sub([['Post Graduate Program (PGP) in AI/ML | UT Austin McCombs / Great Lakes Executive Learning (Feb 2024 – Mar 2025)', { b: true, i: true }]]));
-rows.push(sub(['RANK 1 / COHORT TOPPER (Specialization in Deep Learning, NLP, and Data Modeling): GPA 4.09/5']));
+rows.push(sub(['RANK 1 / COHORT TOPPER (Specialization in Deep Learning, NLP, and Data Modeling): GPA 4.09']));
 rows.push(sub([['Bachelor of Technology (B.Tech), Information Technology | Graduated 2019', { b: true, i: true }]]));
 rows.push(sub(['Kalinga Institute of Industrial Technology University, Bhubaneswar: CGPA 7.17/10']));
 

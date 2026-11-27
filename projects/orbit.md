@@ -3,6 +3,8 @@
 **Catalyst: Solo AI Hackathon (Makers Need More × PromptWars, Hack2skill), Sun Nov 15, 2026.** Solo, one day: challenge revealed at 09:00, submitted on Hack2skill by 16:00 IST. **Result: top 8.2%, 33rd of 391 scored entries (32 scored higher); automated score 96.64 against the winner's 97.21; not placed.**
 **Live:** [orbit-care.onrender.com](https://orbit-care.onrender.com) (free instance; first load can take a minute) · **Code:** [github.com/JannetEkka/orbit-care](https://github.com/JannetEkka/orbit-care) · tracker [DSProjects#109](https://github.com/JannetEkka/DSProjects/issues/109)
 
+**Reminders switched off on 11-27:** the `reminder-tick` workflow was disabled and the Brevo key removed from Render, so no more emails go out. The site stays up as a demo.
+
 ## The 30-second version
 
 Challenge: an elderly care and medication platform. Jannet's idea: a reminder app doesn't help a parent who can't use a phone; what helps is the people around them knowing whether someone actually gave the 1 pm dose. So the elder gets one big button by the bed that speaks at dose time and turns the screen into the tablet's colour, and the care circle (family, nurse, doctor) shares a record where every dose has a named giver. Not marked 30 minutes after it was due, it's missed and the giver is reminded; after 60, the whole family is told.
